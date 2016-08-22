@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="João D. Ferreira">
+  <meta name="author" content="Francisco M. Couto">
+  <title>Data processing for metabolic pathways using files, web services and databases</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="pandoc.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Data processing for metabolic pathways using files, web services and databases</h1>
+<h2 class="author">João D. Ferreira</h2>
+<h2 class="author">Francisco M. Couto</h2>
+<h3 class="date">August 2016</h3>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#data">Data</a></li>
+<li><a href="#processing">Processing</a></li>
+</ul></li>
+<li><a href="#module-1-metabolic-pathways-data">Module 1 – Metabolic pathways data</a><ul>
+<li><a href="#part-i-notepad-and-python">Part I: Notepad++ and Python</a><ul>
+<li><a href="#objectives">Objectives</a></li>
+<li><a href="#steps">Steps</a></li>
+</ul></li>
+<li><a href="#part-ii-beginning-data-processing">Part II: Beginning data processing</a><ul>
+<li><a href="#objectives-1">Objectives</a></li>
+<li><a href="#input">Input:</a></li>
+<li><a href="#output">Output:</a></li>
+<li><a href="#steps-1">Steps:</a></li>
+<li><a href="#quiz">Quiz:</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="introduction">Introduction</h1>
+<p>The aim of these exercises is to provide students the ability and competence to process data in an automatic fashion. The main topic surrounding these exercises will be metabolic pathway data processing, with a closer focus on the proteins that catalyse the chemical reaction those pathways, also known as <em>enzymes</em>. Despite working with metabolic pathways during the classes, the data processing methods that the students will learn in this class can be applied to many other types of data.</p>
+<h2 id="data">Data</h2>
+<p>The following figure represents the first steps in the glycolysis, a metabolic pathway that decomposes glucose in smaller chemical compounds. This figure includes a representation of five steps in this pathway, each one catalysed by a different enzyme.</p>
+<figure>
+<img src="images/pathway.png" title="An example of a metabolic pathway" alt="A Metabolic pathway" /><figcaption>A Metabolic pathway</figcaption>
+</figure>
+<p>For this class, we will provide <a href="files/metabolic_pathways.xls">an Excel file</a> with information on 297 metabolic pathways. Each line in this file contains:</p>
+<ul>
+<li>an identifier of the metabolic pathway;</li>
+<li>the name of the pathway;</li>
+<li>the class it belongs to;</li>
+<li>a list of the enzymes that participate in the pathway.</li>
+</ul>
+<p>Therefore, the Excel file has 297 lines, plus another one for the column headers.</p>
+<p>The following image shows a screenshot of the Excel file and its data</p>
+<figure>
+<img src="images/excel.png" title="A screenshot showing part of the data in the Excel file" alt="A screenshot of the Excel file" /><figcaption>A screenshot of the Excel file</figcaption>
+</figure>
+<p>This information comes from an online database called <a href="http://www.genome.jp/kegg/kegg2.html">Kyoto Encyclopedia of Genes and Genome</a>. The enzymes are referred by their UniProt code. <a href="http://www.uniprot.org/">UniProt</a> is a database of proteins that contain, among a vast amount of information, the aminoacid sequences of the proteins.</p>
+<h2 id="processing">Processing</h2>
+<p>Despite the data being provided to the students as an Excel file, the data processing operations will mostly be executed with a programming language. In this class, we will use <a href="http://www.python.org">Python</a> Processing our data with Python instead of Excel offers several benefits:</p>
+<ul>
+<li>We can define a set of operations to be executed automatically, which in Excel would take a large amount of time, since it is mostly driven by user interaction rather than direct commands</li>
+<li>Programming languages can handle complex data types, while Excel is mostly oriented towards numeric computations</li>
+</ul>
+<p>No deep knowledge of programming will be required for the class exercises, as we will provide most of the code. In fact, the students will not directly learn the details of Python as a programming language, but will instead be given “recipes” that contain most of the necessary logic, with small snippets of missing code that the students need to fill. However, we expect that the students familiarize themselves with Python syntax before the first module of this class by following some online courses. For example, <a href="https://www.codecademy.com/en/tracks/python">Codecademy</a> contains six modules that will help the students in this task:</p>
+<ul>
+<li><a href="https://www.codecademy.com/courses/introduction-to-python-6WeG3/0/1?curriculum_id=4f89dab3d788890003000096">Python Syntax</a></li>
+<li><a href="https://www.codecademy.com/courses/python-beginner-sRXwR/0/1?curriculum_id=4f89dab3d788890003000096">Strings &amp; Console Output</a></li>
+<li><a href="https://www.codecademy.com/courses/python-beginner-BxUFN/0/1?curriculum_id=4f89dab3d788890003000096">Conditionals &amp; Control Flow</a></li>
+<li><a href="https://www.codecademy.com/courses/python-beginner-en-pwmb1/0/1?curriculum_id=4f89dab3d788890003000096">Python Lists and Dictionaries</a></li>
+<li><a href="https://www.codecademy.com/courses/python-intermediate-en-OGNHh/0/1?curriculum_id=4f89dab3d788890003000096">File Input/Output</a></li>
+</ul>
+<h1 id="module-1-metabolic-pathways-data">Module 1 – Metabolic pathways data</h1>
+<h2 id="part-i-notepad-and-python">Part I: Notepad++ and Python</h2>
+<h3 id="objectives">Objectives</h3>
+<ul>
+<li>Open Notepad++, write some Python code and save the file</li>
+<li>Execute the file with Python</li>
+</ul>
+<h3 id="steps">Steps</h3>
+<ol type="1">
+<li>In the Windows start menu, open <code>Notepad++</code>.</li>
+</ol>
+<figure>
+<img src="images/open-notepad.png" title="Open Notepad++" alt="Open Notepad++" /><figcaption>Open Notepad++</figcaption>
+</figure>
+<ol start="2" type="1">
+<li>Write a small “Hello World!” program and save the file in the Desktop (or in whichever folder you want) with the name <code>test.py</code>.</li>
+</ol>
+<figure>
+<img src="images/hello-world.png" title="The small &quot;Hello World&quot; file" alt="The small &quot;Hello World&quot; file" /><figcaption>The small &quot;Hello World&quot; file</figcaption>
+</figure>
+<ol start="3" type="1">
+<li>In the start menu, open the command line (<code>cmd</code>).</li>
+</ol>
+<figure>
+<img src="images/open-cmd.png" title="Starting the command line" alt="Starting the command line" /><figcaption>Starting the command line</figcaption>
+</figure>
+<ol start="4" type="1">
+<li><p>In the terminal (the command line window), we need to navigate to the Desktop folder and then instruct Python to run our <code>test.py</code>. We do this by running the following commands:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> Desktop
+<span class="kw">python</span> test.py</code></pre></div>
+<figure>
+<img src="images/hello-world-run.png" title="The &quot;Hello World&quot; output" alt="The &quot;Hello World&quot; output" /><figcaption>The &quot;Hello World&quot; output</figcaption>
+</figure></li>
+<li><p>Observe the output produced by python.</p></li>
+</ol>
+<h2 id="part-ii-beginning-data-processing">Part II: Beginning data processing</h2>
+<h3 id="objectives-1">Objectives</h3>
+<ul>
+<li>Understand the CSV format</li>
+<li>Convert between CSV and the Excel format</li>
+<li>Read CSV files with Python</li>
+</ul>
+<h3 id="input">Input:</h3>
+<ul>
+<li>File: <a href="files/metabolic_pathways.xls">metabolic_pathways.xls</a></li>
+</ul>
+<h3 id="output">Output:</h3>
+<ul>
+<li>File: metabolic_pathways.csv</li>
+<li><p>Console:</p>
+<div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk">Glycolysis / Gluconeogenesis
+Citrate cycle (TCA cycle)
+Pentose phosphate pathway
+Pentose and glucuronate interconversions
+...</code></pre></div></li>
+</ul>
+<h3 id="steps-1">Steps:</h3>
+<ol type="1">
+<li><p>Abrir o ficheiro Excel. Tome atenção ao conteúdo do ficheiro e tente familiarizar-se com os dados. Este passo é importante para o processamento, pois permite ganhar uma certa intuição acerca da informação com que estamos a lidar.</p></li>
+<li><p>Escrever os dados num ficheiro no formato CSV.</p></li>
+<li><p>Abrir o ficheiro CSV num editor de texto (Notepad++) e estudar o seu formato (e.g. determinar qual o separador dos campos, se os campos são delimitados, e como, etc.)</p></li>
+<li><p>Ler o ficheiro CSV com o Python e, para cada via, imprimir o seu nome. Pode usar o seguinte código, completando nos dois locais assinalados com reticências e num fundo verde (…):</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)    <span class="co"># Abrir o ficheiro</span>
+paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>...) <span class="co"># Criar um leitor de CSV</span>
+<span class="cf">for</span> path <span class="op">in</span> paths:
+    <span class="bu">print</span> ... <span class="co"># Para cada via, imprime o seu nome</span></code></pre></div></li>
+</ol>
+<h3 id="quiz">Quiz:</h3>
+<ol type="1">
+<li>Como procederia para imprimir não o nome das vias mas sim a sua classe?</li>
+<li>Explique porque alguns campos são delimitados por aspas ( &quot; ) e outros não.</li>
+</ol>
+</body>
+</html>
