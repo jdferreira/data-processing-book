@@ -1,54 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <meta name="author" content="João D. Ferreira">
-  <meta name="author" content="Francisco M. Couto">
-  <title>Data processing for metabolic pathways using files, web services and databases</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-  </style>
-  <link rel="stylesheet" href="pandoc.css">
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="author" content="João D. Ferreira">
+    <meta name="author" content="Francisco M. Couto">
+    <title>Data processing for metabolic pathways using files, web services and databases</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="pandoc.css">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 <header>
@@ -57,25 +20,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 class="author">Francisco M. Couto</h2>
 <h3 class="date">August 2016</h3>
 </header>
-<nav id="TOC">
+<nav id="toc">
 <ul>
-<li><a href="#introduction">Introduction</a><ul>
-<li><a href="#data">Data</a></li>
-<li><a href="#processing">Processing</a></li>
-</ul></li>
-<li><a href="#module-1-metabolic-pathways-data">Module 1 – Metabolic pathways data</a><ul>
-<li><a href="#part-i-notepad-and-python">Part I: Notepad++ and Python</a><ul>
-<li><a href="#objectives">Objectives</a></li>
-<li><a href="#steps">Steps</a></li>
-</ul></li>
-<li><a href="#part-ii-beginning-data-processing">Part II: Beginning data processing</a><ul>
-<li><a href="#objectives-1">Objectives</a></li>
-<li><a href="#input">Input:</a></li>
-<li><a href="#output">Output:</a></li>
-<li><a href="#steps-1">Steps:</a></li>
-<li><a href="#quiz">Quiz:</a></li>
-</ul></li>
-</ul></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#module-1-metabolic-pathways-data">Module 1 – Metabolic pathways data</a></li>
 </ul>
 </nav>
 <h1 id="introduction">Introduction</h1>
@@ -170,20 +118,28 @@ Pentose and glucuronate interconversions
 </ul>
 <h3 id="steps-1">Steps:</h3>
 <ol type="1">
-<li><p>Abrir o ficheiro Excel. Tome atenção ao conteúdo do ficheiro e tente familiarizar-se com os dados. Este passo é importante para o processamento, pois permite ganhar uma certa intuição acerca da informação com que estamos a lidar.</p></li>
-<li><p>Escrever os dados num ficheiro no formato CSV.</p></li>
-<li><p>Abrir o ficheiro CSV num editor de texto (Notepad++) e estudar o seu formato (e.g. determinar qual o separador dos campos, se os campos são delimitados, e como, etc.)</p></li>
-<li><p>Ler o ficheiro CSV com o Python e, para cada via, imprimir o seu nome. Pode usar o seguinte código, completando nos dois locais assinalados com reticências e num fundo verde (…):</p>
+<li><p>Open the Excel file. Take special attention to the contents of this file and try to get familiar with the data it contains. This step is one of the most important to data processing, as it allows us to gain intuition about the information that we’re dealing with.</p></li>
+<li><p>Using Excel’s functionalities, save the data in the CSV format.</p></li>
+<li><p>Open the CSV file in a text editor (Notepad++) and study the file that you saved. For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, etc.</p></li>
+<li><p>Read the contents of the CSV file with Python and, for each pathway, print its name. Use the following code, filling wherever you see a green question mark (<code>???</code>):</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
-f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)    <span class="co"># Abrir o ficheiro</span>
-paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>...) <span class="co"># Criar um leitor de CSV</span>
-<span class="cf">for</span> path <span class="op">in</span> paths:
-    <span class="bu">print</span> ... <span class="co"># Para cada via, imprime o seu nome</span></code></pre></div></li>
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)   <span class="co"># Open the file</span>
+paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???) <span class="co"># Create a CSV reader object</span>
+<span class="cf">for</span> path <span class="op">in</span> paths: <span class="co"># For each pathway ...</span>
+    <span class="bu">print</span> ???      <span class="co"># ... print its name</span></code></pre></div></li>
 </ol>
 <h3 id="quiz">Quiz:</h3>
 <ol type="1">
-<li>Como procederia para imprimir não o nome das vias mas sim a sua classe?</li>
-<li>Explique porque alguns campos são delimitados por aspas ( &quot; ) e outros não.</li>
+<li>How would you change the Python code to print the class of each pathway instead of its name?</li>
+<li>Explain why, in the CSV file, some fields are delimited by quotes (<code>&quot;</code>) and other are not.</li>
 </ol>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+// Replace all instances of "???" inside <code> elements with the HTML code:
+// <span class="blank">?</span>
+$("code").html(function () {
+    return $(this).html().replace(/\?\?\?/g, "<span class=\"blank\">?</span>");
+});
+</script>
 </body>
 </html>

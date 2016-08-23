@@ -102,29 +102,33 @@ python test.py
 - File: metabolic_pathways.csv
 - Console:
 ```awk
-Glycolysis / Gluconeogenesis
-Citrate cycle (TCA cycle)
-Pentose phosphate pathway
-Pentose and glucuronate interconversions
-...
+    Glycolysis / Gluconeogenesis
+    Citrate cycle (TCA cycle)
+    Pentose phosphate pathway
+    Pentose and glucuronate interconversions
+    ...
 ```
 
 ### Steps:
-1. Abrir o ficheiro Excel. Tome atenção ao conteúdo do ficheiro e tente familiarizar-se com os dados. Este passo é importante para o processamento, pois permite ganhar uma certa intuição acerca da informação com que estamos a lidar.
+1. Open the Excel file.
+   Take special attention to the contents of this file and try to get familiar with the data it contains.
+   This step is one of the most important to data processing, as it allows us to gain intuition about the information that we're dealing with.
 
-2. Escrever os dados num ficheiro no formato CSV.
+2. Using Excel's functionalities, save the data in the CSV format.
 
-3. Abrir o ficheiro CSV num editor de texto (Notepad++) e estudar o seu formato (e.g. determinar qual o separador dos campos, se os campos são delimitados, e como, etc.)
+3. Open the CSV file in a text editor (Notepad++) and study the file that you saved.
+   For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, etc.
 
-4. Ler o ficheiro CSV com o Python e, para cada via, imprimir o seu nome. Pode usar o seguinte código, completando nos dois locais assinalados com reticências e num fundo verde (...):
+4. Read the contents of the CSV file with Python and, for each pathway, print its name.
+   Use the following code, filling wherever you see a green question mark (`???`):
 ```python
     import csv
-    f = open('metabolic_pathways.csv')    # Abrir o ficheiro
-    paths = csv.reader(f, delimiter=...) # Criar um leitor de CSV
-    for path in paths:
-        print ... # Para cada via, imprime o seu nome
+    f = open('metabolic_pathways.csv')   # Open the file
+    paths = csv.reader(f, delimiter=???) # Create a CSV reader object
+    for path in paths: # For each pathway ...
+        print ???      # ... print its name
 ```
 
 ### Quiz:
-1. Como procederia para imprimir não o nome das vias mas sim a sua classe?
-2. Explique porque alguns campos são delimitados por aspas ( " ) e outros não.
+1. How would you change the Python code to print the class of each pathway instead of its name?
+2. Explain why, in the CSV file, some fields are delimited by quotes (`"`) and other are not.
