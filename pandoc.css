@@ -355,10 +355,6 @@ pre.sourceCode, code.sourceCode {
     background: transparent;
 }
 
-p + div.sourceCode {
-    margin-top: -1em;
-}
-
 pre.sourceCode {
     display: block;
     background: #f8f8f8;
@@ -371,8 +367,8 @@ pre.sourceCode {
     border-radius: 10px;
 }
 
-li > p:first-child {
-    margin-top: 0;
+li > p {
+    margin: 0;
 }
 
 span.blank {

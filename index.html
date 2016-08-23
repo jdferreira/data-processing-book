@@ -24,6 +24,7 @@
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#module-1-metabolic-pathways-data">Module 1 – Metabolic pathways data</a></li>
+<li><a href="#module-2-simple-selection-and-saving-data-on-disk">Module 2 – Simple selection and saving data on disk</a></li>
 </ul>
 </nav>
 <h1 id="introduction">Introduction</h1>
@@ -62,7 +63,7 @@
 </ul>
 <h1 id="module-1-metabolic-pathways-data">Module 1 – Metabolic pathways data</h1>
 <h2 id="part-i-notepad-and-python">Part I: Notepad++ and Python</h2>
-<h3 id="objectives">Objectives</h3>
+<h3 id="objectives">Objectives:</h3>
 <ul>
 <li>Open Notepad++, write some Python code and save the file</li>
 <li>Execute the file with Python</li>
@@ -93,10 +94,10 @@
 <figure>
 <img src="images/hello-world-run.png" title="The &quot;Hello World&quot; output" alt="The &quot;Hello World&quot; output" /><figcaption>The &quot;Hello World&quot; output</figcaption>
 </figure></li>
-<li><p>Observe the output produced by python.</p></li>
+<li><p>Observe the output produced by Python.</p></li>
 </ol>
 <h2 id="part-ii-beginning-data-processing">Part II: Beginning data processing</h2>
-<h3 id="objectives-1">Objectives</h3>
+<h3 id="objectives-1">Objectives:</h3>
 <ul>
 <li>Understand the CSV format</li>
 <li>Convert between CSV and the Excel format</li>
@@ -108,7 +109,7 @@
 </ul>
 <h3 id="output">Output:</h3>
 <ul>
-<li>File: metabolic_pathways.csv</li>
+<li>File: <code>metabolic_pathways.csv</code></li>
 <li><p>Console:</p>
 <div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk">Glycolysis / Gluconeogenesis
 Citrate cycle (TCA cycle)
@@ -119,19 +120,139 @@ Pentose and glucuronate interconversions
 <h3 id="steps-1">Steps:</h3>
 <ol type="1">
 <li><p>Open the Excel file. Take special attention to the contents of this file and try to get familiar with the data it contains. This step is one of the most important to data processing, as it allows us to gain intuition about the information that we’re dealing with.</p></li>
-<li><p>Using Excel’s functionalities, save the data in the CSV format.</p></li>
+<li><p>Using Excel’s functionalities, save the data in the CSV format using the name <code>metabolic_pathways.csv</code>.</p></li>
 <li><p>Open the CSV file in a text editor (Notepad++) and study the file that you saved. For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, etc.</p></li>
-<li><p>Read the contents of the CSV file with Python and, for each pathway, print its name. Use the following code, filling wherever you see a green question mark (<code>???</code>):</p>
+<li>Let’s create a Python script to read the CSV file and print the name of each pathway.
+<ol type="a">
+<li><p>Create an empty file and save it as <code>module1.py</code> on the same folder where the <code>metabolic_pathways.csv</code> file is. Do not forget the <code>.py</code> ending, as this instructs the computer that the file is a Python script.</p></li>
+<li><p>Copy and paste the following code to your file:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
 f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)   <span class="co"># Open the file</span>
 paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???) <span class="co"># Create a CSV reader object</span>
 <span class="cf">for</span> path <span class="op">in</span> paths: <span class="co"># For each pathway ...</span>
     <span class="bu">print</span> ???      <span class="co"># ... print its name</span></code></pre></div></li>
+<li><p>Replace all the green question mark place-holders (<code>???</code>) with appropriate Python code.</p></li>
+</ol></li>
+<li><p>Run the Python script and observe the output. Does it correspond to what you were expecting to see?</p></li>
+<li><p>Make sure you keep a copy of the <code>metabolic_pathways.csv</code> file to yourself, so that you can use it in the next module. For example, send it to you by email or upload it to Dropbox.</p></li>
+<li><p>Submit your code and the answers to the quiz below to moodle.</p></li>
 </ol>
 <h3 id="quiz">Quiz:</h3>
 <ol type="1">
-<li>How would you change the Python code to print the class of each pathway instead of its name?</li>
-<li>Explain why, in the CSV file, some fields are delimited by quotes (<code>&quot;</code>) and other are not.</li>
+<li><p>How would you change the Python code to print the class of each pathway instead of its name?</p></li>
+<li><p>Explain why, in the CSV file, some fields are delimited by quotes (<code>&quot;</code>) and other are not.</p></li>
+</ol>
+<h1 id="module-2-simple-selection-and-saving-data-on-disk">Module 2 – Simple selection and saving data on disk</h1>
+<h2 id="objectives-2">Objectives:</h2>
+<ul>
+<li>Transform selection criteria into actual Python code</li>
+<li>Implementar o processo de seleção em Python</li>
+<li>Guardar informação em ficheiro</li>
+</ul>
+<h2 id="input-1">Input:</h2>
+<ul>
+<li>File: <a href="files/metabolic_pathways.xls">metabolic_pathways.csv</a></li>
+</ul>
+<h2 id="output-1">Output:</h2>
+<ul>
+<li>File: <code>selected1.csv</code>
+<ul>
+<li>containing the data of the pathway <code>hsa04210</code>.</li>
+</ul></li>
+<li>File: <code>selected2.csv</code>
+<ul>
+<li>containing the data of the pathway <code>hsa00730</code> and <code>hsa04122</code>.</li>
+</ul></li>
+</ul>
+<h2 id="steps-2">Steps:</h2>
+<ol type="1">
+<li>Let’s create a Python function that determines whether the path ID of a pathway is <code>hsa04210</code>:
+<ol type="a">
+<li><p>Create an empty file and save it as <code>module2.py</code> on the same folder where the <code>metabolic_pathways.csv</code> file is. Do not forget the <code>.py</code> ending, as this instructs the computer that the file is a Python script.</p></li>
+<li><p>Copy and paste the following code to your file:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> filter1(path):
+    path_id <span class="op">=</span> path[???]  <span class="co"># select the column for the ID</span>
+
+    <span class="cf">if</span> path_id <span class="op">==</span> <span class="st">&#39;???&#39;</span>: <span class="co"># replace with the ID we are searching for</span>
+        <span class="cf">return</span> <span class="va">True</span>
+    <span class="cf">else</span>:
+        <span class="cf">return</span> <span class="va">False</span></code></pre></div></li>
+<li><p>Replace the green question marks (<code>???</code>) with appropriate Python code.</p></li>
+</ol></li>
+<li><p>The previous code is just a function that will run when we call it, but does not do anything on its own. Let’s add more code to the file so that we actually go through each pathway and use the filter on it.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
+
+<span class="co"># ------------------------------------- #</span>
+<span class="co"># PLACE HERE THE FUNCTION DEFINED ABOVE #</span>
+<span class="co"># ------------------------------------- #</span>
+
+<span class="co"># Open the original file and read all pathways</span>
+file_to_read <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)
+paths <span class="op">=</span> csv.reader(file_to_read, delimiter<span class="op">=</span>???)
+
+<span class="co"># Open the file where we will save the selection</span>
+file_to_write <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected1.csv&#39;</span>, <span class="st">&#39;w&#39;</span>)
+w <span class="op">=</span> csv.writer(file_to_write, delimiter<span class="op">=</span>???)
+
+<span class="cf">for</span> path <span class="op">in</span> paths:
+    <span class="cf">if</span> filter1(path):
+        w.writerow(path)
+
+<span class="co"># Close the file</span>
+file_to_write.close()</code></pre></div></li>
+<li><p>Run <code>module2.py</code> and study the file that was produced. Make sure it corresponds to what you were expecting.</p></li>
+<li><p>Edit the file <code>module2.py</code> by creating a new filter <code>filter2</code> which selects the pathways where the enzyme Q9Y697 participates. If necessary, consult the documentation for the function <code>str.split</code> at <a href="https://docs.python.org/2/library/stdtypes.html#str.split" class="uri">https://docs.python.org/2/library/stdtypes.html#str.split</a>.</p>
+<ol type="a">
+<li><p>Create the new function <code>filter2</code>:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> filter2(path):
+    field <span class="op">=</span> path[???]  <span class="co"># select the column for the list of enzymes</span>
+
+    <span class="co"># break that information into a list</span>
+    enzyme_list <span class="op">=</span> <span class="bu">str</span>.split(field, ???)
+
+    <span class="co"># enzyme_list is now a list of strings, such as follows:</span>
+    <span class="co"># [&#39;H9EC08&#39;, &#39;P03905&#39;, &#39;G9LG04&#39;, &#39;P03901&#39;]</span>
+
+    <span class="co"># Return True if our selected enzyme is in that list</span>
+    <span class="cf">if</span> <span class="st">&#39;???&#39;</span> <span class="op">in</span> enzyme_list:
+        <span class="cf">return</span> <span class="va">True</span>
+    <span class="cf">else</span>:
+        <span class="cf">return</span> <span class="va">False</span></code></pre></div></li>
+<li><p>Also change <code>'selected1.csv'</code> into <code>'selected2.csv'</code>. This ensures that the new output will not overwrite the previous one.</p></li>
+</ol></li>
+<li><p>Run <code>module2.py</code> again and study the file that was produced. Make sure it corresponds to what you were expecting; in particular, make sure all the selected pathways contain the enzyme Q9Y697.</p></li>
+</ol>
+<h2 id="quiz-1">Quiz:</h2>
+<ol type="1">
+<li><p>Create a new filter function <code>filter3</code> that selects the pathways that are part of the class “Human Diseases; Cancers”.</p></li>
+<li><p>Using the built-in function <code>len</code>, which returns the number of elements in a list, create a function <code>filter4</code> that selects pathways containing at most 10 enzymes. The documentation for this function can be found in <a href="https://docs.python.org/2/library/functions.html#len" class="uri">https://docs.python.org/2/library/functions.html#len</a></p></li>
+</ol>
+<p><strong>Note</strong>: to read and write CSV files in Python, we have beein using the <code>csv</code> module. This module allows us to specify the format of the file to read/write, <em>e.g.</em> which character to use to separate the fields and to delimit the fields. You should familiarize yourself with this module by reading its documentation at <a href="https://docs.python.org/2/library/csv.html" class="uri">https://docs.python.org/2/library/csv.html</a>.</p>
+<h2 id="objectives-3">## Objectives:</h2>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<h2 id="input-2">## Input:</h2>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<h2 id="output-2">## Output:</h2>
+<ul>
+<li></li>
+</ul>
+<h2 id="steps-3">Steps:</h2>
+<ol type="1">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+<h2 id="quiz-2">Quiz:</h2>
+<ol type="1">
+<li></li>
+<li></li>
 </ol>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script>

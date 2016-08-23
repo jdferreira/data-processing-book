@@ -58,7 +58,7 @@ For example, [Codecademy](https://www.codecademy.com/en/tracks/python) contains 
 
 ## Part I: Notepad++ and Python
 
-### Objectives
+### Objectives:
 
 - Open Notepad++, write some Python code and save the file
 - Execute the file with Python
@@ -78,19 +78,19 @@ For example, [Codecademy](https://www.codecademy.com/en/tracks/python) contains 
 ![Starting the command line](images/open-cmd.png "Starting the command line")
 
 4. In the terminal (the command line window), we need to navigate to the Desktop folder and then instruct Python to run our `test.py`.
-   We do this by running the following commands:
+We do this by running the following commands:
 ```bash
-cd Desktop
-python test.py
+    cd Desktop
+    python test.py
 ```
 ![The \"Hello World\" output](images/hello-world-run.png "The \"Hello World\" output")
 
-5. Observe the output produced by python.
+5. Observe the output produced by Python.
 
 
 ## Part II: Beginning data processing
 
-### Objectives
+### Objectives:
 - Understand the CSV format
 - Convert between CSV and the Excel format
 - Read CSV files with Python
@@ -99,7 +99,7 @@ python test.py
 - File: [metabolic_pathways.xls](files/metabolic_pathways.xls)
 
 ### Output:
-- File: metabolic_pathways.csv
+- File: `metabolic_pathways.csv`
 - Console:
 ```awk
     Glycolysis / Gluconeogenesis
@@ -111,24 +111,168 @@ python test.py
 
 ### Steps:
 1. Open the Excel file.
-   Take special attention to the contents of this file and try to get familiar with the data it contains.
-   This step is one of the most important to data processing, as it allows us to gain intuition about the information that we're dealing with.
+Take special attention to the contents of this file and try to get familiar with the data it contains.
+This step is one of the most important to data processing, as it allows us to gain intuition about the information that we're dealing with.
 
-2. Using Excel's functionalities, save the data in the CSV format.
+2. Using Excel's functionalities, save the data in the CSV format using the name `metabolic_pathways.csv`.
 
 3. Open the CSV file in a text editor (Notepad++) and study the file that you saved.
-   For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, etc.
+For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, etc.
 
-4. Read the contents of the CSV file with Python and, for each pathway, print its name.
-   Use the following code, filling wherever you see a green question mark (`???`):
-```python
-    import csv
-    f = open('metabolic_pathways.csv')   # Open the file
-    paths = csv.reader(f, delimiter=???) # Create a CSV reader object
-    for path in paths: # For each pathway ...
-        print ???      # ... print its name
-```
+4. Let's create a Python script to read the CSV file and print the name of each pathway.
+    a. Create an empty file and save it as `module1.py` on the same folder where the `metabolic_pathways.csv` file is.
+    Do not forget the `.py` ending, as this instructs the computer that the file is a Python script.
+    
+    b. Copy and paste the following code to your file:
+    ```python
+        import csv
+        f = open('metabolic_pathways.csv')   # Open the file
+        paths = csv.reader(f, delimiter=???) # Create a CSV reader object
+        for path in paths: # For each pathway ...
+            print ???      # ... print its name
+    ```
+    
+    c. Replace all the green question mark place-holders (`???`) with appropriate Python code.
+
+5. Run the Python script and observe the output.
+Does it correspond to what you were expecting to see?
+
+6. Make sure you keep a copy of the `metabolic_pathways.csv` file to yourself, so that you can use it in the next module.
+For example, send it to you by email or upload it to Dropbox.
+
+7. Submit your code and the answers to the quiz below to moodle.
 
 ### Quiz:
 1. How would you change the Python code to print the class of each pathway instead of its name?
+
 2. Explain why, in the CSV file, some fields are delimited by quotes (`"`) and other are not.
+
+
+
+# Module 2 -- Simple selection and saving data on disk
+
+## Objectives:
+- Transform selection criteria into actual Python code
+- Implementar o processo de seleção em Python
+- Guardar informação em ficheiro
+
+## Input:
+- File: [metabolic_pathways.csv](files/metabolic_pathways.xls)
+
+## Output:
+- File: `selected1.csv`
+    * containing the data of the pathway `hsa04210`.
+- File: `selected2.csv`
+    * containing the data of the pathway `hsa00730` and `hsa04122`.
+
+## Steps:
+1. Let's create a Python function that determines whether the path ID of a pathway is `hsa04210`:
+    a. Create an empty file and save it as `module2.py` on the same folder where the `metabolic_pathways.csv` file is.
+    Do not forget the `.py` ending, as this instructs the computer that the file is a Python script.
+    
+    b. Copy and paste the following code to your file:
+    ```python
+        def filter1(path):
+            path_id = path[???]  # select the column for the ID
+            
+            if path_id == '???': # replace with the ID we are searching for
+                return True
+            else:
+                return False
+    ```
+    
+    c. Replace the green question marks (`???`) with appropriate Python code.
+
+2. The previous code is just a function that will run when we call it, but does not do anything on its own.
+Let's add more code to the file so that we actually go through each pathway and use the filter on it.
+```python
+    import csv
+    
+    # ------------------------------------- #
+    # PLACE HERE THE FUNCTION DEFINED ABOVE #
+    # ------------------------------------- #
+    
+    # Open the original file and read all pathways
+    file_to_read = open('metabolic_pathways.csv')
+    paths = csv.reader(file_to_read, delimiter=???)
+    
+    # Open the file where we will save the selection
+    file_to_write = open('selected1.csv', 'w')
+    w = csv.writer(file_to_write, delimiter=???)
+    
+    for path in paths:
+        if filter1(path):
+            w.writerow(path)
+    
+    # Close the file
+    file_to_write.close()
+```
+
+3. Run `module2.py` and study the file that was produced.
+Make sure it corresponds to what you were expecting.
+
+4. Edit the file `module2.py` by creating a new filter `filter2` which selects the pathways where the enzyme Q9Y697 participates.
+If necessary, consult the documentation for the function `str.split` at <https://docs.python.org/2/library/stdtypes.html#str.split>.
+
+    a. Create the new function `filter2`:
+    ```python
+        def filter2(path):
+            field = path[???]  # select the column for the list of enzymes
+            
+            # break that information into a list
+            enzyme_list = str.split(field, ???)
+            
+            # enzyme_list is now a list of strings, such as follows:
+            # ['H9EC08', 'P03905', 'G9LG04', 'P03901']
+            
+            # Return True if our selected enzyme is in that list
+            if '???' in enzyme_list:
+                return True
+            else:
+                return False
+    ```
+    
+    b. Also change `'selected1.csv'` into `'selected2.csv'`.
+    This ensures that the new output will not overwrite the previous one.
+
+5. Run `module2.py` again and study the file that was produced.
+Make sure it corresponds to what you were expecting; in particular, make sure all the selected pathways contain the enzyme Q9Y697.
+
+## Quiz:
+1. Create a new filter function `filter3` that selects the pathways that are part of the class "Human Diseases; Cancers".
+
+2. Using the built-in function `len`, which returns the number of elements in a list, create a function `filter4` that selects pathways containing at most 10 enzymes.
+The documentation for this function can be found in <https://docs.python.org/2/library/functions.html#len>
+
+**Note**: to read and write CSV files in Python, we have beein using the `csv` module.
+This module allows us to specify the format of the file to read/write, _e.g._ which character to use to separate the fields and to delimit the fields.
+You should familiarize yourself with this module by reading its documentation at <https://docs.python.org/2/library/csv.html>.
+
+
+
+
+
+
+## Objectives:
+- 
+- 
+- 
+
+## Input:
+- 
+- 
+- 
+
+## Output:
+- 
+- 
+
+## Steps:
+1. 
+2. 
+3. 
+4. 
+
+## Quiz:
+1. 
+2. 
