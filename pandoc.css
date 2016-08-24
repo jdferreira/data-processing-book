@@ -426,6 +426,12 @@ code > span.kw {
     font-weight: bold;
 }
 
+/* Builtins */
+code > span.bu {
+    font-style: italic;
+    color: #204a87;
+}
+
 /* DataType */
 code > span.dt {
     color: #204a87;
@@ -578,6 +584,16 @@ code > span.in {
 }
 
 
-span.blank:before {content: "?";visibility: hidden;}
+span.blank:before {
+    content: "?";
+    visibility: hidden;
+}
 
-span.blank:after {content: "?";visibility: hidden;}
+span.blank:after {
+    content: "?";
+    visibility: hidden;
+}
+
+li li div.sourceCode {
+    margin-left: -2em;
+}
