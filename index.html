@@ -345,7 +345,7 @@ f.close()</code></pre></div></li>
 <h2 id="quiz-2">Quiz:</h2>
 <ol type="1">
 <li><p>Observe in <code>sequences.csv</code> that some enzymes appear more than once. Can you explain why?</p></li>
-<li><p>Describe the code in step 5 line by line.</p></li>
+<li><p>Describe the code in step 5 line by line. Use comments to do it.</p></li>
 </ol>
 <h1 id="module-4-crossing-data-from-several-sources">Module 4 – Crossing data from several sources</h1>
 <h2 id="objectives-4">Objectives:</h2>
@@ -381,9 +381,9 @@ dict_sequences <span class="op">=</span> {}
     enzyme_id <span class="op">=</span> enzyme[???] <span class="co"># The ID of this enzyme</span>
     seq <span class="op">=</span> enzyme[???]       <span class="co"># The aminoacid sequence of this enzyme</span>
     dict_sequences[enzyme_id] <span class="op">=</span> seq</code></pre></div></li>
-<li><p>Then we will read the file <code>selected.csv</code> and associate each pathway with the list of enzymes that are part of it. We will also use a dictionary for this task:</p>
+<li><p>Then we will read the file <code>selected2.csv</code> and associate each pathway with the list of enzymes that are part of it. We will also use a dictionary for this task:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Read the CSV file</span>
-f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected.csv&#39;</span>)
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected2.csv&#39;</span>)
 paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
 
 <span class="co"># Create an empty dictionary that we will populate as we read the CSV</span>
@@ -398,7 +398,7 @@ dict_paths <span class="op">=</span> {}
     enzymes <span class="op">=</span> path[???] <span class="co"># The field of the enzymes</span>
 
     <span class="co"># Break that information into a list</span>
-    enzyme_list <span class="op">=</span> <span class="bu">str</span>.split(field, ???)
+    enzyme_list <span class="op">=</span> <span class="bu">str</span>.split(enzymes, ???)
 
     <span class="co"># Associate the pathway ID with the corresponding list of enzymes</span>
     dict_paths[???] <span class="op">=</span> ???</code></pre></div></li>
@@ -482,7 +482,7 @@ dict_sequences <span class="op">=</span> {}
 <span class="im">import</span> re
 
 <span class="co"># Define here your regular expression</span>
-reg_expr <span class="op">=</span> <span class="st">&#39;???&#39;</span>
+reg_expr <span class="op">=</span> <span class="vs">r&#39;???&#39;</span>
 
 <span class="co"># For each enzyme, retrieve their sequence and determine whether</span>
 <span class="co"># the sequence matches three consecutive alanines</span>
@@ -496,7 +496,7 @@ reg_expr <span class="op">=</span> <span class="st">&#39;???&#39;</span>
 <li><p>Change the code above to save the enzyme identifiers and sequences to a file named <code>relevant_sequences_1.csv</code> instead of printing them to the screen. Refer to module 4, step 3 to refresh your memory on how to write a CSV file.</p></li>
 <li><p>Change the regular expression in the Python script in order to find other sequences. For each of these patterns, save a new file named <code>relevant_sequences_2.csv</code> and <code>relevant_sequences_3.csv</code> respectively.</p>
 <ol type="a">
-<li><p>Sequences where the first 5 aminoacids are polar.</p></li>
+<li><p>Sequences where the first 5 aminoacids are non-polar.</p></li>
 <li><p>Sequences that contain a methionine, followed by any aminoacid, followed by either a serine or a proline.</p></li>
 </ol></li>
 <li><p>Run the code and take notice of the files that were created. Do they correspond to what you were expecting to see?</p></li>
@@ -508,11 +508,11 @@ reg_expr <span class="op">=</span> <span class="st">&#39;???&#39;</span>
 <li><p>Write an alternative regular expression to the one of step 3 having the same meaning but using different regular expression elements.</p></li>
 <li><p>Imagine you want to apply the first regular expression used in this module (three consecutive alanines) to the file <code>relevant_sequences_2.csv</code> instead of <code>sequences.csv</code>. What modifications would you have to do in the Python script to accommodate this change? Would the result be the equal to what you got in <code>relevant_sequences_1.csv</code>?</p></li>
 </ol>
-<p><strong>Note</strong>: In case you want to explore regular expressions in more detail, we propose the following exercise:<br> What regular expression describes a molecular group that connects to GTP? This is a complex pattern that can be described with three smaller sequences:</p>
+<p><strong>Note</strong>: In case you want to explore regular expressions in more detail, we propose the following exercise:<br> What regular expression describes a molecular group that connects to GTP? This is a complex pattern that can be described with three smaller sequences (note that there is no aminoacid with the letter <code>X</code>; this letter is used to describe that any aminoacid can occur in that position):</p>
 <ul>
-<li>the first is GXXXXGK,</li>
-<li>the second is DXXG, and</li>
-<li>the third is NKXD or NKXW.</li>
+<li>the first is <code>GXXXXGK</code>,</li>
+<li>the second is <code>DXXG</code>, and</li>
+<li>the third is <code>NKXD</code> or <code>NKXW</code>.</li>
 </ul>
 <p>The first and second group are separated by either 40 to 80 aminoacids or 130 to 170 aminoacids; the second and third groups are separated by 40 to 80 aminoacids.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 <h1 id="module">Module</h1>

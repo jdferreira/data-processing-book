@@ -390,6 +390,7 @@ For example, send it to you by email or upload it to Dropbox.
 Can you explain why?
 
 2. Describe the code in step 5 line by line.
+Use comments to do it.
 
 
 # Module 4 -- Crossing data from several sources
@@ -428,11 +429,11 @@ As such, add this to your `module4.py`, filling in the question marks:
         dict_sequences[enzyme_id] = seq
 ```
 
-3. Then we will read the file `selected.csv` and associate each pathway with the list of enzymes that are part of it.
+3. Then we will read the file `selected2.csv` and associate each pathway with the list of enzymes that are part of it.
 We will also use a dictionary for this task:
 ```python
     # Read the CSV file
-    f = open('selected.csv')
+    f = open('selected2.csv')
     paths = csv.reader(f, delimiter=???)
     
     # Create an empty dictionary that we will populate as we read the CSV
@@ -447,7 +448,7 @@ We will also use a dictionary for this task:
         enzymes = path[???] # The field of the enzymes
         
         # Break that information into a list
-        enzyme_list = str.split(field, ???)
+        enzyme_list = str.split(enzymes, ???)
         
         # Associate the pathway ID with the corresponding list of enzymes
         dict_paths[???] = ???
@@ -552,7 +553,7 @@ Explain why.
     import re
     
     # Define here your regular expression
-    reg_expr = '???'
+    reg_expr = r'???'
     
     # For each enzyme, retrieve their sequence and determine whether
     # the sequence matches three consecutive alanines
@@ -571,7 +572,7 @@ Refer to module 4, step 3 to refresh your memory on how to write a CSV file.
 5. Change the regular expression in the Python script in order to find other sequences.
 For each of these patterns, save a new file named `relevant_sequences_2.csv` and `relevant_sequences_3.csv` respectively.
     
-    a. Sequences where the first 5 aminoacids are polar.
+    a. Sequences where the first 5 aminoacids are non-polar.
     
     b. Sequences that contain a methionine, followed by any aminoacid, followed by either a serine or a proline.
 
@@ -593,11 +594,11 @@ Would the result be the equal to what you got in `relevant_sequences_1.csv`?
 
 **Note**: In case you want to explore regular expressions in more detail, we propose the following exercise:<br>
 What regular expression describes a molecular group that connects to GTP?
-This is a complex pattern that can be described with three smaller sequences:
+This is a complex pattern that can be described with three smaller sequences (note that there is no aminoacid with the letter `X`; this letter is used to describe that any aminoacid can occur in that position):
 
-- the first is GXXXXGK,
-- the second is DXXG, and
-- the third is NKXD or NKXW.
+- the first is `GXXXXGK`,
+- the second is `DXXG`, and
+- the third is `NKXD` or `NKXW`.
 
 The first and second group are separated by either 40 to 80 aminoacids or 130 to 170 aminoacids; the second and third groups are separated by 40 to 80 aminoacids.[^1]
 
