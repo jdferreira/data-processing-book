@@ -125,6 +125,7 @@ This step is one of the most important to data processing, as it allows us to ga
 For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, etc.
 
 5. Let's create a Python script to read the CSV file and print the name of each pathway.
+
     a. Create an empty file and save it as `module1.py` on the same folder where the `metabolic_pathways.csv` file is.
     Do not forget the `.py` ending, as this instructs the computer that the file is a Python script.
     
@@ -142,7 +143,7 @@ For example, determine what character is used to separate the various fields of 
     
     c. Replace all the green question mark place-holders (`???`) with appropriate Python code.
 
-6. Run the Python script and observe the output.
+6. Run `module1.py` in the command line and observe the output.
 Does it correspond to what you were expecting to see?
 
 7. Make sure you keep a copy of the `metabolic_pathways.csv` file to yourself, so that you can use it in the next modules.
@@ -174,6 +175,7 @@ For example, send it to you by email or upload it to Dropbox.
 
 ## Steps:
 1. Let's create a Python function that determines whether the path ID of a pathway is `hsa04210`:
+
     a. Create an empty file and save it as `module2.py` on the same folder where the `metabolic_pathways.csv` file is.
     Do not forget the `.py` ending, as this instructs the computer that the file is a Python script.
     
@@ -283,9 +285,13 @@ Try to change the identifier in the link from `P12345` to another one.
 
 2. In a Python file named `module3.py`, create a function called `get_sequence` that takes as input the ID of a protein and returns its aminoacid sequence.
 This function:
+
     a. opens the URL mentioned above,
+    
     b. reads the content on that URL,
+    
     c. extracts the aminoacid sequence, and
+    
     d. joins all the lines so that only a single string is returned
     ```python
         import urllib # This module contains functions to read URLs
@@ -327,7 +333,9 @@ To do that, add the following lines to the Python file (replace the `???` instan
 ```
 
 4. Now we are going to read the enzymes in the `selected2.csv` file and perform a lookup of their aminoacid sequences.
+    
     a. Remove or comment the code from step 3.
+    
     b. Replace it with this:
     ```python
         import csv
@@ -368,7 +376,8 @@ Continue adding code to your `module3.py` file:
     f.close()
 ```
 
-6. Run the code and take notice of the output that was created (the `sequences.csv` file). Does it correspond to what you were expecting to see?
+6. Run the code and take notice of the file that was created (`sequences.csv`).
+Does it correspond to what you were expecting to see?
 
 7. Make sure you keep a copy of the `sequences.csv` file to yourself, so that you can use it in the next modules.
 For example, send it to you by email or upload it to Dropbox.
@@ -472,7 +481,7 @@ To do so, add this final piece of code to your script:
             w.writerow([path_id, seq])
 ```
 
-4. Run the Python script and observe the output.
+4. Run the code and take notice of the file that was created (`paths_enzymes.csv`).
 Does it correspond to what you were expecting to see?
 
 5. Make sure you keep a copy of the `paths_enzymes.csv` file to yourself, so that you can use it in the next modules.
@@ -488,6 +497,120 @@ Describe which modifications you would need to execute in the code of today's mo
 
 2. The output file `paths_enzymes.csv` contains some enzymes more than once.
 Explain why.
+
+
+
+
+# Module 5 -- Information selection with regular expressions
+
+## Objectives:
+- Develop regular expressions that represent several selection criteria
+- Use the `re` Python module to create the regular expressions
+- Search for aminoacid motives in the enzyme sequences
+
+## Input:
+- File [sequences.csv](files/sequences.csv) from module 3
+
+## Output:
+- File: `relevant_sequences_1.csv`
+- File: `relevant_sequences_2.csv`
+- File: `relevant_sequences_3.csv`
+
+## Steps:
+
+1. In this module, we will search, using regular expressions, the enzymes whose aminoacid sequence matches a certain pattern.
+    
+    a. You can consult a [reference cheat sheet of regular expressions](http://www.cheat-sheets.org/saved-copy/regular_expressions_cheat_sheet.png).
+    
+    b. You can also find the correspondence between each aminoacid and their 1-letter code in this [chart](http://bio100.class.uic.edu/lectures/aminoacids01.jpg).
+    
+    c. Familiarize yourself these two charts.
+
+2. We start by reading the file `sequences.csv` and creating a dictionary that associates the enzymes with their aminoacid sequence, just as we did in the previous module.
+```python
+    import csv
+    
+    # Read the CSV file
+    f = open('sequences.csv')
+    enzymes = csv.reader(f, delimiter=???)
+    
+    # Create an empty dictionary that we will populate as we read the CSV
+    # file
+    dict_sequences = {}
+    
+    # For each of the enzymes in the file, associate the enzyme with its
+    # sequence
+    for enzyme in enzymes:
+        enzyme_id = enzyme[???] # The ID of this enzyme
+        seq = enzyme[???]       # The aminoacid sequence of this enzyme
+        dict_sequences[enzyme_id] = seq
+```
+
+3. Now that we have the dictionary, let's search for all enzymes whose aminoacid sequence contains three consecutive alanines:
+```python
+    # We import the re module to handle regular expressions
+    import re
+    
+    # Define here your regular expression
+    reg_expr = '???'
+    
+    # For each enzyme, retrieve their sequence and determine whether
+    # the sequence matches three consecutive alanines
+    for enzyme in dict_sequences:
+        # Retrieve the aminoacid sequence
+        seq = ???
+        
+        # Determine whether the sequence matches the pattern
+        if re.search(reg_expr, seq):
+            print 'The enzyme ' + ??? + ' matches the expression ' + reg_expr
+```
+
+4. Change the code above to save the enzyme identifiers and sequences to a file named `relevant_sequences_1.csv` instead of printing them to the screen.
+Refer to module 4, step 3 to refresh your memory on how to write a CSV file.
+
+5. Change the regular expression in the Python script in order to find other sequences.
+For each of these patterns, save a new file named `relevant_sequences_2.csv` and `relevant_sequences_3.csv` respectively.
+    
+    a. Sequences where the first 5 aminoacids are polar.
+    
+    b. Sequences that contain a methionine, followed by any aminoacid, followed by either a serine or a proline.
+
+6. Run the code and take notice of the files that were created.
+Do they correspond to what you were expecting to see?
+
+7. Make sure you keep a copy of the `relevant_sequences_1.csv`, `relevant_sequences_2.csv` and `relevant_sequences_3.csv` files to yourself, so that you can use them in the next modules.
+For example, send it to you by email or upload it to Dropbox.
+
+8. Submit your code and the answers to the quiz below to moodle.
+
+## Quiz:
+
+1. Write an alternative regular expression to the one of step 3 having the same meaning but using different regular expression elements.
+
+2. Imagine you want to apply the first regular expression used in this module (three consecutive alanines) to the file `relevant_sequences_2.csv` instead of `sequences.csv`.
+What modifications would you have to do in the Python script to accommodate this change?
+Would the result be the equal to what you got in `relevant_sequences_1.csv`?
+
+**Note**: In case you want to explore regular expressions in more detail, we propose the following exercise:<br>
+What regular expression describes a molecular group that connects to GTP?
+This is a complex pattern that can be described with three smaller sequences:
+
+- the first is GXXXXGK,
+- the second is DXXG, and
+- the third is NKXD or NKXW.
+
+The first and second group are separated by either 40 to 80 aminoacids or 130 to 170 aminoacids; the second and third groups are separated by 40 to 80 aminoacids.[^1]
+
+[^1]: Source: Dever TE, Glynias MJ, Merrick WC (1987). PNAS 84(7), 1814-1818.
+
+
+
+
+
+
+
+
+
 
 
 
@@ -521,3 +644,7 @@ Explain why.
 1. 
 
 2. 
+
+
+
+
