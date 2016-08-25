@@ -600,9 +600,8 @@ This is a complex pattern that can be described with three smaller sequences (no
 - the second is `DXXG`, and
 - the third is `NKXD` or `NKXW`.
 
-The first and second group are separated by either 40 to 80 aminoacids or 130 to 170 aminoacids; the second and third groups are separated by 40 to 80 aminoacids.[^1]
-
-[^1]: Source: Dever TE, Glynias MJ, Merrick WC (1987). PNAS 84(7), 1814-1818.
+The first and second group are separated by either 40 to 80 aminoacids or 130 to 170 aminoacids; the second and third groups are separated by 40 to 80 aminoacids.
+<small>[Source: Dever TE, Glynias MJ, Merrick WC (1987). PNAS 84(7), 1814-1818.]</small>
 
 
 
