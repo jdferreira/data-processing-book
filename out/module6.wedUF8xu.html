@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title></title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="pandoc.css">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+
+// Replace all instances of "???" inside <code> elements with the HTML code:
+// <span class="blank">?</span>
+$("code").html(function () {
+    return $(this).html().replace(/\?\?\?/g, "<span class=\"blank\">?</span>");
+});
+
+// "print" is a builtin in python3 but a keyworkd in python2.
+// Let's make sure this change happens
+$("span.bu").each(function() {
+    if ($(this).text() == "print") {
+        $(this).removeClass('bu');
+        $(this).addClass('kw');
+    }
+})
+
+</script>
+</body>
+</html>

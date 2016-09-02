@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title></title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="pandoc.css">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<h1 id="module-1-metabolic-pathways-data">Module 1 – Metabolic pathways data</h1>
+<h2 id="part-i-notepad-and-python">Part I: Notepad++ and Python</h2>
+<h3 id="objectives">Objectives:</h3>
+<ul>
+<li>Open Notepad++, write some Python code and save the file</li>
+<li>Execute the file with Python</li>
+</ul>
+<h3 id="steps">Steps</h3>
+<ol type="1">
+<li>In the Windows start menu, open <code>Notepad++</code>.</li>
+</ol>
+<figure>
+<img src="images/open-notepad.png" title="Open Notepad++" alt="Open Notepad++" /><figcaption>Open Notepad++</figcaption>
+</figure>
+<ol start="2" type="1">
+<li>Write a small “Hello World!” program and save the file in the Desktop (or in whichever folder you want) with the name <code>test.py</code>.</li>
+</ol>
+<figure>
+<img src="images/hello-world.png" title="The small &quot;Hello World&quot; file" alt="The small &quot;Hello World&quot; file" /><figcaption>The small &quot;Hello World&quot; file</figcaption>
+</figure>
+<ol start="3" type="1">
+<li>In the start menu, open the command line (<code>cmd</code>).</li>
+</ol>
+<figure>
+<img src="images/open-cmd.png" title="Starting the command line" alt="Starting the command line" /><figcaption>Starting the command line</figcaption>
+</figure>
+<ol start="4" type="1">
+<li><p>In the terminal (the command line window), we need to navigate to the Desktop folder and then instruct Python to run our <code>test.py</code>. We do this by running the following commands:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> Desktop
+<span class="kw">python</span> test.py</code></pre></div>
+<figure>
+<img src="images/hello-world-run.png" title="The &quot;Hello World&quot; output" alt="The &quot;Hello World&quot; output" /><figcaption>The &quot;Hello World&quot; output</figcaption>
+</figure></li>
+<li><p>Observe the output produced by Python.</p></li>
+</ol>
+<h2 id="part-ii-beginning-data-processing">Part II: Beginning data processing</h2>
+<h3 id="objectives-1">Objectives:</h3>
+<ul>
+<li>Understand the CSV format</li>
+<li>Convert between the Excel format and CSV</li>
+<li>Understand the meaning of metadata</li>
+<li>Read CSV files with Python</li>
+</ul>
+<h3 id="input">Input:</h3>
+<ul>
+<li>File: <a href="files/metabolic_pathways.xls">metabolic_pathways.xls</a></li>
+</ul>
+<h3 id="output">Output:</h3>
+<ul>
+<li>File: <code>metabolic_pathways.csv</code></li>
+<li><p>Console:</p>
+<div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk">Glycolysis / Gluconeogenesis
+Citrate cycle (TCA cycle)
+Pentose phosphate pathway
+Pentose and glucuronate interconversions
+...</code></pre></div></li>
+</ul>
+<h3 id="steps-1">Steps:</h3>
+<ol type="1">
+<li><p>Open the Excel file. Take special attention to the contents of this file and try to get familiar with the data it contains. This step is one of the most important to data processing, as it allows us to gain intuition about the information that we’re dealing with.</p></li>
+<li><p>Remove the first row, which contains only the headers of the columns. (This first row is called “metadata” since it explains the data contained in the file but is not itself actual data.)</p></li>
+<li><p>Using Excel’s functionalities, save the data in the CSV format using the name <code>metabolic_pathways.csv</code>.</p></li>
+<li><p>Open the CSV file in a text editor (Notepad++) and study the file that you saved. For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, etc.</p></li>
+<li><p>Let’s create a Python script to read the CSV file and print the name of each pathway.</p>
+<ol type="a">
+<li><p>Create an empty file and save it as <code>module1.py</code> on the same folder where the <code>metabolic_pathways.csv</code> file is. Do not forget the <code>.py</code> ending, as this instructs the computer that the file is a Python script.</p></li>
+<li><p>Copy and paste the following code to your file:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
+
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)   <span class="co"># Open the file</span>
+
+paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???) <span class="co"># Create a CSV reader object</span>
+
+<span class="cf">for</span> path <span class="op">in</span> paths: <span class="co"># For each pathway ...</span>
+    <span class="bu">print</span> ???      <span class="co"># ... print its name</span></code></pre></div></li>
+<li><p>Replace all the green question mark place-holders (<code>???</code>) with appropriate Python code.</p></li>
+</ol></li>
+<li><p>Run <code>module1.py</code> in the command line and observe the output. Does it correspond to what you were expecting to see?</p></li>
+<li><p>Make sure you keep a copy of the <code>metabolic_pathways.csv</code> file to yourself, so that you can use it in the next modules. For example, send it to you by email or upload it to Dropbox.</p></li>
+<li><p>Submit your code and the answers to the quiz below to moodle.</p></li>
+</ol>
+<h3 id="quiz">Quiz:</h3>
+<ol type="1">
+<li><p>How would you change the Python code to print the class of each pathway instead of its name?</p></li>
+<li><p>Explain why, in the CSV file, some fields are delimited by quotes (<code>&quot;</code>) and other are not.</p></li>
+</ol>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+
+// Replace all instances of "???" inside <code> elements with the HTML code:
+// <span class="blank">?</span>
+$("code").html(function () {
+    return $(this).html().replace(/\?\?\?/g, "<span class=\"blank\">?</span>");
+});
+
+// "print" is a builtin in python3 but a keyworkd in python2.
+// Let's make sure this change happens
+$("span.bu").each(function() {
+    if ($(this).text() == "print") {
+        $(this).removeClass('bu');
+        $(this).addClass('kw');
+    }
+})
+
+</script>
+</body>
+</html>

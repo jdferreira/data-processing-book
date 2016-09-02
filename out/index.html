@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="author" content="João D. Ferreira">
+    <meta name="author" content="Francisco M. Couto">
+    <title>Data processing for metabolic pathways using files, web services and databases</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="pandoc.css">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Data processing for metabolic pathways using files, web services and databases</h1>
+<h2 class="author">João D. Ferreira</h2>
+<h2 class="author">Francisco M. Couto</h2>
+<h3 class="date">August 2016</h3>
+</header>
+<h1 id="table-of-contents">Table of contents</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="module1.xSpnKKsf.html">Module 1 – Metabolic pathways data</a></li>
+<li><a href="module2.1ze59Jg6.html">Module 2 – Simple selection and saving data on disk</a></li>
+<li><a href="module3.brjM6OTI.html">Module 3 – UniProt as a web service</a></li>
+<li><a href="module4.wA7dhLqP.html">Module 4 – Crossing data from several sources</a></li>
+<li><a href="module5.jPQ8bPvi.html">Module 5 – Information selection with regular expressions</a></li>
+</ul>
+<h1 id="introduction">Introduction</h1>
+<p>The aim of these exercises is to provide students the ability and competence to process data in an automatic fashion. The main topic surrounding these exercises will be metabolic pathway data processing, with a closer focus on the proteins that catalyse the chemical reaction those pathways, also known as <em>enzymes</em>. Despite working with metabolic pathways during the classes, the data processing methods that the students will learn in this class can be applied to many other types of data.</p>
+<h2 id="data">Data</h2>
+<p>The following figure represents the first steps in the glycolysis, a metabolic pathway that decomposes glucose in smaller chemical compounds. This figure includes a representation of five steps in this pathway, each one catalysed by a different enzyme.</p>
+<figure>
+<img src="images/pathway.png" title="An example of a metabolic pathway" alt="A Metabolic pathway" /><figcaption>A Metabolic pathway</figcaption>
+</figure>
+<p>For this class, we will provide <a href="files/metabolic_pathways.xls">an Excel file</a> with information on 297 metabolic pathways. Each line in this file contains:</p>
+<ul>
+<li>an identifier of the metabolic pathway;</li>
+<li>the name of the pathway;</li>
+<li>the class it belongs to;</li>
+<li>a list of the enzymes that participate in the pathway.</li>
+</ul>
+<p>Therefore, the Excel file has 297 lines, plus another one for the column headers.</p>
+<p>The following image shows a screenshot of the Excel file and its data</p>
+<figure>
+<img src="images/excel.png" title="A screenshot showing part of the data in the Excel file" alt="A screenshot of the Excel file" /><figcaption>A screenshot of the Excel file</figcaption>
+</figure>
+<p>This information comes from an online database called <a href="http://www.genome.jp/kegg/kegg2.html">Kyoto Encyclopedia of Genes and Genome</a>. The enzymes are referred by their UniProt code. <a href="http://www.uniprot.org/">UniProt</a> is a database of proteins that contain, among a vast amount of information, the aminoacid sequences of the proteins.</p>
+<h2 id="processing">Processing</h2>
+<p>Despite the data being provided to the students as an Excel file, the data processing operations will mostly be executed with a programming language. In this class, we will use <a href="http://www.python.org">Python</a> Processing our data with Python instead of Excel offers several benefits:</p>
+<ul>
+<li>We can define a set of operations to be executed automatically, which in Excel would take a large amount of time, since it is mostly driven by user interaction rather than direct commands</li>
+<li>Programming languages can handle complex data types, while Excel is mostly oriented towards numeric computations</li>
+</ul>
+<p>No deep knowledge of programming will be required for the class exercises, as we will provide most of the code. In fact, the students will not directly learn the details of Python as a programming language, but will instead be given “recipes” that contain most of the necessary logic, with small snippets of missing code that the students need to fill. However, we expect that the students familiarize themselves with Python syntax before the first module of this class by following some online courses. For example, <a href="https://www.codecademy.com/en/tracks/python">Codecademy</a> contains six modules that will help the students in this task:</p>
+<ul>
+<li><a href="https://www.codecademy.com/courses/introduction-to-python-6WeG3/0/1?curriculum_id=4f89dab3d788890003000096">Python Syntax</a></li>
+<li><a href="https://www.codecademy.com/courses/python-beginner-sRXwR/0/1?curriculum_id=4f89dab3d788890003000096">Strings &amp; Console Output</a></li>
+<li><a href="https://www.codecademy.com/courses/python-beginner-BxUFN/0/1?curriculum_id=4f89dab3d788890003000096">Conditionals &amp; Control Flow</a></li>
+<li><a href="https://www.codecademy.com/courses/python-beginner-en-pwmb1/0/1?curriculum_id=4f89dab3d788890003000096">Python Lists and Dictionaries</a></li>
+<li><a href="https://www.codecademy.com/courses/python-intermediate-en-OGNHh/0/1?curriculum_id=4f89dab3d788890003000096">File Input/Output</a></li>
+</ul>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+
+// Replace all instances of "???" inside <code> elements with the HTML code:
+// <span class="blank">?</span>
+$("code").html(function () {
+    return $(this).html().replace(/\?\?\?/g, "<span class=\"blank\">?</span>");
+});
+
+// "print" is a builtin in python3 but a keyworkd in python2.
+// Let's make sure this change happens
+$("span.bu").each(function() {
+    if ($(this).text() == "print") {
+        $(this).removeClass('bu');
+        $(this).addClass('kw');
+    }
+})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title></title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="pandoc.css">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<h1 id="module-4-crossing-data-from-several-sources">Module 4 – Crossing data from several sources</h1>
+<h2 id="objectives">Objectives:</h2>
+<ul>
+<li>Cross data from different data sources</li>
+</ul>
+<h2 id="input">Input:</h2>
+<ul>
+<li>File <a href="files/selected2.csv">selected2.csv</a> from module 2</li>
+<li>File <a href="files/sequences.csv">sequences.csv</a> from module 3</li>
+</ul>
+<h2 id="output">Output:</h2>
+<ul>
+<li>File: <code>paths_enzymes.csv</code></li>
+</ul>
+<h2 id="steps">Steps:</h2>
+<ol type="1">
+<li><p>Start by creating an empty <code>module4.py</code> file.</p></li>
+<li><p>We will first read the file <code>sequences.csv</code> so that we can build a dictionary where each enzyme is associated with its own aminoacid sequence. As such, add this to your <code>module4.py</code>, filling in the question marks:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
+
+<span class="co"># Read the CSV file</span>
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;sequences.csv&#39;</span>)
+enzymes <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
+
+<span class="co"># Create an empty dictionary that we will populate as we read the CSV</span>
+<span class="co"># file</span>
+dict_sequences <span class="op">=</span> {}
+
+<span class="co"># For each of the enzymes in the file, associate the enzyme with its</span>
+<span class="co"># sequence</span>
+<span class="cf">for</span> enzyme <span class="op">in</span> enzymes:
+    enzyme_id <span class="op">=</span> enzyme[???] <span class="co"># The ID of this enzyme</span>
+    seq <span class="op">=</span> enzyme[???]       <span class="co"># The aminoacid sequence of this enzyme</span>
+    dict_sequences[enzyme_id] <span class="op">=</span> seq</code></pre></div></li>
+<li><p>Then we will read the file <code>selected2.csv</code> and associate each pathway with the list of enzymes that are part of it. We will also use a dictionary for this task:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Read the CSV file</span>
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected2.csv&#39;</span>)
+paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
+
+<span class="co"># Create an empty dictionary that we will populate as we read the CSV</span>
+<span class="co"># file</span>
+dict_paths <span class="op">=</span> {}
+
+<span class="co"># For each pathway in that file:</span>
+<span class="co"># - extract the list of enzymes in the pathway</span>
+<span class="co"># - associate the pathway with this list of enzymes</span>
+<span class="cf">for</span> path <span class="op">in</span> paths:
+    path_id <span class="op">=</span> path[???] <span class="co"># The ID of the pathways</span>
+    enzymes <span class="op">=</span> path[???] <span class="co"># The field of the enzymes</span>
+
+    <span class="co"># Break that information into a list</span>
+    enzyme_list <span class="op">=</span> <span class="bu">str</span>.split(enzymes, ???)
+
+    <span class="co"># Associate the pathway ID with the corresponding list of enzymes</span>
+    dict_paths[???] <span class="op">=</span> ???</code></pre></div></li>
+<li><p>Now that we have the two dictionaries, we can go through each pathway and through each enzyme in it and create a CSV file that crosses the information, associating each pathway to the aminoacid sequences of its enzymes. To do so, add this final piece of code to your script:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Open a file to save the output</span>
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;paths_enzymes.csv&#39;</span>, <span class="st">&#39;w&#39;</span>)
+w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
+
+<span class="co"># For each pathway and each enzyme that it contains</span>
+<span class="cf">for</span> path_id <span class="op">in</span> dict_paths :
+    <span class="co"># Let&#39;s print some debugging information</span>
+    <span class="bu">print</span> <span class="st">&#39;Processing pathway with ID &#39;</span> <span class="op">+</span> path_id
+
+    <span class="co"># Retrieve the list of enzymes associated with this pathway</span>
+    enzyme_list <span class="op">=</span> dict_paths[???]
+
+    <span class="co"># Now that we have the list of enzymes, associate the pathway with each</span>
+    <span class="co"># aminoacid sequence</span>
+    <span class="cf">for</span> enzyme_id <span class="op">in</span> enzyme_list:
+        <span class="co"># Some more debugging information</span>
+        <span class="bu">print</span> <span class="st">&#39;  enzyme = &#39;</span> <span class="op">+</span> enzyme_id
+
+        <span class="co"># Retrieve the sequence associated with this enzyme</span>
+        seq <span class="op">=</span> dict_sequences[???]
+
+        <span class="co"># Write this row to the CSV file</span>
+        w.writerow([path_id, seq])</code></pre></div></li>
+<li><p>Run the code and take notice of the file that was created (<code>paths_enzymes.csv</code>). Does it correspond to what you were expecting to see?</p></li>
+<li><p>Make sure you keep a copy of the <code>paths_enzymes.csv</code> file to yourself, so that you can use it in the next modules. For example, send it to you by email or upload it to Dropbox.</p></li>
+<li><p>Submit your code and the answers to the quiz below to moodle.</p></li>
+</ol>
+<h2 id="quiz">Quiz:</h2>
+<ol type="1">
+<li><p>Imagine you created the file <code>selected2.csv</code> based on a different selection criterion (for example selecting only the pathways with at most 10 enzymes, as proposed in the quiz of module 2). Describe which modifications you would need to execute in the code of today’s module to accommodate this change.</p></li>
+<li><p>The output file <code>paths_enzymes.csv</code> contains some enzymes more than once. Explain why.</p></li>
+</ol>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+
+// Replace all instances of "???" inside <code> elements with the HTML code:
+// <span class="blank">?</span>
+$("code").html(function () {
+    return $(this).html().replace(/\?\?\?/g, "<span class=\"blank\">?</span>");
+});
+
+// "print" is a builtin in python3 but a keyworkd in python2.
+// Let's make sure this change happens
+$("span.bu").each(function() {
+    if ($(this).text() == "print") {
+        $(this).removeClass('bu');
+        $(this).addClass('kw');
+    }
+})
+
+</script>
+</body>
+</html>
