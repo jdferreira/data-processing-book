@@ -31,7 +31,7 @@ JOBS = {
         'modules/module5.md',          #   -- ditto --
         'modules/module6.md',          #   -- ditto --
         'modules/module7.md',          #   -- ditto --
-        '-o', 'index.html',            # output output
+        '-o', 'out/index.html',            # output output
         '-t', 'html5',                 # format to write
         '--smart',                     # smart quotes and hyphens
         '--template', 'template.html', # HTML template to use
