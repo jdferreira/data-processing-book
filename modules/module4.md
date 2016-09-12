@@ -1,4 +1,4 @@
-# Module 4 -- Crossing data from several sources
+# Module 4 -- Crossing data from several sources {#module4}
 
 ## Objectives:
 - Cross data from different data sources

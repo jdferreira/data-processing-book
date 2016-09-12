@@ -1,4 +1,4 @@
-# Module 1 -- Metabolic pathways data
+# Module 1 -- Metabolic pathways data {#module1}
 
 ## Part I: Notepad++ and Python
 

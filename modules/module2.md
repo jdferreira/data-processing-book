@@ -1,4 +1,4 @@
-# Module 2 -- Simple selection and saving data on disk
+# Module 2 -- Simple selection and saving data on disk {#module2}
 
 ## Objectives:
 - Transform a selection criterion into actual Python code

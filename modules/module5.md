@@ -1,4 +1,4 @@
-# Module 5 -- Information selection with regular expressions
+# Module 5 -- Information selection with regular expressions {#module5}
 
 ## Objectives:
 - Develop regular expressions that represent several selection criteria

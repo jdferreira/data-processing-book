@@ -1,15 +1,15 @@
 % Data processing for metabolic pathways using files, web services and databases
 % João D. Ferreira; Francisco M. Couto
-% August 2016
+% Version of 2016
 
 # Table of contents
 
 - [Introduction](#introduction)
-- [Module 1 -- Metabolic pathways data](module1.xSpnKKsf.html)
-- [Module 2 -- Simple selection and saving data on disk](module2.1ze59Jg6.html)
-- [Module 3 -- UniProt as a web service](module3.brjM6OTI.html)
-- [Module 4 -- Crossing data from several sources](module4.wA7dhLqP.html)
-- [Module 5 -- Information selection with regular expressions](module5.jPQ8bPvi.html)
+- [Module 1 -- Metabolic pathways data](#module1)
+- [Module 2 -- Simple selection and saving data on disk](#module2)
+- [Module 3 -- UniProt as a web service](#module3)
+- [Module 4 -- Crossing data from several sources](#module4)
+- [Module 5 -- Information selection with regular expressions](#module5)
 
 
 # Introduction
@@ -61,4 +61,5 @@ For example, [Codecademy](https://www.codecademy.com/en/tracks/python) contains 
 - [Conditionals & Control Flow](https://www.codecademy.com/courses/python-beginner-BxUFN/0/1?curriculum_id=4f89dab3d788890003000096)
 - [Python Lists and Dictionaries](https://www.codecademy.com/courses/python-beginner-en-pwmb1/0/1?curriculum_id=4f89dab3d788890003000096)
 - [File Input/Output](https://www.codecademy.com/courses/python-intermediate-en-OGNHh/0/1?curriculum_id=4f89dab3d788890003000096)
+
 
