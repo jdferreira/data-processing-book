@@ -7,49 +7,37 @@ import subprocess
 import threading
 import time
 
-DIR = os.path.abspath(os.path.dirname(__file__))
-
 TO_WATCH = {
-    b'template.html': 'all',
-    b'pandoc.css': 'all',
-    b'index.md': ['index'],
-    b'modules/module1.xSpnKKsf.md': ['module1'],
-    b'modules/module2.1ze59Jg6.md': ['module2'],
-    b'modules/module3.brjM6OTI.md': ['module3'],
-    b'modules/module4.wA7dhLqP.md': ['module4'],
-    b'modules/module5.jPQ8bPvi.md': ['module5'],
-    b'modules/module6.wedUF8xu.md': ['module6'],
-    b'modules/module7.czgnasyN.md': ['module7'],
+    b'pandoc.css':         ['css'],
+    b'template.html':      ['index'],
+    b'index.md':           ['index'],
+    b'modules/module1.md': ['index'],
+    b'modules/module2.md': ['index'],
+    b'modules/module3.md': ['index'],
+    b'modules/module4.md': ['index'],
+    b'modules/module5.md': ['index'],
+    b'modules/module6.md': ['index'],
+    b'modules/module7.md': ['index'],
 }
 
-PANDOC_COMMAND = [
-    'pandoc',                      # executable
-    None,                          # input filename
-    '-o', None,                    # output output
-    '-t', 'html5',                 # format to write
-    '--smart',                     # smart quotes and hyphens
-    '--template', 'template.html', # HTML template to use
-    '--css', 'pandoc.css ',        # CSS to link to from the output
-    '--highlight-style', 'tango',  # highlighting syntax for code sections
-]
-
-def make_pandoc_command(infile, outfile):
-    result = PANDOC_COMMAND[:]
-    result[1] = infile
-    result[3] = outfile
-    return result
-
-
 JOBS = {
-    'index':   make_pandoc_command('index.md',                    'out/index.html'),
-    'module1': make_pandoc_command('modules/module1.xSpnKKsf.md', 'out/module1.xSpnKKsf.html'),
-    'module2': make_pandoc_command('modules/module2.1ze59Jg6.md', 'out/module2.1ze59Jg6.html'),
-    'module3': make_pandoc_command('modules/module3.brjM6OTI.md', 'out/module3.brjM6OTI.html'),
-    'module4': make_pandoc_command('modules/module4.wA7dhLqP.md', 'out/module4.wA7dhLqP.html'),
-    'module5': make_pandoc_command('modules/module5.jPQ8bPvi.md', 'out/module5.jPQ8bPvi.html'),
-    'module6': make_pandoc_command('modules/module6.wedUF8xu.md', 'out/module6.wedUF8xu.html'),
-    'module7': make_pandoc_command('modules/module7.czgnasyN.md', 'out/module7.czgnasyN.html'),
-    'template': ['cp', 'template.html', 'out/template.html'],
+    'index': [
+        'pandoc',                      # executable
+        'index.md',                    # input filenames
+        'modules/module1.md',          #   -- ditto --
+        'modules/module2.md',          #   -- ditto --
+        'modules/module3.md',          #   -- ditto --
+        'modules/module4.md',          #   -- ditto --
+        'modules/module5.md',          #   -- ditto --
+        'modules/module6.md',          #   -- ditto --
+        'modules/module7.md',          #   -- ditto --
+        '-o', 'index.html',            # output output
+        '-t', 'html5',                 # format to write
+        '--smart',                     # smart quotes and hyphens
+        '--template', 'template.html', # HTML template to use
+        '--css', 'pandoc.css ',        # CSS to link to from the output
+        '--highlight-style', 'tango',  # highlighting syntax for code sections
+    ],
     'css': ['cp', 'pandoc.css', 'out/pandoc.css'],
 }
 
@@ -75,9 +63,9 @@ class Router(threading.Thread):
     
     
     def process(self, job_name):
-        job = subprocess.run(JOBS[job_name])
+        returncode = subprocess.call(JOBS[job_name])
         
-        if job.returncode < 0:
+        if returncode < 0:
             print('did not make it')
         else:
             print()
