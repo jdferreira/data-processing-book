@@ -18,14 +18,14 @@ TO_WATCH = {
     b'en/modules/module5.md': ['en-index'],
     b'en/modules/module6.md': ['en-index'],
     b'en/modules/module7.md': ['en-index'],
-    b'pt/index.md':           ['pt-index'],
-    b'pt/modules/module1.md': ['pt-index'],
-    b'pt/modules/module2.md': ['pt-index'],
-    b'pt/modules/module3.md': ['pt-index'],
-    b'pt/modules/module4.md': ['pt-index'],
-    b'pt/modules/module5.md': ['pt-index'],
-    b'pt/modules/module6.md': ['pt-index'],
-    b'pt/modules/module7.md': ['pt-index'],
+    # b'pt/index.md':           ['pt-index'],
+    # b'pt/modules/module1.md': ['pt-index'],
+    # b'pt/modules/module2.md': ['pt-index'],
+    # b'pt/modules/module3.md': ['pt-index'],
+    # b'pt/modules/module4.md': ['pt-index'],
+    # b'pt/modules/module5.md': ['pt-index'],
+    # b'pt/modules/module6.md': ['pt-index'],
+    # b'pt/modules/module7.md': ['pt-index'],
 }
 
 JOBS = {
@@ -39,34 +39,31 @@ JOBS = {
         'en/modules/module5.md',       #   -- ditto --
         'en/modules/module6.md',       #   -- ditto --
         'en/modules/module7.md',       #   -- ditto --
-        '-o', 'en/out/index.html',     # output output
+        '-o', 'out/en/index.html',     # output output
         '-t', 'html5',                 # format to write
         '--smart',                     # smart quotes and hyphens
         '--template', 'template.html', # HTML template to use
-        '--css', 'pandoc.css ',        # CSS to link to from the output
+        '--css', '../pandoc.css',      # CSS to link to from the output
         '--highlight-style', 'tango',  # highlighting syntax for code sections
     ),
-    'pt-index': (
-        'pandoc',                      # executable
-        'en/index.md',                 # input filenames
-        'en/modules/module1.md',       #   -- ditto --
-        'en/modules/module2.md',       #   -- ditto --
-        'en/modules/module3.md',       #   -- ditto --
-        'en/modules/module4.md',       #   -- ditto --
-        'en/modules/module5.md',       #   -- ditto --
-        'en/modules/module6.md',       #   -- ditto --
-        'en/modules/module7.md',       #   -- ditto --
-        '-o', 'en/out/index.html',     # output output
-        '-t', 'html5',                 # format to write
-        '--smart',                     # smart quotes and hyphens
-        '--template', 'template.html', # HTML template to use
-        '--css', 'pandoc.css ',        # CSS to link to from the output
-        '--highlight-style', 'tango',  # highlighting syntax for code sections
-    ),
-    'css': [
-        ('cp', 'pandoc.css', 'en/out/pandoc.css'),
-        ('cp', 'pandoc.css', 'pt/out/pandoc.css'),
-    ],
+    # 'pt-index': (
+    #     'pandoc',                      # executable
+    #     'en/index.md',                 # input filenames
+    #     'en/modules/module1.md',       #   -- ditto --
+    #     'en/modules/module2.md',       #   -- ditto --
+    #     'en/modules/module3.md',       #   -- ditto --
+    #     'en/modules/module4.md',       #   -- ditto --
+    #     'en/modules/module5.md',       #   -- ditto --
+    #     'en/modules/module6.md',       #   -- ditto --
+    #     'en/modules/module7.md',       #   -- ditto --
+    #     '-o', 'out/pt/index.html',     # output output
+    #     '-t', 'html5',                 # format to write
+    #     '--smart',                     # smart quotes and hyphens
+    #     '--template', 'template.html', # HTML template to use
+    #     '--css', '../pandoc.css',      # CSS to link to from the output
+    #     '--highlight-style', 'tango',  # highlighting syntax for code sections
+    # ),
+    'css': ('cp', 'pandoc.css', 'out/pandoc.css'),
 }
 
 

@@ -8,7 +8,7 @@
     <meta name="author" content="Francisco M. Couto">
     <title>Data processing for metabolic pathways using files, web services and databases</title>
     <style type="text/css">code{white-space: pre;}</style>
-    <link rel="stylesheet" href="pandoc.css">
+    <link rel="stylesheet" href="../pandoc.css">
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
     <![endif]-->
@@ -36,7 +36,7 @@
 <h2 id="data">Data</h2>
 <p>The following figure represents the first steps in the glycolysis, a metabolic pathway that decomposes glucose in smaller chemical compounds. This figure includes a representation of five steps in this pathway, each one catalysed by a different enzyme.</p>
 <figure>
-<img src="images/pathway.png" title="An example of a metabolic pathway" alt="A Metabolic pathway" /><figcaption>A Metabolic pathway</figcaption>
+<img src="../images/pathway.png" title="An example of a metabolic pathway" alt="A Metabolic pathway" /><figcaption>A Metabolic pathway</figcaption>
 </figure>
 <p>For this class, we will provide <a href="files/metabolic_pathways.xls">an Excel file</a> with information on 297 metabolic pathways. Each line in this file contains:</p>
 <ul>
@@ -48,7 +48,7 @@
 <p>Therefore, the Excel file has 297 lines, plus another one for the column headers.</p>
 <p>The following image shows a screenshot of the Excel file and its data</p>
 <figure>
-<img src="images/excel.png" title="A screenshot showing part of the data in the Excel file" alt="A screenshot of the Excel file" /><figcaption>A screenshot of the Excel file</figcaption>
+<img src="../images/excel.png" title="A screenshot showing part of the data in the Excel file" alt="A screenshot of the Excel file" /><figcaption>A screenshot of the Excel file</figcaption>
 </figure>
 <p>This information comes from an online database called <a href="http://www.genome.jp/kegg/kegg2.html">Kyoto Encyclopedia of Genes and Genome</a>. The enzymes are referred by their UniProt code. <a href="http://www.uniprot.org/">UniProt</a> is a database of proteins that contain, among a vast amount of information, the aminoacid sequences of the proteins.</p>
 <h2 id="processing">Processing</h2>
@@ -77,26 +77,26 @@
 <li>In the Windows start menu, open <code>Notepad++</code>.</li>
 </ol>
 <figure>
-<img src="images/open-notepad.png" title="Open Notepad++" alt="Open Notepad++" /><figcaption>Open Notepad++</figcaption>
+<img src="../images/open-notepad.png" title="Open Notepad++" alt="Open Notepad++" /><figcaption>Open Notepad++</figcaption>
 </figure>
 <ol start="2" type="1">
 <li>Write a small “Hello World!” program and save the file in the Desktop (or in whichever folder you want) with the name <code>test.py</code>.</li>
 </ol>
 <figure>
-<img src="images/hello-world.png" title="The small &quot;Hello World&quot; file" alt="The small &quot;Hello World&quot; file" /><figcaption>The small &quot;Hello World&quot; file</figcaption>
+<img src="../images/hello-world.png" title="The small &quot;Hello World&quot; file" alt="The small &quot;Hello World&quot; file" /><figcaption>The small &quot;Hello World&quot; file</figcaption>
 </figure>
 <ol start="3" type="1">
 <li>In the start menu, open the command line (<code>cmd</code>).</li>
 </ol>
 <figure>
-<img src="images/open-cmd.png" title="Starting the command line" alt="Starting the command line" /><figcaption>Starting the command line</figcaption>
+<img src="../images/open-cmd.png" title="Starting the command line" alt="Starting the command line" /><figcaption>Starting the command line</figcaption>
 </figure>
 <ol start="4" type="1">
 <li><p>In the terminal (the command line window), we need to navigate to the Desktop folder and then instruct Python to run our <code>test.py</code>. We do this by running the following commands:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> Desktop
 <span class="kw">python</span> test.py</code></pre></div>
 <figure>
-<img src="images/hello-world-run.png" title="The &quot;Hello World&quot; output" alt="The &quot;Hello World&quot; output" /><figcaption>The &quot;Hello World&quot; output</figcaption>
+<img src="../images/hello-world-run.png" title="The &quot;Hello World&quot; output" alt="The &quot;Hello World&quot; output" /><figcaption>The &quot;Hello World&quot; output</figcaption>
 </figure></li>
 <li><p>Observe the output produced by Python.</p></li>
 </ol>

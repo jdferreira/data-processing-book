@@ -11,15 +11,15 @@
 
 1. In the Windows start menu, open `Notepad++`.
 
-![Open Notepad++](images/open-notepad.png "Open Notepad++")
+![Open Notepad++](../images/open-notepad.png "Open Notepad++")
 
 2. Write a small "Hello World!" program and save the file in the Desktop (or in whichever folder you want) with the name `test.py`.
 
-![The small \"Hello World\" file](images/hello-world.png "The small \"Hello World\" file")
+![The small \"Hello World\" file](../images/hello-world.png "The small \"Hello World\" file")
 
 3. In the start menu, open the command line (`cmd`).
 
-![Starting the command line](images/open-cmd.png "Starting the command line")
+![Starting the command line](../images/open-cmd.png "Starting the command line")
 
 4. In the terminal (the command line window), we need to navigate to the Desktop folder and then instruct Python to run our `test.py`.
 We do this by running the following commands:
@@ -27,7 +27,7 @@ We do this by running the following commands:
     cd Desktop
     python test.py
 ```
-![The \"Hello World\" output](images/hello-world-run.png "The \"Hello World\" output")
+![The \"Hello World\" output](../images/hello-world-run.png "The \"Hello World\" output")
 
 5. Observe the output produced by Python.
 
