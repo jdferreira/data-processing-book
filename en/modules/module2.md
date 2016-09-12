@@ -94,7 +94,7 @@ For example, send it to you by email or upload it to Dropbox.
 7. Submit your code and the answers to the quiz below to moodle.
 
 
-## Quiz:
+## After the class:
 1. Create a new filter function `filter3` that selects the pathways that are part of the class "Human Diseases; Cancers".
 
 2. Using the built-in function `len`, which returns the number of elements in a list, create a function `filter4` that selects pathways containing at most 10 enzymes.

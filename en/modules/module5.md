@@ -24,6 +24,7 @@
     c. Familiarize yourself these two charts.
 
 2. We start by reading the file `sequences.csv` and creating a dictionary that associates the enzymes with their aminoacid sequence, just as we did in the previous module.
+Start the `module5.py` script:
 ```python
     import csv
     
@@ -80,13 +81,12 @@ For example, send it to you by email or upload it to Dropbox.
 
 8. Submit your code and the answers to the quiz below to moodle.
 
-## Quiz:
-
+## After the class:
 1. Write an alternative regular expression to the one of step 3 having the same meaning but using different regular expression elements.
 
 2. Imagine you want to apply the first regular expression used in this module (three consecutive alanines) to the file `relevant_sequences_2.csv` instead of `sequences.csv`.
-What modifications would you have to do in the Python script to accommodate this change?
-Would the result be the equal to what you got in `relevant_sequences_1.csv`?
+Chnage the Python script to accommodate this change.
+Verify whether the result is equal to what you got in `relevant_sequences_1.csv`.
 
 **Note**: In case you want to explore regular expressions in more detail, we propose the following exercise:<br>
 What regular expression describes a molecular group that connects to GTP?

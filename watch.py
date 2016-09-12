@@ -9,36 +9,64 @@ import time
 
 TO_WATCH = {
     b'pandoc.css':         ['css'],
-    b'template.html':      ['index'],
-    b'index.md':           ['index'],
-    b'modules/module1.md': ['index'],
-    b'modules/module2.md': ['index'],
-    b'modules/module3.md': ['index'],
-    b'modules/module4.md': ['index'],
-    b'modules/module5.md': ['index'],
-    b'modules/module6.md': ['index'],
-    b'modules/module7.md': ['index'],
+    b'template.html':      ['en-index', 'pt-index'],
+    b'en/index.md':           ['en-index'],
+    b'en/modules/module1.md': ['en-index'],
+    b'en/modules/module2.md': ['en-index'],
+    b'en/modules/module3.md': ['en-index'],
+    b'en/modules/module4.md': ['en-index'],
+    b'en/modules/module5.md': ['en-index'],
+    b'en/modules/module6.md': ['en-index'],
+    b'en/modules/module7.md': ['en-index'],
+    b'pt/index.md':           ['pt-index'],
+    b'pt/modules/module1.md': ['pt-index'],
+    b'pt/modules/module2.md': ['pt-index'],
+    b'pt/modules/module3.md': ['pt-index'],
+    b'pt/modules/module4.md': ['pt-index'],
+    b'pt/modules/module5.md': ['pt-index'],
+    b'pt/modules/module6.md': ['pt-index'],
+    b'pt/modules/module7.md': ['pt-index'],
 }
 
 JOBS = {
-    'index': [
+    'en-index': (
         'pandoc',                      # executable
-        'index.md',                    # input filenames
-        'modules/module1.md',          #   -- ditto --
-        'modules/module2.md',          #   -- ditto --
-        'modules/module3.md',          #   -- ditto --
-        'modules/module4.md',          #   -- ditto --
-        'modules/module5.md',          #   -- ditto --
-        'modules/module6.md',          #   -- ditto --
-        'modules/module7.md',          #   -- ditto --
-        '-o', 'out/index.html',            # output output
+        'en/index.md',                 # input filenames
+        'en/modules/module1.md',       #   -- ditto --
+        'en/modules/module2.md',       #   -- ditto --
+        'en/modules/module3.md',       #   -- ditto --
+        'en/modules/module4.md',       #   -- ditto --
+        'en/modules/module5.md',       #   -- ditto --
+        'en/modules/module6.md',       #   -- ditto --
+        'en/modules/module7.md',       #   -- ditto --
+        '-o', 'en/out/index.html',     # output output
         '-t', 'html5',                 # format to write
         '--smart',                     # smart quotes and hyphens
         '--template', 'template.html', # HTML template to use
         '--css', 'pandoc.css ',        # CSS to link to from the output
         '--highlight-style', 'tango',  # highlighting syntax for code sections
+    ),
+    'pt-index': (
+        'pandoc',                      # executable
+        'en/index.md',                 # input filenames
+        'en/modules/module1.md',       #   -- ditto --
+        'en/modules/module2.md',       #   -- ditto --
+        'en/modules/module3.md',       #   -- ditto --
+        'en/modules/module4.md',       #   -- ditto --
+        'en/modules/module5.md',       #   -- ditto --
+        'en/modules/module6.md',       #   -- ditto --
+        'en/modules/module7.md',       #   -- ditto --
+        '-o', 'en/out/index.html',     # output output
+        '-t', 'html5',                 # format to write
+        '--smart',                     # smart quotes and hyphens
+        '--template', 'template.html', # HTML template to use
+        '--css', 'pandoc.css ',        # CSS to link to from the output
+        '--highlight-style', 'tango',  # highlighting syntax for code sections
+    ),
+    'css': [
+        ('cp', 'pandoc.css', 'en/out/pandoc.css'),
+        ('cp', 'pandoc.css', 'pt/out/pandoc.css'),
     ],
-    'css': ['cp', 'pandoc.css', 'out/pandoc.css'],
 }
 
 
@@ -63,7 +91,17 @@ class Router(threading.Thread):
     
     
     def process(self, job_name):
-        returncode = subprocess.call(JOBS[job_name])
+        job_list = JOBS[job_name]
+        if type(job_list) is tuple:
+            job_list = [job_list]
+        
+        if len(job_list) == 0:
+            return
+        
+        for job in job_list:
+            returncode = subprocess.call(job)
+            if returncode < 0:
+                break
         
         if returncode < 0:
             print('did not make it')

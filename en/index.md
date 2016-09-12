@@ -10,6 +10,8 @@
 - [Module 3 -- UniProt as a web service](#module3)
 - [Module 4 -- Crossing data from several sources](#module4)
 - [Module 5 -- Information selection with regular expressions](#module5)
+- [Module 6 -- Create an SQL database](#module6)
+- [Module 7 -- Inserting data from CSV](#module7)
 
 
 # Introduction
@@ -39,7 +41,8 @@ The following image shows a screenshot of the Excel file and its data
 
 ![A screenshot of the Excel file](images/excel.png "A screenshot showing part of the data in the Excel file")
 
-This information comes from an online database called [Kyoto Encyclopedia of Genes and Genome](http://www.genome.jp/kegg/kegg2.html). The enzymes are referred by their UniProt code.
+This information comes from an online database called [Kyoto Encyclopedia of Genes and Genome](http://www.genome.jp/kegg/kegg2.html).
+The enzymes are referred by their UniProt code.
 [UniProt](http://www.uniprot.org/) is a database of proteins that contain, among a vast amount of information, the aminoacid sequences of the proteins.
 
 ## Processing

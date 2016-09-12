@@ -46,7 +46,7 @@ We do this by running the following commands:
 ### Output:
 - File: `metabolic_pathways.csv`
 - Console:
-```awk
+```text
     Glycolysis / Gluconeogenesis
     Citrate cycle (TCA cycle)
     Pentose phosphate pathway
@@ -95,9 +95,7 @@ For example, send it to you by email or upload it to Dropbox.
 
 8. Submit your code and the answers to the quiz below to moodle.
 
-### Quiz:
-1. How would you change the Python code to print the class of each pathway instead of its name?
+## After the class:
+1. Change the Python code to print the class of each pathway instead of its name.
 
-2. Explain why, in the CSV file, some fields are delimited by quotes (`"`) and other are not.
-
-
+2. Vertify that some fields in the CSV file are delimited by quotes (`"`) and other are not.

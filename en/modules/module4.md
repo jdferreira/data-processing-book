@@ -97,11 +97,7 @@ For example, send it to you by email or upload it to Dropbox.
 
 
 
-## Quiz:
-1. Imagine you created the file `selected2.csv` based on a different selection criterion (for example selecting only the pathways with at most 10 enzymes, as proposed in the quiz of module 2).
-Describe which modifications you would need to execute in the code of today's module to accommodate this change.
-
-2. The output file `paths_enzymes.csv` contains some enzymes more than once.
-Explain why.
-
+## After the class:
+1. Change the selection criterion used to create the file `selected2.csv` (for example selecting only the pathways with at most 10 enzymes, as proposed in the quiz of module 2).
+Then change the code of today's module to accommodate this change.
 

@@ -119,11 +119,5 @@ For example, send it to you by email or upload it to Dropbox.
 8. Submit your code and the answers to the quiz below to moodle.
 
 
-## Quiz:
-1. Observe in `sequences.csv` that some enzymes appear more than once.
-Can you explain why?
-
-2. Describe the code in step 5 line by line.
-Use comments to do it.
-
-
+## After the class:
+1. Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why?
