@@ -38,7 +38,7 @@ def make_pandoc_command(lang):
         '{}/modules/module7.md'.format(lang),
         
         # output filename
-        '-o', 'out/{}-index.html'.format(lang),
+        '-o', 'out/index-{}.html'.format(lang),
         
         # More options
         '-t', 'html5',                 # format to write
