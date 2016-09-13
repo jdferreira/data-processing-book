@@ -58,6 +58,7 @@ JOBS = {
 }
 
 add_lang('en')
+add_lang('pt')
 
 
 class Router(threading.Thread):
