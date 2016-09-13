@@ -116,8 +116,6 @@ Does it correspond to what you were expecting to see?
 7. Make sure you keep a copy of the `sequences.csv` file to yourself, so that you can use it in the next modules.
 For example, send it to you by email or upload it to Dropbox.
 
-8. Submit your code and the answers to the quiz below to moodle.
-
 
 ## After the class:
 1. Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why?

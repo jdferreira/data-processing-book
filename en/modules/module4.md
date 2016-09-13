@@ -4,8 +4,10 @@
 - Cross data from different data sources
 
 ## Input:
-- File [selected2.csv](files/selected2.csv) from module 2
-- File [sequences.csv](files/sequences.csv) from module 3
+- File: [selected2.csv](files/selected2.csv)
+    - created in module 2
+- File: [sequences.csv](files/sequences.csv)
+    - created in module 3
 
 ## Output:
 - File: `paths_enzymes.csv`
@@ -92,8 +94,6 @@ Does it correspond to what you were expecting to see?
 
 5. Make sure you keep a copy of the `paths_enzymes.csv` file to yourself, so that you can use it in the next modules.
 For example, send it to you by email or upload it to Dropbox.
-
-6. Submit your code and the answers to the quiz below to moodle.
 
 
 

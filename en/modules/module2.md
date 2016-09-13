@@ -91,8 +91,6 @@ Make sure it corresponds to what you were expecting; in particular, make sure al
 6. Make sure you keep a copy of the `selected1.csv` and `selected2.csv` files to yourself, so that you can use them in the next modules.
 For example, send it to you by email or upload it to Dropbox.
 
-7. Submit your code and the answers to the quiz below to moodle.
-
 
 ## After the class:
 1. Create a new filter function `filter3` that selects the pathways that are part of the class "Human Diseases; Cancers".

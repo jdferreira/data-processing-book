@@ -6,7 +6,8 @@
 - Search for aminoacid motives in the enzyme sequences
 
 ## Input:
-- File [sequences.csv](files/sequences.csv) from module 3
+- File: [sequences.csv](files/sequences.csv)
+    - created in module 3
 
 ## Output:
 - File: `relevant_sequences_1.csv`
@@ -79,7 +80,6 @@ Do they correspond to what you were expecting to see?
 7. Make sure you keep a copy of the `relevant_sequences_1.csv`, `relevant_sequences_2.csv` and `relevant_sequences_3.csv` files to yourself, so that you can use them in the next modules.
 For example, send it to you by email or upload it to Dropbox.
 
-8. Submit your code and the answers to the quiz below to moodle.
 
 ## After the class:
 1. Write an alternative regular expression to the one of step 3 having the same meaning but using different regular expression elements.

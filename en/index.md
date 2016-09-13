@@ -25,7 +25,7 @@ Despite working with metabolic pathways during the classes, the data processing 
 The following figure represents the first steps in the glycolysis, a metabolic pathway that decomposes glucose in smaller chemical compounds.
 This figure includes a representation of five steps in this pathway, each one catalysed by a different enzyme.
 
-![A Metabolic pathway](../images/pathway.png "An example of a metabolic pathway")
+![A Metabolic pathway](images/pathway.png "An example of a metabolic pathway")
 
 For this class, we will provide [an Excel file](files/metabolic_pathways.xls) with information on 297 metabolic pathways.
 Each line in this file contains:
@@ -39,7 +39,7 @@ Therefore, the Excel file has 297 lines, plus another one for the column headers
 
 The following image shows a screenshot of the Excel file and its data
 
-![A screenshot of the Excel file](../images/excel.png "A screenshot showing part of the data in the Excel file")
+![A screenshot of the Excel file](images/excel.png "A screenshot showing part of the data in the Excel file")
 
 This information comes from an online database called [Kyoto Encyclopedia of Genes and Genome](http://www.genome.jp/kegg/kegg2.html).
 The enzymes are referred by their UniProt code.

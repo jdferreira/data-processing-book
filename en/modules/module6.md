@@ -10,12 +10,12 @@
 - None
 
 ### Output:
-- Database file `example.db`
+- Database file: `example.db`
 
 
 ### Steps:
 1. First, create an empty database file using Python.
-You can name this script <nobr>`database.py`.</nobr>
+You can name this script <nobr>`example.py`.</nobr>
 ```python
     # `sqlite3` is a package that can be used to create a file containing
     # a relational database. We use this package to create the database,
@@ -185,7 +185,8 @@ If you need, consult the files from the previous modules to find the name, enzym
     connection.commit()
 ```
 
-3. Finally, let's just make sure that the tables contain some data:
+3. Finally, let's just make sure that the tables contain some data.
+For that, we will select the sequences of each table
 ```python
     rows = connection.execute('SELECT id, sequence FROM enzymes')
     for row in rows:
@@ -199,6 +200,10 @@ This should produce the oputput
     Q53FP3 starts with MLLRA
     Q9Y697 starts with MLLRA
 ```
+
+7. Make sure you keep a copy of the `pathways.db` file to yourself, so that you can use it in the next module.
+For example, send it to you by email or upload it to Dropbox.
+
 
 ## After the class:
 1. Verify that the primray key of the table `path_enzyme` has two atributes, and explain why that happens.

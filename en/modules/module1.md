@@ -11,15 +11,15 @@
 
 1. In the Windows start menu, open `Notepad++`.
 
-![Open Notepad++](../images/open-notepad.png "Open Notepad++")
+![Open Notepad++](images/open-notepad.png "Open Notepad++")
 
 2. Write a small "Hello World!" program and save the file in the Desktop (or in whichever folder you want) with the name `test.py`.
 
-![The small \"Hello World\" file](../images/hello-world.png "The small \"Hello World\" file")
+![The small \"Hello World\" file](images/hello-world.png "The small \"Hello World\" file")
 
 3. In the start menu, open the command line (`cmd`).
 
-![Starting the command line](../images/open-cmd.png "Starting the command line")
+![Starting the command line](images/open-cmd.png "Starting the command line")
 
 4. In the terminal (the command line window), we need to navigate to the Desktop folder and then instruct Python to run our `test.py`.
 We do this by running the following commands:
@@ -27,9 +27,13 @@ We do this by running the following commands:
     cd Desktop
     python test.py
 ```
-![The \"Hello World\" output](../images/hello-world-run.png "The \"Hello World\" output")
+![The \"Hello World\" output](images/hello-world-run.png "The \"Hello World\" output")
 
-5. Observe the output produced by Python.
+5. Observe the output produced by Python and ensure that the screen shows the following:
+```text
+    Hello World!
+```
+
 
 
 ## Part II: Beginning data processing
@@ -93,7 +97,6 @@ Does it correspond to what you were expecting to see?
 7. Make sure you keep a copy of the `metabolic_pathways.csv` file to yourself, so that you can use it in the next modules.
 For example, send it to you by email or upload it to Dropbox.
 
-8. Submit your code and the answers to the quiz below to moodle.
 
 ## After the class:
 1. Change the Python code to print the class of each pathway instead of its name.
