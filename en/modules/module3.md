@@ -14,8 +14,9 @@
     - containing the aminoacid sequences for each enzyme
 
 ## Steps:
+
 1. Go to <http://www.uniprot.org/uniprot/P12345.fasta> and study the FASTA format.
-Try to change the identifier in the link from `P12345` to another one.
+Change the identifier in the link from `P12345` to another one and study its content and how it is different from the previous one.
 
 2. In a Python file named `module3.py`, create a function called `get_sequence` that takes as input the ID of a protein and returns its aminoacid sequence.
 This function:
@@ -30,7 +31,7 @@ This function:
     ```python
         import urllib # This module contains functions to read URLs
 
-        def get_sequence(ID):
+        def get_sequence(identifier):
             # Establish the URL to open
             url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
             

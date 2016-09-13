@@ -12,8 +12,8 @@
 ### Output:
 - Database file: `example.db`
 
-
 ### Steps:
+
 1. First, create an empty database file using Python.
 You can name this script <nobr>`example.py`.</nobr>
 ```python
@@ -96,26 +96,22 @@ Add the following to your script:
     Doris is 19 years old and has id #4
 ```
 
-
 ## Part II: Now with real data
 
 ## Objectives:
 - Design a simple database schema to store information on the pathways
-- Create the database in SQLite
 - Use foreign keys
-- Insert data from the CSV file
-- Query the data
 
 ## Input:
 - None
 
 ## Output:
-- File: `pathways.db`
+- Database file: `pathways.db`
 
 ## Steps:
 
 1. Now that you know how to create a database and create its tables, we will make a database called `pathways.db` with three tables.
-First create a new Python script `module6.py` with the following
+First create a new Python script `module6.py` with the following code:
 ```python
     import sqlite3
     
@@ -186,7 +182,7 @@ If you need, consult the files from the previous modules to find the name, enzym
 ```
 
 3. Finally, let's just make sure that the tables contain some data.
-For that, we will select the sequences of each table
+For that, we will select the sequences of each pathway.
 ```python
     rows = connection.execute('SELECT id, sequence FROM enzymes')
     for row in rows:
@@ -195,20 +191,21 @@ For that, we will select the sequences of each table
         
         print enzyme_id + ' starts with ' + enzyme_sequence[:5]
 ```
-This should produce the oputput
+
+4. Ensure that the output on the screen is:
 ```text
     Q53FP3 starts with MLLRA
     Q9Y697 starts with MLLRA
 ```
 
-7. Make sure you keep a copy of the `pathways.db` file to yourself, so that you can use it in the next module.
+5. Make sure you keep a copy of the `pathways.db` file to yourself, so that you can use it in the next module.
 For example, send it to you by email or upload it to Dropbox.
 
-
 ## After the class:
+
 1. Verify that the primray key of the table `path_enzyme` has two atributes, and explain why that happens.
 
 2. Modify the database schema so that the database can store the name of the enzymes and also their position within the pathway (a whole number).
 
-3. Change the code of step 3 so that you can verify the contents of the other two tables.
+3. Change the code of step 3 so that you can also verify the contents of the  tables `paths` and `path_enzyme`.
 

@@ -1,6 +1,7 @@
 # Module 4 -- Crossing data from several sources {#module4}
 
 ## Objectives:
+- Use dictionaries to associate information
 - Cross data from different data sources
 
 ## Input:
@@ -13,6 +14,7 @@
 - File: `paths_enzymes.csv`
 
 ## Steps:
+
 1. Start by creating an empty `module4.py` file.
 
 2. We will first read the file `sequences.csv` so that we can build a dictionary where each enzyme is associated with its own aminoacid sequence.
@@ -61,7 +63,7 @@ We will also use a dictionary for this task:
         dict_paths[???] = ???
 ```
 
-3. Now that we have the two dictionaries, we can go through each pathway and through each enzyme in it and create a CSV file that crosses the information, associating each pathway to the aminoacid sequences of its enzymes.
+4. Now that we have the two dictionaries, we can go through each pathway and through each enzyme in it and create a CSV file that crosses the information, associating each pathway to the aminoacid sequences of its enzymes.
 To do so, add this final piece of code to your script:
 ```python
     # Open a file to save the output
@@ -89,10 +91,10 @@ To do so, add this final piece of code to your script:
             w.writerow([path_id, seq])
 ```
 
-4. Run the code and take notice of the file that was created (`paths_enzymes.csv`).
+5. Run the code and take notice of the file that was created (`paths_enzymes.csv`).
 Does it correspond to what you were expecting to see?
 
-5. Make sure you keep a copy of the `paths_enzymes.csv` file to yourself, so that you can use it in the next modules.
+6. Make sure you keep a copy of the `paths_enzymes.csv` file to yourself, so that you can use it in the next modules.
 For example, send it to you by email or upload it to Dropbox.
 
 

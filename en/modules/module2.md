@@ -6,7 +6,7 @@
 - Save the selected information on a new file
 
 ## Input:
-- File: [metabolic_pathways.csv](files/metabolic_pathways.xls)
+- File: [metabolic_pathways.csv](files/metabolic_pathways.csv)
 
 ## Output:
 - File: `selected1.csv`
@@ -15,6 +15,7 @@
     * containing the data of the pathway `hsa00730` and `hsa04122`.
 
 ## Steps:
+
 1. Let's create a Python function that determines whether the path ID of a pathway is `hsa04210`:
 
     a. Create an empty file and save it as `module2.py` on the same folder where the `metabolic_pathways.csv` file is.
@@ -33,20 +34,17 @@
     
     c. Replace the green question marks (`???`) with appropriate Python code.
 
-2. The previous code is just a function that will run when we call it, but does not do anything on its own.
+2. The previous code just defines a function that will run when we call it, but does not do anything on its own.
 Let's add more code to the file so that we actually go through each pathway and use the filter on it.
 ```python
     import csv
     
-    # ------------------------------------- #
-    # PLACE THE FUNCTION DEFINED ABOVE HERE #
-    # ------------------------------------- #
-    
-    # Open the original file and read all pathways
+    # Open the original file to read all pathways
     file_to_read = open('metabolic_pathways.csv')
     paths = csv.reader(file_to_read, delimiter=???)
     
-    # Open the file where we will save the selection
+    # Open the file to save the selection
+    # The 'w' instructs Python that we want to write on this file
     file_to_write = open('selected1.csv', 'w')
     w = csv.writer(file_to_write, delimiter=???)
     
@@ -63,6 +61,7 @@ Make sure it corresponds to what you were expecting.
 
 4. Edit the file `module2.py` by creating a new filter `filter2` which selects the pathways where the enzyme Q9Y697 participates.
 If necessary, consult the documentation for the function `str.split` at <https://docs.python.org/2/library/stdtypes.html#str.split>.
+We will implement this funcionality in two steps:
 
     a. Create the new function `filter2`:
     ```python
@@ -91,8 +90,8 @@ Make sure it corresponds to what you were expecting; in particular, make sure al
 6. Make sure you keep a copy of the `selected1.csv` and `selected2.csv` files to yourself, so that you can use them in the next modules.
 For example, send it to you by email or upload it to Dropbox.
 
-
 ## After the class:
+
 1. Create a new filter function `filter3` that selects the pathways that are part of the class "Human Diseases; Cancers".
 
 2. Using the built-in function `len`, which returns the number of elements in a list, create a function `filter4` that selects pathways containing at most 10 enzymes.

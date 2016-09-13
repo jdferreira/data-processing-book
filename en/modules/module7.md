@@ -35,8 +35,7 @@
     connection.commit()
 ```
 
-2. The following commands read the pathway data from our files from previous modules and add them to the database.
-Append this code to the script:
+2. Add the following code to the script, which will read the data from each pathway and add them to the database.
 ```python
     import csv
     
@@ -119,15 +118,16 @@ Append this code to the script:
         
         print 'Path ' + path_id + ' is named "' + path_name + '"'
 ```
-Check that the output is
+
+6. Check that the output is
 ```text
     Path hsa00730 is named "Thiamine metabolism"
     Path hsa04122 is named "Sulfur relay system"
 ```
 
-6. The code above prints the results to the screen.
-Now we want to save them into a CSV file.
-Replace the code from the previous step with this:
+7. The code above prints the results to the screen.
+Now we want to save them into the CSV file `results_1.csv`.
+Replace the code from step 5 with this:
 ```python
     # Let's open file 'results_1.csv' in write mode
     f = open(???, ???)
@@ -140,14 +140,14 @@ Replace the code from the previous step with this:
         w.writerow(row)
 ```
 
-7. Let's now select all the enzymes whose id starts with Q and save them to the file `results_2.csv`.
+8. Let's now select all the enzymes whose id starts with Q and save them to the file `results_2.csv`.
 The code recipe is the same, changing only the file name and the query.
-You can use the following query, changing where necessary
+You can use the following query, changing where necessary:
 ```sql
     SELECT ??? FROM enzymes WHERE ??? LIKE "Q%"
 ```
 
-8. Now we will cross the data in the tables.
+9. Now we will cross the data in the tables.
 Duplicate and adapt the same code from the previous step, using the following command SQL to select the enzyme sequences of each pathway, and save the results to `results_3.csv`:
 ```sql
     SELECT paths.name, enzymes.???
@@ -156,7 +156,7 @@ Duplicate and adapt the same code from the previous step, using the following co
       AND enzymes.id = path_enzyme.enzyme_id
 ```
 
-9. SQL allows the use of complex queries.
+10. SQL allows the use of complex queries.
 Use this query to save the id and name of the pathways associated with at least 15 enzymes.
 Save this to `results_4.csv`.
 ```sql
@@ -166,11 +166,15 @@ Save this to `results_4.csv`.
 ```
 
 ## After the class:
+
 1. Determine the reason for using the list `enzymes_inserted` in step 3.<br>
 **Hint**: try to remove the list from the script and observe that the code fails with a `constraint failed` exception.
 
 2. Many of the steps in this module suffer from code repetition.
-    a. Create a function `run_sql` that accepts two arguments: an sql command and a file name.
-    b. Implement this function so that it runs the sql command and saves the results in a CSV file.
+    
+    a. Create a function `run_sql` that accepts two arguments: an SQL command and a file name.
+    
+    b. Implement this function so that it runs the SQL command and saves the results in a CSV file.
+    
     c. Change today's code so that it uses the function, instead of repeating code<br>
     **Hint**: The steps 6 to 9 will each simply call the function once.

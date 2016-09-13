@@ -65,7 +65,7 @@ Start the `module5.py` script:
 ```
 
 4. Change the code above to save the enzyme identifiers and sequences to a file named `relevant_sequences_1.csv` instead of printing them to the screen.
-Refer to module 4, step 3 to refresh your memory on how to write a CSV file.
+Refer to module 3, step 5 to refresh your memory on how to write a CSV file.
 
 5. Change the regular expression in the Python script in order to find other sequences.
 For each of these patterns, save a new file named `relevant_sequences_2.csv` and `relevant_sequences_3.csv` respectively.
@@ -85,12 +85,12 @@ For example, send it to you by email or upload it to Dropbox.
 1. Write an alternative regular expression to the one of step 3 having the same meaning but using different regular expression elements.
 
 2. Imagine you want to apply the first regular expression used in this module (three consecutive alanines) to the file `relevant_sequences_2.csv` instead of `sequences.csv`.
-Chnage the Python script to accommodate this change.
+Change the Python script to accommodate this change.
 Verify whether the result is equal to what you got in `relevant_sequences_1.csv`.
 
-**Note**: In case you want to explore regular expressions in more detail, we propose the following exercise:<br>
+**Note**: To the students that want to explore regular expressions in more detail, we propose the following exercise:<br>
 What regular expression describes a molecular group that connects to GTP?
-This is a complex pattern that can be described with three smaller sequences (note that there is no aminoacid with the letter `X`; this letter is used to describe that any aminoacid can occur in that position):
+This is a complex pattern that is composed of three subsequences (note that there is no aminoacid with the letter `X`; this letter is used to describe that any aminoacid can occur in that position):
 
 - the first is `GXXXXGK`,
 - the second is `DXXG`, and

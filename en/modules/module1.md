@@ -7,7 +7,7 @@
 - Open Notepad++, write some Python code and save the file
 - Execute the file with Python
 
-### Steps
+### Steps:
 
 1. In the Windows start menu, open `Notepad++`.
 
@@ -34,8 +34,6 @@ We do this by running the following commands:
     Hello World!
 ```
 
-
-
 ## Part II: Beginning data processing
 
 ### Objectives:
@@ -61,16 +59,16 @@ We do this by running the following commands:
 ### Steps:
 
 1. Open the Excel file.
-Take special attention to the contents of this file and try to get familiar with the data it contains.
+Take special attention to the contents of this file and get familiar with the data it contains.
 This step is one of the most important to data processing, as it allows us to gain intuition about the information that we're dealing with.
 
-2. Remove the first row, which contains only the headers of the columns.
+2. Remove the first row, which contains the headers of the columns.
 (This first row is called "metadata" since it explains the data contained in the file but is not itself actual data.)
 
 3. Using Excel's functionalities, save the data in the CSV format using the name `metabolic_pathways.csv`.
 
-4. Open the CSV file in a text editor (Notepad++) and study the file that you saved.
-For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, etc.
+4. Open the CSV file in a text editor (`Notepad++`) and study the file that you saved.
+For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, _etc_.
 
 5. Let's create a Python script to read the CSV file and print the name of each pathway.
 
@@ -94,11 +92,11 @@ For example, determine what character is used to separate the various fields of 
 6. Run `module1.py` in the command line and observe the output.
 Does it correspond to what you were expecting to see?
 
-7. Make sure you keep a copy of the `metabolic_pathways.csv` file to yourself, so that you can use it in the next modules.
+7. Make sure you keep a copy of the `metabolic_pathways.csv` file to yourself, and the so `module1.py` script, that you can use them in the next modules.
 For example, send it to you by email or upload it to Dropbox.
 
-
 ## After the class:
+
 1. Change the Python code to print the class of each pathway instead of its name.
 
-2. Vertify that some fields in the CSV file are delimited by quotes (`"`) and other are not.
+2. Vertify that some fields in the CSV file are delimited by quotes (`"`) and other are not. Explain why.
