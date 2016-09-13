@@ -1,31 +1,31 @@
-# Module 5 -- Information selection with regular expressions {#module5}
+# Módulo 5 -- Seleção de informação com expressões regulares {#module5}
 
-## Objectives:
-- Develop regular expressions that represent several selection criteria
-- Use the `re` Python module to create the regular expressions
-- Search for aminoacid motives in the enzyme sequences
+## Objetivos:
+- Desenhar expressões regular para representar vários critérios de seleção
+- Usar o módulo `re` para criar e utilizar expressões regular
+- Procurar por motivos de aminoácidos nas sequências das enzimas
 
 ## Input:
-- File: [sequences.csv](files/sequences.csv)
-    - created in module 3
+- Ficheiro: [sequences.csv](files/sequences.csv)
+    - criado no módulo 3
 
 ## Output:
-- File: `relevant_sequences_1.csv`
-- File: `relevant_sequences_2.csv`
-- File: `relevant_sequences_3.csv`
+- Ficheiro: `relevant_sequences_1.csv`
+- Ficheiro: `relevant_sequences_2.csv`
+- Ficheiro: `relevant_sequences_3.csv`
 
-## Steps:
+## Passos:
 
-1. In this module, we will search, using regular expressions, the enzymes whose aminoacid sequence matches a certain pattern.
+1. Neste módulo, vamos usar expressões regulares para procurar enzimas cujas sequências de aminoácidos satisfazem certos padrões.
     
-    a. You can consult a [reference cheat sheet of regular expressions](http://www.cheat-sheets.org/saved-copy/regular_expressions_cheat_sheet.png).
+    a. Consulte a [folha de mnemónicas de expressões regulares](http://www.cheat-sheets.org/saved-copy/regular_expressions_cheat_sheet.png).
     
-    b. You can also find the correspondence between each aminoacid and their 1-letter code in this [chart](http://bio100.class.uic.edu/lectures/aminoacids01.jpg).
+    b. Pode ainda encontrar a correspondência entre cada aminoácido e a seu código de 1 letra [neste quadro](http://bio100.class.uic.edu/lectures/aminoacids01.jpg).
     
-    c. Familiarize yourself these two charts.
+    c. Familiarize-se com estes dois quadros.
 
-2. We start by reading the file `sequences.csv` and creating a dictionary that associates the enzymes with their aminoacid sequence, just as we did in the previous module.
-Start the `module5.py` script:
+2. Começamos por ler o conteúdo do ficheiro `sequences.csv` e por criar um dicionário que associa as enzimas às suas sequências de aminoácidos, tal como fizemos no módulo anterior.
+Crie o _script_ `module5.py`:
 ```python
     import csv
     
@@ -45,7 +45,7 @@ Start the `module5.py` script:
         dict_sequences[enzyme_id] = seq
 ```
 
-3. Now that we have the dictionary, let's search for all enzymes whose aminoacid sequence contains three consecutive alanines:
+3. Agora que temos o dicionário, vamos procurar as enzimas cujas sequências contêm três alaninas consecutivas:
 ```python
     # We import the re module to handle regular expressions
     import re
@@ -64,37 +64,37 @@ Start the `module5.py` script:
             print 'The enzyme ' + ??? + ' matches the expression ' + reg_expr
 ```
 
-4. Change the code above to save the enzyme identifiers and sequences to a file named `relevant_sequences_1.csv` instead of printing them to the screen.
-Refer to module 4, step 3 to refresh your memory on how to write a CSV file.
+4. Modifique o código acima para gravar os identificadores e sequências de aminoácidos num ficheiro `relevant_sequences_1.csv`, em vez de escrever no ecrã.
+Refira-se ao módulo 3, passo 5 se necessitar de se relembrar de como escrever um ficheiro CSV.
 
-5. Change the regular expression in the Python script in order to find other sequences.
-For each of these patterns, save a new file named `relevant_sequences_2.csv` and `relevant_sequences_3.csv` respectively.
+5. Altere a expressão regular no _script_ para encontrar outros padrões.
+Para cada um destes padrões, grave os identificadores e sequências no ficheiro `relevant_sequences_2.csv` e `relevant_sequences_3.csv` respetivamente.
     
-    a. Sequences where the first 5 aminoacids are non-polar.
+    a. Sequências onde os primeiros 5 aminoácidos são não-polares.
     
-    b. Sequences that contain a methionine, followed by any aminoacid, followed by either a serine or a proline.
+    b. Sequências que contêm uma metionina, seguida de qualquer aminoácido, seguida de uma serina ou uma prolina.
 
-6. Run the code and take notice of the files that were created.
-Do they correspond to what you were expecting to see?
+6. Execute o código e estude os ficheiros criados.
+Correspondem ao que esperava ver?
 
-7. Make sure you keep a copy of the `relevant_sequences_1.csv`, `relevant_sequences_2.csv` and `relevant_sequences_3.csv` files to yourself, so that you can use them in the next modules.
-For example, send it to you by email or upload it to Dropbox.
+7. Certifique-se de que mantém uma cópia dos ficheiros `relevant_sequences_1.csv`, `relevant_sequences_2.csv` e `relevant_sequences_3.csv` para si, assim como do _script_ `module5.py`, de forma a que os possa usar nos próximos módulos.
+Por exemplo, envie-os para si por email ou faça o upload para a Dropbox.
 
+## Após a aula:
 
-## After the class:
-1. Write an alternative regular expression to the one of step 3 having the same meaning but using different regular expression elements.
+1. Escreva uma expressão regular alternativa à definida no passo 1, mantendo o significado mas usando elementos de expressões regulares diferentes.
 
-2. Imagine you want to apply the first regular expression used in this module (three consecutive alanines) to the file `relevant_sequences_2.csv` instead of `sequences.csv`.
-Chnage the Python script to accommodate this change.
-Verify whether the result is equal to what you got in `relevant_sequences_1.csv`.
+2. Imagine que quer aplicar a primeira expressão regular usada neste módulo (3 alaninas consecutivas) ao ficheiro `relevant_sequences_2.csv` em vez de `sequences.csv`.
+Altere o _script_ Python para acomodar estas alterações.
+Verifique se o resultado é igual ao que tinha obtido no ficheiro `relevant_sequences_1.csv`.
 
-**Note**: In case you want to explore regular expressions in more detail, we propose the following exercise:<br>
-What regular expression describes a molecular group that connects to GTP?
-This is a complex pattern that can be described with three smaller sequences (note that there is no aminoacid with the letter `X`; this letter is used to describe that any aminoacid can occur in that position):
+**Nota**: Para os alunos que queiram explorar expressões regulares em mais detalhe, propomos o seguinte exercício:<br>
+Qual a expressão regular que descreve um grupo de ligação ao GTP?
+Este é um grupo complexo que consiste em três sub-sequências:
 
-- the first is `GXXXXGK`,
-- the second is `DXXG`, and
-- the third is `NKXD` or `NKXW`.
+- a primeira é `GXXXXGK`,
+- a segunda é `DXXG`, e
+- a terceira é `NKXD` ou `NKXW`.
 
-The first and second group are separated by either 40 to 80 aminoacids or 130 to 170 aminoacids; the second and third groups are separated by 40 to 80 aminoacids.
-<small>[Source: Dever TE, Glynias MJ, Merrick WC (1987). PNAS 84(7), 1814-1818.]</small>
+Entre o primeiro e o segundo grupos existem 40 a 80 aminoácidos ou 130 a 170 aminoácidos; entre o segundo e o terceiro grupo existem entre 40 a 80 aminoácidos.
+<small>[Fonte: Dever TE, Glynias MJ, Merrick WC (1987). PNAS 84(7), 1814-1818.]</small>

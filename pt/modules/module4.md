@@ -1,22 +1,24 @@
-# Module 4 -- Crossing data from several sources {#module4}
+# Módulo 4 -- Cruzamento de dados de várias fontes {#module4}
 
-## Objectives:
-- Cross data from different data sources
+## Objetivos:
+- Usar dicionários para associar informação
+- Cruzar dados de diversas fontes
 
 ## Input:
-- File: [selected2.csv](files/selected2.csv)
-    - created in module 2
-- File: [sequences.csv](files/sequences.csv)
-    - created in module 3
+- Ficheiro: [selected2.csv](files/selected2.csv)
+    - criado no módulo 2
+- Ficheiro: [sequences.csv](files/sequences.csv)
+    - criado no módulo 3
 
 ## Output:
-- File: `paths_enzymes.csv`
+- Ficheiro: `paths_enzymes.csv`
 
-## Steps:
-1. Start by creating an empty `module4.py` file.
+## Passos:
 
-2. We will first read the file `sequences.csv` so that we can build a dictionary where each enzyme is associated with its own aminoacid sequence.
-As such, add this to your `module4.py`, filling in the question marks:
+1. Comece por criar um novo _script_ `module4.py` vazio.
+
+2. Vamos primeiro ler o ficheiro `sequences.csv` para construir um dicionário onde cada enzima é associada à sua própria sequência.
+Para tal, adicione ao _script_ o seguinte código, substituindo os pontos de interrogação:
 ```python
     import csv
     
@@ -36,8 +38,8 @@ As such, add this to your `module4.py`, filling in the question marks:
         dict_sequences[enzyme_id] = seq
 ```
 
-3. Then we will read the file `selected2.csv` and associate each pathway with the list of enzymes that are part of it.
-We will also use a dictionary for this task:
+3. Em seguida, vamos ler o ficheiro `selected2.csv` e associar a cada via uma lista das suas enzimas
+Também aqui vamos usar um dicionário.
 ```python
     # Read the CSV file
     f = open('selected2.csv')
@@ -61,8 +63,8 @@ We will also use a dictionary for this task:
         dict_paths[???] = ???
 ```
 
-3. Now that we have the two dictionaries, we can go through each pathway and through each enzyme in it and create a CSV file that crosses the information, associating each pathway to the aminoacid sequences of its enzymes.
-To do so, add this final piece of code to your script:
+4. Agora que temos os dois dicionários, podemos percorrer cada via e cada enzima de cada via de forma a criar um ficheiro CSV que cruza a informação, associando a cada via as sequências de aminoácidos das suas enzimas.
+Para tal, adicione o seguinte ao seu _script_:
 ```python
     # Open a file to save the output
     f = open('paths_enzymes.csv', 'w')
@@ -89,15 +91,14 @@ To do so, add this final piece of code to your script:
             w.writerow([path_id, seq])
 ```
 
-4. Run the code and take notice of the file that was created (`paths_enzymes.csv`).
-Does it correspond to what you were expecting to see?
+5. Corra o código e estude o conteúdo do ficheiro que foi criado (`paths_enzymes.csv`).
+Corresponde ao que estava à espera?
 
-5. Make sure you keep a copy of the `paths_enzymes.csv` file to yourself, so that you can use it in the next modules.
-For example, send it to you by email or upload it to Dropbox.
+6. Certifique-se de que mantém uma cópia do ficheiro `paths_enzymes.csv` para si, assim como do _script_ `module4.py`, de forma a que os possa usar nos próximos módulos.
+Por exemplo, envie-os para si por email ou faça o upload para a Dropbox.
 
+## Após a aula:
 
-
-## After the class:
-1. Change the selection criterion used to create the file `selected2.csv` (for example selecting only the pathways with at most 10 enzymes, as proposed in the quiz of module 2).
-Then change the code of today's module to accommodate this change.
+1. Altere o critério de seleção usado para criar o ficheiro `selected2.csv` (por exemplo selecionando as vias com um máximo de 10 enzimas, como proposto no módulo 2).
+Em seguida altere o código de hoje para acomodar esta alteração.
 

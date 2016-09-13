@@ -1,36 +1,37 @@
-# Module 3 -- UniProt as a web service {#module3}
+# Módulo 3 -- UniProt como serviço web {#module3}
 
-## Objectives:
-- Recognize the importance of external sources of data
-- Use a web service through Python code
-- Process information coming from a web service
+## Objetivos:
+- Reconhecer a importância das fontes de dados externas
+- Usar um serviço web através de código Python
+- Processar a informação proveniente de um serviço web
 
 ## Input:
-- File: [selected2.csv](files/selected2.csv)
-    - created in the previous module
+- Ficheiro: [selected2.csv](files/selected2.csv)
+    - criado no módulo anterior
 
 ## Output:
-- File: `sequences.csv`
-    - containing the aminoacid sequences for each enzyme
+- Ficheiro: `sequences.csv`
+    - contendo as sequências de aminoácidos de cada enzima
 
-## Steps:
-1. Go to <http://www.uniprot.org/uniprot/P12345.fasta> and study the FASTA format.
-Try to change the identifier in the link from `P12345` to another one.
+## Passos:
 
-2. In a Python file named `module3.py`, create a function called `get_sequence` that takes as input the ID of a protein and returns its aminoacid sequence.
-This function:
+1. Abra o URL <http://www.uniprot.org/uniprot/P12345.fasta> no _browser_ e estude o formato FASTA.
+Altere o identificador do link de `P12345` para outro à sua escolha e estude o seu conteúdo e quais as diferenças entre os dois.
 
-    a. opens the URL mentioned above,
+2. Num _script_ Python chamado `module3.py`, crie uma função chamada `get_sequence` que recebe o identificador de uma proteína e devolve a sua sequência de aminoácidos.
+Esta função:
+
+    a. abre o URL mencionado acima,
     
-    b. reads the content on that URL,
+    b. lê o conteúdo acessível por esse URL,
     
-    c. extracts the aminoacid sequence, and
+    c. extrai a sequência de aminoácidos, e
     
-    d. joins all the lines so that only a single string is returned
+    d. junta todas as linhas numa só, de forma a devolver apenas uma _string_.
     ```python
         import urllib # This module contains functions to read URLs
 
-        def get_sequence(ID):
+        def get_sequence(identifier):
             # Establish the URL to open
             url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
             
@@ -54,8 +55,8 @@ This function:
             return ???
     ```
 
-3. Let's try our function on a couple of proteins.
-To do that, add the following lines to the Python file (replace the `???` instances with any protein IDs you want):
+3. Vamos experimentar executar a função com um pequeno número de proteínas.
+Para tal, adicione as seguintes linhas ao _script_ Python, substituindo `???` pelos identificadores que quiser:
 ```python
     sequence1 = get_sequence('P12345')
     sequence2 = get_sequence('???')
@@ -66,11 +67,11 @@ To do that, add the following lines to the Python file (replace the `???` instan
     print "SEQUENCE 3:\n" + sequence3 + "\n"
 ```
 
-4. Now we are going to read the enzymes in the `selected2.csv` file and perform a lookup of their aminoacid sequences.
+4. Agora que já vimos como utilizar a função, vamos ler as enzimas do ficheiro `selected2.csv` e determinar as suas sequências de aminoácidos.
     
-    a. Remove or comment the code from step 3.
+    a. Remova ou comente as linhas do passo 3.
     
-    b. Replace it with this:
+    b. Substitua-as por:
     ```python
         import csv
         
@@ -96,9 +97,9 @@ To do that, add the following lines to the Python file (replace the `???` instan
                 enzymes.append(e)
     ```
 
-5. Now that we have a list of enzymes, we can use it and the function we created in the beginning to get the aminoacid sequence of each enzyme.
-We will save this information into a new file.
-Continue adding code to your `module3.py` file:
+5. Agora que temos uma lista de enzimas, podemos usá-la juntamente com a função que criamos anteriormente para obter as suas sequências de aminoácidos.
+Vamos gravar esta informação num novo ficheiro `sequences.csv`.
+Para tal, continue a adicionar códugo ao _script_ `module3.py`:
 ```python
     f = open('sequences.csv', 'w')
     w = csv.writer(f, delimiter=???)
@@ -110,12 +111,12 @@ Continue adding code to your `module3.py` file:
     f.close()
 ```
 
-6. Run the code and take notice of the file that was created (`sequences.csv`).
-Does it correspond to what you were expecting to see?
+6. Execute o código e estude o conteúdo do novo ficheiro (`sequences.csv`).
+Corresponde ao que esperava ver?
 
-7. Make sure you keep a copy of the `sequences.csv` file to yourself, so that you can use it in the next modules.
-For example, send it to you by email or upload it to Dropbox.
+7. Certifique-se de que mantém uma cópia do ficheiro `sequences.csv` para si, assim como do _script_ `module3.py`, de forma a que os possa usar nos próximos módulos.
+Por exemplo, envie-os para si por email ou faça o upload para a Dropbox.
 
+## Após a aula:
 
-## After the class:
-1. Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why?
+1. Verifique que no ficheiro `sequences.csv` algumas enzimas aparecem repetidas. Tente explicar porquê.

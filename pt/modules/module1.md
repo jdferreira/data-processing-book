@@ -1,55 +1,53 @@
-# Module 1 -- Metabolic pathways data {#module1}
+# Módulo 1 -- Dados de vias metabólicas {#module1}
 
-## Part I: Notepad++ and Python
+## Parte I: Notepad++ e Python
 
-### Objectives:
+### Objetivos:
 
-- Open Notepad++, write some Python code and save the file
-- Execute the file with Python
+- Abrir o Notepad++, escrever algum código Python e gravar o ficheiro
+- Executar o código com o interpretador Python
 
-### Steps
+### Passos:
 
-1. In the Windows start menu, open `Notepad++`.
+1. No menu iniciar do Windows, abra o `Notepad++`.
 
-![Open Notepad++](images/open-notepad.png "Open Notepad++")
+![Abrir o Notepad++](images/open-notepad.png "Abrir o Notepad++")
 
-2. Write a small "Hello World!" program and save the file in the Desktop (or in whichever folder you want) with the name `test.py`.
+2. Escreva um pequeno programa "Hello World" e grave o ficheiro no Ambiente de Trabalho (ou em qualquer outra pasta que quiser) com o nome `test.py`.
 
-![The small \"Hello World\" file](images/hello-world.png "The small \"Hello World\" file")
+![O programa \"Hello World\"](images/hello-world.png "O programa \"Hello World\"")
 
-3. In the start menu, open the command line (`cmd`).
+3. No menu iniciar, abra a linha de comandos (`cmd`).
 
-![Starting the command line](images/open-cmd.png "Starting the command line")
+![Abrindo a linha de comandos](images/open-cmd.png "Abrindo a linha de comandos")
 
-4. In the terminal (the command line window), we need to navigate to the Desktop folder and then instruct Python to run our `test.py`.
-We do this by running the following commands:
+4. No terminal (a janela com a linha de comandos), precisamos de navegar para o Ambiente de Trabalho e depois instruir o interpretador Python a executar o ficheiro `test.py`.
+Para tal, escreva e execute os seguintes comandos no terminal:
 ```bash
     cd Desktop
     python test.py
 ```
-![The \"Hello World\" output](images/hello-world-run.png "The \"Hello World\" output")
+![O output do programa \"Hello World\"](images/hello-world-run.png "O output do programa \"Hello World\"")
 
-5. Observe the output produced by Python and ensure that the screen shows the following:
+5. Observe o output produzido pelo Python e confirme que o terminal mostra o seguinte:
 ```text
     Hello World!
 ```
 
+## Part II: Iniciando o processamento de dados
 
-
-## Part II: Beginning data processing
-
-### Objectives:
-- Understand the CSV format
-- Convert between the Excel format and CSV
-- Understand the meaning of metadata
-- Read CSV files with Python
+### Objetivos:
+- Compreender o formato CSV
+- Converter um ficheiro Excel no formato CSV
+- Compreender o significado de metadados
+- Ler ficheiros CSV com Python
 
 ### Input:
-- File: [metabolic_pathways.xls](files/metabolic_pathways.xls)
+- Ficheiro: [metabolic_pathways.xls](files/metabolic_pathways.xls)
 
 ### Output:
-- File: `metabolic_pathways.csv`
-- Console:
+- Ficheiro: `metabolic_pathways.csv`
+- Terminal:
 ```text
     Glycolysis / Gluconeogenesis
     Citrate cycle (TCA cycle)
@@ -58,26 +56,26 @@ We do this by running the following commands:
     ...
 ```
 
-### Steps:
+### Passos:
 
-1. Open the Excel file.
-Take special attention to the contents of this file and try to get familiar with the data it contains.
-This step is one of the most important to data processing, as it allows us to gain intuition about the information that we're dealing with.
+1. Abra o ficheiro Excel.
+Tome especial atenção ao conteúdo deste ficheiro e familiarize-se com os dados que contém.
+Este passo é de grande importância em processamento de dados, pois permite-nos ganhar intuição sobre a informação com que estamos a lidar.
 
-2. Remove the first row, which contains only the headers of the columns.
-(This first row is called "metadata" since it explains the data contained in the file but is not itself actual data.)
+2. Remova a primeira linha, que contém os cabeçalhos das colunas.
+(Esta primeira linha é classificada como "metadados" uma vez que fornece informação acerca dos dados no ficheiro mas não contém, por si mesma, dados.)
 
-3. Using Excel's functionalities, save the data in the CSV format using the name `metabolic_pathways.csv`.
+3. Usando as funcionalidades do Excel, grave os dados no formato CSV usando o nome `metabolic_pathways.csv`.
 
-4. Open the CSV file in a text editor (Notepad++) and study the file that you saved.
-For example, determine what character is used to separate the various fields of the data, whether the fields are delimited and how, etc.
+4. Abra o ficheiro CSV num editor de texto (`Notepad++`) e estude o conteúdo do novo ficheiro.
+Por exemplo, determine qual caracter é usado para separar os vários campos, se os campos estão delimitados e como, _etc_.
 
-5. Let's create a Python script to read the CSV file and print the name of each pathway.
-
-    a. Create an empty file and save it as `module1.py` on the same folder where the `metabolic_pathways.csv` file is.
-    Do not forget the `.py` ending, as this instructs the computer that the file is a Python script.
+5. Vamos criar um _script_ Python para ler o ficheiro CSV e imprimir o nome de cada via.
     
-    b. Copy and paste the following code to your file:
+    a. Crie um ficheiro vazio e grave-o como `module1.py` na mesma pasta onde está o ficheiro `metabolic_pathways.csv`.
+    Não esqueça a terminação `.py`, pois esta indica ao computador que o ficheiro é um _script_ Python.
+    
+    b. Copie e cole o código seguinte para o seu ficheiro:
     ```python
         import csv
         
@@ -89,16 +87,16 @@ For example, determine what character is used to separate the various fields of 
             print ???      # ... print its name
     ```
     
-    c. Replace all the green question mark place-holders (`???`) with appropriate Python code.
+    c. Substitua todos os pontos de interrogação (`???`) por código Python apropriado.
 
-6. Run `module1.py` in the command line and observe the output.
-Does it correspond to what you were expecting to see?
+6. Corra o `module1.py` no terminal e observe o output.
+O output corresponde ao que estava à espera de ver?
 
-7. Make sure you keep a copy of the `metabolic_pathways.csv` file to yourself, so that you can use it in the next modules.
-For example, send it to you by email or upload it to Dropbox.
+7. Certifique-se de que mantém uma cópia do ficheiro `metabolic_pathways.csv` para si, assim como do _script_ `module1.py`, de forma a que os possa usar nos próximos módulos.
+Por exemplo, envie-os para si por email ou faça o upload para a Dropbox.
 
+## Após a aula:
 
-## After the class:
-1. Change the Python code to print the class of each pathway instead of its name.
+1. Altere o código Python para imprimir não o nome das vias mas a sua classe.
 
-2. Vertify that some fields in the CSV file are delimited by quotes (`"`) and other are not.
+2. Verifique que alguns campos no ficheiro CSV estão delimitados por aspas (`"`) e que outro não estão. Explique porquê.

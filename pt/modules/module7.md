@@ -1,26 +1,26 @@
-# Module 7 -- Inserting data from CSV {#module7}
+# Módulo 7 -- Inserção de dados CSV {#module7}
 
-## Objectives:
-- Copy data from CSV into the database
-- Query the database with complex selection criteria
+## Objetivos:
+- Copiar dados de CSV para a base de dados
+- Consultar os dados com critérios de seleção complexos
 
 ## Input:
-- File: [selected2.csv](files/selected2.csv)
-    - created in module 3
-- File: [sequences.csv](files/sequences.csv)
-    - created in module 3
-- File: [pathways.db](files/pathways.db)
-    - created in module 6
+- Ficheiro: [selected2.csv](files/selected2.csv)
+    - criado no módulo 3
+- Ficheiro: [sequences.csv](files/sequences.csv)
+    - criado no módulo 3
+- Ficheiro: [pathways.db](files/pathways.db)
+    - criado no módulo 6
 
 ## Output:
-- File: `results_1.csv`
-- File: `results_2.csv`
-- File: `results_3.csv`
-- File: `results_4.csv`
+- Ficheiro: `results_1.csv`
+- Ficheiro: `results_2.csv`
+- Ficheiro: `results_3.csv`
+- Ficheiro: `results_4.csv`
 
-## Steps:
+## Passos:
 
-1. Create a new Python script `module7.py` that opens the database `pathways.db` created in the previous module with Python and removes the entries in the tables.
+1. Crie um novo _script_ Python `module7.py` que abre a base de dados criada no módulo anterior e remove as linhas das tabelas.
 ```python
     import sqlite3
     
@@ -35,8 +35,7 @@
     connection.commit()
 ```
 
-2. The following commands read the pathway data from our files from previous modules and add them to the database.
-Append this code to the script:
+2. Adicione o código seguinte ao _script_, o qual lê os dados de cada via  metabólica e adicionam-nos à base de dados.
 ```python
     import csv
     
@@ -61,7 +60,7 @@ Append this code to the script:
     connection.commit()
 ```
 
-3. We will do the same thing for the enzymes:
+3. Vamos fazer o mesmo com as enzimas:
 ```python
     # Now do the same for the enzymes
     f = open('sequences.csv')
@@ -87,7 +86,7 @@ Append this code to the script:
     connection.commit()
 ```
 
-4. And now it is time to insert into the database the information that will allow us to relate pathways with enzymes:
+4. E agora vamos inserir na base de dados a informação que associa cada via às suas enzimas:
 ```python
     # Which file do we need to read in order to relate pathways with enzymes?
     f = open(???)
@@ -108,7 +107,7 @@ Append this code to the script:
     connection.commit()
 ```
 
-5. Let's use an SQL query to print the id and name of the pathways:
+5. Com um comando SQL, consulte os dados das vias metabólicas e imprima o identificar e o nome no terminal:
 ```python
     rows = connection.execute('SELECT ??? FROM ???')
     
@@ -119,15 +118,16 @@ Append this code to the script:
         
         print 'Path ' + path_id + ' is named "' + path_name + '"'
 ```
-Check that the output is
+
+6. Verifique que o output é
 ```text
     Path hsa00730 is named "Thiamine metabolism"
     Path hsa04122 is named "Sulfur relay system"
 ```
 
-6. The code above prints the results to the screen.
-Now we want to save them into a CSV file.
-Replace the code from the previous step with this:
+7. O código anterior imprime a informação no terminal.
+Agora queremos gravar essa mesma informação no ficheiro CSV `results_1.csv`.
+Substitua o código do passo 5 por isto:
 ```python
     # Let's open file 'results_1.csv' in write mode
     f = open(???, ???)
@@ -140,15 +140,15 @@ Replace the code from the previous step with this:
         w.writerow(row)
 ```
 
-7. Let's now select all the enzymes whose id starts with Q and save them to the file `results_2.csv`.
-The code recipe is the same, changing only the file name and the query.
-You can use the following query, changing where necessary
+8. Selecione agora as enzimas cujo identificar começa com Q e grave-as no ficheiro `results_2.csv`.
+A receita é a mesma, apenas mudando o nome do ficheiro e o comando de consulta.
+Pode usar a seguinte consulta, substituindo onde for apropriado:
 ```sql
     SELECT ??? FROM enzymes WHERE ??? LIKE "Q%"
 ```
 
-8. Now we will cross the data in the tables.
-Duplicate and adapt the same code from the previous step, using the following command SQL to select the enzyme sequences of each pathway, and save the results to `results_3.csv`:
+9. Agora vamos cruzar informação de várias tabelas.
+Duplique e adapte o código do passo anterior, usando o seguinte comando SQL para selecionar as sequências das enzimas de cada via metabólica, e grave o resultado no ficheiro `results_3.csv`:
 ```sql
     SELECT paths.name, enzymes.???
     FROM paths, enzymes, path_enzyme
@@ -156,21 +156,25 @@ Duplicate and adapt the same code from the previous step, using the following co
       AND enzymes.id = path_enzyme.enzyme_id
 ```
 
-9. SQL allows the use of complex queries.
-Use this query to save the id and name of the pathways associated with at least 15 enzymes.
-Save this to `results_4.csv`.
+10. SQL permite consultas mais complexas.
+Use a consulta seguinte para gravar o identificador e o nome das vias metabólicas associadas a pelo menos 15 enzimas.
+Grave o resultado no ficheiro `results_4.csv`.
 ```sql
     SELECT paths.id, paths.name
     FROM paths, path_enzymes
     GROUP BY path_id HAVING COUNT(*) >= 15
 ```
 
-## After the class:
-1. Determine the reason for using the list `enzymes_inserted` in step 3.<br>
-**Hint**: try to remove the list from the script and observe that the code fails with a `constraint failed` exception.
+## Após a aula:
 
-2. Many of the steps in this module suffer from code repetition.
-    a. Create a function `run_sql` that accepts two arguments: an sql command and a file name.
-    b. Implement this function so that it runs the sql command and saves the results in a CSV file.
-    c. Change today's code so that it uses the function, instead of repeating code<br>
-    **Hint**: The steps 6 to 9 will each simply call the function once.
+1. Determine a razão para usar uma lista `enzymes_inserted` no passo 3.<br>
+**Dica**: tente remover o uso da lista, execute o _script_ e observe que o código falha com uma exceção `constraint failed`.
+
+2. Muitos dos passos deste módulo consistem em código repetido.
+    
+    a. Crie uma função `run_sql` que aceita dois argumentos: um comando SQL e o nome de um ficheiro.
+    
+    b. A implementação desta função deve executar o comando SQL fornecido e gravar o resultado obtido num ficheiro CSV.
+    
+    c. Altere o código deste módulo de forma a que use a função `run_sql` em vez de repetir código.
+    **Dica**: Os passos 7 a 10 serão simplesmente a chamada à função.

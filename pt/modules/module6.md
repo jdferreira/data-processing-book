@@ -1,21 +1,21 @@
-# Module 6 -- Create an SQL database {#module6}
+# Módulo 6 -- Criar uma base de dados SQL {#module6}
 
-## Part I: A small example to get you going
+## Parte I: Um pequeno exemplo para começar
 
-### Objectives:
-- Create a database in SQLite using Python
-- Insert and query data in the database
+### Objetivos:
+- Criar uma base de dados SQLite usando Python
+- Inserir e consultar dados na base de dados
 
 ### Input:
-- None
+- Nenhum
 
 ### Output:
-- Database file: `example.db`
+- Ficheiro da base de dados: `example.db`
 
+### Passos:
 
-### Steps:
-1. First, create an empty database file using Python.
-You can name this script <nobr>`example.py`.</nobr>
+1. Primeiro crie uma base de dados vazia usando Python.
+Dê a este _script_ o nome de <nobr>`example.py`.</nobr>
 ```python
     # `sqlite3` is a package that can be used to create a file containing
     # a relational database. We use this package to create the database,
@@ -28,8 +28,8 @@ You can name this script <nobr>`example.py`.</nobr>
     connection = sqlite3.connect('example.db')
 ```
 
-2. Now that we have an empty database, let's add some tables and some data.
-Add the following to your script:
+2. Agora que temos uma base de dados vazia, vamos adicionar tabelas e algumas linhas.
+Adicione o seguinte código ao seu _script_:
 ```python
     # We can now emit SQL commands to the opened database
     
@@ -71,7 +71,7 @@ Add the following to your script:
     connection.commit()
 ```
 
-3. Finally make sure that the database actually contains the information you inserted:
+3. Finalmente, vamos certificar-nos que a base de dados contém a informação inserida:
 ```python
     # We can also emit SELECT commands which will return data back to Python
     
@@ -88,7 +88,7 @@ Add the following to your script:
         print msg
 ```
 
-4. Make sure that you get the following output:
+4. Verifique que este é o output produzido.
 ```text
     Alice is 20 years old and has id #1
     Brock is 21 years old and has id #2
@@ -96,26 +96,22 @@ Add the following to your script:
     Doris is 19 years old and has id #4
 ```
 
+## Part II: Agora com dados reais
 
-## Part II: Now with real data
-
-## Objectives:
-- Design a simple database schema to store information on the pathways
-- Create the database in SQLite
-- Use foreign keys
-- Insert data from the CSV file
-- Query the data
+## Objetivos:
+- Desenhar um esquema de base de dados simples para guardar informação de vias metabólicas
+- Usar chaves estrangeiras
 
 ## Input:
-- None
+- Nenhum
 
 ## Output:
-- File: `pathways.db`
+- Ficheiro de base de dados: `pathways.db`
 
-## Steps:
+## Passos:
 
-1. Now that you know how to create a database and create its tables, we will make a database called `pathways.db` with three tables.
-First create a new Python script `module6.py` with the following
+1. AGora que já sabe criar uma base de dados e criar as suas tabelas, vamos começar uma nova base de dados no ficheiro `pathways.db` com três tabelas.
+Primeiro, crie um _script_ `module6.py` com o seguinte código:
 ```python
     import sqlite3
     
@@ -152,9 +148,9 @@ First create a new Python script `module6.py` with the following
     ''')
 ```
 
-2. Now, we insert some data in these three tables.
-We will only insert one pathway and two enzymes of that pathway.
-If you need, consult the files from the previous modules to find the name, enzymes and sequences of the pathway `hsa00730`.
+2. Agora vamos inserir os dados nestas três tabelas.
+Como exemplo, vamos inserir apenas uma via e duas enzimas dessa via.
+Se necessário, consulte os ficheiros criados nos módulos anteriores para encontrar o nome da via `hsa00730` e as enzimas que fazem parte dela.
 ```python
     connection.execute('''
         INSERT INTO path (id, name, class)
@@ -185,8 +181,8 @@ If you need, consult the files from the previous modules to find the name, enzym
     connection.commit()
 ```
 
-3. Finally, let's just make sure that the tables contain some data.
-For that, we will select the sequences of each table
+3. Por fim, vamos assegurar-nos que as tabelas contêm os dados que lá colocámos.
+Para tal, como exemplo, vamos selecionar as enzimas de cada via.
 ```python
     rows = connection.execute('SELECT id, sequence FROM enzymes')
     for row in rows:
@@ -195,20 +191,21 @@ For that, we will select the sequences of each table
         
         print enzyme_id + ' starts with ' + enzyme_sequence[:5]
 ```
-This should produce the oputput
+
+4. Verifique que o output corresponde ao seguinte:
 ```text
     Q53FP3 starts with MLLRA
     Q9Y697 starts with MLLRA
 ```
 
-7. Make sure you keep a copy of the `pathways.db` file to yourself, so that you can use it in the next module.
-For example, send it to you by email or upload it to Dropbox.
+5. Certifique-se de que mantém uma cópia do ficheiro `pathways.db` para si, assim como do _script_ `module6.py`, de forma a que os possa usar nos próximos módulos.
+Por exemplo, envie-os para si por email ou faça o upload para a Dropbox.
 
+## Após a aula:
 
-## After the class:
-1. Verify that the primray key of the table `path_enzyme` has two atributes, and explain why that happens.
+1. Verifique que a chave primária da tabela `path_enzyme` tem dois atributos e explique porquê.
 
-2. Modify the database schema so that the database can store the name of the enzymes and also their position within the pathway (a whole number).
+2. Modifique o esquema da base de dados para que possa guardar também o nome de cada enzima e a sua posição na via metabólica (um número inteiro).
 
-3. Change the code of step 3 so that you can verify the contents of the other two tables.
+3. Altere o código do passo 3 para que verifique também o conteúdo das tabelas `paths` e `path_enzyme`.
 

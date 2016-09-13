@@ -1,26 +1,27 @@
-# Module 2 -- Simple selection and saving data on disk {#module2}
+# Módulo 2 -- Seleção simples e guardar informação em disco {#module2}
 
-## Objectives:
-- Transform a selection criterion into actual Python code
-- Implement the selection process in Python
-- Save the selected information on a new file
+## Objetivos:
+- Transformar um critério de seleção em código Python
+- Implementar o processo de seleção em Python
+- Gravar os dados selecionados num novo ficheiro
 
 ## Input:
-- File: [metabolic_pathways.csv](files/metabolic_pathways.xls)
+- Ficheiro: [metabolic_pathways.csv](files/metabolic_pathways.csv)
 
 ## Output:
-- File: `selected1.csv`
-    * containing the data of the pathway `hsa04210`.
-- File: `selected2.csv`
-    * containing the data of the pathway `hsa00730` and `hsa04122`.
+- Ficheiro: `selected1.csv`
+    * contendo os dados da via `hsa04210`.
+- Ficheiro: `selected2.csv`
+    * contendo os dados das vias `hsa00730` e `hsa04122`.
 
-## Steps:
-1. Let's create a Python function that determines whether the path ID of a pathway is `hsa04210`:
+## Passos:
 
-    a. Create an empty file and save it as `module2.py` on the same folder where the `metabolic_pathways.csv` file is.
-    Do not forget the `.py` ending, as this instructs the computer that the file is a Python script.
+1. Vamos criar uma função Python que determine se o ID de uma via é `hsa04210`:
+
+    a. Crie um ficheiro vazio e grave-o como `module2.py` na mesma pasta onde o ficheiro `metabolic_pathways.csv` está.
+    Não se esqueça da terminação `.py`, pois esta indica ao computador que o ficheiro é um _script_ Python.
     
-    b. Copy and paste the following code to your file:
+    b. Copie e cole o código seguinte para o ficheiro:
     ```python
         def filter1(path):
             path_id = path[???]  # Select the column for the ID
@@ -31,22 +32,19 @@
                 return False
     ```
     
-    c. Replace the green question marks (`???`) with appropriate Python code.
+    c. Substitua os pontos de interrogração (`???`) por código Python apropriado.
 
-2. The previous code is just a function that will run when we call it, but does not do anything on its own.
-Let's add more code to the file so that we actually go through each pathway and use the filter on it.
+2. O código do passo anterior define uma função que vai ser executada quando for chamada, mas por si só não faz nada.
+Vamos adicionar mais código ao ficheiro para efetivamente usarmos a função em cada uma das vias metabólicas.
 ```python
     import csv
     
-    # ------------------------------------- #
-    # PLACE THE FUNCTION DEFINED ABOVE HERE #
-    # ------------------------------------- #
-    
-    # Open the original file and read all pathways
+    # Open the original file to read all pathways
     file_to_read = open('metabolic_pathways.csv')
     paths = csv.reader(file_to_read, delimiter=???)
     
-    # Open the file where we will save the selection
+    # Open the file to save the selection
+    # The 'w' instructs Python that we want to write on this file
     file_to_write = open('selected1.csv', 'w')
     w = csv.writer(file_to_write, delimiter=???)
     
@@ -58,13 +56,14 @@ Let's add more code to the file so that we actually go through each pathway and 
     file_to_write.close()
 ```
 
-3. Run `module2.py` and study the file that was produced.
-Make sure it corresponds to what you were expecting.
+3. Corra o _script_ `module2.py` e estude o novo ficheiro que foi criado.
+Verifique que o seu conteúdo corresponde ao que esperava.
 
-4. Edit the file `module2.py` by creating a new filter `filter2` which selects the pathways where the enzyme Q9Y697 participates.
-If necessary, consult the documentation for the function `str.split` at <https://docs.python.org/2/library/stdtypes.html#str.split>.
+4. Edite o ficheiro `module2.py` criando agora uma nova função `filter2` que seleciona as vias onde a enzima Q9Y697 participa.
+Se necessário, consulte a documentação para a função `str.split` em <https://docs.python.org/2/library/stdtypes.html#str.split>.
+Vamos implementar esta funcionalidade em dois passos:
 
-    a. Create the new function `filter2`:
+    a. Crie a nova função `filter2`:
     ```python
         def filter2(path):
             field = path[???] # Select the column for the list of enzymes
@@ -82,24 +81,24 @@ If necessary, consult the documentation for the function `str.split` at <https:/
                 return False
     ```
     
-    b. Also change `'selected1.csv'` into `'selected2.csv'`.
-    This ensures that the new output will not overwrite the previous one.
+    b. Altere `'selected1.csv'` para `'selected2.csv'`.
+    Esta modifação é essencial para que o novo ficheiro produzido não substitua o que já existe.
 
-5. Run `module2.py` again and study the file that was produced.
-Make sure it corresponds to what you were expecting; in particular, make sure all the selected pathways contain the enzyme Q9Y697.
+5. Corra o `module2.py` outra vez e estude o ficheiro que foi produzido.
+Verifique que o seu conteúdo corresponde ao que esperava: em particular, assegure-se que a enzima Q9Y697 pertence a todas as vias selecionadas.
 
-6. Make sure you keep a copy of the `selected1.csv` and `selected2.csv` files to yourself, so that you can use them in the next modules.
-For example, send it to you by email or upload it to Dropbox.
+6. Certifique-se de que mantém uma cópia dos ficheiros `selected1.csv` e `selected2.csv` para si, assim como do _script_ `module2.py`, de forma a que os possa usar nos próximos módulos.
+Por exemplo, envie-os para si por email ou faça o upload para a Dropbox.
 
+## Após a aula:
 
-## After the class:
-1. Create a new filter function `filter3` that selects the pathways that are part of the class "Human Diseases; Cancers".
+1. Crie uma terceira função `filter3` que seleciona as vias que fazem parte da classe "Human Diseases; Cancers".
 
-2. Using the built-in function `len`, which returns the number of elements in a list, create a function `filter4` that selects pathways containing at most 10 enzymes.
-The documentation for this function can be found in <https://docs.python.org/2/library/functions.html#len>
+2. Usando a função pré-existente `len`, que devolve o número de elementos numa lista, crie a função `filter4` que seleciona as vias que contêm no máximo 10 enzimas.
+A documentação para esta função pode ser encontrada em <https://docs.python.org/2/library/functions.html#len>
 
-**Note**: to read and write CSV files in Python, we have been using the `csv` module.
-This module allows us to specify the format of the file to read/write, _e.g._ which character to use to separate the fields and to delimit the fields.
-You should familiarize yourself with this module by reading its documentation at <https://docs.python.org/2/library/csv.html>.
+**Nota**: para ler e escrever ficheiros CSV em Python, usámos (e vamos usar mais vezes) o módulo `csv`.
+Este módulo permite especificar o formato do ficheiro a ler e escrever, _e.g._ qual o caracter a usar para separar os campos e para os delimitar.
+Deve familiarizar-se com este módulo por si mesmo lendo a documentação em <https://docs.python.org/2/library/csv.html>.
 
 

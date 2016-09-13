@@ -1,68 +1,74 @@
-% Data processing for metabolic pathways using files, web services and databases
+% Processamento de dados de vias metabólicas usando ficheiros, serviços web e bases de dados
 % João D. Ferreira; Francisco M. Couto
-% Version of 2016
+% Faculdade de Ciências da Universidade de Lisboa<br>Versão de 2016
 
-# Table of contents
+<div id="license">
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+![](images/cc-88x31.png "Creative Commons License")
+</a>
+Este documento está protegido pela licença<br>
+[Creative Commons - Atribuição 4.0 Internacional](http://creativecommons.org/licenses/by/4.0/)
+</div>
 
-- [Introduction](#introduction)
-- [Module 1 -- Metabolic pathways data](#module1)
-- [Module 2 -- Simple selection and saving data on disk](#module2)
-- [Module 3 -- UniProt as a web service](#module3)
-- [Module 4 -- Crossing data from several sources](#module4)
-- [Module 5 -- Information selection with regular expressions](#module5)
-- [Module 6 -- Create an SQL database](#module6)
-- [Module 7 -- Inserting data from CSV](#module7)
+# Índice
+
+- [Introdução](#introduction)
+- [Módulo 1 -- Dados de vias metabólicas](#module1)
+- [Módulo 2 -- Seleção simples e guardar informação em disco](#module2)
+- [Módulo 3 -- UniProt como serviço web](#module3)
+- [Módulo 4 -- Cruzamento de dados de várias fontes](#module4)
+- [Módulo 5 -- Seleção de informação com expressões regulares](#module5)
+- [Módulo 6 -- Criar uma base de dados SQL](#module6)
+- [Módulo 7 -- Inserção de dados CSV](#module7)
 
 
-# Introduction
+# Introdução {#introduction}
 
-The aim of these exercises is to provide students the ability and competence to process data in an automatic fashion.
-The main topic surrounding these exercises will be metabolic pathway data processing, with a closer focus on the proteins that catalyse the chemical reaction those pathways, also known as _enzymes_.
-Despite working with metabolic pathways during the classes, the data processing methods that the students will learn in this class can be applied to many other types of data.
+O objetivo destes exercícios é munir os alunos com a capacidade e a competência para processar dados de forma automática.
+O tema principal destes exercícios será o processamento de dados de via metabólica, com foco sobre as proteínas que catalisam as reações químicas das vias, também conhecido como _enzimas_.
+Apesar de trabalharmos com vias metabólicas durante as aulas, os métodos de processamento de dados que os alunos vão aprender nesta disciplina podem ser aplicado a muitos outros tipos de dados.
 
-## Data
+## Dados
 
-The following figure represents the first steps in the glycolysis, a metabolic pathway that decomposes glucose in smaller chemical compounds.
-This figure includes a representation of five steps in this pathway, each one catalysed by a different enzyme.
+A figura que se segue representa os primeiros passos na glicólise, uma via metabólica que decompõe a glicose em compostos químicos mais pequenos.
+Esta figura inclui uma representação de cinco etapas desta via, cada uma catalisada por uma enzima diferente.
 
-![A Metabolic pathway](images/pathway.png "An example of a metabolic pathway")
+![Uma via metabólica](images/pathway.png "Exemplo de uma via metabólica")
 
-For this class, we will provide [an Excel file](files/metabolic_pathways.xls) with information on 297 metabolic pathways.
-Each line in this file contains:
+Para estas aulas, iremos fornecer [um ficheiro Excel](files/metabolic_pathways.xls) com informação sobre 297 vias metabólicas.
+Cada linha neste arquivo contém:
 
-- an identifier of the metabolic pathway;
-- the name of the pathway;
-- the class it belongs to;
-- a list of the enzymes that participate in the pathway.
+- O identificador da via metabólica;
+- O nome da via;
+- A classe a que pertence;
+- Uma lista das enzimas que participam na via.
 
-Therefore, the Excel file has 297 lines, plus another one for the column headers.
+Assim, o arquivo Excel tem 297 linhas de informação, mais uma para os cabeçalhos das colunas.
 
-The following image shows a screenshot of the Excel file and its data
+A imagem seguinte mostra uma imagem do ficheiro Excel e seus dados.
 
-![A screenshot of the Excel file](images/excel.png "A screenshot showing part of the data in the Excel file")
+![Screenshot do ficheiro Excel](images/excel.png "Parte dos dados do ficheiro Excel")
 
-This information comes from an online database called [Kyoto Encyclopedia of Genes and Genome](http://www.genome.jp/kegg/kegg2.html).
-The enzymes are referred by their UniProt code.
-[UniProt](http://www.uniprot.org/) is a database of proteins that contain, among a vast amount of information, the aminoacid sequences of the proteins.
+Esta informação foi extraída de um banco de dados online chamado [Kyoto Encyclopedia of Genes and Genome](http://www.genome.jp/kegg/kegg2.html).
+As enzimas são referidos pelo seu código UniProt.
+A [UniProt](http://www.uniprot.org/) é um banco de dados de proteínas que contêm, entre uma vasta quantidade de informação, as sequências de aminoácidos das proteínas.
 
-## Processing
+## Processamento
 
-Despite the data being provided to the students as an Excel file, the data processing operations will mostly be executed with a programming language.
-In this class, we will use [Python](http://www.python.org)
-Processing our data with Python instead of Excel offers several benefits:
+Apesar de os dados serem fornecidos aos alunos na forma de ficheiro Excel, as operações de processamento de dados vão ser maioritariamente executadas com uma linguagem de programação.
+Nesta disciplina vamos usar [Python](http://www.python.org).
+O processamento dos dados com Python em vez de Excel oferece vários benefícios:
 
-- We can define a set of operations to be executed automatically, which in Excel would take a large amount of time, since it is mostly driven by user interaction rather than direct commands
-- Programming languages can handle complex data types, while Excel is mostly oriented towards numeric computations
+- Podemos definir um conjunto de operações a serem executadas automaticamente, as quais levariam muito tempo no Excel, uma vez que nesse programa o processamento de dados é feito maioritariamente através da interação do utilizador com a interface gráfica, e não com o uso direto de comandos;
+- Uma linguagens de programação pode lidar com tipos de dados complexos, enquanto que o Excel é principalmente orientada para cálculos numéricos.
 
-No deep knowledge of programming will be required for the class exercises, as we will provide most of the code.
-In fact, the students will not directly learn the details of Python as a programming language, but will instead be given "recipes" that contain most of the necessary logic, with small snippets of missing code that the students need to fill.
-However, we expect that the students familiarize themselves with Python syntax before the first module of this class by following some online courses.
-For example, [Codecademy](https://www.codecademy.com/en/tracks/python) contains six modules that will help the students in this task:
+Não será necessário nenhum conhecimento profundo da programação para os exercícios das aulas, pois iremos fornecer a maior parte do código.
+Na verdade, os alunos não aprenderão diretamente os detalhes do Python como uma linguagem de programação, mas em vez disso, serão dadas "receitas" que contêm a maior parte da lógica necessária, com pequenos trechos de código em falta que os estudantes precisarão de preencher.
+No entanto, esperamos que os alunos se familiarizarem com a sintaxe de Python, seguindo alguns cursos online.
+Por exemplo, o [Codecademy](https://www.codecademy.com/en/tracks/python) contém seis módulos que irão ajudar os alunos nesta tarefa (note-se que existem versões em português nesse site):
 
 - [Python Syntax](https://www.codecademy.com/courses/introduction-to-python-6WeG3/0/1?curriculum_id=4f89dab3d788890003000096)
 - [Strings & Console Output](https://www.codecademy.com/courses/python-beginner-sRXwR/0/1?curriculum_id=4f89dab3d788890003000096)
 - [Conditionals & Control Flow](https://www.codecademy.com/courses/python-beginner-BxUFN/0/1?curriculum_id=4f89dab3d788890003000096)
 - [Python Lists and Dictionaries](https://www.codecademy.com/courses/python-beginner-en-pwmb1/0/1?curriculum_id=4f89dab3d788890003000096)
 - [File Input/Output](https://www.codecademy.com/courses/python-intermediate-en-OGNHh/0/1?curriculum_id=4f89dab3d788890003000096)
-
-
