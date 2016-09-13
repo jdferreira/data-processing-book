@@ -7,73 +7,67 @@ import subprocess
 import threading
 import time
 
-TO_WATCH = {
-    b'pandoc.css':         ['css'],
-    b'template.html':      ['en-index', 'pt-index'],
-    b'en/index.md':           ['en-index'],
-    b'en/modules/module1.md': ['en-index'],
-    b'en/modules/module2.md': ['en-index'],
-    b'en/modules/module3.md': ['en-index'],
-    b'en/modules/module4.md': ['en-index'],
-    b'en/modules/module5.md': ['en-index'],
-    b'en/modules/module6.md': ['en-index'],
-    b'en/modules/module7.md': ['en-index'],
-    # b'pt/index.md':           ['pt-index'],
-    # b'pt/modules/module1.md': ['pt-index'],
-    # b'pt/modules/module2.md': ['pt-index'],
-    # b'pt/modules/module3.md': ['pt-index'],
-    # b'pt/modules/module4.md': ['pt-index'],
-    # b'pt/modules/module5.md': ['pt-index'],
-    # b'pt/modules/module6.md': ['pt-index'],
-    # b'pt/modules/module7.md': ['pt-index'],
-}
+def add_lang(lang):
+    job_name = '{}-index'.format(lang)
+    
+    TO_WATCH[b'template.html'].append(job_name)
+    
+    filename = '{}/index.md'.format(lang)
+    TO_WATCH[filename.encode('ascii')] = [job_name]
+    
+    for i in range(7):
+        module_num = i + 1
+        filename = '{}/modules/module{}.md'.format(lang, module_num)
+        TO_WATCH[filename.encode('ascii')] = [job_name]
+    
+    JOBS[job_name] = [make_pandoc_command(lang)]
 
-JOBS = {
-    'en-index': (
-        'pandoc',                      # executable
-        'en/index.md',                 # input filenames
-        'en/modules/module1.md',       #   -- ditto --
-        'en/modules/module2.md',       #   -- ditto --
-        'en/modules/module3.md',       #   -- ditto --
-        'en/modules/module4.md',       #   -- ditto --
-        'en/modules/module5.md',       #   -- ditto --
-        'en/modules/module6.md',       #   -- ditto --
-        'en/modules/module7.md',       #   -- ditto --
-        '-o', 'out/en/index.html',     # output output
+def make_pandoc_command(lang):
+    return (
+        # executable
+        'pandoc',
+        
+        # input filenames
+        '{}/index.md'.format(lang),
+        '{}/modules/module1.md'.format(lang),
+        '{}/modules/module2.md'.format(lang),
+        '{}/modules/module3.md'.format(lang),
+        '{}/modules/module4.md'.format(lang),
+        '{}/modules/module5.md'.format(lang),
+        '{}/modules/module6.md'.format(lang),
+        '{}/modules/module7.md'.format(lang),
+        
+        # output filename
+        '-o', 'out/{}-index.html'.format(lang),
+        
+        # More options
         '-t', 'html5',                 # format to write
         '--smart',                     # smart quotes and hyphens
         '--template', 'template.html', # HTML template to use
-        '--css', '../pandoc.css',      # CSS to link to from the output
+        '--css', 'pandoc.css',         # CSS to link to from the output
         '--highlight-style', 'tango',  # highlighting syntax for code sections
-    ),
-    # 'pt-index': (
-    #     'pandoc',                      # executable
-    #     'en/index.md',                 # input filenames
-    #     'en/modules/module1.md',       #   -- ditto --
-    #     'en/modules/module2.md',       #   -- ditto --
-    #     'en/modules/module3.md',       #   -- ditto --
-    #     'en/modules/module4.md',       #   -- ditto --
-    #     'en/modules/module5.md',       #   -- ditto --
-    #     'en/modules/module6.md',       #   -- ditto --
-    #     'en/modules/module7.md',       #   -- ditto --
-    #     '-o', 'out/pt/index.html',     # output output
-    #     '-t', 'html5',                 # format to write
-    #     '--smart',                     # smart quotes and hyphens
-    #     '--template', 'template.html', # HTML template to use
-    #     '--css', '../pandoc.css',      # CSS to link to from the output
-    #     '--highlight-style', 'tango',  # highlighting syntax for code sections
-    # ),
-    'css': ('cp', 'pandoc.css', 'out/pandoc.css'),
+    )
+
+TO_WATCH = {
+    b'pandoc.css':    ['css'],
+    b'template.html': [],
 }
+
+JOBS = {
+    'css': [('cp', 'pandoc.css', 'out/pandoc.css')],
+}
+
+add_lang('en')
 
 
 class Router(threading.Thread):
     
-    def __init__(self, interval=1):
+    def __init__(self, interval=1, sleep_for=1):
         super().__init__()
         
-        self.prev = time.time()
+        self.prev = time.time() - interval
         self.interval = interval
+        self.sleep_for = sleep_for
         
         self.queue = set(JOBS.keys())
     
@@ -85,15 +79,12 @@ class Router(threading.Thread):
             job_names = JOBS.keys()
             
         self.queue.update(job_names)
+        
+        self.prev = time.time()
     
     
     def process(self, job_name):
         job_list = JOBS[job_name]
-        if type(job_list) is tuple:
-            job_list = [job_list]
-        
-        if len(job_list) == 0:
-            return
         
         for job in job_list:
             returncode = subprocess.call(job)
@@ -118,10 +109,10 @@ class Router(threading.Thread):
         self.running = True
         
         while self.running:
-            if self.running and len(self.queue) > 0:
+            if len(self.queue) > 0 and time.time() - self.prev > self.interval:
                 self.process_queue()
             
-            time.sleep(self.interval)
+            time.sleep(self.sleep_for)
     
     
     def stop(self):
