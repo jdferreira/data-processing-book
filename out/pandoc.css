@@ -390,8 +390,12 @@ pre.sourceCode.bash {
     border-left: 1em solid #333;
 }
 
+pre.sourceCode.sql {
+    border-left: 1em solid #204a87;
+}
+
 pre code {
-    color: inherit;
+    color: initial;
 }
 
 table.sourceCode,
