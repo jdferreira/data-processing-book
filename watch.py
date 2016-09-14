@@ -17,7 +17,7 @@ def add_lang(lang):
     
     for i in range(7):
         module_num = i + 1
-        filename = '{}/modules/module{}.md'.format(lang, module_num)
+        filename = '{}/module{}.md'.format(lang, module_num)
         TO_WATCH[filename.encode('ascii')] = [job_name]
     
     JOBS[job_name] = [make_pandoc_command(lang)]
@@ -29,13 +29,13 @@ def make_pandoc_command(lang):
         
         # input filenames
         '{}/index.md'.format(lang),
-        '{}/modules/module1.md'.format(lang),
-        '{}/modules/module2.md'.format(lang),
-        '{}/modules/module3.md'.format(lang),
-        '{}/modules/module4.md'.format(lang),
-        '{}/modules/module5.md'.format(lang),
-        '{}/modules/module6.md'.format(lang),
-        '{}/modules/module7.md'.format(lang),
+        '{}/module1.md'.format(lang),
+        '{}/module2.md'.format(lang),
+        '{}/module3.md'.format(lang),
+        '{}/module4.md'.format(lang),
+        '{}/module5.md'.format(lang),
+        '{}/module6.md'.format(lang),
+        '{}/module7.md'.format(lang),
         
         # output filename
         '-o', 'out/index-{}.html'.format(lang),
