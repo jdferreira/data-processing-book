@@ -50,7 +50,9 @@
         path_name = ???
         path_class = ???
         
-        # Insert into the database using the `?` notation
+        # Insert into the database
+        # Notice that we create a generic SQL command using the `?` notation
+        # and give the parameters of the command as a tuple
         connection.execute('''
             INSERT INTO paths (id, name, class)
             VALUES (?, ?, ?)

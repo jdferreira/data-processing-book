@@ -99,4 +99,4 @@ Por exemplo, envie-os para si por email ou faça o upload para a Dropbox.
 
 1. Altere o código Python para imprimir não o nome das vias mas a sua classe.
 
-2. Verifique que alguns campos no ficheiro CSV estão delimitados por aspas (`"`) e que outro não estão. Explique porquê.
+2. Explique a razão pela qual alguns campos no ficheiro CSV estão delimitados por aspas <nobr>(`"`)</nobr> e outros não.

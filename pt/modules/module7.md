@@ -50,7 +50,9 @@
         path_name = ???
         path_class = ???
         
-        # Insert into the database using the `?` notation
+        # Insert into the database
+        # Notice that we create a generic SQL command using the `?` notation
+        # and give the parameters of the command as a tuple
         connection.execute('''
             INSERT INTO paths (id, name, class)
             VALUES (?, ?, ?)
@@ -176,5 +178,5 @@ Grave o resultado no ficheiro `results_4.csv`.
     
     b. A implementação desta função deve executar o comando SQL fornecido e gravar o resultado obtido num ficheiro CSV.
     
-    c. Altere o código deste módulo de forma a que use a função `run_sql` em vez de repetir código.
+    c. Altere o código deste módulo de forma a que use a função `run_sql` em vez de repetir código.<br>
     **Dica**: Os passos 7 a 10 serão simplesmente a chamada à função.

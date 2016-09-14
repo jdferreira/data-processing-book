@@ -152,7 +152,7 @@ paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>
 <h2 id="after-the-class">After the class:</h2>
 <ol type="1">
 <li><p>Change the Python code to print the class of each pathway instead of its name.</p></li>
-<li><p>Vertify that some fields in the CSV file are delimited by quotes (<code>&quot;</code>) and other are not. Explain why.</p></li>
+<li><p>Vertify that some fields in the CSV file are delimited by quotes <nobr>(<code>&quot;</code>)</nobr> and other are not. Explain why.</p></li>
 </ol>
 <h1 id="module2">Module 2 – Simple selection and saving data on disk</h1>
 <h2 id="objectives-2">Objectives:</h2>
@@ -520,23 +520,22 @@ reg_expr <span class="op">=</span> <span class="vs">r&#39;???&#39;</span>
 </ul>
 <p>The first and second group are separated by either 40 to 80 aminoacids or 130 to 170 aminoacids; the second and third groups are separated by 40 to 80 aminoacids. <small>[Source: Dever TE, Glynias MJ, Merrick WC (1987). PNAS 84(7), 1814-1818.]</small></p>
 <h1 id="module6">Module 6 – Create an SQL database</h1>
-<h2 id="part-i-a-small-example-to-get-you-going">Part I: A small example to get you going</h2>
-<h3 id="objectives-6">Objectives:</h3>
+<h2 id="objectives-6">Objectives:</h2>
 <ul>
-<li>Create a database in SQLite using Python</li>
-<li>Insert and query data in the database</li>
+<li>Design a simple database schema to store information on the pathways</li>
+<li>Use foreign keys</li>
 </ul>
-<h3 id="input-5">Input:</h3>
+<h2 id="input-5">Input:</h2>
 <ul>
 <li>None</li>
 </ul>
-<h3 id="output-5">Output:</h3>
+<h2 id="output-5">Output:</h2>
 <ul>
-<li>Database file: <code>example.db</code></li>
+<li>Database file: <code>pathways.db</code></li>
 </ul>
-<h3 id="steps-6">Steps:</h3>
+<h2 id="steps-6">Steps:</h2>
 <ol type="1">
-<li><p>First, create an empty database file using Python. You can name this script <nobr><code>example.py</code>.</nobr></p>
+<li><p>We will start by creating an empty database in the file <code>pathways.db</code> which will contain three tables. First create a new Python script <code>module6.py</code> with the following code:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># `sqlite3` is a package that can be used to create a file containing</span>
 <span class="co"># a relational database. We use this package to create the database,</span>
 <span class="co"># insert data in it and query the data.</span>
@@ -545,90 +544,9 @@ reg_expr <span class="op">=</span> <span class="vs">r&#39;???&#39;</span>
 
 <span class="co"># To access a database, we need to connect to it. If the file does not</span>
 <span class="co"># exist, one will be created</span>
-connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&#39;example.db&#39;</span>)</code></pre></div></li>
-<li><p>Now that we have an empty database, let’s add some tables and some data. Add the following to your script:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># We can now emit SQL commands to the opened database</span>
-
-<span class="co"># First create a table to store student information</span>
-connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">    CREATE TABLE students (</span>
-<span class="st">        id INTEGER PRIMARY KEY,</span>
-<span class="st">        name TEXT,</span>
-<span class="st">        age INTEGER</span>
-<span class="st">    )</span>
-<span class="st">&#39;&#39;&#39;</span>)
-
-<span class="co"># Then add information to that table</span>
-connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">    INSERT INTO students (id, name, age)</span>
-<span class="st">    VALUES (1, &#39;Alice&#39;, 20)</span>
-<span class="st">&#39;&#39;&#39;</span>)
-
-connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">    INSERT INTO students (id, name, age)</span>
-<span class="st">    VALUES (2, &#39;Brock&#39;, 21)</span>
-<span class="st">&#39;&#39;&#39;</span>)
-
-connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">    INSERT INTO students (id, name, age)</span>
-<span class="st">    VALUES (3, &#39;Chuck&#39;, 19)</span>
-<span class="st">&#39;&#39;&#39;</span>)
-
-<span class="co"># You can also insert data that is stored in variables</span>
-student_id <span class="op">=</span> <span class="dv">4</span>
-student_name <span class="op">=</span> <span class="st">&#39;Doris&#39;</span>
-student_age <span class="op">=</span> <span class="dv">19</span>
-connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">    INSERT INTO students (id, name, age)</span>
-<span class="st">    VALUES (?, ?, ?)</span>
-<span class="st">&#39;&#39;&#39;</span>, (student_id, student_name, student_age))
-
-<span class="co"># Ensure that the data is saved</span>
-connection.commit()</code></pre></div></li>
-<li><p>Finally make sure that the database actually contains the information you inserted:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># We can also emit SELECT commands which will return data back to Python</span>
-
-rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT id, name, age FROM students&#39;</span>)
-
-<span class="cf">for</span> row <span class="op">in</span> rows:
-    student_id <span class="op">=</span> row[<span class="dv">0</span>]
-    student_name <span class="op">=</span> row[<span class="dv">1</span>]
-    student_age <span class="op">=</span> row[<span class="dv">2</span>]
-
-    msg <span class="op">=</span> student_name <span class="op">+</span> <span class="st">&#39; is &#39;</span> <span class="op">+</span> <span class="bu">str</span>(student_age) <span class="op">+</span> <span class="st">&#39; years old&#39;</span>
-    msg <span class="op">=</span> msg <span class="op">+</span> <span class="st">&#39; and has id #&#39;</span> <span class="op">+</span> <span class="bu">str</span>(student_id)
-
-    <span class="bu">print</span> msg</code></pre></div></li>
-<li><p>Make sure that you get the following output:</p>
-<pre class="text"><code>Alice is 20 years old and has id #1
-Brock is 21 years old and has id #2
-Chuck is 19 years old and has id #3
-Doris is 19 years old and has id #4</code></pre></li>
-</ol>
-<h2 id="part-ii-now-with-real-data">Part II: Now with real data</h2>
-<h2 id="objectives-7">Objectives:</h2>
-<ul>
-<li>Design a simple database schema to store information on the pathways</li>
-<li>Use foreign keys</li>
-</ul>
-<h2 id="input-6">Input:</h2>
-<ul>
-<li>None</li>
-</ul>
-<h2 id="output-6">Output:</h2>
-<ul>
-<li>Database file: <code>pathways.db</code></li>
-</ul>
-<h2 id="steps-7">Steps:</h2>
-<ol type="1">
-<li><p>Now that you know how to create a database and create its tables, we will make a database called <code>pathways.db</code> with three tables. First create a new Python script <code>module6.py</code> with the following code:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> sqlite3
-
-connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&#39;pathways.db&#39;</span>)
-
-<span class="co"># Let&#39;s create the three tables.</span>
-
-<span class="co"># This contains information about the pathway</span>
+connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&#39;pathways.db&#39;</span>)</code></pre></div></li>
+<li><p>Now that we have an empty database, let’s add the tables that we need to store the metabolic pathway data.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># This table will contain data about the pathways</span>
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    CREATE TABLE path (</span>
 <span class="st">        id VARCHAR(255) PRIMARY KEY,</span>
@@ -637,7 +555,7 @@ connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    )</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
-<span class="co"># This contains information about the enzymes</span>
+<span class="co"># This table will contain data about the enzymes</span>
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    CREATE TABLE enzyme (</span>
 <span class="st">        id VARCHAR(255) PRIMARY KEY,</span>
@@ -645,7 +563,7 @@ connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    )</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
-<span class="co"># This associates each pathway with its enzymes</span>
+<span class="co"># This table will associate each pathway with its enzymes</span>
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    CREATE TABLE path_enzyme (</span>
 <span class="st">        path_id VARCHAR(255),</span>
@@ -658,27 +576,27 @@ connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <li><p>Now, we insert some data in these three tables. We will only insert one pathway and two enzymes of that pathway. If you need, consult the files from the previous modules to find the name, enzymes and sequences of the pathway <code>hsa00730</code>.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    INSERT INTO path (id, name, class)</span>
-<span class="st">    VALUES (&#39;hsa00730&#39;, &#39;???&#39;, &#39;???&#39;);</span>
+<span class="st">    VALUES (&#39;hsa00730&#39;, &#39;???&#39;, &#39;???&#39;)</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    INSERT INTO enzyme (id, sequence)</span>
-<span class="st">    VALUES (&#39;Q53FP3&#39;,&#39;???&#39;);</span>
+<span class="st">    VALUES (&#39;Q53FP3&#39;,&#39;???&#39;)</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    INSERT INTO enzyme (id, sequence)</span>
-<span class="st">    VALUES (&#39;???&#39;,&#39;???&#39;);</span>
+<span class="st">    VALUES (&#39;???&#39;,&#39;???&#39;)</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    INSERT INTO path_enzyme (path_id, enzyme_id)</span>
-<span class="st">    VALUES (&#39;hsa00730&#39;,&#39;???&#39;);</span>
+<span class="st">    VALUES (&#39;hsa00730&#39;,&#39;???&#39;)</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    INSERT INTO path_enzyme (path_id, enzyme_id)</span>
-<span class="st">    VALUES (&#39;???&#39;,&#39;???&#39;);</span>
+<span class="st">    VALUES (&#39;???&#39;,&#39;???&#39;)</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
 <span class="co"># Ensure that the data is saved</span>
@@ -697,17 +615,17 @@ Q9Y697 starts with MLLRA</code></pre></li>
 </ol>
 <h2 id="after-the-class-5">After the class:</h2>
 <ol type="1">
-<li><p>Verify that the primray key of the table <code>path_enzyme</code> has two atributes, and explain why that happens.</p></li>
+<li><p>Explain why the primary key of the table <code>path_enzyme</code> has two atributes.</p></li>
 <li><p>Modify the database schema so that the database can store the name of the enzymes and also their position within the pathway (a whole number).</p></li>
-<li><p>Change the code of step 3 so that you can also verify the contents of the tables <code>paths</code> and <code>path_enzyme</code>.</p></li>
+<li><p>Change the code of step 4 so that you can also verify the contents of the tables <code>paths</code> and <code>path_enzyme</code>.</p></li>
 </ol>
 <h1 id="module7">Module 7 – Inserting data from CSV</h1>
-<h2 id="objectives-8">Objectives:</h2>
+<h2 id="objectives-7">Objectives:</h2>
 <ul>
 <li>Copy data from CSV into the database</li>
 <li>Query the database with complex selection criteria</li>
 </ul>
-<h2 id="input-7">Input:</h2>
+<h2 id="input-6">Input:</h2>
 <ul>
 <li>File: <a href="files/selected2.csv">selected2.csv</a>
 <ul>
@@ -722,14 +640,14 @@ Q9Y697 starts with MLLRA</code></pre></li>
 <li>created in module 6</li>
 </ul></li>
 </ul>
-<h2 id="output-7">Output:</h2>
+<h2 id="output-6">Output:</h2>
 <ul>
 <li>File: <code>results_1.csv</code></li>
 <li>File: <code>results_2.csv</code></li>
 <li>File: <code>results_3.csv</code></li>
 <li>File: <code>results_4.csv</code></li>
 </ul>
-<h2 id="steps-8">Steps:</h2>
+<h2 id="steps-7">Steps:</h2>
 <ol type="1">
 <li><p>Create a new Python script <code>module7.py</code> that opens the database <code>pathways.db</code> created in the previous module with Python and removes the entries in the tables.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> sqlite3
@@ -757,7 +675,9 @@ paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>
     path_name <span class="op">=</span> ???
     path_class <span class="op">=</span> ???
 
-    <span class="co"># Insert into the database using the `?` notation</span>
+    <span class="co"># Insert into the database</span>
+    <span class="co"># Notice that we create a generic SQL command using the `?` notation</span>
+    <span class="co"># and give the parameters of the command as a tuple</span>
     connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">        INSERT INTO paths (id, name, class)</span>
 <span class="st">        VALUES (?, ?, ?)</span>

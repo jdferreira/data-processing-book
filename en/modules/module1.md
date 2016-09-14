@@ -99,4 +99,4 @@ For example, send it to you by email or upload it to Dropbox.
 
 1. Change the Python code to print the class of each pathway instead of its name.
 
-2. Vertify that some fields in the CSV file are delimited by quotes (`"`) and other are not. Explain why.
+2. Vertify that some fields in the CSV file are delimited by quotes <nobr>(`"`)</nobr> and other are not. Explain why.
