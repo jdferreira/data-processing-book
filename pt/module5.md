@@ -29,36 +29,36 @@ Crie o _script_ `module5.py`:
 ```python
     import csv
     
-    # Lê o ficheiro CSV
+    # Le o ficheiro CSV
     f = open('sequences.csv')
     enzymes = csv.reader(f, delimiter=???)
     
-    # Cria um dicionário vazio onde vamos introduzir a informação
+    # Cria um dicionario vazio onde vamos introduzir a informacao
     # proveniente do ficheiro CSV
     dict_sequences = {}
     
-    # Para cada enzima no ficheiro, associa-a com a sua sequência
+    # Para cada enzima no ficheiro, associa-a com a sua sequencia
     for enzyme in enzymes:
         enzyme_id = enzyme[???] # O identificador desta enzima
-        seq = enzyme[???]       # A sequência de aminoácidos da enzima
+        seq = enzyme[???]       # A sequencia de aminoacidos da enzima
         dict_sequences[enzyme_id] = seq
 ```
 
 3. Agora que temos o dicionário, vamos procurar as enzimas cujas sequências contêm três alaninas consecutivas:
 ```python
-    # Importamos o módulo `re` para lidar com expressões regulares
+    # Importamos o modulo `re` para lidar com expressoes regulares
     import re
     
-    # Defina aqui a sua expressão regular
+    # Defina aqui a sua expressao regular
     reg_expr = r'???'
     
-    # Para cada enzima, obtém a sua sequência e determina se a sequência
-    # satisfaz o padrão: três alaninas consecutivas
+    # Para cada enzima, obtem a sua sequencia e determina se a sequencia
+    # satisfaz o padrao: tres alaninas consecutivas
     for enzyme in dict_sequences:
-        # Seleciona a sequência de aminoácidos
+        # Seleciona a sequencia de aminoacidos
         seq = ???
         
-        # Determina se a sequência satisfaz o padrão
+        # Determina se a sequencia satisfaz o padrao
         if re.search(reg_expr, seq):
             print 'The enzyme ' + ??? + ' matches the expression ' + reg_expr
 ```

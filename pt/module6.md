@@ -15,20 +15,20 @@
 1. Vamos começar por criar uma nova base de dados vazia no ficheiro `pathways.db` com três tabelas.
 Primeiro, crie um _script_ `module6.py` com o seguinte código:
 ```python
-    # `sqlite3` é um módulo que é usado para criar bases de dados relacionais.
-    # Usamos este módulo para criar a base de dados, inserir nela os dados e
+    # `sqlite3` e um modulo usado para criar bases de dados relacionais.
+    # Usamos este modulo para criar a base de dados, e para inserir e
     # consultar os dados
     
     import sqlite3
     
-    # Para aceder à base de dados, precisamos de estabelecer uma ligação com
-    # ela. Se o ficheiro não existir, vai ser criado vazio.
+    # Para aceder a base de dados, precisamos de estabelecer uma ligacao
+    # com ela. Se o ficheiro nao existir, vai ser criado vazio.
     connection = sqlite3.connect('pathways.db')
 ```
 
 2. Agora que temos uma base de dados vazia, vamos adicionar as tabelas necessárias para guardar os dados de vias metabólicas.
 ```python
-    # Esta tabela vai conter dados de vias metabólicas
+    # Esta tabela vai conter dados de vias metabolicas
     connection.execute('''
         CREATE TABLE path (
             id VARCHAR(255) PRIMARY KEY,

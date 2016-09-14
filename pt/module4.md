@@ -22,29 +22,29 @@ Para tal, adicione ao _script_ o seguinte código, substituindo os pontos de int
 ```python
     import csv
     
-    # Lê o ficheiro CSV
+    # Le o ficheiro CSV
     f = open('sequences.csv')
     enzymes = csv.reader(f, delimiter=???)
     
-    # Cria um dicionário vazio onde vamos introduzir a informação
+    # Cria um dicionario vazio onde vamos introduzir a informacao
     # proveniente do ficheiro CSV
     dict_sequences = {}
     
-    # Para cada enzima no ficheiro, associa-a com a sua sequência
+    # Para cada enzima no ficheiro, associa-a com a sua sequencia
     for enzyme in enzymes:
         enzyme_id = enzyme[???] # O identificador desta enzima
-        seq = enzyme[???]       # A sequência de aminoácidos da enzima
+        seq = enzyme[???]       # A sequencia de aminoacidos da enzima
         dict_sequences[enzyme_id] = seq
 ```
 
 3. Em seguida, vamos ler o ficheiro `selected2.csv` e associar a cada via uma lista das suas enzimas
 Também aqui vamos usar um dicionário.
 ```python
-    # Lê o ficheiro CSV
+    # Le o ficheiro CSV
     f = open('selected2.csv')
     paths = csv.reader(f, delimiter=???)
     
-    # Cria um dicionário vazio onde vamos introduzir a informação
+    # Cria um dicionario vazio onde vamos introduzir a informacao
     # proveniente do ficheiro CSV
     dict_paths = {}
     
@@ -58,7 +58,7 @@ Também aqui vamos usar um dicionário.
         # Divide a string de enzimas numa lista
         enzyme_list = str.split(enzymes, ???)
         
-        # Associa o identificador da via com a correspondente lista de enzimas
+        # Associa o identificador da via com a lista de enzimas
         dict_paths[???] = ???
 ```
 
@@ -69,25 +69,25 @@ Para tal, adicione o seguinte ao seu _script_:
     f = open('paths_enzymes.csv', 'w')
     w = csv.writer(f, delimiter=???)
     
-    # Para cada via e cada enzima que ela contém
+    # Para cada via e cada enzima que ela contem
     for path_id in dict_paths :
-        # Vamos imprimir alguma informação no ecrã para
-        # sabermos o que está a acontecer
+        # Vamos imprimir alguma informacao no ecra para
+        # sabermos o que esta a acontecer
         print 'Processing pathway with ID ' + path_id
         
         # Seleciona a lista de enzimas associadas a esta via
         enzyme_list = dict_paths[???]
         
         # Agora que temos a lista de enzimas, associa a via com a cada uma
-        # das sequências de aminoácidos das suas enzimas
+        # das sequencias de aminoacidos das suas enzimas
         for enzyme_id in enzyme_list:
-            # Mais informação de depuração
+            # Mais informacao de depuracao
             print '  enzyme = ' + enzyme_id
             
-            # Seleciona a sequência associada a esta enzima
+            # Seleciona a sequencia associada a esta enzima
             seq = dict_sequences[???]
             
-            # Escreve esta informação no ficheiro CSV
+            # Escreve esta informacao no ficheiro CSV
             w.writerow([path_id, seq])
 ```
 

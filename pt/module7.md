@@ -39,20 +39,20 @@
 ```python
     import csv
     
-    # Lê as vias selecionadas no módulo 3
+    # Le as vias selecionadas no modulo 3
     f = open('selected2.csv')
     paths = csv.reader(f, delimiter=???)
     
-    # Para cada via, insere a sua informação na base de dados
+    # Para cada via, insere a sua informacao na base de dados
     for path in paths:
-        # Extrai a informação da via presente na variável `path`
+        # Extrai a informacao da via presente na variavel `path`
         path_id = path[0]
         path_name = ???
         path_class = ???
         
-        # Insere a informação na base de dados
-        # Note que usamos um comando genérico usando a notação `?`
-        # e fornecemos os parâmetros através de um tuplo
+        # Insere a informacao na base de dados
+        # Note que usamos um comando generico usando a notacao `?`
+        # e fornecemos os parametros atraves de um tuplo
         connection.execute('''
             INSERT INTO paths (id, name, class)
             VALUES (?, ?, ?)
@@ -68,20 +68,20 @@
     f = open('sequences.csv')
     enzymes = csv.reader(f, delimiter=???)
     
-    enzymes_inserted = [] # Lista com as enzimas já inseridas
+    enzymes_inserted = [] # Lista com as enzimas ja inseridas
     
     for enzyme in enzymes:
         enzyme_id = ???
         enzyme_sequence = ???
         
-        # Determina se a enzima já foi inserida anteriormente
+        # Determina se a enzima ja foi inserida anteriormente
         if enzyme_id not in enzymes_inserted:
             connection.execute('''
                 INSERT INTO enzymes (id, sequence)
                 VALUES (?, ?)
             ''', (enzyme_id, enzyme_sequence))
             
-            # Adiciona esta enzima à lista de enzimas já inseridas
+            # Adiciona esta enzima a lista de enzimas ja inseridas
             enzymes_inserted.append(enzyme_id)
     
     # Grava
@@ -99,7 +99,8 @@
         path_id = path[0]
         enzyme_list = path[3].split('|')
         
-        # Para cada enzima, precisamos de inserir uma linha na tabela `path_enzyme`
+        # Para cada enzima, precisamos de inserir uma linha
+        # na tabela `path_enzyme`
         for enzyme_id in enzyme_list:
             connection.execute('''
                 INSERT INTO path_enzyme (path_id, enzyme_id)
@@ -137,7 +138,7 @@ Substitua o código do passo 5 por isto:
     
     rows = connection.execute('SELECT ??? FROM ???')
     
-    # Escreve a informação~de cada via no ficheiro CSV
+    # Escreve a informacao de cada via no ficheiro CSV
     for row in rows:
         w.writerow(row)
 ```

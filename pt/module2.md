@@ -26,7 +26,7 @@
         def filter1(path):
             path_id = path[???]  # Seleciona a coluna do identificar
             
-            # Substitua '???' pelo identificador que estamos à procura
+            # Substitua '???' pelo identificador que estamos a procura
             if path_id == '???':
                 return True
             else:
@@ -72,7 +72,7 @@ Vamos implementar esta funcionalidade em dois passos:
             # Divide as enzimas numa lista
             enzyme_list = str.split(field, ???)
             
-            # `enzyme_list` é agora uma lista de strings, como por exemplo:
+            # `enzyme_list` e agora uma lista de strings, como por exemplo:
             # ['H9EC08', 'P03905', 'G9LG04', 'P03901']
             
             # Devolve `True` se a enzima escolhida estiver nessa lista
