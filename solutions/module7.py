@@ -66,11 +66,43 @@ for path in paths:
 # Save the changes
 connection.commit()
 
+# Let's open file `results_1.csv` in write mode
+f = open('results_1.csv', 'w')
+w = csv.writer(f, delimiter=???)
+
 rows = connection.execute('SELECT id, name FROM enzymes')
 
-# For each that was selected, print the id and the name of the pathway
+# For each selected pathway, save it to the file
 for row in rows:
-    path_id = row[0]
-    path_name = row[1]
-    
-    print 'Path ' + path_id + ' is named "' + path_name + '"'
+    w.writerow(row)
+
+
+f = open('results_2.csv', 'w')
+w = csv.writer(f, delimiter=???)
+
+rows = connection.execute('SELECT id FROM enzymes WHERE id LIKE "Q%"')
+for row in rows:
+    w.writerow(row)
+
+
+f = open('results_3.csv', 'w')
+w = csv.writer(f, delimiter=???)
+
+rows = connection.execute(
+    'SELECT paths.name, enzymes.sequence '
+    'FROM paths, enzymes, path_enzyme '
+    'WHERE paths.id = path_enzyme.path_id '
+    '  AND enzymes.id = path_enzyme.enzyme_id')
+for row in rows:
+    w.writerow(row)
+
+
+f = open('results_4.csv', 'w')
+w = csv.writer(f, delimiter=???)
+
+rows = connection.execute(
+    'SELECT paths.id, paths.name '
+    'FROM paths, path_enzymes '
+    'GROUP BY path_id HAVING COUNT(*) >= 15')
+for row in rows:
+    w.writerow(row)
