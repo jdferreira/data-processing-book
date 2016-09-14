@@ -24,9 +24,10 @@
     b. Copie e cole o código seguinte para o ficheiro:
     ```python
         def filter1(path):
-            path_id = path[???]  # Select the column for the ID
+            path_id = path[???]  # Seleciona a coluna do identificar
             
-            if path_id == '???': # Replace with the ID we are searching for
+            # Substitua '???' pelo identificador que estamos à procura
+            if path_id == '???':
                 return True
             else:
                 return False
@@ -39,12 +40,12 @@ Vamos adicionar mais código ao ficheiro para efetivamente usarmos a função em
 ```python
     import csv
     
-    # Open the original file to read all pathways
+    # Abre o ficheiro original para ler todas as vias
     file_to_read = open('metabolic_pathways.csv')
     paths = csv.reader(file_to_read, delimiter=???)
     
-    # Open the file to save the selection
-    # The 'w' instructs Python that we want to write on this file
+    # Abre o ficheiro para gravar as vias selecionadas
+    # O 'w' indica ao Python que queremos gravar neste ficheiro
     file_to_write = open('selected1.csv', 'w')
     w = csv.writer(file_to_write, delimiter=???)
     
@@ -52,7 +53,7 @@ Vamos adicionar mais código ao ficheiro para efetivamente usarmos a função em
         if filter1(path):
             w.writerow(path)
     
-    # Close the file
+    # Fecha o ficheiro
     file_to_write.close()
 ```
 
@@ -66,15 +67,15 @@ Vamos implementar esta funcionalidade em dois passos:
     a. Crie a nova função `filter2`:
     ```python
         def filter2(path):
-            field = path[???] # Select the column for the list of enzymes
+            field = path[???] # Seleciona a coluna com a lista de enzymas
             
-            # Break that information into a list
+            # Divide as enzimas numa lista
             enzyme_list = str.split(field, ???)
             
-            # enzyme_list is now a list of strings, such as follows:
+            # `enzyme_list` é agora uma lista de strings, como por exemplo:
             # ['H9EC08', 'P03905', 'G9LG04', 'P03901']
             
-            # Return True if our selected enzyme is in that list
+            # Devolve `True` se a enzima escolhida estiver nessa lista
             if '???' in enzyme_list:
                 return True
             else:

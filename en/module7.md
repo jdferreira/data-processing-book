@@ -131,7 +131,7 @@
 Now we want to save them into the CSV file `results_1.csv`.
 Replace the code from step 5 with this:
 ```python
-    # Let's open file 'results_1.csv' in write mode
+    # Let's open file `results_1.csv` in write mode
     f = open(???, ???)
     w = csv.writer(f, delimiter=???)
     

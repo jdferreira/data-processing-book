@@ -22,72 +22,72 @@ Para tal, adicione ao _script_ o seguinte código, substituindo os pontos de int
 ```python
     import csv
     
-    # Read the CSV file
+    # Lê o ficheiro CSV
     f = open('sequences.csv')
     enzymes = csv.reader(f, delimiter=???)
     
-    # Create an empty dictionary that we will populate as we read the CSV
-    # file
+    # Cria um dicionário vazio onde vamos introduzir a informação
+    # proveniente do ficheiro CSV
     dict_sequences = {}
     
-    # For each of the enzymes in the file, associate the enzyme with its
-    # sequence
+    # Para cada enzima no ficheiro, associa-a com a sua sequência
     for enzyme in enzymes:
-        enzyme_id = enzyme[???] # The ID of this enzyme
-        seq = enzyme[???]       # The aminoacid sequence of this enzyme
+        enzyme_id = enzyme[???] # O identificador desta enzima
+        seq = enzyme[???]       # A sequência de aminoácidos da enzima
         dict_sequences[enzyme_id] = seq
 ```
 
 3. Em seguida, vamos ler o ficheiro `selected2.csv` e associar a cada via uma lista das suas enzimas
 Também aqui vamos usar um dicionário.
 ```python
-    # Read the CSV file
+    # Lê o ficheiro CSV
     f = open('selected2.csv')
     paths = csv.reader(f, delimiter=???)
     
-    # Create an empty dictionary that we will populate as we read the CSV
-    # file
+    # Cria um dicionário vazio onde vamos introduzir a informação
+    # proveniente do ficheiro CSV
     dict_paths = {}
     
-    # For each pathway in that file:
-    # - extract the list of enzymes in the pathway
-    # - associate the pathway with this list of enzymes
+    # Para cada via nesse ficheiro:
+    # - extrai a lista de enzimas da via,
+    # - associa a via com esta lista de enzimas
     for path in paths:
-        path_id = path[???] # The ID of the pathways
-        enzymes = path[???] # The field of the enzymes
+        path_id = path[???] # O identificador da via
+        enzymes = path[???] # O campo com a lista de enzimas
         
-        # Break that information into a list
+        # Divide a string de enzimas numa lista
         enzyme_list = str.split(enzymes, ???)
         
-        # Associate the pathway ID with the corresponding list of enzymes
+        # Associa o identificador da via com a correspondente lista de enzimas
         dict_paths[???] = ???
 ```
 
 4. Agora que temos os dois dicionários, podemos percorrer cada via e cada enzima de cada via de forma a criar um ficheiro CSV que cruza a informação, associando a cada via as sequências de aminoácidos das suas enzimas.
 Para tal, adicione o seguinte ao seu _script_:
 ```python
-    # Open a file to save the output
+    # Abre um ficheiro para gravar o output
     f = open('paths_enzymes.csv', 'w')
     w = csv.writer(f, delimiter=???)
     
-    # For each pathway and each enzyme that it contains
+    # Para cada via e cada enzima que ela contém
     for path_id in dict_paths :
-        # Let's print some debugging information
+        # Vamos imprimir alguma informação no ecrã para
+        # sabermos o que está a acontecer
         print 'Processing pathway with ID ' + path_id
         
-        # Retrieve the list of enzymes associated with this pathway
+        # Seleciona a lista de enzimas associadas a esta via
         enzyme_list = dict_paths[???]
         
-        # Now that we have the list of enzymes, associate the pathway with each
-        # aminoacid sequence
+        # Agora que temos a lista de enzimas, associa a via com a cada uma
+        # das sequências de aminoácidos das suas enzimas
         for enzyme_id in enzyme_list:
-            # Some more debugging information
+            # Mais informação de depuração
             print '  enzyme = ' + enzyme_id
             
-            # Retrieve the sequence associated with this enzyme
+            # Seleciona a sequência associada a esta enzima
             seq = dict_sequences[???]
             
-            # Write this row to the CSV file
+            # Escreve esta informação no ficheiro CSV
             w.writerow([path_id, seq])
 ```
 

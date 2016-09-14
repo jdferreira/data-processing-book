@@ -15,20 +15,20 @@
 1. Vamos começar por criar uma nova base de dados vazia no ficheiro `pathways.db` com três tabelas.
 Primeiro, crie um _script_ `module6.py` com o seguinte código:
 ```python
-    # `sqlite3` is a package that can be used to create a file containing
-    # a relational database. We use this package to create the database,
-    # insert data in it and query the data.
+    # `sqlite3` é um módulo que é usado para criar bases de dados relacionais.
+    # Usamos este módulo para criar a base de dados, inserir nela os dados e
+    # consultar os dados
     
     import sqlite3
     
-    # To access a database, we need to connect to it. If the file does not
-    # exist, one will be created
+    # Para aceder à base de dados, precisamos de estabelecer uma ligação com
+    # ela. Se o ficheiro não existir, vai ser criado vazio.
     connection = sqlite3.connect('pathways.db')
 ```
 
 2. Agora que temos uma base de dados vazia, vamos adicionar as tabelas necessárias para guardar os dados de vias metabólicas.
 ```python
-    # This table will contain data about the pathways
+    # Esta tabela vai conter dados de vias metabólicas
     connection.execute('''
         CREATE TABLE path (
             id VARCHAR(255) PRIMARY KEY,
@@ -37,7 +37,7 @@ Primeiro, crie um _script_ `module6.py` com o seguinte código:
         )
     ''')
     
-    # This table will contain data about the enzymes
+    # Esta tabela vai conter dados das enzimas
     connection.execute('''
         CREATE TABLE enzyme (
             id VARCHAR(255) PRIMARY KEY,
@@ -45,7 +45,7 @@ Primeiro, crie um _script_ `module6.py` com o seguinte código:
         )
     ''')
     
-    # This table will associate each pathway with its enzymes
+    # Esta tabela vai associar cada via com as suas enzimas
     connection.execute('''
         CREATE TABLE path_enzyme (
             path_id VARCHAR(255),
@@ -86,7 +86,7 @@ Se necessário, consulte os ficheiros criados nos módulos anteriores para encon
         VALUES ('???','???')
     ''')
     
-    # Ensure that the data is saved
+    # Grava a base de dados
     connection.commit()
 ```
 

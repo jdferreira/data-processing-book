@@ -48,7 +48,7 @@ This function:
             sequence = str.join("", lines)
             
             # Remove the line ends (the "enter" used to start the next line)
-            # This line end is represented as \n
+            # This line end is represented as `\n`
             sequence = str.replace(sequence, '\n', '')
             
             # Return the sequence

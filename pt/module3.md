@@ -29,29 +29,30 @@ Esta função:
     
     d. junta todas as linhas numa só, de forma a devolver apenas uma _string_.
     ```python
-        import urllib # This module contains functions to read URLs
+        import urllib # Este módulo contém funções para ler URLs
 
         def get_sequence(identifier):
-            # Establish the URL to open
+            # Estabelece o URL a abrir
             url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
             
-            # Open the URL
+            # Abre o URL
             f = urllib.urlopen(url)
             
-            # Read all the lines into a list
+            # Lê todas as linhas do URL  numa lista
             lines = f.readlines()
             
-            # Ignore the first line, which contains metadata
+            # Ignora a primeira linha, que contém apenas metadados
             del lines[0]
             
-            # Join all the remaining lines into a single string
+            # Junta as linhas todas numa string única
             sequence = str.join("", lines)
             
-            # Remove the line ends (the "enter" used to start the next line)
-            # This line end is represented as \n
+            # Remove a terminação das linhas (o "enter" usado para começar
+            # a linha seguinte)
+            # Esta terminação é representada por `\n`
             sequence = str.replace(sequence, '\n', '')
             
-            # Return the sequence
+            # Devolve a sequência
             return ???
     ```
 
@@ -75,24 +76,24 @@ Para tal, adicione as seguintes linhas ao _script_ Python, substituindo `???` pe
     ```python
         import csv
         
-        # Open the output file from the previous module
+        # Abre o output do módulo anterior
         f = open('selected2.csv')
         paths = csv.reader(f, delimiter=???)
         
-        # Start with an empty list of enzymes
+        # Começa uma lista de enzimas vazia
         enzymes = []
         
-        # Then:
-        # - read the information of each pathway,
-        # - extract the list of enzymes of each pathway, and
-        # - append each enzyme to the list of enzymes
+        # Depois:
+        # - lê a informação de cada via,
+        # - extrai a lista de enzimas de cada via, e
+        # - adiciona cada enzima à lista de enzimas
         for path in paths:
-            enzymes_field = path[???] # The field of the enzymes
+            enzymes_field = path[???] # O campo das enzimas
             
-            # Split the enzymes into a list, as in module 2
+            # Divide as enzimas numa lista, tal como no módulo 2
             enzymes_in_this_path = str.split(enzymes_field, ???)
             
-            # Append each one into the master enzyme list
+            # Adiciona acad uma à lista mestre de enzimas
             for e in enzymes_in_this_path:
                 enzymes.append(e)
     ```

@@ -47,7 +47,7 @@ Start the `module5.py` script:
 
 3. Now that we have the dictionary, let's search for all enzymes whose aminoacid sequence contains three consecutive alanines:
 ```python
-    # We import the re module to handle regular expressions
+    # We import the `re` module to handle regular expressions
     import re
     
     # Define here your regular expression

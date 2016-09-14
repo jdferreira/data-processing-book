@@ -71,10 +71,10 @@ We will implement this funcionality in two steps:
             # Break that information into a list
             enzyme_list = str.split(field, ???)
             
-            # enzyme_list is now a list of strings, such as follows:
+            # `enzyme_list` is now a list of strings, such as follows:
             # ['H9EC08', 'P03905', 'G9LG04', 'P03901']
             
-            # Return True if our selected enzyme is in that list
+            # Return `True` if our selected enzyme is in that list
             if '???' in enzyme_list:
                 return True
             else:

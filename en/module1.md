@@ -79,7 +79,7 @@ For example, determine what character is used to separate the various fields of 
     ```python
         import csv
         
-        f = open('metabolic_pathways.csv')   # Open the file
+        f = open('metabolic_pathways.csv') # Open the file
         
         paths = csv.reader(f, delimiter=???) # Create a CSV reader object
         

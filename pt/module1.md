@@ -79,12 +79,12 @@ Por exemplo, determine qual caracter é usado para separar os vários campos, se
     ```python
         import csv
         
-        f = open('metabolic_pathways.csv')   # Open the file
+        f = open('metabolic_pathways.csv') # Abre o ficheiro
         
-        paths = csv.reader(f, delimiter=???) # Create a CSV reader object
+        paths = csv.reader(f, delimiter=???) # Cria um leitor de CSV
         
-        for path in paths: # For each pathway ...
-            print ???      # ... print its name
+        for path in paths: # Para cada via ...
+            print ???      # ... imprime o seu nome
     ```
     
     c. Substitua todos os pontos de interrogação (`???`) por código Python apropriado.

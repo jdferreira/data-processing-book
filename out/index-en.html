@@ -138,7 +138,7 @@ Pentose and glucuronate interconversions
 <li><p>Copy and paste the following code to your file:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
 
-f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)   <span class="co"># Open the file</span>
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>) <span class="co"># Open the file</span>
 
 paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???) <span class="co"># Create a CSV reader object</span>
 
@@ -219,10 +219,10 @@ file_to_write.close()</code></pre></div></li>
     <span class="co"># Break that information into a list</span>
     enzyme_list <span class="op">=</span> <span class="bu">str</span>.split(field, ???)
 
-    <span class="co"># enzyme_list is now a list of strings, such as follows:</span>
+    <span class="co"># `enzyme_list` is now a list of strings, such as follows:</span>
     <span class="co"># [&#39;H9EC08&#39;, &#39;P03905&#39;, &#39;G9LG04&#39;, &#39;P03901&#39;]</span>
 
-    <span class="co"># Return True if our selected enzyme is in that list</span>
+    <span class="co"># Return `True` if our selected enzyme is in that list</span>
     <span class="cf">if</span> <span class="st">&#39;???&#39;</span> <span class="op">in</span> enzyme_list:
         <span class="cf">return</span> <span class="va">True</span>
     <span class="cf">else</span>:
@@ -287,7 +287,7 @@ file_to_write.close()</code></pre></div></li>
     sequence <span class="op">=</span> <span class="bu">str</span>.join(<span class="st">&quot;&quot;</span>, lines)
 
     <span class="co"># Remove the line ends (the &quot;enter&quot; used to start the next line)</span>
-    <span class="co"># This line end is represented as \n</span>
+    <span class="co"># This line end is represented as `\n`</span>
     sequence <span class="op">=</span> <span class="bu">str</span>.replace(sequence, <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>, <span class="st">&#39;&#39;</span>)
 
     <span class="co"># Return the sequence</span>
@@ -483,7 +483,7 @@ dict_sequences <span class="op">=</span> {}
     seq <span class="op">=</span> enzyme[???]       <span class="co"># The aminoacid sequence of this enzyme</span>
     dict_sequences[enzyme_id] <span class="op">=</span> seq</code></pre></div></li>
 <li><p>Now that we have the dictionary, let’s search for all enzymes whose aminoacid sequence contains three consecutive alanines:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># We import the re module to handle regular expressions</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># We import the `re` module to handle regular expressions</span>
 <span class="im">import</span> re
 
 <span class="co"># Define here your regular expression</span>
@@ -739,7 +739,7 @@ connection.commit()</code></pre></div></li>
 <pre class="text"><code>Path hsa00730 is named &quot;Thiamine metabolism&quot;
 Path hsa04122 is named &quot;Sulfur relay system&quot;</code></pre></li>
 <li><p>The code above prints the results to the screen. Now we want to save them into the CSV file <code>results_1.csv</code>. Replace the code from step 5 with this:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Let&#39;s open file &#39;results_1.csv&#39; in write mode</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Let&#39;s open file `results_1.csv` in write mode</span>
 f <span class="op">=</span> <span class="bu">open</span>(???, ???)
 w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
 

@@ -138,12 +138,12 @@ Pentose and glucuronate interconversions
 <li><p>Copie e cole o código seguinte para o seu ficheiro:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
 
-f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)   <span class="co"># Open the file</span>
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>) <span class="co"># Abre o ficheiro</span>
 
-paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???) <span class="co"># Create a CSV reader object</span>
+paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???) <span class="co"># Cria um leitor de CSV</span>
 
-<span class="cf">for</span> path <span class="op">in</span> paths: <span class="co"># For each pathway ...</span>
-    <span class="bu">print</span> ???      <span class="co"># ... print its name</span></code></pre></div></li>
+<span class="cf">for</span> path <span class="op">in</span> paths: <span class="co"># Para cada via ...</span>
+    <span class="bu">print</span> ???      <span class="co"># ... imprime o seu nome</span></code></pre></div></li>
 <li><p>Substitua todos os pontos de interrogação (<code>???</code>) por código Python apropriado.</p></li>
 </ol></li>
 <li><p>Corra o <code>module1.py</code> no terminal e observe o output. O output corresponde ao que estava à espera de ver?</p></li>
@@ -183,9 +183,10 @@ paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>
 <li><p>Crie um ficheiro vazio e grave-o como <code>module2.py</code> na mesma pasta onde o ficheiro <code>metabolic_pathways.csv</code> está. Não se esqueça da terminação <code>.py</code>, pois esta indica ao computador que o ficheiro é um <em>script</em> Python.</p></li>
 <li><p>Copie e cole o código seguinte para o ficheiro:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> filter1(path):
-    path_id <span class="op">=</span> path[???]  <span class="co"># Select the column for the ID</span>
+    path_id <span class="op">=</span> path[???]  <span class="co"># Seleciona a coluna do identificar</span>
 
-    <span class="cf">if</span> path_id <span class="op">==</span> <span class="st">&#39;???&#39;</span>: <span class="co"># Replace with the ID we are searching for</span>
+    <span class="co"># Substitua &#39;???&#39; pelo identificador que estamos à procura</span>
+    <span class="cf">if</span> path_id <span class="op">==</span> <span class="st">&#39;???&#39;</span>:
         <span class="cf">return</span> <span class="va">True</span>
     <span class="cf">else</span>:
         <span class="cf">return</span> <span class="va">False</span></code></pre></div></li>
@@ -194,12 +195,12 @@ paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>
 <li><p>O código do passo anterior define uma função que vai ser executada quando for chamada, mas por si só não faz nada. Vamos adicionar mais código ao ficheiro para efetivamente usarmos a função em cada uma das vias metabólicas.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
 
-<span class="co"># Open the original file to read all pathways</span>
+<span class="co"># Abre o ficheiro original para ler todas as vias</span>
 file_to_read <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)
 paths <span class="op">=</span> csv.reader(file_to_read, delimiter<span class="op">=</span>???)
 
-<span class="co"># Open the file to save the selection</span>
-<span class="co"># The &#39;w&#39; instructs Python that we want to write on this file</span>
+<span class="co"># Abre o ficheiro para gravar as vias selecionadas</span>
+<span class="co"># O &#39;w&#39; indica ao Python que queremos gravar neste ficheiro</span>
 file_to_write <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected1.csv&#39;</span>, <span class="st">&#39;w&#39;</span>)
 w <span class="op">=</span> csv.writer(file_to_write, delimiter<span class="op">=</span>???)
 
@@ -207,22 +208,22 @@ w <span class="op">=</span> csv.writer(file_to_write, delimiter<span class="op">
     <span class="cf">if</span> filter1(path):
         w.writerow(path)
 
-<span class="co"># Close the file</span>
+<span class="co"># Fecha o ficheiro</span>
 file_to_write.close()</code></pre></div></li>
 <li><p>Corra o <em>script</em> <code>module2.py</code> e estude o novo ficheiro que foi criado. Verifique que o seu conteúdo corresponde ao que esperava.</p></li>
 <li><p>Edite o ficheiro <code>module2.py</code> criando agora uma nova função <code>filter2</code> que seleciona as vias onde a enzima Q9Y697 participa. Se necessário, consulte a documentação para a função <code>str.split</code> em <a href="https://docs.python.org/2/library/stdtypes.html#str.split" class="uri">https://docs.python.org/2/library/stdtypes.html#str.split</a>. Vamos implementar esta funcionalidade em dois passos:</p>
 <ol type="a">
 <li><p>Crie a nova função <code>filter2</code>:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> filter2(path):
-    field <span class="op">=</span> path[???] <span class="co"># Select the column for the list of enzymes</span>
+    field <span class="op">=</span> path[???] <span class="co"># Seleciona a coluna com a lista de enzymas</span>
 
-    <span class="co"># Break that information into a list</span>
+    <span class="co"># Divide as enzimas numa lista</span>
     enzyme_list <span class="op">=</span> <span class="bu">str</span>.split(field, ???)
 
-    <span class="co"># enzyme_list is now a list of strings, such as follows:</span>
+    <span class="co"># `enzyme_list` é agora uma lista de strings, como por exemplo:</span>
     <span class="co"># [&#39;H9EC08&#39;, &#39;P03905&#39;, &#39;G9LG04&#39;, &#39;P03901&#39;]</span>
 
-    <span class="co"># Return True if our selected enzyme is in that list</span>
+    <span class="co"># Devolve `True` se a enzima escolhida estiver nessa lista</span>
     <span class="cf">if</span> <span class="st">&#39;???&#39;</span> <span class="op">in</span> enzyme_list:
         <span class="cf">return</span> <span class="va">True</span>
     <span class="cf">else</span>:
@@ -268,29 +269,30 @@ file_to_write.close()</code></pre></div></li>
 <li><p>lê o conteúdo acessível por esse URL,</p></li>
 <li><p>extrai a sequência de aminoácidos, e</p></li>
 <li><p>junta todas as linhas numa só, de forma a devolver apenas uma <em>string</em>.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> urllib <span class="co"># This module contains functions to read URLs</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> urllib <span class="co"># Este módulo contém funções para ler URLs</span>
 
 <span class="kw">def</span> get_sequence(identifier):
-    <span class="co"># Establish the URL to open</span>
+    <span class="co"># Estabelece o URL a abrir</span>
     url <span class="op">=</span> <span class="st">&#39;http://www.uniprot.org/uniprot/&#39;</span> <span class="op">+</span> ??? <span class="op">+</span> <span class="st">&#39;.fasta&#39;</span>
 
-    <span class="co"># Open the URL</span>
+    <span class="co"># Abre o URL</span>
     f <span class="op">=</span> urllib.urlopen(url)
 
-    <span class="co"># Read all the lines into a list</span>
+    <span class="co"># Lê todas as linhas do URL  numa lista</span>
     lines <span class="op">=</span> f.readlines()
 
-    <span class="co"># Ignore the first line, which contains metadata</span>
+    <span class="co"># Ignora a primeira linha, que contém apenas metadados</span>
     <span class="kw">del</span> lines[<span class="dv">0</span>]
 
-    <span class="co"># Join all the remaining lines into a single string</span>
+    <span class="co"># Junta as linhas todas numa string única</span>
     sequence <span class="op">=</span> <span class="bu">str</span>.join(<span class="st">&quot;&quot;</span>, lines)
 
-    <span class="co"># Remove the line ends (the &quot;enter&quot; used to start the next line)</span>
-    <span class="co"># This line end is represented as \n</span>
+    <span class="co"># Remove a terminação das linhas (o &quot;enter&quot; usado para começar</span>
+    <span class="co"># a linha seguinte)</span>
+    <span class="co"># Esta terminação é representada por `\n`</span>
     sequence <span class="op">=</span> <span class="bu">str</span>.replace(sequence, <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>, <span class="st">&#39;&#39;</span>)
 
-    <span class="co"># Return the sequence</span>
+    <span class="co"># Devolve a sequência</span>
     <span class="cf">return</span> ???</code></pre></div></li>
 </ol></li>
 <li><p>Vamos experimentar executar a função com um pequeno número de proteínas. Para tal, adicione as seguintes linhas ao <em>script</em> Python, substituindo <code>???</code> pelos identificadores que quiser:</p>
@@ -307,24 +309,24 @@ sequence3 <span class="op">=</span> get_sequence(<span class="st">&#39;???&#39;<
 <li><p>Substitua-as por:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
 
-<span class="co"># Open the output file from the previous module</span>
+<span class="co"># Abre o output do módulo anterior</span>
 f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected2.csv&#39;</span>)
 paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
 
-<span class="co"># Start with an empty list of enzymes</span>
+<span class="co"># Começa uma lista de enzimas vazia</span>
 enzymes <span class="op">=</span> []
 
-<span class="co"># Then:</span>
-<span class="co"># - read the information of each pathway,</span>
-<span class="co"># - extract the list of enzymes of each pathway, and</span>
-<span class="co"># - append each enzyme to the list of enzymes</span>
+<span class="co"># Depois:</span>
+<span class="co"># - lê a informação de cada via,</span>
+<span class="co"># - extrai a lista de enzimas de cada via, e</span>
+<span class="co"># - adiciona cada enzima à lista de enzimas</span>
 <span class="cf">for</span> path <span class="op">in</span> paths:
-    enzymes_field <span class="op">=</span> path[???] <span class="co"># The field of the enzymes</span>
+    enzymes_field <span class="op">=</span> path[???] <span class="co"># O campo das enzimas</span>
 
-    <span class="co"># Split the enzymes into a list, as in module 2</span>
+    <span class="co"># Divide as enzimas numa lista, tal como no módulo 2</span>
     enzymes_in_this_path <span class="op">=</span> <span class="bu">str</span>.split(enzymes_field, ???)
 
-    <span class="co"># Append each one into the master enzyme list</span>
+    <span class="co"># Adiciona acad uma à lista mestre de enzimas</span>
     <span class="cf">for</span> e <span class="op">in</span> enzymes_in_this_path:
         enzymes.append(e)</code></pre></div></li>
 </ol></li>
@@ -371,64 +373,64 @@ f.close()</code></pre></div></li>
 <li><p>Vamos primeiro ler o ficheiro <code>sequences.csv</code> para construir um dicionário onde cada enzima é associada à sua própria sequência. Para tal, adicione ao <em>script</em> o seguinte código, substituindo os pontos de interrogação:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
 
-<span class="co"># Read the CSV file</span>
+<span class="co"># Lê o ficheiro CSV</span>
 f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;sequences.csv&#39;</span>)
 enzymes <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
 
-<span class="co"># Create an empty dictionary that we will populate as we read the CSV</span>
-<span class="co"># file</span>
+<span class="co"># Cria um dicionário vazio onde vamos introduzir a informação</span>
+<span class="co"># proveniente do ficheiro CSV</span>
 dict_sequences <span class="op">=</span> {}
 
-<span class="co"># For each of the enzymes in the file, associate the enzyme with its</span>
-<span class="co"># sequence</span>
+<span class="co"># Para cada enzima no ficheiro, associa-a com a sua sequência</span>
 <span class="cf">for</span> enzyme <span class="op">in</span> enzymes:
-    enzyme_id <span class="op">=</span> enzyme[???] <span class="co"># The ID of this enzyme</span>
-    seq <span class="op">=</span> enzyme[???]       <span class="co"># The aminoacid sequence of this enzyme</span>
+    enzyme_id <span class="op">=</span> enzyme[???] <span class="co"># O identificador desta enzima</span>
+    seq <span class="op">=</span> enzyme[???]       <span class="co"># A sequência de aminoácidos da enzima</span>
     dict_sequences[enzyme_id] <span class="op">=</span> seq</code></pre></div></li>
 <li><p>Em seguida, vamos ler o ficheiro <code>selected2.csv</code> e associar a cada via uma lista das suas enzimas Também aqui vamos usar um dicionário.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Read the CSV file</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Lê o ficheiro CSV</span>
 f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected2.csv&#39;</span>)
 paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
 
-<span class="co"># Create an empty dictionary that we will populate as we read the CSV</span>
-<span class="co"># file</span>
+<span class="co"># Cria um dicionário vazio onde vamos introduzir a informação</span>
+<span class="co"># proveniente do ficheiro CSV</span>
 dict_paths <span class="op">=</span> {}
 
-<span class="co"># For each pathway in that file:</span>
-<span class="co"># - extract the list of enzymes in the pathway</span>
-<span class="co"># - associate the pathway with this list of enzymes</span>
+<span class="co"># Para cada via nesse ficheiro:</span>
+<span class="co"># - extrai a lista de enzimas da via,</span>
+<span class="co"># - associa a via com esta lista de enzimas</span>
 <span class="cf">for</span> path <span class="op">in</span> paths:
-    path_id <span class="op">=</span> path[???] <span class="co"># The ID of the pathways</span>
-    enzymes <span class="op">=</span> path[???] <span class="co"># The field of the enzymes</span>
+    path_id <span class="op">=</span> path[???] <span class="co"># O identificador da via</span>
+    enzymes <span class="op">=</span> path[???] <span class="co"># O campo com a lista de enzimas</span>
 
-    <span class="co"># Break that information into a list</span>
+    <span class="co"># Divide a string de enzimas numa lista</span>
     enzyme_list <span class="op">=</span> <span class="bu">str</span>.split(enzymes, ???)
 
-    <span class="co"># Associate the pathway ID with the corresponding list of enzymes</span>
+    <span class="co"># Associa o identificador da via com a correspondente lista de enzimas</span>
     dict_paths[???] <span class="op">=</span> ???</code></pre></div></li>
 <li><p>Agora que temos os dois dicionários, podemos percorrer cada via e cada enzima de cada via de forma a criar um ficheiro CSV que cruza a informação, associando a cada via as sequências de aminoácidos das suas enzimas. Para tal, adicione o seguinte ao seu <em>script</em>:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Open a file to save the output</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Abre um ficheiro para gravar o output</span>
 f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;paths_enzymes.csv&#39;</span>, <span class="st">&#39;w&#39;</span>)
 w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
 
-<span class="co"># For each pathway and each enzyme that it contains</span>
+<span class="co"># Para cada via e cada enzima que ela contém</span>
 <span class="cf">for</span> path_id <span class="op">in</span> dict_paths :
-    <span class="co"># Let&#39;s print some debugging information</span>
+    <span class="co"># Vamos imprimir alguma informação no ecrã para</span>
+    <span class="co"># sabermos o que está a acontecer</span>
     <span class="bu">print</span> <span class="st">&#39;Processing pathway with ID &#39;</span> <span class="op">+</span> path_id
 
-    <span class="co"># Retrieve the list of enzymes associated with this pathway</span>
+    <span class="co"># Seleciona a lista de enzimas associadas a esta via</span>
     enzyme_list <span class="op">=</span> dict_paths[???]
 
-    <span class="co"># Now that we have the list of enzymes, associate the pathway with each</span>
-    <span class="co"># aminoacid sequence</span>
+    <span class="co"># Agora que temos a lista de enzimas, associa a via com a cada uma</span>
+    <span class="co"># das sequências de aminoácidos das suas enzimas</span>
     <span class="cf">for</span> enzyme_id <span class="op">in</span> enzyme_list:
-        <span class="co"># Some more debugging information</span>
+        <span class="co"># Mais informação de depuração</span>
         <span class="bu">print</span> <span class="st">&#39;  enzyme = &#39;</span> <span class="op">+</span> enzyme_id
 
-        <span class="co"># Retrieve the sequence associated with this enzyme</span>
+        <span class="co"># Seleciona a sequência associada a esta enzima</span>
         seq <span class="op">=</span> dict_sequences[???]
 
-        <span class="co"># Write this row to the CSV file</span>
+        <span class="co"># Escreve esta informação no ficheiro CSV</span>
         w.writerow([path_id, seq])</code></pre></div></li>
 <li><p>Corra o código e estude o conteúdo do ficheiro que foi criado (<code>paths_enzymes.csv</code>). Corresponde ao que estava à espera?</p></li>
 <li><p>Certifique-se de que mantém uma cópia do ficheiro <code>paths_enzymes.csv</code> para si, assim como do <em>script</em> <code>module4.py</code>, de forma a que os possa usar nos próximos módulos. Por exemplo, envie-os para si por email ou faça o upload para a Dropbox.</p></li>
@@ -468,34 +470,33 @@ w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
 <li><p>Começamos por ler o conteúdo do ficheiro <code>sequences.csv</code> e por criar um dicionário que associa as enzimas às suas sequências de aminoácidos, tal como fizemos no módulo anterior. Crie o <em>script</em> <code>module5.py</code>:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
 
-<span class="co"># Read the CSV file</span>
+<span class="co"># Lê o ficheiro CSV</span>
 f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;sequences.csv&#39;</span>)
 enzymes <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
 
-<span class="co"># Create an empty dictionary that we will populate as we read the CSV</span>
-<span class="co"># file</span>
+<span class="co"># Cria um dicionário vazio onde vamos introduzir a informação</span>
+<span class="co"># proveniente do ficheiro CSV</span>
 dict_sequences <span class="op">=</span> {}
 
-<span class="co"># For each of the enzymes in the file, associate the enzyme with its</span>
-<span class="co"># sequence</span>
+<span class="co"># Para cada enzima no ficheiro, associa-a com a sua sequência</span>
 <span class="cf">for</span> enzyme <span class="op">in</span> enzymes:
-    enzyme_id <span class="op">=</span> enzyme[???] <span class="co"># The ID of this enzyme</span>
-    seq <span class="op">=</span> enzyme[???]       <span class="co"># The aminoacid sequence of this enzyme</span>
+    enzyme_id <span class="op">=</span> enzyme[???] <span class="co"># O identificador desta enzima</span>
+    seq <span class="op">=</span> enzyme[???]       <span class="co"># A sequência de aminoácidos da enzima</span>
     dict_sequences[enzyme_id] <span class="op">=</span> seq</code></pre></div></li>
 <li><p>Agora que temos o dicionário, vamos procurar as enzimas cujas sequências contêm três alaninas consecutivas:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># We import the re module to handle regular expressions</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Importamos o módulo `re` para lidar com expressões regulares</span>
 <span class="im">import</span> re
 
-<span class="co"># Define here your regular expression</span>
+<span class="co"># Defina aqui a sua expressão regular</span>
 reg_expr <span class="op">=</span> <span class="vs">r&#39;???&#39;</span>
 
-<span class="co"># For each enzyme, retrieve their sequence and determine whether</span>
-<span class="co"># the sequence matches three consecutive alanines</span>
+<span class="co"># Para cada enzima, obtém a sua sequência e determina se a sequência</span>
+<span class="co"># satisfaz o padrão: três alaninas consecutivas</span>
 <span class="cf">for</span> enzyme <span class="op">in</span> dict_sequences:
-    <span class="co"># Retrieve the aminoacid sequence</span>
+    <span class="co"># Seleciona a sequência de aminoácidos</span>
     seq <span class="op">=</span> ???
 
-    <span class="co"># Determine whether the sequence matches the pattern</span>
+    <span class="co"># Determina se a sequência satisfaz o padrão</span>
     <span class="cf">if</span> re.search(reg_expr, seq):
         <span class="bu">print</span> <span class="st">&#39;The enzyme &#39;</span> <span class="op">+</span> ??? <span class="op">+</span> <span class="st">&#39; matches the expression &#39;</span> <span class="op">+</span> reg_expr</code></pre></div></li>
 <li><p>Modifique o código acima para gravar os identificadores e sequências de aminoácidos num ficheiro <code>relevant_sequences_1.csv</code>, em vez de escrever no ecrã. Refira-se ao módulo 3, passo 5 se necessitar de se relembrar de como escrever um ficheiro CSV.</p></li>
@@ -536,17 +537,17 @@ reg_expr <span class="op">=</span> <span class="vs">r&#39;???&#39;</span>
 <h2 id="passos-6">Passos:</h2>
 <ol type="1">
 <li><p>Vamos começar por criar uma nova base de dados vazia no ficheiro <code>pathways.db</code> com três tabelas. Primeiro, crie um <em>script</em> <code>module6.py</code> com o seguinte código:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># `sqlite3` is a package that can be used to create a file containing</span>
-<span class="co"># a relational database. We use this package to create the database,</span>
-<span class="co"># insert data in it and query the data.</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># `sqlite3` é um módulo que é usado para criar bases de dados relacionais.</span>
+<span class="co"># Usamos este módulo para criar a base de dados, inserir nela os dados e</span>
+<span class="co"># consultar os dados</span>
 
 <span class="im">import</span> sqlite3
 
-<span class="co"># To access a database, we need to connect to it. If the file does not</span>
-<span class="co"># exist, one will be created</span>
+<span class="co"># Para aceder à base de dados, precisamos de estabelecer uma ligação com</span>
+<span class="co"># ela. Se o ficheiro não existir, vai ser criado vazio.</span>
 connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&#39;pathways.db&#39;</span>)</code></pre></div></li>
 <li><p>Agora que temos uma base de dados vazia, vamos adicionar as tabelas necessárias para guardar os dados de vias metabólicas.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># This table will contain data about the pathways</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Esta tabela vai conter dados de vias metabólicas</span>
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    CREATE TABLE path (</span>
 <span class="st">        id VARCHAR(255) PRIMARY KEY,</span>
@@ -555,7 +556,7 @@ connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    )</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
-<span class="co"># This table will contain data about the enzymes</span>
+<span class="co"># Esta tabela vai conter dados das enzimas</span>
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    CREATE TABLE enzyme (</span>
 <span class="st">        id VARCHAR(255) PRIMARY KEY,</span>
@@ -563,7 +564,7 @@ connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    )</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
-<span class="co"># This table will associate each pathway with its enzymes</span>
+<span class="co"># Esta tabela vai associar cada via com as suas enzimas</span>
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    CREATE TABLE path_enzyme (</span>
 <span class="st">        path_id VARCHAR(255),</span>
@@ -599,7 +600,7 @@ connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    VALUES (&#39;???&#39;,&#39;???&#39;)</span>
 <span class="st">&#39;&#39;&#39;</span>)
 
-<span class="co"># Ensure that the data is saved</span>
+<span class="co"># Grava a base de dados</span>
 connection.commit()</code></pre></div></li>
 <li><p>Por fim, vamos assegurar-nos que as tabelas contêm os dados que lá colocámos. Para tal, como exemplo, vamos selecionar as enzimas de cada via.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT id, sequence FROM enzymes&#39;</span>)
@@ -654,62 +655,62 @@ Q9Y697 starts with MLLRA</code></pre></li>
 
 connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&#39;pathways.db&#39;</span>)
 
-<span class="co"># Erase all data from the three tables</span>
+<span class="co"># Remove todos os dados inseridos nas tabelas</span>
 connection.execute(<span class="st">&#39;DELETE FROM path_enzyme&#39;</span>)
 connection.execute(<span class="st">&#39;DELETE FROM paths&#39;</span>)
 connection.execute(<span class="st">&#39;DELETE FROM enzymes&#39;</span>)
 
-<span class="co"># Save the deletions</span>
+<span class="co"># Grava a base de dados</span>
 connection.commit()</code></pre></div></li>
 <li><p>Adicione o código seguinte ao <em>script</em>, o qual lê os dados de cada via metabólica e adicionam-nos à base de dados.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
 
-<span class="co"># Read the pathways from the file from module 3</span>
+<span class="co"># Lê as vias selecionadas no módulo 3</span>
 f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected2.csv&#39;</span>)
 paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
 
-<span class="co"># For each pathway, insert its information into the database</span>
+<span class="co"># Para cada via, insere a sua informação na base de dados</span>
 <span class="cf">for</span> path <span class="op">in</span> paths:
-    <span class="co"># Extract the pathway information from the `path` variable</span>
+    <span class="co"># Extrai a informação da via presente na variável `path`</span>
     path_id <span class="op">=</span> path[<span class="dv">0</span>]
     path_name <span class="op">=</span> ???
     path_class <span class="op">=</span> ???
 
-    <span class="co"># Insert into the database</span>
-    <span class="co"># Notice that we create a generic SQL command using the `?` notation</span>
-    <span class="co"># and give the parameters of the command as a tuple</span>
+    <span class="co"># Insere a informação na base de dados</span>
+    <span class="co"># Note que usamos um comando genérico usando a notação `?`</span>
+    <span class="co"># e fornecemos os parâmetros através de um tuplo</span>
     connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">        INSERT INTO paths (id, name, class)</span>
 <span class="st">        VALUES (?, ?, ?)</span>
 <span class="st">    &#39;&#39;&#39;</span>, (path_id, path_name, path_class))
 
-<span class="co"># Save the changes</span>
+<span class="co"># Grava</span>
 connection.commit()</code></pre></div></li>
 <li><p>Vamos fazer o mesmo com as enzimas:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Now do the same for the enzymes</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Agora fazemos o mesmo para as enzimas</span>
 f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;sequences.csv&#39;</span>)
 enzymes <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
 
-enzymes_inserted <span class="op">=</span> [] <span class="co"># Keep a list of the enzymes already inserted</span>
+enzymes_inserted <span class="op">=</span> [] <span class="co"># Lista com as enzimas já inseridas</span>
 
 <span class="cf">for</span> enzyme <span class="op">in</span> enzymes:
     enzyme_id <span class="op">=</span> ???
     enzyme_sequence <span class="op">=</span> ???
 
-    <span class="co"># Check to see if the enzyme has been added before</span>
+    <span class="co"># Determina se a enzima já foi inserida anteriormente</span>
     <span class="cf">if</span> enzyme_id <span class="op">not</span> <span class="op">in</span> enzymes_inserted:
         connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">            INSERT INTO enzymes (id, sequence)</span>
 <span class="st">            VALUES (?, ?)</span>
 <span class="st">        &#39;&#39;&#39;</span>, (enzyme_id, enzyme_sequence))
 
-        <span class="co"># Add this enzyme to the list of enzymes already inserted</span>
+        <span class="co"># Adiciona esta enzima à lista de enzimas já inseridas</span>
         enzymes_inserted.append(enzyme_id)
 
-<span class="co"># Save the changes</span>
+<span class="co"># Grava</span>
 connection.commit()</code></pre></div></li>
 <li><p>E agora vamos inserir na base de dados a informação que associa cada via às suas enzimas:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Which file do we need to read in order to relate pathways with enzymes?</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Que ficheiro precisamos de ler para relacionar vias e enzimas?</span>
 f <span class="op">=</span> <span class="bu">open</span>(???)
 
 paths <span class="op">=</span>  csv.reader(f, delimiter<span class="op">=</span>???)
@@ -718,7 +719,7 @@ paths <span class="op">=</span>  csv.reader(f, delimiter<span class="op">=</span
     path_id <span class="op">=</span> path[<span class="dv">0</span>]
     enzyme_list <span class="op">=</span> path[<span class="dv">3</span>].split(<span class="st">&#39;|&#39;</span>)
 
-    <span class="co"># For each enzyme, we need to add one line to the `path_enzyme` table</span>
+    <span class="co"># Para cada enzima, precisamos de inserir uma linha na tabela `path_enzyme`</span>
     <span class="cf">for</span> enzyme_id <span class="op">in</span> enzyme_list:
         connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">            INSERT INTO path_enzyme (path_id, enzyme_id)</span>
@@ -729,7 +730,7 @@ connection.commit()</code></pre></div></li>
 <li><p>Com um comando SQL, consulte os dados das vias metabólicas e imprima o identificar e o nome no terminal:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT ??? FROM ???&#39;</span>)
 
-<span class="co"># For each selected pathway, print the id and the name of the pathway</span>
+<span class="co"># Para cada via, imprime o identificador e o nome</span>
 <span class="cf">for</span> row <span class="op">in</span> rows:
     path_id <span class="op">=</span> row[???]
     path_name <span class="op">=</span> row[???]
@@ -739,13 +740,13 @@ connection.commit()</code></pre></div></li>
 <pre class="text"><code>Path hsa00730 is named &quot;Thiamine metabolism&quot;
 Path hsa04122 is named &quot;Sulfur relay system&quot;</code></pre></li>
 <li><p>O código anterior imprime a informação no terminal. Agora queremos gravar essa mesma informação no ficheiro CSV <code>results_1.csv</code>. Substitua o código do passo 5 por isto:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Let&#39;s open file &#39;results_1.csv&#39; in write mode</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Abre o ficheiro `results_1.csv` em modo de escrita (write mode)</span>
 f <span class="op">=</span> <span class="bu">open</span>(???, ???)
 w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
 
 rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT ??? FROM ???&#39;</span>)
 
-<span class="co"># For each selected pathway, save it to the file</span>
+<span class="co"># Escreve a informação~de cada via no ficheiro CSV</span>
 <span class="cf">for</span> row <span class="op">in</span> rows:
     w.writerow(row)</code></pre></div></li>
 <li><p>Selecione agora as enzimas cujo identificar começa com Q e grave-as no ficheiro <code>results_2.csv</code>. A receita é a mesma, apenas mudando o nome do ficheiro e o comando de consulta. Pode usar a seguinte consulta, substituindo onde for apropriado:</p>
@@ -757,7 +758,7 @@ rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT ?
   <span class="kw">AND</span> enzymes.id = path_enzyme.enzyme_id</code></pre></div></li>
 <li><p>SQL permite consultas mais complexas. Use a consulta seguinte para gravar o identificador e o nome das vias metabólicas associadas a pelo menos 15 enzimas. Grave o resultado no ficheiro <code>results_4.csv</code>.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> paths.id, paths.name
-<span class="kw">FROM</span> paths, path_enzymes
+<span class="kw">FROM</span> paths, path_enzyme
 <span class="kw">GROUP</span> <span class="kw">BY</span> path_id <span class="kw">HAVING</span> <span class="fu">COUNT</span>(*) &gt;= <span class="dv">15</span></code></pre></div></li>
 </ol>
 <h2 id="após-a-aula-6">Após a aula:</h2>
