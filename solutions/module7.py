@@ -102,7 +102,7 @@ w = csv.writer(f, delimiter=???)
 
 rows = connection.execute(
     'SELECT paths.id, paths.name '
-    'FROM paths, path_enzymes '
+    'FROM paths, path_enzyme '
     'GROUP BY path_id HAVING COUNT(*) >= 15')
 for row in rows:
     w.writerow(row)

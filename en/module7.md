@@ -163,7 +163,7 @@ Use this query to save the id and name of the pathways associated with at least 
 Save this to `results_4.csv`.
 ```sql
     SELECT paths.id, paths.name
-    FROM paths, path_enzymes
+    FROM paths, path_enzyme
     GROUP BY path_id HAVING COUNT(*) >= 15
 ```
 
