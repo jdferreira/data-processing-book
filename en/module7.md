@@ -165,7 +165,8 @@ Save this to `results_4.csv`.
 ```sql
     SELECT paths.id, paths.name
     FROM paths, path_enzyme
-    GROUP BY path_id HAVING COUNT(*) >= 15
+    WHERE paths.id = path_enzyme.path_id
+    GROUP BY path_id HAVING COUNT(*) >= 300
 ```
 
 ## After the class:

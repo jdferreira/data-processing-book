@@ -11,7 +11,7 @@ connection.execute('DELETE FROM paths')
 connection.execute('DELETE FROM enzymes')
 
 # Read the pathways from the file from module 3
-f = open('selected2.csv')
+f = open('metabolic_pathways.csv')
 paths = csv.reader(f, delimiter=',')
 
 # For each pathway, insert its information into the database
@@ -29,7 +29,7 @@ for path in paths:
 
 
 # Now do the same for the enzymes
-f = open('sequences.csv')
+f = open('all_sequences.csv')
 enzymes = csv.reader(f, delimiter=',')
 
 enzymes_inserted = [] # Keep a list of the enzymes already inserted
@@ -49,7 +49,7 @@ for enzyme in enzymes:
         enzymes_inserted.append(enzyme_id)
 
 # Which file do we need to read in order to relate pathways with enzymes?
-f = open('selected2.csv')
+f = open('metabolic_pathways.csv')
 paths =  csv.reader(f, delimiter=',')
 
 for path in paths:
@@ -67,26 +67,26 @@ for path in paths:
 connection.commit()
 
 # Let's open file `results_1.csv` in write mode
-f = open('results_1.csv', 'bw')
-w = csv.writer(f, delimiter=???)
+f = open('results_1.csv', 'wb')
+w = csv.writer(f, delimiter=',')
 
-rows = connection.execute('SELECT id, name FROM enzymes')
+rows = connection.execute('SELECT id, name FROM paths')
 
 # For each selected pathway, save it to the file
 for row in rows:
     w.writerow(row)
 
 
-f = open('results_2.csv', 'bw')
-w = csv.writer(f, delimiter=???)
+f = open('results_2.csv', 'wb')
+w = csv.writer(f, delimiter=',')
 
 rows = connection.execute('SELECT id FROM enzymes WHERE id LIKE "Q%"')
 for row in rows:
     w.writerow(row)
 
 
-f = open('results_3.csv', 'bw')
-w = csv.writer(f, delimiter=???)
+f = open('results_3.csv', 'wb')
+w = csv.writer(f, delimiter=',')
 
 rows = connection.execute(
     'SELECT paths.name, enzymes.sequence '
@@ -97,12 +97,13 @@ for row in rows:
     w.writerow(row)
 
 
-f = open('results_4.csv', 'bw')
-w = csv.writer(f, delimiter=???)
+f = open('results_4.csv', 'wb')
+w = csv.writer(f, delimiter=',')
 
 rows = connection.execute(
     'SELECT paths.id, paths.name '
     'FROM paths, path_enzyme '
-    'GROUP BY path_id HAVING COUNT(*) >= 15')
+    'WHERE paths.id = path_enzyme.path_id '
+    'GROUP BY path_id HAVING COUNT(*) >= 300')
 for row in rows:
     w.writerow(row)
