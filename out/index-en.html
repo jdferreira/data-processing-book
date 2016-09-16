@@ -199,8 +199,8 @@ file_to_read <span class="op">=</span> <span class="bu">open</span>(<span class=
 paths <span class="op">=</span> csv.reader(file_to_read, delimiter<span class="op">=</span>???)
 
 <span class="co"># Open the file to save the selection</span>
-<span class="co"># The &#39;w&#39; instructs Python that we want to write on this file</span>
-file_to_write <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected1.csv&#39;</span>, <span class="st">&#39;w&#39;</span>)
+<span class="co"># The &#39;bw&#39; instructs Python that we want to write on this file</span>
+file_to_write <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected1.csv&#39;</span>, <span class="st">&#39;bw&#39;</span>)
 w <span class="op">=</span> csv.writer(file_to_write, delimiter<span class="op">=</span>???)
 
 <span class="cf">for</span> path <span class="op">in</span> paths:
@@ -329,7 +329,7 @@ enzymes <span class="op">=</span> []
         enzymes.append(e)</code></pre></div></li>
 </ol></li>
 <li><p>Now that we have a list of enzymes, we can use it and the function we created in the beginning to get the aminoacid sequence of each enzyme. We will save this information into a new file. Continue adding code to your <code>module3.py</code> file:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;sequences.csv&#39;</span>, <span class="st">&#39;w&#39;</span>)
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;sequences.csv&#39;</span>, <span class="st">&#39;bw&#39;</span>)
 w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
 
 <span class="cf">for</span> e <span class="op">in</span> enzymes:
@@ -342,7 +342,8 @@ f.close()</code></pre></div></li>
 </ol>
 <h2 id="after-the-class-2">After the class:</h2>
 <ol type="1">
-<li>Observe in <code>sequences.csv</code> that some enzymes appear more than once, and try to explain why?</li>
+<li><p>Observe in <code>sequences.csv</code> that some enzymes appear more than once, and try to explain why?</p></li>
+<li><p>Change your code in order to find the sequence of all the enzymes in the metabolic pathways, and not only the enzymes in the pathways selected in the previous module. Save the sequences into a file named <code>all_sequences.csv</code>.</p></li>
 </ol>
 <h1 id="module4">Module 4 – Crossing data from several sources</h1>
 <h2 id="objectives-4">Objectives:</h2>
@@ -408,7 +409,7 @@ dict_paths <span class="op">=</span> {}
     dict_paths[???] <span class="op">=</span> ???</code></pre></div></li>
 <li><p>Now that we have the two dictionaries, we can go through each pathway and through each enzyme in it and create a CSV file that crosses the information, associating each pathway to the aminoacid sequences of its enzymes. To do so, add this final piece of code to your script:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Open a file to save the output</span>
-f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;paths_enzymes.csv&#39;</span>, <span class="st">&#39;w&#39;</span>)
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;paths_enzymes.csv&#39;</span>, <span class="st">&#39;bw&#39;</span>)
 w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
 
 <span class="co"># For each pathway and each enzyme that it contains</span>
@@ -627,13 +628,13 @@ Q9Y697 starts with MLLRA</code></pre></li>
 </ul>
 <h2 id="input-6">Input:</h2>
 <ul>
-<li>File: <a href="files/selected2.csv">selected2.csv</a>
+<li>File: <a href="files/metabolic_pathways.csv">metabolic_pathways.csv</a>
 <ul>
-<li>created in module 3</li>
+<li>created in module 1</li>
 </ul></li>
-<li>File: <a href="files/sequences.csv">sequences.csv</a>
+<li>File: <a href="files/all_sequences.csv">all_sequences.csv</a>
 <ul>
-<li>created in module 3</li>
+<li>similar to <code>sequences.csv</code> from module 3 but will the sequence of all the enzymes. See question 2 in the <strong>After the class</strong> section of that module.</li>
 </ul></li>
 <li>File: <a href="files/pathways.db">pathways.db</a>
 <ul>
@@ -665,7 +666,7 @@ connection.commit()</code></pre></div></li>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> csv
 
 <span class="co"># Read the pathways from the file from module 3</span>
-f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected2.csv&#39;</span>)
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;metabolic_pathways.csv&#39;</span>)
 paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
 
 <span class="co"># For each pathway, insert its information into the database</span>
@@ -687,7 +688,7 @@ paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>
 connection.commit()</code></pre></div></li>
 <li><p>We will do the same thing for the enzymes:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Now do the same for the enzymes</span>
-f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;sequences.csv&#39;</span>)
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;all_sequences.csv&#39;</span>)
 enzymes <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>???)
 
 enzymes_inserted <span class="op">=</span> [] <span class="co"># Keep a list of the enzymes already inserted</span>
@@ -757,7 +758,7 @@ rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT ?
   <span class="kw">AND</span> enzymes.id = path_enzyme.enzyme_id</code></pre></div></li>
 <li><p>SQL allows the use of complex queries. Use this query to save the id and name of the pathways associated with at least 15 enzymes. Save this to <code>results_4.csv</code>.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> paths.id, paths.name
-<span class="kw">FROM</span> paths, path_enzymes
+<span class="kw">FROM</span> paths, path_enzyme
 <span class="kw">GROUP</span> <span class="kw">BY</span> path_id <span class="kw">HAVING</span> <span class="fu">COUNT</span>(*) &gt;= <span class="dv">15</span></code></pre></div></li>
 </ol>
 <h2 id="after-the-class-6">After the class:</h2>

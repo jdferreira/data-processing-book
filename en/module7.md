@@ -5,10 +5,11 @@
 - Query the database with complex selection criteria
 
 ## Input:
-- File: [selected2.csv](files/selected2.csv)
-    - created in module 3
-- File: [sequences.csv](files/sequences.csv)
-    - created in module 3
+- File: [metabolic_pathways.csv](files/metabolic_pathways.csv)
+    - created in module 1
+- File: [all_sequences.csv](files/all_sequences.csv)
+    - similar to `sequences.csv` from module 3 but will the sequence of all the enzymes.
+    See question 2 in the **After the class** section of that module.
 - File: [pathways.db](files/pathways.db)
     - created in module 6
 
@@ -40,7 +41,7 @@
     import csv
     
     # Read the pathways from the file from module 3
-    f = open('selected2.csv')
+    f = open('metabolic_pathways.csv')
     paths = csv.reader(f, delimiter=???)
     
     # For each pathway, insert its information into the database
@@ -65,7 +66,7 @@
 3. We will do the same thing for the enzymes:
 ```python
     # Now do the same for the enzymes
-    f = open('sequences.csv')
+    f = open('all_sequences.csv')
     enzymes = csv.reader(f, delimiter=???)
     
     enzymes_inserted = [] # Keep a list of the enzymes already inserted

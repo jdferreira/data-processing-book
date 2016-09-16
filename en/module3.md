@@ -119,4 +119,8 @@ For example, send it to you by email or upload it to Dropbox.
 
 
 ## After the class:
+
 1. Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why?
+
+2. Change your code in order to find the sequence of all the enzymes in the metabolic pathways, and not only the enzymes in the pathways selected in the previous module.
+Save the sequences into a file named `all_sequences.csv`.

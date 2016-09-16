@@ -121,3 +121,6 @@ Por exemplo, envie-os para si por email ou faça o upload para a Dropbox.
 ## Após a aula:
 
 1. Verifique que no ficheiro `sequences.csv` algumas enzimas aparecem repetidas. Tente explicar porquê.
+
+2. Altere o código de forma a encontrar a sequência de aminoácidos de todas as enzimas das vias metabólicas, e não apenas das enzimas nas vias selecionadas no módulo anterior.
+Grave as sequências num ficheiro chamado `all_sequences.csv`.

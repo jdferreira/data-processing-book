@@ -5,10 +5,11 @@
 - Consultar os dados com critérios de seleção complexos
 
 ## Input:
-- Ficheiro: [selected2.csv](files/selected2.csv)
-    - criado no módulo 3
-- Ficheiro: [sequences.csv](files/sequences.csv)
-    - criado no módulo 3
+- Ficheiro: [metabolic_pathways.csv](files/metabolic_pathways.csv)
+    - criado no módulo 1
+- Ficheiro: [all_sequences.csv](files/all_sequences.csv)
+    - semelhante ao ficheiro `sequences.csv` do módulo 3, mas com a sequências de todas as enzimas.
+    Veja a questão 2 da secção **Após a aula** do módulo 3.
 - Ficheiro: [pathways.db](files/pathways.db)
     - criado no módulo 6
 
@@ -40,7 +41,7 @@
     import csv
     
     # Le as vias selecionadas no modulo 3
-    f = open('selected2.csv')
+    f = open('metabolic_pathways.csv')
     paths = csv.reader(f, delimiter=???)
     
     # Para cada via, insere a sua informacao na base de dados
@@ -65,7 +66,7 @@
 3. Vamos fazer o mesmo com as enzimas:
 ```python
     # Agora fazemos o mesmo para as enzimas
-    f = open('sequences.csv')
+    f = open('all_sequences.csv')
     enzymes = csv.reader(f, delimiter=???)
     
     enzymes_inserted = [] # Lista com as enzimas ja inseridas
