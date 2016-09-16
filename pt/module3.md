@@ -102,7 +102,7 @@ Para tal, adicione as seguintes linhas ao _script_ Python, substituindo `???` pe
 Vamos gravar esta informação num novo ficheiro `sequences.csv`.
 Para tal, continue a adicionar códugo ao _script_ `module3.py`:
 ```python
-    f = open('sequences.csv', 'w')
+    f = open('sequences.csv', 'bw')
     w = csv.writer(f, delimiter=???)
     
     for e in enzymes:

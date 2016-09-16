@@ -67,7 +67,7 @@ for path in paths:
 connection.commit()
 
 # Let's open file `results_1.csv` in write mode
-f = open('results_1.csv', 'w')
+f = open('results_1.csv', 'bw')
 w = csv.writer(f, delimiter=???)
 
 rows = connection.execute('SELECT id, name FROM enzymes')
@@ -77,7 +77,7 @@ for row in rows:
     w.writerow(row)
 
 
-f = open('results_2.csv', 'w')
+f = open('results_2.csv', 'bw')
 w = csv.writer(f, delimiter=???)
 
 rows = connection.execute('SELECT id FROM enzymes WHERE id LIKE "Q%"')
@@ -85,7 +85,7 @@ for row in rows:
     w.writerow(row)
 
 
-f = open('results_3.csv', 'w')
+f = open('results_3.csv', 'bw')
 w = csv.writer(f, delimiter=???)
 
 rows = connection.execute(
@@ -97,7 +97,7 @@ for row in rows:
     w.writerow(row)
 
 
-f = open('results_4.csv', 'w')
+f = open('results_4.csv', 'bw')
 w = csv.writer(f, delimiter=???)
 
 rows = connection.execute(

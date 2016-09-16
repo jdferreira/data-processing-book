@@ -56,7 +56,7 @@ for path in paths:
     for e in enzymes_in_this_path:
         enzymes.append(e)
 
-f = open('sequences.csv', 'w')
+f = open('sequences.csv', 'bw')
 w = csv.writer(f, delimiter=',')
 
 for e in enzymes:

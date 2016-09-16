@@ -20,7 +20,7 @@ for enzyme in enzymes:
 
 
 # Open the file to save the output
-f = open('relevant_sequences_1.csv', 'w')
+f = open('relevant_sequences_1.csv', 'bw')
 w = csv.writer(f, delimiter=',')
 
 # Define here your regular expression
