@@ -40,7 +40,7 @@ for path in paths:
     dict_paths[path_id] = enzyme_list
 
 # Open a file to save the output
-f = open('paths_enzymes.csv', 'bw')
+f = open('paths_enzymes.csv', 'wb')
 w = csv.writer(f, delimiter=',')
 
 # For each pathway and each enzyme that it contains

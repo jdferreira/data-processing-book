@@ -66,7 +66,7 @@ Também aqui vamos usar um dicionário.
 Para tal, adicione o seguinte ao seu _script_:
 ```python
     # Abre um ficheiro para gravar o output
-    f = open('paths_enzymes.csv', 'bw')
+    f = open('paths_enzymes.csv', 'wb')
     w = csv.writer(f, delimiter=???)
     
     # Para cada via e cada enzima que ela contem

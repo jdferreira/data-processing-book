@@ -101,7 +101,7 @@ To do that, add the following lines to the Python file (replace the `???` instan
 We will save this information into a new file.
 Continue adding code to your `module3.py` file:
 ```python
-    f = open('sequences.csv', 'bw')
+    f = open('sequences.csv', 'wb')
     w = csv.writer(f, delimiter=???)
     
     for e in enzymes:

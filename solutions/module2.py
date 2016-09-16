@@ -32,7 +32,7 @@ file_to_read = open('metabolic_pathways.csv')
 paths = csv.reader(file_to_read, delimiter=',')
 
 # Open the file where we will save the selection
-file_to_write = open('selected2.csv', 'bw')
+file_to_write = open('selected2.csv', 'wb')
 w = csv.writer(file_to_write, delimiter=',')
 
 for path in paths:

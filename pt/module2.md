@@ -45,8 +45,8 @@ Vamos adicionar mais código ao ficheiro para efetivamente usarmos a função em
     paths = csv.reader(file_to_read, delimiter=???)
     
     # Abre o ficheiro para gravar as vias selecionadas
-    # O 'bw' indica ao Python que queremos gravar neste ficheiro
-    file_to_write = open('selected1.csv', 'bw')
+    # O 'wb' indica ao Python que queremos gravar neste ficheiro
+    file_to_write = open('selected1.csv', 'wb')
     w = csv.writer(file_to_write, delimiter=???)
     
     for path in paths:

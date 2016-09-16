@@ -67,7 +67,7 @@ We will also use a dictionary for this task:
 To do so, add this final piece of code to your script:
 ```python
     # Open a file to save the output
-    f = open('paths_enzymes.csv', 'bw')
+    f = open('paths_enzymes.csv', 'wb')
     w = csv.writer(f, delimiter=???)
     
     # For each pathway and each enzyme that it contains

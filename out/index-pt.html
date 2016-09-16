@@ -200,8 +200,8 @@ file_to_read <span class="op">=</span> <span class="bu">open</span>(<span class=
 paths <span class="op">=</span> csv.reader(file_to_read, delimiter<span class="op">=</span>???)
 
 <span class="co"># Abre o ficheiro para gravar as vias selecionadas</span>
-<span class="co"># O &#39;bw&#39; indica ao Python que queremos gravar neste ficheiro</span>
-file_to_write <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected1.csv&#39;</span>, <span class="st">&#39;bw&#39;</span>)
+<span class="co"># O &#39;wb&#39; indica ao Python que queremos gravar neste ficheiro</span>
+file_to_write <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;selected1.csv&#39;</span>, <span class="st">&#39;wb&#39;</span>)
 w <span class="op">=</span> csv.writer(file_to_write, delimiter<span class="op">=</span>???)
 
 <span class="cf">for</span> path <span class="op">in</span> paths:
@@ -331,7 +331,7 @@ enzymes <span class="op">=</span> []
         enzymes.append(e)</code></pre></div></li>
 </ol></li>
 <li><p>Agora que temos uma lista de enzimas, podemos usá-la juntamente com a função que criamos anteriormente para obter as suas sequências de aminoácidos. Vamos gravar esta informação num novo ficheiro <code>sequences.csv</code>. Para tal, continue a adicionar códugo ao <em>script</em> <code>module3.py</code>:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;sequences.csv&#39;</span>, <span class="st">&#39;bw&#39;</span>)
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;sequences.csv&#39;</span>, <span class="st">&#39;wb&#39;</span>)
 w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
 
 <span class="cf">for</span> e <span class="op">in</span> enzymes:
@@ -410,7 +410,7 @@ dict_paths <span class="op">=</span> {}
     dict_paths[???] <span class="op">=</span> ???</code></pre></div></li>
 <li><p>Agora que temos os dois dicionários, podemos percorrer cada via e cada enzima de cada via de forma a criar um ficheiro CSV que cruza a informação, associando a cada via as sequências de aminoácidos das suas enzimas. Para tal, adicione o seguinte ao seu <em>script</em>:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Abre um ficheiro para gravar o output</span>
-f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;paths_enzymes.csv&#39;</span>, <span class="st">&#39;bw&#39;</span>)
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;paths_enzymes.csv&#39;</span>, <span class="st">&#39;wb&#39;</span>)
 w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
 
 <span class="co"># Para cada via e cada enzima que ela contem</span>
@@ -761,7 +761,8 @@ rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT ?
 <li><p>SQL permite consultas mais complexas. Use a consulta seguinte para gravar o identificador e o nome das vias metabólicas associadas a pelo menos 15 enzimas. Grave o resultado no ficheiro <code>results_4.csv</code>.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> paths.id, paths.name
 <span class="kw">FROM</span> paths, path_enzyme
-<span class="kw">GROUP</span> <span class="kw">BY</span> path_id <span class="kw">HAVING</span> <span class="fu">COUNT</span>(*) &gt;= <span class="dv">15</span></code></pre></div></li>
+<span class="kw">WHERE</span> paths.id = path_enzyme.path_id
+<span class="kw">GROUP</span> <span class="kw">BY</span> path_id <span class="kw">HAVING</span> <span class="fu">COUNT</span>(*) &gt;= <span class="dv">300</span></code></pre></div></li>
 </ol>
 <h2 id="após-a-aula-6">Após a aula:</h2>
 <ol type="1">

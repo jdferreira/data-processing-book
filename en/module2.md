@@ -44,8 +44,8 @@ Let's add more code to the file so that we actually go through each pathway and 
     paths = csv.reader(file_to_read, delimiter=???)
     
     # Open the file to save the selection
-    # The 'bw' instructs Python that we want to write on this file
-    file_to_write = open('selected1.csv', 'bw')
+    # The 'wb' instructs Python that we want to write on this file
+    file_to_write = open('selected1.csv', 'wb')
     w = csv.writer(file_to_write, delimiter=???)
     
     for path in paths:
