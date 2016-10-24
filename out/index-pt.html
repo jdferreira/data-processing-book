@@ -8,7 +8,7 @@
     <meta name="author" content="Francisco M. Couto">
     <title>Processamento de dados de vias metabólicas usando ficheiros, serviços web e bases de dados</title>
     <style type="text/css">code{white-space: pre;}</style>
-    <link rel="stylesheet" href="pandoc.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--[if lt IE 9]>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
     <![endif]-->
@@ -35,7 +35,7 @@
 <li><a href="#module7">Módulo 7 – Inserção de dados CSV</a></li>
 </ul>
 <h1 id="introduction">Introdução</h1>
-<p>O objetivo destes exercícios é munir os alunos com a capacidade e a competência para processar dados de forma automática. O tema principal destes exercícios será o processamento de dados de via metabólica, com foco sobre as proteínas que catalisam as reações químicas das vias, também conhecido como <em>enzimas</em>. Apesar de trabalharmos com vias metabólicas durante as aulas, os métodos de processamento de dados que os alunos vão aprender nesta disciplina podem ser aplicado a muitos outros tipos de dados.</p>
+<p>O objetivo destes exercícios é munir os alunos com a capacidade e a competência para processar dados de forma automática. O tema principal destes exercícios será o processamento de dados de vias metabólicas, com foco sobre as proteínas que catalisam as reações químicas das vias, também conhecido como <em>enzimas</em>. Apesar de trabalharmos com vias metabólicas durante as aulas, os métodos de processamento de dados que os alunos vão aprender nesta disciplina podem ser aplicado a muitos outros tipos de dados.</p>
 <h2 id="dados">Dados</h2>
 <p>A figura que se segue representa os primeiros passos na glicólise, uma via metabólica que decompõe a glicose em compostos químicos mais pequenos. Esta figura inclui uma representação de cinco etapas desta via, cada uma catalisada por uma enzima diferente.</p>
 <figure>
@@ -774,24 +774,5 @@ rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT ?
 <li><p>Altere o código deste módulo de forma a que use a função <code>run_sql</code> em vez de repetir código.<br> <strong>Dica</strong>: Os passos 7 a 10 serão simplesmente a chamada à função.</p></li>
 </ol></li>
 </ol>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script>
-
-// Replace all instances of "???" inside <code> elements with the HTML code:
-// <span class="blank">?</span>
-$("code").html(function () {
-    return $(this).html().replace(/\?\?\?/g, "<span class=\"blank\">?</span>");
-});
-
-// "print" is a builtin in python3 but a keyworkd in python2.
-// Let's make sure this change happens
-$("span.bu").each(function() {
-    if ($(this).text() == "print") {
-        $(this).removeClass('bu');
-        $(this).addClass('kw');
-    }
-})
-
-</script>
 </body>
 </html>

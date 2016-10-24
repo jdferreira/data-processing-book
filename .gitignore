@@ -1,2 +1,6 @@
 solutions/*.db
 solutions/*.csv
+
+node_modules/
+
+tmp/

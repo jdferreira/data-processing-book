@@ -25,7 +25,7 @@ Este documento está protegido pela licença<br>
 # Introdução {#introduction}
 
 O objetivo destes exercícios é munir os alunos com a capacidade e a competência para processar dados de forma automática.
-O tema principal destes exercícios será o processamento de dados de via metabólica, com foco sobre as proteínas que catalisam as reações químicas das vias, também conhecido como _enzimas_.
+O tema principal destes exercícios será o processamento de dados de vias metabólicas, com foco sobre as proteínas que catalisam as reações químicas das vias, também conhecido como _enzimas_.
 Apesar de trabalharmos com vias metabólicas durante as aulas, os métodos de processamento de dados que os alunos vão aprender nesta disciplina podem ser aplicado a muitos outros tipos de dados.
 
 ## Dados

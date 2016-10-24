@@ -40,8 +40,7 @@ $if(title)$
 <h1 class="title">$title$</h1>
 $if(subtitle)$
 <h1 class="subtitle">$subtitle$</h1>
-$endif$
-$for(author)$
+$endif$$for(author)$
 <h2 class="author">$author$</h2>
 $endfor$
 $if(date)$
@@ -58,24 +57,5 @@ $body$
 $for(include-after)$
 $include-after$
 $endfor$
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script>
-
-// Replace all instances of "???" inside <code> elements with the HTML code:
-// <span class="blank">?</span>
-$$("code").html(function () {
-    return $$(this).html().replace(/\?\?\?/g, "<span class=\"blank\">?</span>");
-});
-
-// "print" is a builtin in python3 but a keyworkd in python2.
-// Let's make sure this change happens
-$$("span.bu").each(function() {
-    if ($$(this).text() == "print") {
-        $$(this).removeClass('bu');
-        $$(this).addClass('kw');
-    }
-})
-
-</script>
 </body>
 </html>
