@@ -43,50 +43,52 @@ const PANDOC_COMMAND = [
  * thus building the main site of a given localization.
  */
 function buildIndex(lang) {
-    gulp.src(lang + '/*.md')
+    return gulp.src(lang + '/*.md')
         .pipe(
             shell([ PANDOC_COMMAND ], {
                 templateData: { lang }
             })
-        );
-    
-    jsdom.env({
-        file: 'out/index-' + lang + '.html',
-        scripts: ['http://code.jquery.com/jquery.js'],
-        done(err, window) {
-            var $ = window.$;
-            
-            // Replace all instances of "???" inside <code> elements with the HTML code:
-            // <span class="blank">?</span>
-            $('code').html(function () {
-                return $(this).html().replace(/\?\?\?/g, '<span class="blank">?</span>');
-            });
+        )
+        .on('end', function() {
+            jsdom.env({
+                file: 'out/index-' + lang + '.html',
+                scripts: ['http://code.jquery.com/jquery.js'],
+                done(err, window) {
+                    var $ = window.$;
+                    
+                    // Replace all instances of '???' inside <code> elements with the
+                    // HTML code:
+                    // <span class="blank">?</span>
+                    $('code').html(function () {
+                        return $(this)
+                            .html()
+                            .replace(/\?\?\?/g, '<span class="blank">?</span>');
+                    });
 
-            // 'print' is a builtin in python3 but a keyworkd in python2.
-            // Let's make sure this change happens
-            $('span.bu').each(function() {
-                if ($(this).text() == 'print') {
-                    $(this).removeClass('bu');
-                    $(this).addClass('kw');
+                    // 'print' is a builtin in python3 but a keyworkd in python2.
+                    // Let's also make this change here
+                    $('span.bu').each(function() {
+                        if ($(this).text() == 'print') {
+                            $(this).removeClass('bu');
+                            $(this).addClass('kw');
+                        }
+                    });
+                    
+                    // Remove the extra jquery <script> element
+                    $('script.jsdom').remove();
+                    
+                    // Write the resulting file back into its output filename
+                    var newSource = $('html').html();
+                    fs.writeFile(
+                        'out/index-' + lang + '.html',
+                        newSource,
+                        function(err) {
+                            if (err) throw err;
+                        }
+                    );
                 }
             });
-            
-            $('script.jsdom').remove();
-            
-            var newSource = $('html').html();
-            
-            process.nextTick(function() {
-                fs.writeFile(
-                    'out/index-' + lang + '.html',
-                    newSource,
-                    function(err) {
-                        if (err) throw err;
-                    }
-                );
-            });
-        }
-    });
-    
+        });
 }
 
 gulp.task('build-en', function() {
