@@ -8,7 +8,7 @@
     <meta name="author" content="Francisco M. Couto">
     <title>Data processing for metabolic pathways using files, web services and databases</title>
     <style type="text/css">code{white-space: pre;}</style>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.min.css">
     <!--[if lt IE 9]>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
     <![endif]-->
@@ -772,24 +772,5 @@ rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT ?
 <li><p>Change today’s code so that it uses the function, instead of repeating code<br> <strong>Hint</strong>: The steps 6 to 9 will each simply call the function once.</p></li>
 </ol></li>
 </ol>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script>
-
-// Replace all instances of "???" inside <code> elements with the HTML code:
-// <span class="blank">?</span>
-$("code").html(function () {
-    return $(this).html().replace(/\?\?\?/g, "<span class=\"blank\">?</span>");
-});
-
-// "print" is a builtin in python3 but a keyworkd in python2.
-// Let's make sure this change happens
-$("span.bu").each(function() {
-    if ($(this).text() == "print") {
-        $(this).removeClass('bu');
-        $(this).addClass('kw');
-    }
-})
-
-</script>
 </body>
 </html>

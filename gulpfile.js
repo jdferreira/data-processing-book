@@ -33,7 +33,7 @@ const PANDOC_COMMAND = [
     '-t', 'html5',                 // format used to write the output
     '--smart',                     // smart quotes and hyphens
     '--template', 'template.html', // HTML template to use
-    '--css', 'css/main.css',       // CSS to link to from the output
+    '--css', 'css/main.min.css',   // CSS to link to from the output
     '--highlight-style', 'tango',  // highlighting syntax for code sections
 ].join(' ');
 
