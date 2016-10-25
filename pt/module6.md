@@ -39,7 +39,7 @@ Primeiro, crie um _script_ `module6.py` com o seguinte código:
     
     # Esta tabela vai conter dados das enzimas
     connection.execute('''
-        CREATE TABLE enzyme (
+        CREATE TABLE enzymes (
             id VARCHAR(255) PRIMARY KEY,
             sequence TEXT NOT NULL
         )

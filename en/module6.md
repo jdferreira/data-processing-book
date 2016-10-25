@@ -39,7 +39,7 @@ First create a new Python script `module6.py` with the following code:
     
     # This table will contain data about the enzymes
     connection.execute('''
-        CREATE TABLE enzyme (
+        CREATE TABLE enzymes (
             id VARCHAR(255) PRIMARY KEY,
             sequence TEXT NOT NULL
         )
