@@ -29,8 +29,8 @@
     
     # Erase all data from the three tables
     connection.execute('DELETE FROM path_enzyme')
-    connection.execute('DELETE FROM paths')
-    connection.execute('DELETE FROM enzymes')
+    connection.execute('DELETE FROM path')
+    connection.execute('DELETE FROM enzyme')
     
     # Save the deletions
     connection.commit()
@@ -55,7 +55,7 @@
         # Notice that we create a generic SQL command using the `?` notation
         # and give the parameters of the command as a tuple
         connection.execute('''
-            INSERT INTO paths (id, name, class)
+            INSERT INTO path (id, name, class)
             VALUES (?, ?, ?)
         ''', (path_id, path_name, path_class))
         
@@ -78,7 +78,7 @@
         # Check to see if the enzyme has been added before
         if enzyme_id not in enzymes_inserted:
             connection.execute('''
-                INSERT INTO enzymes (id, sequence)
+                INSERT INTO enzyme (id, sequence)
                 VALUES (?, ?)
             ''', (enzyme_id, enzyme_sequence))
             
@@ -141,31 +141,33 @@ Replace the code from step 5 with this:
     # For each selected pathway, save it to the file
     for row in rows:
         w.writerow(row)
+    
+    f.close()
 ```
 
 8. Let's now select all the enzymes whose id starts with Q and save them to the file `results_2.csv`.
 The code recipe is the same, changing only the file name and the query.
 You can use the following query, changing where necessary:
 ```sql
-    SELECT ??? FROM enzymes WHERE ??? LIKE "Q%"
+    SELECT ??? FROM enzyme WHERE ??? LIKE "Q%"
 ```
 
 9. Now we will cross the data in the tables.
 Duplicate and adapt the same code from the previous step, using the following command SQL to select the enzyme sequences of each pathway, and save the results to `results_3.csv`:
 ```sql
-    SELECT paths.name, enzymes.???
-    FROM paths, enzymes, path_enzyme
-    WHERE paths.id = path_enzyme.path_id
-      AND enzymes.id = path_enzyme.enzyme_id
+    SELECT path.name, enzyme.???
+    FROM path, enzyme, path_enzyme
+    WHERE path.id = path_enzyme.path_id
+      AND enzyme.id = path_enzyme.enzyme_id
 ```
 
 10. SQL allows the use of complex queries.
 Use this query to save the id and name of the pathways associated with at least 15 enzymes.
 Save this to `results_4.csv`.
 ```sql
-    SELECT paths.id, paths.name
-    FROM paths, path_enzyme
-    WHERE paths.id = path_enzyme.path_id
+    SELECT path.id, path.name
+    FROM path, path_enzyme
+    WHERE path.id = path_enzyme.path_id
     GROUP BY path_id HAVING COUNT(*) >= 300
 ```
 

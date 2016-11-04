@@ -28,6 +28,11 @@ First create a new Python script `module6.py` with the following code:
 
 2. Now that we have an empty database, let's add the tables that we need to store the metabolic pathway data.
 ```python
+    # Erase the tables in case they already exist in the database
+    connection.execute('DROP TABLE IF EXISTS path')
+    connection.execute('DROP TABLE IF EXISTS enzyme')
+    connection.execute('DROP TABLE IF EXISTS path_enzyme')
+    
     # This table will contain data about the pathways
     connection.execute('''
         CREATE TABLE path (
@@ -39,7 +44,7 @@ First create a new Python script `module6.py` with the following code:
     
     # This table will contain data about the enzymes
     connection.execute('''
-        CREATE TABLE enzymes (
+        CREATE TABLE enzyme (
             id VARCHAR(255) PRIMARY KEY,
             sequence TEXT NOT NULL
         )
@@ -91,9 +96,10 @@ If you need, consult the files from the previous modules to find the name, enzym
 ```
 
 4. Finally, let's just make sure that the tables contain some data.
-For that, we will select the sequences of each pathway.
+To do that, you can use [DB Browser for SQLite](http://sqlitebrowser.org/), which has a [portable version](https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.9.1/SQLiteDatabaseBrowserPortable_3.9.1_English.paf.exe) that can be used without installation.
+o check with Python, we can select, for example, the sequences of each pathway.
 ```python
-    rows = connection.execute('SELECT id, sequence FROM enzymes')
+    rows = connection.execute('SELECT id, sequence FROM enzyme')
     for row in rows:
         enzyme_id = row[0]
         enzyme_sequence = row[1]

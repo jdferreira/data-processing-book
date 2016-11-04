@@ -89,6 +89,8 @@ To do so, add this final piece of code to your script:
             
             # Write this row to the CSV file
             w.writerow([path_id, seq])
+    
+    f.close()
 ```
 
 5. Run the code and take notice of the file that was created (`paths_enzymes.csv`).

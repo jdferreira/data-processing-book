@@ -430,7 +430,9 @@ w <span class="op">=</span> csv.writer(f, delimiter<span class="op">=</span>???)
         seq <span class="op">=</span> dict_sequences[???]
 
         <span class="co"># Write this row to the CSV file</span>
-        w.writerow([path_id, seq])</code></pre></div></li>
+        w.writerow([path_id, seq])
+
+f.close()</code></pre></div></li>
 <li><p>Run the code and take notice of the file that was created (<code>paths_enzymes.csv</code>). Does it correspond to what you were expecting to see?</p></li>
 <li><p>Make sure you keep a copy of the <code>paths_enzymes.csv</code> file to yourself, so that you can use it in the next modules. For example, send it to you by email or upload it to Dropbox.</p></li>
 </ol>
@@ -547,7 +549,12 @@ reg_expr <span class="op">=</span> <span class="vs">r&#39;???&#39;</span>
 <span class="co"># exist, one will be created</span>
 connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&#39;pathways.db&#39;</span>)</code></pre></div></li>
 <li><p>Now that we have an empty database, let’s add the tables that we need to store the metabolic pathway data.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># This table will contain data about the pathways</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Erase the tables in case they already exist in the database</span>
+connection.execute(<span class="st">&#39;DROP TABLE IF EXISTS path&#39;</span>)
+connection.execute(<span class="st">&#39;DROP TABLE IF EXISTS enzyme&#39;</span>)
+connection.execute(<span class="st">&#39;DROP TABLE IF EXISTS path_enzyme&#39;</span>)
+
+<span class="co"># This table will contain data about the pathways</span>
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
 <span class="st">    CREATE TABLE path (</span>
 <span class="st">        id VARCHAR(255) PRIMARY KEY,</span>
@@ -558,7 +565,7 @@ connection.execute(<span class="st">&#39;&#39;&#39;</span>
 
 <span class="co"># This table will contain data about the enzymes</span>
 connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">    CREATE TABLE enzymes (</span>
+<span class="st">    CREATE TABLE enzyme (</span>
 <span class="st">        id VARCHAR(255) PRIMARY KEY,</span>
 <span class="st">        sequence TEXT NOT NULL</span>
 <span class="st">    )</span>
@@ -602,8 +609,8 @@ connection.execute(<span class="st">&#39;&#39;&#39;</span>
 
 <span class="co"># Ensure that the data is saved</span>
 connection.commit()</code></pre></div></li>
-<li><p>Finally, let’s just make sure that the tables contain some data. For that, we will select the sequences of each pathway.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT id, sequence FROM enzymes&#39;</span>)
+<li><p>Finally, let’s just make sure that the tables contain some data. To do that, you can use <a href="http://sqlitebrowser.org/">DB Browser for SQLite</a>, which has a <a href="https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.9.1/SQLiteDatabaseBrowserPortable_3.9.1_English.paf.exe">portable version</a> that can be used without installation. o check with Python, we can select, for example, the sequences of each pathway.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT id, sequence FROM enzyme&#39;</span>)
 <span class="cf">for</span> row <span class="op">in</span> rows:
     enzyme_id <span class="op">=</span> row[<span class="dv">0</span>]
     enzyme_sequence <span class="op">=</span> row[<span class="dv">1</span>]
@@ -657,8 +664,8 @@ connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<sp
 
 <span class="co"># Erase all data from the three tables</span>
 connection.execute(<span class="st">&#39;DELETE FROM path_enzyme&#39;</span>)
-connection.execute(<span class="st">&#39;DELETE FROM paths&#39;</span>)
-connection.execute(<span class="st">&#39;DELETE FROM enzymes&#39;</span>)
+connection.execute(<span class="st">&#39;DELETE FROM path&#39;</span>)
+connection.execute(<span class="st">&#39;DELETE FROM enzyme&#39;</span>)
 
 <span class="co"># Save the deletions</span>
 connection.commit()</code></pre></div></li>
@@ -680,7 +687,7 @@ paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>
     <span class="co"># Notice that we create a generic SQL command using the `?` notation</span>
     <span class="co"># and give the parameters of the command as a tuple</span>
     connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">        INSERT INTO paths (id, name, class)</span>
+<span class="st">        INSERT INTO path (id, name, class)</span>
 <span class="st">        VALUES (?, ?, ?)</span>
 <span class="st">    &#39;&#39;&#39;</span>, (path_id, path_name, path_class))
 
@@ -700,7 +707,7 @@ enzymes_inserted <span class="op">=</span> [] <span class="co"># Keep a list of 
     <span class="co"># Check to see if the enzyme has been added before</span>
     <span class="cf">if</span> enzyme_id <span class="op">not</span> <span class="op">in</span> enzymes_inserted:
         connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">            INSERT INTO enzymes (id, sequence)</span>
+<span class="st">            INSERT INTO enzyme (id, sequence)</span>
 <span class="st">            VALUES (?, ?)</span>
 <span class="st">        &#39;&#39;&#39;</span>, (enzyme_id, enzyme_sequence))
 
@@ -748,18 +755,20 @@ rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT ?
 
 <span class="co"># For each selected pathway, save it to the file</span>
 <span class="cf">for</span> row <span class="op">in</span> rows:
-    w.writerow(row)</code></pre></div></li>
+    w.writerow(row)
+
+f.close()</code></pre></div></li>
 <li><p>Let’s now select all the enzymes whose id starts with Q and save them to the file <code>results_2.csv</code>. The code recipe is the same, changing only the file name and the query. You can use the following query, changing where necessary:</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> ??? <span class="kw">FROM</span> enzymes <span class="kw">WHERE</span> ??? <span class="kw">LIKE</span> <span class="ot">&quot;Q%&quot;</span></code></pre></div></li>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> ??? <span class="kw">FROM</span> enzyme <span class="kw">WHERE</span> ??? <span class="kw">LIKE</span> <span class="ot">&quot;Q%&quot;</span></code></pre></div></li>
 <li><p>Now we will cross the data in the tables. Duplicate and adapt the same code from the previous step, using the following command SQL to select the enzyme sequences of each pathway, and save the results to <code>results_3.csv</code>:</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> paths.name, enzymes.???
-<span class="kw">FROM</span> paths, enzymes, path_enzyme
-<span class="kw">WHERE</span> paths.id = path_enzyme.path_id
-  <span class="kw">AND</span> enzymes.id = path_enzyme.enzyme_id</code></pre></div></li>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.name, enzyme.???
+<span class="kw">FROM</span> path, enzyme, path_enzyme
+<span class="kw">WHERE</span> path.id = path_enzyme.path_id
+  <span class="kw">AND</span> enzyme.id = path_enzyme.enzyme_id</code></pre></div></li>
 <li><p>SQL allows the use of complex queries. Use this query to save the id and name of the pathways associated with at least 15 enzymes. Save this to <code>results_4.csv</code>.</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> paths.id, paths.name
-<span class="kw">FROM</span> paths, path_enzyme
-<span class="kw">WHERE</span> paths.id = path_enzyme.path_id
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.id, path.name
+<span class="kw">FROM</span> path, path_enzyme
+<span class="kw">WHERE</span> path.id = path_enzyme.path_id
 <span class="kw">GROUP</span> <span class="kw">BY</span> path_id <span class="kw">HAVING</span> <span class="fu">COUNT</span>(*) &gt;= <span class="dv">300</span></code></pre></div></li>
 </ol>
 <h2 id="after-the-class-6">After the class:</h2>

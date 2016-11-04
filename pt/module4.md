@@ -89,6 +89,8 @@ Para tal, adicione o seguinte ao seu _script_:
             
             # Escreve esta informacao no ficheiro CSV
             w.writerow([path_id, seq])
+    
+    f.close()
 ```
 
 5. Corra o código e estude o conteúdo do ficheiro que foi criado (`paths_enzymes.csv`).

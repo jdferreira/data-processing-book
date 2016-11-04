@@ -29,8 +29,8 @@
     
     # Remove todos os dados inseridos nas tabelas
     connection.execute('DELETE FROM path_enzyme')
-    connection.execute('DELETE FROM paths')
-    connection.execute('DELETE FROM enzymes')
+    connection.execute('DELETE FROM path')
+    connection.execute('DELETE FROM enzyme')
     
     # Grava a base de dados
     connection.commit()
@@ -55,7 +55,7 @@
         # Note que usamos um comando generico usando a notacao `?`
         # e fornecemos os parametros atraves de um tuplo
         connection.execute('''
-            INSERT INTO paths (id, name, class)
+            INSERT INTO path (id, name, class)
             VALUES (?, ?, ?)
         ''', (path_id, path_name, path_class))
     
@@ -78,7 +78,7 @@
         # Determina se a enzima ja foi inserida anteriormente
         if enzyme_id not in enzymes_inserted:
             connection.execute('''
-                INSERT INTO enzymes (id, sequence)
+                INSERT INTO enzyme (id, sequence)
                 VALUES (?, ?)
             ''', (enzyme_id, enzyme_sequence))
             
@@ -142,31 +142,33 @@ Substitua o código do passo 5 por isto:
     # Escreve a informacao de cada via no ficheiro CSV
     for row in rows:
         w.writerow(row)
+    
+    f.close()
 ```
 
 8. Selecione agora as enzimas cujo identificar começa com Q e grave-as no ficheiro `results_2.csv`.
 A receita é a mesma, apenas mudando o nome do ficheiro e o comando de consulta.
 Pode usar a seguinte consulta, substituindo onde for apropriado:
 ```sql
-    SELECT ??? FROM enzymes WHERE ??? LIKE "Q%"
+    SELECT ??? FROM enzyme WHERE ??? LIKE "Q%"
 ```
 
 9. Agora vamos cruzar informação de várias tabelas.
 Duplique e adapte o código do passo anterior, usando o seguinte comando SQL para selecionar as sequências das enzimas de cada via metabólica, e grave o resultado no ficheiro `results_3.csv`:
 ```sql
-    SELECT paths.name, enzymes.???
-    FROM paths, enzymes, path_enzyme
-    WHERE paths.id = path_enzyme.path_id
-      AND enzymes.id = path_enzyme.enzyme_id
+    SELECT path.name, enzyme.???
+    FROM path, enzyme, path_enzyme
+    WHERE path.id = path_enzyme.path_id
+      AND enzyme.id = path_enzyme.enzyme_id
 ```
 
 10. SQL permite consultas mais complexas.
 Use a consulta seguinte para gravar o identificador e o nome das vias metabólicas associadas a pelo menos 15 enzimas.
 Grave o resultado no ficheiro `results_4.csv`.
 ```sql
-    SELECT paths.id, paths.name
-    FROM paths, path_enzyme
-    WHERE paths.id = path_enzyme.path_id
+    SELECT path.id, path.name
+    FROM path, path_enzyme
+    WHERE path.id = path_enzyme.path_id
     GROUP BY path_id HAVING COUNT(*) >= 300
 ```
 

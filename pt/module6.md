@@ -28,6 +28,11 @@ Primeiro, crie um _script_ `module6.py` com o seguinte código:
 
 2. Agora que temos uma base de dados vazia, vamos adicionar as tabelas necessárias para guardar os dados de vias metabólicas.
 ```python
+    # Apaga as tabelas caso ja existam na base de dados
+    connection.execute('DROP TABLE IF EXISTS path')
+    connection.execute('DROP TABLE IF EXISTS enzyme')
+    connection.execute('DROP TABLE IF EXISTS path_enzyme')
+    
     # Esta tabela vai conter dados de vias metabolicas
     connection.execute('''
         CREATE TABLE path (
@@ -39,7 +44,7 @@ Primeiro, crie um _script_ `module6.py` com o seguinte código:
     
     # Esta tabela vai conter dados das enzimas
     connection.execute('''
-        CREATE TABLE enzymes (
+        CREATE TABLE enzyme (
             id VARCHAR(255) PRIMARY KEY,
             sequence TEXT NOT NULL
         )
@@ -91,9 +96,10 @@ Se necessário, consulte os ficheiros criados nos módulos anteriores para encon
 ```
 
 4. Por fim, vamos assegurar-nos que as tabelas contêm os dados que lá colocámos.
-Para tal, como exemplo, vamos selecionar as enzimas de cada via.
+Para isso pode usar o [DB Browser for SQLite](http://sqlitebrowser.org/), cuja versão ["portable"](https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.9.1/SQLiteDatabaseBrowserPortable_3.9.1_English.paf.exe) pode ser usada sem necessitar de instalação.
+Para verificar pelo python, podemos selecionar por exemplo as enzimas de cada via.
 ```python
-    rows = connection.execute('SELECT id, sequence FROM enzymes')
+    rows = connection.execute('SELECT id, sequence FROM enzyme')
     for row in rows:
         enzyme_id = row[0]
         enzyme_sequence = row[1]
