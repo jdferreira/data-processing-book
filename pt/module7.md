@@ -167,7 +167,7 @@ Duplique e adapte o código do passo anterior, usando o seguinte comando SQL par
 ```
 
 10. SQL permite consultas mais complexas.
-Use a consulta seguinte para gravar o identificador e o nome das vias metabólicas associadas a pelo menos 15 enzimas.
+Use a consulta seguinte para gravar o identificador e o nome das vias metabólicas associadas a pelo menos 300 enzimas.
 Grave o resultado no ficheiro `results_4.csv`.
 ```sql
     SELECT path.id, path.name

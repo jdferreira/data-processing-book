@@ -166,7 +166,7 @@ Duplicate and adapt the same code from the previous step, using the following co
 ```
 
 10. SQL allows the use of complex queries.
-Use this query to save the id and name of the pathways associated with at least 15 enzymes.
+Use this query to save the id and name of the pathways associated with at least 300 enzymes.
 Save this to `results_4.csv`.
 ```sql
     SELECT path.id, path.name
