@@ -124,8 +124,12 @@
 
 6. Check that the output is
 ```text
-    Path hsa00730 is named "Thiamine metabolism"
-    Path hsa04122 is named "Sulfur relay system"
+    Path hsa00010 is named "Glycolysis / Gluconeogenesis"
+    Path hsa00020 is named "Citrate cycle (TCA cycle)"
+    Path hsa00030 is named "Pentose phosphate pathway"
+    Path hsa00040 is named "Pentose and glucuronate interconversions"
+    Path hsa00051 is named "Fructose and mannose metabolism"
+    ...
 ```
 
 7. The code above prints the results to the screen.

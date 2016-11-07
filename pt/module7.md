@@ -111,7 +111,7 @@
     connection.commit()
 ```
 
-5. Com um comando SQL, consulte os dados das vias metabólicas e imprima o identificar e o nome no terminal:
+5. Com um comando SQL, consulte os dados das vias metabólicas e imprima o identificador e o nome no terminal:
 ```python
     rows = connection.execute('SELECT ??? FROM ???')
     
@@ -125,8 +125,12 @@
 
 6. Verifique que o output é
 ```text
-    Path hsa00730 is named "Thiamine metabolism"
-    Path hsa04122 is named "Sulfur relay system"
+    Path hsa00010 is named "Glycolysis / Gluconeogenesis"
+    Path hsa00020 is named "Citrate cycle (TCA cycle)"
+    Path hsa00030 is named "Pentose phosphate pathway"
+    Path hsa00040 is named "Pentose and glucuronate interconversions"
+    Path hsa00051 is named "Fructose and mannose metabolism"
+    ...
 ```
 
 7. O código anterior imprime a informação no terminal.
@@ -146,7 +150,7 @@ Substitua o código do passo 5 por isto:
     f.close()
 ```
 
-8. Selecione agora as enzimas cujo identificar começa com Q e grave-as no ficheiro `results_2.csv`.
+8. Selecione agora as enzimas cujo identificador começa com Q e grave-as no ficheiro `results_2.csv`.
 A receita é a mesma, apenas mudando o nome do ficheiro e o comando de consulta.
 Pode usar a seguinte consulta, substituindo onde for apropriado:
 ```sql
