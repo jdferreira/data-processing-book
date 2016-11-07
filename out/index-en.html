@@ -769,7 +769,7 @@ f.close()</code></pre></div></li>
 <span class="kw">FROM</span> path, enzyme, path_enzyme
 <span class="kw">WHERE</span> path.id = path_enzyme.path_id
   <span class="kw">AND</span> enzyme.id = path_enzyme.enzyme_id</code></pre></div></li>
-<li><p>SQL allows the use of complex queries. Use this query to save the id and name of the pathways associated with at least 15 enzymes. Save this to <code>results_4.csv</code>.</p>
+<li><p>SQL allows the use of complex queries. Use this query to save the id and name of the pathways associated with at least 300 enzymes. Save this to <code>results_4.csv</code>.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.id, path.name
 <span class="kw">FROM</span> path, path_enzyme
 <span class="kw">WHERE</span> path.id = path_enzyme.path_id

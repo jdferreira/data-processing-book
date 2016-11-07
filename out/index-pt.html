@@ -771,7 +771,7 @@ f.close()</code></pre></div></li>
 <span class="kw">FROM</span> path, enzyme, path_enzyme
 <span class="kw">WHERE</span> path.id = path_enzyme.path_id
   <span class="kw">AND</span> enzyme.id = path_enzyme.enzyme_id</code></pre></div></li>
-<li><p>SQL permite consultas mais complexas. Use a consulta seguinte para gravar o identificador e o nome das vias metabólicas associadas a pelo menos 15 enzimas. Grave o resultado no ficheiro <code>results_4.csv</code>.</p>
+<li><p>SQL permite consultas mais complexas. Use a consulta seguinte para gravar o identificador e o nome das vias metabólicas associadas a pelo menos 300 enzimas. Grave o resultado no ficheiro <code>results_4.csv</code>.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.id, path.name
 <span class="kw">FROM</span> path, path_enzyme
 <span class="kw">WHERE</span> path.id = path_enzyme.path_id
