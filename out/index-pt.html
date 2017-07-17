@@ -548,18 +548,13 @@ reg_expr <span class="op">=</span> <span class="vs">r'<span class="blank">?</spa
 <span class="co"># com ela. Se o ficheiro nao existir, vai ser criado vazio.</span>
 connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">'pathways.db'</span>)</code></pre></div></li>
 <li><p>Agora que temos uma base de dados vazia, vamos adicionar as tabelas necessárias para guardar os dados de vias metabólicas.</p>
-<<<<<<< HEAD
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Apaga as tabelas caso ja existam na base de dados</span>
-connection.execute(<span class="st">&#39;DROP TABLE IF EXISTS path&#39;</span>)
-connection.execute(<span class="st">&#39;DROP TABLE IF EXISTS enzyme&#39;</span>)
-connection.execute(<span class="st">&#39;DROP TABLE IF EXISTS path_enzyme&#39;</span>)
+connection.execute(<span class="st">'DROP TABLE IF EXISTS path'</span>)
+connection.execute(<span class="st">'DROP TABLE IF EXISTS enzyme'</span>)
+connection.execute(<span class="st">'DROP TABLE IF EXISTS path_enzyme'</span>)
 
 <span class="co"># Esta tabela vai conter dados de vias metabolicas</span>
-connection.execute(<span class="st">&#39;&#39;&#39;</span>
-=======
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Esta tabela vai conter dados de vias metabolicas</span>
 connection.execute(<span class="st">'''</span>
->>>>>>> correct-development
 <span class="st">    CREATE TABLE path (</span>
 <span class="st">        id VARCHAR(255) PRIMARY KEY,</span>
 <span class="st">        name VARCHAR(255) NOT NULL,</span>
@@ -613,13 +608,8 @@ connection.execute(<span class="st">'''</span>
 
 <span class="co"># Grava a base de dados</span>
 connection.commit()</code></pre></div></li>
-<<<<<<< HEAD
 <li><p>Por fim, vamos assegurar-nos que as tabelas contêm os dados que lá colocámos. Para isso pode usar o <a href="http://sqlitebrowser.org/">DB Browser for SQLite</a>, cuja versão <a href="https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.9.1/SQLiteDatabaseBrowserPortable_3.9.1_English.paf.exe">“portable”</a> pode ser usada sem necessitar de instalação. Para verificar pelo python, podemos selecionar por exemplo as enzimas de cada via.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT id, sequence FROM enzyme&#39;</span>)
-=======
-<li><p>Por fim, vamos assegurar-nos que as tabelas contêm os dados que lá colocámos. Para tal, como exemplo, vamos selecionar as enzimas de cada via.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">'SELECT id, sequence FROM enzymes'</span>)
->>>>>>> correct-development
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">'SELECT id, sequence FROM enzyme'</span>)
 <span class="cf">for</span> row <span class="op">in</span> rows:
     enzyme_id <span class="op">=</span> row[<span class="dv">0</span>]
     enzyme_sequence <span class="op">=</span> row[<span class="dv">1</span>]
@@ -672,15 +662,9 @@ Q9Y697 starts with MLLRA</code></pre></li>
 connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">'pathways.db'</span>)
 
 <span class="co"># Remove todos os dados inseridos nas tabelas</span>
-<<<<<<< HEAD
-connection.execute(<span class="st">&#39;DELETE FROM path_enzyme&#39;</span>)
-connection.execute(<span class="st">&#39;DELETE FROM path&#39;</span>)
-connection.execute(<span class="st">&#39;DELETE FROM enzyme&#39;</span>)
-=======
 connection.execute(<span class="st">'DELETE FROM path_enzyme'</span>)
-connection.execute(<span class="st">'DELETE FROM paths'</span>)
-connection.execute(<span class="st">'DELETE FROM enzymes'</span>)
->>>>>>> correct-development
+connection.execute(<span class="st">'DELETE FROM path'</span>)
+connection.execute(<span class="st">'DELETE FROM enzyme'</span>)
 
 <span class="co"># Grava a base de dados</span>
 connection.commit()</code></pre></div></li>
@@ -701,13 +685,8 @@ paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>
     <span class="co"># Insere a informacao na base de dados</span>
     <span class="co"># Note que usamos um comando generico usando a notacao `?`</span>
     <span class="co"># e fornecemos os parametros atraves de um tuplo</span>
-<<<<<<< HEAD
-    connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">        INSERT INTO path (id, name, class)</span>
-=======
     connection.execute(<span class="st">'''</span>
-<span class="st">        INSERT INTO paths (id, name, class)</span>
->>>>>>> correct-development
+<span class="st">        INSERT INTO path (id, name, class)</span>
 <span class="st">        VALUES (?, ?, ?)</span>
 <span class="st">    '''</span>, (path_id, path_name, path_class))
 
@@ -726,13 +705,8 @@ enzymes_inserted <span class="op">=</span> [] <span class="co"># Lista com as en
 
     <span class="co"># Determina se a enzima ja foi inserida anteriormente</span>
     <span class="cf">if</span> enzyme_id <span class="op">not</span> <span class="op">in</span> enzymes_inserted:
-<<<<<<< HEAD
-        connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">            INSERT INTO enzyme (id, sequence)</span>
-=======
         connection.execute(<span class="st">'''</span>
-<span class="st">            INSERT INTO enzymes (id, sequence)</span>
->>>>>>> correct-development
+<span class="st">            INSERT INTO enzyme (id, sequence)</span>
 <span class="st">            VALUES (?, ?)</span>
 <span class="st">        '''</span>, (enzyme_id, enzyme_sequence))
 
@@ -760,13 +734,8 @@ paths <span class="op">=</span>  csv.reader(f, delimiter<span class="op">=</span
 <span class="st">        '''</span>, (path_id, enzyme_id))
 
 connection.commit()</code></pre></div></li>
-<<<<<<< HEAD
 <li><p>Com um comando SQL, consulte os dados das vias metabólicas e imprima o identificador e o nome no terminal:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT ??? FROM ???&#39;</span>)
-=======
-<li><p>Com um comando SQL, consulte os dados das vias metabólicas e imprima o identificar e o nome no terminal:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">'SELECT <span class="blank">?</span> FROM <span class="blank">?</span>'</span>)
->>>>>>> correct-development
 
 <span class="co"># Para cada via, imprime o identificador e o nome</span>
 <span class="cf">for</span> row <span class="op">in</span> rows:
@@ -775,17 +744,12 @@ connection.commit()</code></pre></div></li>
 
     <span class="kw">print</span> <span class="st">'Path '</span> <span class="op">+</span> path_id <span class="op">+</span> <span class="st">' is named "'</span> <span class="op">+</span> path_name <span class="op">+</span> <span class="st">'"'</span></code></pre></div></li>
 <li><p>Verifique que o output é</p>
-<<<<<<< HEAD
-<pre class="text"><code>Path hsa00010 is named &quot;Glycolysis / Gluconeogenesis&quot;
-Path hsa00020 is named &quot;Citrate cycle (TCA cycle)&quot;
-Path hsa00030 is named &quot;Pentose phosphate pathway&quot;
-Path hsa00040 is named &quot;Pentose and glucuronate interconversions&quot;
-Path hsa00051 is named &quot;Fructose and mannose metabolism&quot;
+<pre class="text"><code>Path hsa00010 is named "Glycolysis / Gluconeogenesis"
+Path hsa00020 is named "Citrate cycle (TCA cycle)"
+Path hsa00030 is named "Pentose phosphate pathway"
+Path hsa00040 is named "Pentose and glucuronate interconversions"
+Path hsa00051 is named "Fructose and mannose metabolism"
 ...</code></pre></li>
-=======
-<pre class="text"><code>Path hsa00730 is named "Thiamine metabolism"
-Path hsa04122 is named "Sulfur relay system"</code></pre></li>
->>>>>>> correct-development
 <li><p>O código anterior imprime a informação no terminal. Agora queremos gravar essa mesma informação no ficheiro CSV <code>results_1.csv</code>. Substitua o código do passo 5 por isto:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Abre o ficheiro `results_1.csv` em modo de escrita (write mode)</span>
 f <span class="op">=</span> <span class="bu">open</span>(<span class="blank">?</span>, <span class="blank">?</span>)
@@ -795,14 +759,13 @@ rows <span class="op">=</span> connection.execute(<span class="st">'SELECT <span
 
 <span class="co"># Escreve a informacao de cada via no ficheiro CSV</span>
 <span class="cf">for</span> row <span class="op">in</span> rows:
-<<<<<<< HEAD
     w.writerow(row)
 
 f.close()</code></pre></div></li>
 <li><p>Selecione agora as enzimas cujo identificador começa com Q e grave-as no ficheiro <code>results_2.csv</code>. A receita é a mesma, apenas mudando o nome do ficheiro e o comando de consulta. Pode usar a seguinte consulta, substituindo onde for apropriado:</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> ??? <span class="kw">FROM</span> enzyme <span class="kw">WHERE</span> ??? <span class="kw">LIKE</span> <span class="ot">&quot;Q%&quot;</span></code></pre></div></li>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="blank">?</span> <span class="kw">FROM</span> enzyme <span class="kw">WHERE</span> <span class="blank">?</span> <span class="kw">LIKE</span> <span class="ot">"Q%"</span></code></pre></div></li>
 <li><p>Agora vamos cruzar informação de várias tabelas. Duplique e adapte o código do passo anterior, usando o seguinte comando SQL para selecionar as sequências das enzimas de cada via metabólica, e grave o resultado no ficheiro <code>results_3.csv</code>:</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.name, enzyme.???
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.name, enzyme.<span class="blank">?</span>
 <span class="kw">FROM</span> path, enzyme, path_enzyme
 <span class="kw">WHERE</span> path.id = path_enzyme.path_id
   <span class="kw">AND</span> enzyme.id = path_enzyme.enzyme_id</code></pre></div></li>
@@ -810,20 +773,6 @@ f.close()</code></pre></div></li>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.id, path.name
 <span class="kw">FROM</span> path, path_enzyme
 <span class="kw">WHERE</span> path.id = path_enzyme.path_id
-=======
-    w.writerow(row)</code></pre></div></li>
-<li><p>Selecione agora as enzimas cujo identificar começa com Q e grave-as no ficheiro <code>results_2.csv</code>. A receita é a mesma, apenas mudando o nome do ficheiro e o comando de consulta. Pode usar a seguinte consulta, substituindo onde for apropriado:</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="blank">?</span> <span class="kw">FROM</span> enzymes <span class="kw">WHERE</span> <span class="blank">?</span> <span class="kw">LIKE</span> <span class="ot">"Q%"</span></code></pre></div></li>
-<li><p>Agora vamos cruzar informação de várias tabelas. Duplique e adapte o código do passo anterior, usando o seguinte comando SQL para selecionar as sequências das enzimas de cada via metabólica, e grave o resultado no ficheiro <code>results_3.csv</code>:</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> paths.name, enzymes.<span class="blank">?</span>
-<span class="kw">FROM</span> paths, enzymes, path_enzyme
-<span class="kw">WHERE</span> paths.id = path_enzyme.path_id
-  <span class="kw">AND</span> enzymes.id = path_enzyme.enzyme_id</code></pre></div></li>
-<li><p>SQL permite consultas mais complexas. Use a consulta seguinte para gravar o identificador e o nome das vias metabólicas associadas a pelo menos 15 enzimas. Grave o resultado no ficheiro <code>results_4.csv</code>.</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> paths.id, paths.name
-<span class="kw">FROM</span> paths, path_enzyme
-<span class="kw">WHERE</span> paths.id = path_enzyme.path_id
->>>>>>> correct-development
 <span class="kw">GROUP</span> <span class="kw">BY</span> path_id <span class="kw">HAVING</span> <span class="fu">COUNT</span>(*) &gt;= <span class="dv">300</span></code></pre></div></li>
 </ol>
 <h2 id="após-a-aula-6">Após a aula:</h2>

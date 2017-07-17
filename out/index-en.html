@@ -547,18 +547,13 @@ reg_expr <span class="op">=</span> <span class="vs">r'<span class="blank">?</spa
 <span class="co"># exist, one will be created</span>
 connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">'pathways.db'</span>)</code></pre></div></li>
 <li><p>Now that we have an empty database, let’s add the tables that we need to store the metabolic pathway data.</p>
-<<<<<<< HEAD
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Erase the tables in case they already exist in the database</span>
-connection.execute(<span class="st">&#39;DROP TABLE IF EXISTS path&#39;</span>)
-connection.execute(<span class="st">&#39;DROP TABLE IF EXISTS enzyme&#39;</span>)
-connection.execute(<span class="st">&#39;DROP TABLE IF EXISTS path_enzyme&#39;</span>)
+connection.execute(<span class="st">'DROP TABLE IF EXISTS path'</span>)
+connection.execute(<span class="st">'DROP TABLE IF EXISTS enzyme'</span>)
+connection.execute(<span class="st">'DROP TABLE IF EXISTS path_enzyme'</span>)
 
 <span class="co"># This table will contain data about the pathways</span>
-connection.execute(<span class="st">&#39;&#39;&#39;</span>
-=======
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># This table will contain data about the pathways</span>
 connection.execute(<span class="st">'''</span>
->>>>>>> correct-development
 <span class="st">    CREATE TABLE path (</span>
 <span class="st">        id VARCHAR(255) PRIMARY KEY,</span>
 <span class="st">        name VARCHAR(255) NOT NULL,</span>
@@ -612,13 +607,8 @@ connection.execute(<span class="st">'''</span>
 
 <span class="co"># Ensure that the data is saved</span>
 connection.commit()</code></pre></div></li>
-<<<<<<< HEAD
 <li><p>Finally, let’s just make sure that the tables contain some data. To do that, you can use <a href="http://sqlitebrowser.org/">DB Browser for SQLite</a>, which has a <a href="https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.9.1/SQLiteDatabaseBrowserPortable_3.9.1_English.paf.exe">portable version</a> that can be used without installation. o check with Python, we can select, for example, the sequences of each pathway.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">&#39;SELECT id, sequence FROM enzyme&#39;</span>)
-=======
-<li><p>Finally, let’s just make sure that the tables contain some data. For that, we will select the sequences of each pathway.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">'SELECT id, sequence FROM enzymes'</span>)
->>>>>>> correct-development
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">rows <span class="op">=</span> connection.execute(<span class="st">'SELECT id, sequence FROM enzyme'</span>)
 <span class="cf">for</span> row <span class="op">in</span> rows:
     enzyme_id <span class="op">=</span> row[<span class="dv">0</span>]
     enzyme_sequence <span class="op">=</span> row[<span class="dv">1</span>]
@@ -671,15 +661,9 @@ Q9Y697 starts with MLLRA</code></pre></li>
 connection <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">'pathways.db'</span>)
 
 <span class="co"># Erase all data from the three tables</span>
-<<<<<<< HEAD
-connection.execute(<span class="st">&#39;DELETE FROM path_enzyme&#39;</span>)
-connection.execute(<span class="st">&#39;DELETE FROM path&#39;</span>)
-connection.execute(<span class="st">&#39;DELETE FROM enzyme&#39;</span>)
-=======
 connection.execute(<span class="st">'DELETE FROM path_enzyme'</span>)
-connection.execute(<span class="st">'DELETE FROM paths'</span>)
-connection.execute(<span class="st">'DELETE FROM enzymes'</span>)
->>>>>>> correct-development
+connection.execute(<span class="st">'DELETE FROM path'</span>)
+connection.execute(<span class="st">'DELETE FROM enzyme'</span>)
 
 <span class="co"># Save the deletions</span>
 connection.commit()</code></pre></div></li>
@@ -700,13 +684,8 @@ paths <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span>
     <span class="co"># Insert into the database</span>
     <span class="co"># Notice that we create a generic SQL command using the `?` notation</span>
     <span class="co"># and give the parameters of the command as a tuple</span>
-<<<<<<< HEAD
-    connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">        INSERT INTO path (id, name, class)</span>
-=======
     connection.execute(<span class="st">'''</span>
-<span class="st">        INSERT INTO paths (id, name, class)</span>
->>>>>>> correct-development
+<span class="st">        INSERT INTO path (id, name, class)</span>
 <span class="st">        VALUES (?, ?, ?)</span>
 <span class="st">    '''</span>, (path_id, path_name, path_class))
 
@@ -725,13 +704,8 @@ enzymes_inserted <span class="op">=</span> [] <span class="co"># Keep a list of 
 
     <span class="co"># Check to see if the enzyme has been added before</span>
     <span class="cf">if</span> enzyme_id <span class="op">not</span> <span class="op">in</span> enzymes_inserted:
-<<<<<<< HEAD
-        connection.execute(<span class="st">&#39;&#39;&#39;</span>
-<span class="st">            INSERT INTO enzyme (id, sequence)</span>
-=======
         connection.execute(<span class="st">'''</span>
-<span class="st">            INSERT INTO enzymes (id, sequence)</span>
->>>>>>> correct-development
+<span class="st">            INSERT INTO enzyme (id, sequence)</span>
 <span class="st">            VALUES (?, ?)</span>
 <span class="st">        '''</span>, (enzyme_id, enzyme_sequence))
 
@@ -768,17 +742,12 @@ connection.commit()</code></pre></div></li>
 
     <span class="kw">print</span> <span class="st">'Path '</span> <span class="op">+</span> path_id <span class="op">+</span> <span class="st">' is named "'</span> <span class="op">+</span> path_name <span class="op">+</span> <span class="st">'"'</span></code></pre></div></li>
 <li><p>Check that the output is</p>
-<<<<<<< HEAD
-<pre class="text"><code>Path hsa00010 is named &quot;Glycolysis / Gluconeogenesis&quot;
-Path hsa00020 is named &quot;Citrate cycle (TCA cycle)&quot;
-Path hsa00030 is named &quot;Pentose phosphate pathway&quot;
-Path hsa00040 is named &quot;Pentose and glucuronate interconversions&quot;
-Path hsa00051 is named &quot;Fructose and mannose metabolism&quot;
+<pre class="text"><code>Path hsa00010 is named "Glycolysis / Gluconeogenesis"
+Path hsa00020 is named "Citrate cycle (TCA cycle)"
+Path hsa00030 is named "Pentose phosphate pathway"
+Path hsa00040 is named "Pentose and glucuronate interconversions"
+Path hsa00051 is named "Fructose and mannose metabolism"
 ...</code></pre></li>
-=======
-<pre class="text"><code>Path hsa00730 is named "Thiamine metabolism"
-Path hsa04122 is named "Sulfur relay system"</code></pre></li>
->>>>>>> correct-development
 <li><p>The code above prints the results to the screen. Now we want to save them into the CSV file <code>results_1.csv</code>. Replace the code from step 5 with this:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Let's open file `results_1.csv` in write mode</span>
 f <span class="op">=</span> <span class="bu">open</span>(<span class="blank">?</span>, <span class="blank">?</span>)
@@ -792,10 +761,9 @@ rows <span class="op">=</span> connection.execute(<span class="st">'SELECT <span
 
 f.close()</code></pre></div></li>
 <li><p>Let’s now select all the enzymes whose id starts with Q and save them to the file <code>results_2.csv</code>. The code recipe is the same, changing only the file name and the query. You can use the following query, changing where necessary:</p>
-<<<<<<< HEAD
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> ??? <span class="kw">FROM</span> enzyme <span class="kw">WHERE</span> ??? <span class="kw">LIKE</span> <span class="ot">&quot;Q%&quot;</span></code></pre></div></li>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="blank">?</span> <span class="kw">FROM</span> enzyme <span class="kw">WHERE</span> <span class="blank">?</span> <span class="kw">LIKE</span> <span class="ot">"Q%"</span></code></pre></div></li>
 <li><p>Now we will cross the data in the tables. Duplicate and adapt the same code from the previous step, using the following command SQL to select the enzyme sequences of each pathway, and save the results to <code>results_3.csv</code>:</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.name, enzyme.???
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.name, enzyme.<span class="blank">?</span>
 <span class="kw">FROM</span> path, enzyme, path_enzyme
 <span class="kw">WHERE</span> path.id = path_enzyme.path_id
   <span class="kw">AND</span> enzyme.id = path_enzyme.enzyme_id</code></pre></div></li>
@@ -803,18 +771,6 @@ f.close()</code></pre></div></li>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> path.id, path.name
 <span class="kw">FROM</span> path, path_enzyme
 <span class="kw">WHERE</span> path.id = path_enzyme.path_id
-=======
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="blank">?</span> <span class="kw">FROM</span> enzymes <span class="kw">WHERE</span> <span class="blank">?</span> <span class="kw">LIKE</span> <span class="ot">"Q%"</span></code></pre></div></li>
-<li><p>Now we will cross the data in the tables. Duplicate and adapt the same code from the previous step, using the following command SQL to select the enzyme sequences of each pathway, and save the results to <code>results_3.csv</code>:</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> paths.name, enzymes.<span class="blank">?</span>
-<span class="kw">FROM</span> paths, enzymes, path_enzyme
-<span class="kw">WHERE</span> paths.id = path_enzyme.path_id
-  <span class="kw">AND</span> enzymes.id = path_enzyme.enzyme_id</code></pre></div></li>
-<li><p>SQL allows the use of complex queries. Use this query to save the id and name of the pathways associated with at least 15 enzymes. Save this to <code>results_4.csv</code>.</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> paths.id, paths.name
-<span class="kw">FROM</span> paths, path_enzyme
-<span class="kw">WHERE</span> paths.id = path_enzyme.path_id
->>>>>>> correct-development
 <span class="kw">GROUP</span> <span class="kw">BY</span> path_id <span class="kw">HAVING</span> <span class="fu">COUNT</span>(*) &gt;= <span class="dv">300</span></code></pre></div></li>
 </ol>
 <h2 id="after-the-class-6">After the class:</h2>
