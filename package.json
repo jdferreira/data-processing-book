@@ -1,0 +1,32 @@
+{
+  "name": "data-processing-book",
+  "version": "1.0.0",
+  "description": "Files for the Data Processing Book",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdferreira/data-processing-book.git"
+  },
+  "author": "João D. Ferreira",
+  "license": "CC-BY-4.0",
+  "bugs": {
+    "url": "https://github.com/jdferreira/data-processing-book/issues"
+  },
+  "homepage": "https://github.com/jdferreira/data-processing-book#readme",
+  "devDependencies": {
+    "file-system": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sequence": "^0.4.6",
+    "gulp-shell": "^0.5.2",
+    "gulp-util": "^3.0.7",
+    "jsdom": "^9.8.0",
+    "lightbox2": "^2.8.2"
+  }
+}
