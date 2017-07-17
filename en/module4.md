@@ -36,6 +36,8 @@ As such, add this to your `module4.py`, filling in the question marks:
         enzyme_id = enzyme[???] # The ID of this enzyme
         seq = enzyme[???]       # The aminoacid sequence of this enzyme
         dict_sequences[enzyme_id] = seq
+    
+    f.close()
 ```
 
 3. Then we will read the file `selected2.csv` and associate each pathway with the list of enzymes that are part of it.
@@ -61,6 +63,8 @@ We will also use a dictionary for this task:
         
         # Associate the pathway ID with the corresponding list of enzymes
         dict_paths[???] = ???
+    
+    f.close()
 ```
 
 4. Now that we have the two dictionaries, we can go through each pathway and through each enzyme in it and create a CSV file that crosses the information, associating each pathway to the aminoacid sequences of its enzymes.

@@ -43,6 +43,8 @@ Start the `module5.py` script:
         enzyme_id = enzyme[???] # The ID of this enzyme
         seq = enzyme[???]       # The aminoacid sequence of this enzyme
         dict_sequences[enzyme_id] = seq
+    
+    f.close()
 ```
 
 3. Now that we have the dictionary, let's search for all enzymes whose aminoacid sequence contains three consecutive alanines:

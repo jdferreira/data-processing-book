@@ -42,6 +42,8 @@ Crie o _script_ `module5.py`:
         enzyme_id = enzyme[???] # O identificador desta enzima
         seq = enzyme[???]       # A sequencia de aminoacidos da enzima
         dict_sequences[enzyme_id] = seq
+    
+    f.close()
 ```
 
 3. Agora que temos o dicionário, vamos procurar as enzimas cujas sequências contêm três alaninas consecutivas:

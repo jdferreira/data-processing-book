@@ -35,6 +35,8 @@ Para tal, adicione ao _script_ o seguinte código, substituindo os pontos de int
         enzyme_id = enzyme[???] # O identificador desta enzima
         seq = enzyme[???]       # A sequencia de aminoacidos da enzima
         dict_sequences[enzyme_id] = seq
+    
+    f.close()
 ```
 
 3. Em seguida, vamos ler o ficheiro `selected2.csv` e associar a cada via uma lista das suas enzimas
@@ -60,6 +62,8 @@ Também aqui vamos usar um dicionário.
         
         # Associa o identificador da via com a lista de enzimas
         dict_paths[???] = ???
+    
+    f.close()
 ```
 
 4. Agora que temos os dois dicionários, podemos percorrer cada via e cada enzima de cada via de forma a criar um ficheiro CSV que cruza a informação, associando a cada via as sequências de aminoácidos das suas enzimas.

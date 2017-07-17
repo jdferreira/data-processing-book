@@ -58,7 +58,10 @@
             INSERT INTO path (id, name, class)
             VALUES (?, ?, ?)
         ''', (path_id, path_name, path_class))
-        
+    
+    # Close the file
+    f.close()
+    
     # Save the changes
     connection.commit()
 ```
@@ -85,6 +88,9 @@
             # Add this enzyme to the list of enzymes already inserted
             enzymes_inserted.append(enzyme_id)
     
+    # Close the file
+    f.close()
+    
     # Save the changes
     connection.commit()
 ```
@@ -107,6 +113,7 @@
                 VALUES (?, ?)
             ''', (path_id, enzyme_id))
     
+    f.close()
     connection.commit()
 ```
 

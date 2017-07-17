@@ -96,6 +96,8 @@ Para tal, adicione as seguintes linhas ao _script_ Python, substituindo `???` pe
             # Adiciona cada uma a lista mestre de enzimas
             for e in enzymes_in_this_path:
                 enzymes.append(e)
+        
+        f.close()
     ```
 
 5. Agora que temos uma lista de enzimas, podemos usá-la juntamente com a função que criamos anteriormente para obter as suas sequências de aminoácidos.

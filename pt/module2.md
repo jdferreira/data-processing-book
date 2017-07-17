@@ -53,7 +53,8 @@ Vamos adicionar mais código ao ficheiro para efetivamente usarmos a função em
         if filter1(path):
             w.writerow(path)
     
-    # Fecha o ficheiro
+    # Fecha os ficheiros
+    file_to_read.close()
     file_to_write.close()
 ```
 

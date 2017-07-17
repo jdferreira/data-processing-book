@@ -85,6 +85,9 @@ Por exemplo, determine qual caracter é usado para separar os vários campos, se
         
         for path in paths: # Para cada via ...
             print ???      # ... imprime o seu nome
+        
+        # Fecha o ficheiro
+        f.close()
     ```
     
     c. Substitua todos os pontos de interrogação (`???`) por código Python apropriado.

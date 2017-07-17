@@ -85,6 +85,9 @@ For example, determine what character is used to separate the various fields of 
         
         for path in paths: # For each pathway ...
             print ???      # ... print its name
+        
+        # Close the file
+        f.close()
     ```
     
     c. Replace all the green question mark place-holders (`???`) with appropriate Python code.

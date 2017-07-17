@@ -95,6 +95,8 @@ To do that, add the following lines to the Python file (replace the `???` instan
             # Append each one into the master enzyme list
             for e in enzymes_in_this_path:
                 enzymes.append(e)
+        
+        f.close()
     ```
 
 5. Now that we have a list of enzymes, we can use it and the function we created in the beginning to get the aminoacid sequence of each enzyme.

@@ -59,6 +59,10 @@
             VALUES (?, ?, ?)
         ''', (path_id, path_name, path_class))
     
+    
+    # Fecha o ficheiro
+    f.close()
+    
     # Grava
     connection.commit()
 ```
@@ -85,6 +89,9 @@
             # Adiciona esta enzima a lista de enzimas ja inseridas
             enzymes_inserted.append(enzyme_id)
     
+    # Fecha o ficheiro
+    f.close()
+    
     # Grava
     connection.commit()
 ```
@@ -108,6 +115,7 @@
                 VALUES (?, ?)
             ''', (path_id, enzyme_id))
     
+    f.close()
     connection.commit()
 ```
 

@@ -26,7 +26,8 @@
         def filter1(path):
             path_id = path[???]  # Select the column for the ID
             
-            if path_id == '???': # Replace with the ID we are searching for
+            # Replace with the ID we are searching for
+            if path_id == '???':
                 return True
             else:
                 return False
@@ -52,7 +53,8 @@ Let's add more code to the file so that we actually go through each pathway and 
         if filter1(path):
             w.writerow(path)
     
-    # Close the file
+    # Close the files
+    file_to_read.close()
     file_to_write.close()
 ```
 
