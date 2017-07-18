@@ -24,8 +24,11 @@ const PANDOC_COMMAND_ARR = [
     // from index.md and then containing all the modules in numeric order.
     undefined,
     
-    // output filename
+    // Output filename
     '-o', 'out/index-<%= lang %>.html',
+    
+    // Additional Metadata arguments
+    '--metadata', 'lang:<%= lang %>', // The language of the document
     
     // More options
     '-t', 'html5',                 // format used to write the output
