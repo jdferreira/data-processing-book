@@ -1,6 +1,6 @@
 % Processamento de dados de vias metabólicas usando ficheiros, serviços web e bases de dados
 % João D. Ferreira; Francisco M. Couto
-% Faculdade de Ciências da Universidade de Lisboa<br>Versão de 2016
+% Faculdade de Ciências da Universidade de Lisboa<br>Versão de 2017
 
 <div id="license">
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
