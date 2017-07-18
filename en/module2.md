@@ -1,0 +1,36 @@
+# Module 2 -- CSV files {#module2}
+
+## Objectives:
+
+-  Store data in [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) files
+
+## Input:
+
+- File: [metabolic_pathways.xls](files/metabolic_pathways.xls)
+
+## Output:
+- File: `metabolic_pathways.csv`
+
+## Steps:
+
+1. Open your Personal Area on your computer and create a folder named module2.
+
+2. Save the file `metabolic_pathways.xls` given as input in the previous folder.
+
+3. Change the delimiter that is used in your computer to comma and not semicolon (defined by default for Portugal).
+- Click the Start button, and then click Control Panel.
+- Open the dialog box for changing Regional and Language settings.
+- Type , (comma) in the List separator box.
+NOTE: you have to do this step every time you use a different computer.
+
+4. Open the previous file in Excel, and save it as CSV:
+- Go to File > Save As
+- The Save As dialog box appears
+- In the Save as type box, choose CSV (Comma delimited). 
+
+5. Open the CSV file in a text editor (Notepad) and find how many commas has each line?
+
+6. Open the CSV file in Excel.
+
+
+
