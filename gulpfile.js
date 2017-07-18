@@ -53,7 +53,7 @@ function getInputFiles(lang) {
     // the rest are not valid for our purposes.
     var files = fs
         .readdirSync(lang)
-        .reduce(function (current, filename) {
+        .reduce((current, filename) => {
             var value = false;
             
             if (filename === 'index.md') {
@@ -75,14 +75,10 @@ function getInputFiles(lang) {
         }, []);
     
     // Sort the files using their numeric value
-    files.sort(function(a, b) {
-        return a.value - b.value
-    });
+    files.sort((a, b) => a.value - b.value);
     
     // Return the file names, joined with the name of the language directory
-    return files.map(function(item) {
-        return path.join(lang, item.filename);
-    });
+    return files.map(item => path.join(lang, item.filename));
 }
 
 /**
@@ -92,9 +88,7 @@ function getInputFiles(lang) {
 function findLanguages() {
     return fs
         .readdirSync('.')
-        .filter(function(item) {
-            return item.length == 2 && fs.statSync(item).isDirectory()
-        });
+        .filter(item => item.length === 2 && fs.statSync(item).isDirectory());
 }
 
 /**
@@ -122,7 +116,7 @@ function buildIndex(lang) {
                 templateData: { lang }
             })
         )
-        .on('end', function() {
+        .on('end', () => {
             jsdom.env({
                 file: 'out/index-' + lang + '.html',
                 scripts: ['http://code.jquery.com/jquery.js'],
@@ -131,7 +125,10 @@ function buildIndex(lang) {
                     
                     // Replace '???' inside <code> elements with
                     // <span class="blank">?</span>
-                    $('code').html(function () {
+                    $('code').html(function() {
+                        // Note that this cannot be defined with ES6's arrow
+                        // functions because `this` is undefined in those
+                        // constructs, rendering the function unusable
                         return $(this)
                             .html()
                             .replace(/\?\?\?/g, '<span class="blank">?</span>');
@@ -140,7 +137,8 @@ function buildIndex(lang) {
                     // `print` is a builtin in python3 but a keyworkd in python2.
                     // Let's also make this change here
                     $('span.bu').each(function() {
-                        if ($(this).text() == 'print') {
+                        // See above for why we're not using arrow functions
+                        if ($(this).text() === 'print') {
                             $(this).removeClass('bu');
                             $(this).addClass('kw');
                         }
@@ -150,25 +148,22 @@ function buildIndex(lang) {
                     $('script.jsdom').remove();
                     
                     // Write the resulting file back into its output filename
-                    var newSource = $('html').html();
+                    var newSource = $('html')[0].outerHTML;
                     fs.writeFileSync(
                         'out/index-' + lang + '.html',
-                        newSource
+                        '<!DOCTYPE html>\n' + newSource
                     );
                 }
             });
         });
 }
 
-gulp.task('build', function() {
-    var tasks = findLanguages()
-        .map(function (item) {
-            return buildIndex(item);
-        });
+gulp.task('build', () => {
+    var tasks = findLanguages().map(buildIndex);
     return merge(tasks);
 });
 
-gulp.task('sass', function() {
+gulp.task('sass', () => {
     var options = {
         outputStyle: 'compressed',
     };
@@ -179,7 +174,7 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('out/css'));
 });
 
-gulp.task('minify-css', function() {
+gulp.task('minify-css', () => {
     return gulp
         .src(['out/css/*.css', '!out/css/main.min.css'])
         .pipe(cleanCSS())
@@ -187,14 +182,14 @@ gulp.task('minify-css', function() {
         .pipe(gulp.dest('out/css'))
 });
 
-gulp.task('clean-css', function() {
+gulp.task('clean-css', () => {
     return gulp
         .src(['out/css/*.css', '!out/css/main.min.css'])
         .pipe(clean());
 });
 
-gulp.task('watch', function() {
-    gulp.watch('styles/sass/*.scss', function() {
+gulp.task('watch', () => {
+    gulp.watch('styles/sass/*.scss', () => {
         gulpSequence('sass', 'minify-css', 'clean-css')();
     });
     gulp.watch('en/*.md', ['build-en']);
