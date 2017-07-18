@@ -23,7 +23,7 @@ The enzymes are referred by their UniProt code. [UniProt](http://www.uniprot.org
 
 5. Find how many metabolic pathways it contains.
 
-6. Find the name of the pathway with the identifier hsa03030.
+6. Find the name of the pathway with the identifier "hsa03030".
 
 7. Find the identifier of the pathway with the name "Insulin secretion".
 

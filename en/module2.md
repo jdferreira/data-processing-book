@@ -2,7 +2,9 @@
 
 ## Objectives:
 
--  Store data in [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) files
+- Store data in [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) files
+- Understand the CSV format
+- Convert between the Excel format and CSV
 
 ## Input:
 
@@ -30,7 +32,15 @@ NOTE: you have to do this step every time you use a different computer.
 
 5. Open the CSV file in a text editor (Notepad) and find how many commas has each line?
 
-6. Open the CSV file in Excel.
+6. Verify that some fields in the CSV file are delimited by quotes <nobr>(`"`)</nobr> and other are not. Explain why.
+
+7. Open the CSV file in Excel.
+
+8. Make sure you keep a copy of the files, so you can use them afterwards.
+For example, send it to you by email or upload it to Dropbox.
+
+
+
 
 
 
