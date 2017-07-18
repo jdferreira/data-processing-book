@@ -51,24 +51,24 @@ NOTE: do not open version 2 of Python
 Replace the previous command: 
 
 ```python
-	print('Hello World!')
+    print('Hello World!')
 ```
 
 by the following code:    
 
-	```python
-        import csv
+```python
+    import csv
+     
+    f = open('metabolic_pathways.csv') # Open the file
         
-        f = open('metabolic_pathways.csv') # Open the file
+    paths = csv.reader(f, delimiter='???') # Create a CSV reader object
         
-        paths = csv.reader(f, delimiter='???') # Create a CSV reader object
+    for path in paths: # For each pathway ...
+        print(paths[???])      # ... print its name
         
-        for path in paths: # For each pathway ...
-            print(paths[???])      # ... print its name
-        
-        # Close the file
-        f.close()
-    ```
+    # Close the file
+    f.close()
+```
     
 NOTE: Replace all the green question mark place-holders (`???`) with appropriate Python code.
 
