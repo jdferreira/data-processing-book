@@ -6,6 +6,7 @@ var shell = require('gulp-shell');
 var gutil = require('gulp-util');
 var clean = require('gulp-clean');
 var jsdom = require('jsdom');
+var merge = require('merge-stream');
 var rename = require('gulp-rename');
 var isNumeric = require('isnumeric');
 var cleanCSS = require('gulp-clean-css');
@@ -82,6 +83,18 @@ function getInputFiles(lang) {
 }
 
 /**
+ * Return an array with the language directories of this project. A language
+ * directory is a directory whose name is a two letter word
+ */
+function findLanguages() {
+    return fs
+        .readdirSync('.')
+        .filter(function(item) {
+            return item.length == 2 && fs.statSync(item).isDirectory()
+        });
+}
+
+/**
  * This function returns a gulp pipeline that builds the index.html file from
  * the *.md files, specifically for a given language tag (en, pt, etc...),
  * thus building the main site of a given localization.
@@ -135,24 +148,21 @@ function buildIndex(lang) {
                     
                     // Write the resulting file back into its output filename
                     var newSource = $('html').html();
-                    fs.writeFile(
+                    fs.writeFileSync(
                         'out/index-' + lang + '.html',
-                        newSource,
-                        function(err) {
-                            if (err) throw err;
-                        }
+                        newSource
                     );
                 }
             });
         });
 }
 
-gulp.task('build-en', function() {
-    return buildIndex('en');
-});
-
-gulp.task('build-pt', function() {
-    return buildIndex('pt');
+gulp.task('build', function() {
+    var tasks = findLanguages()
+        .map(function (item) {
+            return buildIndex(item);
+        });
+    return merge(tasks);
 });
 
 gulp.task('sass', function() {
