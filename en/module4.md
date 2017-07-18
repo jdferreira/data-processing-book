@@ -34,6 +34,7 @@
 NOTE: do not open version 2 of Python 
 
 5. Click on `File`, then on `New File`, and write
+
 ```python
     print('Hello World!')
 ```
@@ -41,17 +42,21 @@ NOTE: do not open version 2 of Python
 6. Save the file as `module4.py` in the previous folder.
 
 7. Click on `Run` and then `Run Module` and observe the output produced by Python and ensure that the screen shows the following:
+
 ```text
     Hello World!
 ```
 
 8. Let's create a Python script to read the CSV file and print the name of each pathway. 
 Replace the previous command: 
-	```python
-		print('Hello World!')
-	```
+
+```python
+	print('Hello World!')
+```
+
 by the following code:    
-    ```python
+
+	```python
         import csv
         
         f = open('metabolic_pathways.csv') # Open the file
