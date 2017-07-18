@@ -35,14 +35,16 @@ const PANDOC_COMMAND_ARR = [
     '--highlight-style', 'tango',  // highlighting syntax for code sections
 ];
 
+/**
+ * The regular expression to validate modules with content
+ */
 const MODULE_REGEX = /^module(\d+).md$/;
 
 /**
- * This function finds and returns all the input files in a given directory,
- * corresponding to the *.md files of a language edition. Only index.md and
- * module*.md files are returned, where * is any string with only digits. The
- * returned array contains the index.md in the first position (if one such file
- * exists) and the module*.md files sorted in numeric order after that.
+ * Return an array with the input files in a given language directory,
+ * corresponding to the index.md and module*.md files, whereis any digit-only
+ * string. The array contains the index.md in the first position (if one such
+ * file exists) and the module*.md files sorted in numeric order after that.
  */
 function getInputFiles(lang) {
     // Get all the files in the directory. Then assign to each a numeric value
@@ -51,34 +53,35 @@ function getInputFiles(lang) {
     // the rest are not valid for our purposes.
     var files = fs
         .readdirSync(lang)
-        .reduce(function (current, item) {
+        .reduce(function (current, filename) {
             var value = false;
             
-            if (item === 'index.md') {
+            if (filename === 'index.md') {
                 value = 0;
             }
             else {
-                var match = MODULE_REGEX.exec(item);
+                var match = MODULE_REGEX.exec(filename);
                 if (match !== null) {
                     value = parseInt(match[1])
                 }
             }
             
+            // Only update the current array if a valid file has been found
             if (value !== false) {
-                current.push([value, item]);
+                current.push({ filename, value });
             }
             
             return current;
         }, []);
     
-    // Sort the files using the numeric value
+    // Sort the files using their numeric value
     files.sort(function(a, b) {
-        return a[0] - b[0]
+        return a.value - b.value
     });
     
-    // Return only the file names, joined with the name of the directory
+    // Return the file names, joined with the name of the language directory
     return files.map(function(item) {
-        return path.join(lang, item[1]);
+        return path.join(lang, item.filename);
     });
 }
 
@@ -95,9 +98,9 @@ function findLanguages() {
 }
 
 /**
- * This function returns a gulp pipeline that builds the index.html file from
- * the *.md files, specifically for a given language tag (en, pt, etc...),
- * thus building the main site of a given localization.
+ * Return a gulp pipeline that builds the index.html file from the *.md files
+ * of a given language directory, thus building the main site of a given
+ * localization.
  */
 function buildIndex(lang) {
     var command = PANDOC_COMMAND_ARR.slice();
@@ -112,7 +115,8 @@ function buildIndex(lang) {
     // and replacing it with each item that is contained in `files`
     Array.prototype.splice.apply(command, [index, 1].concat(files));
     
-    return gulp.src(lang + '/*.md')
+    return gulp
+        .src(lang + '/*.md')
         .pipe(
             shell([ command.join(' ') ], {
                 templateData: { lang }
@@ -125,8 +129,7 @@ function buildIndex(lang) {
                 done(err, window) {
                     var $ = window.$;
                     
-                    // Replace all instances of '???' inside <code> elements with the
-                    // HTML code:
+                    // Replace '???' inside <code> elements with
                     // <span class="blank">?</span>
                     $('code').html(function () {
                         return $(this)
@@ -134,7 +137,7 @@ function buildIndex(lang) {
                             .replace(/\?\?\?/g, '<span class="blank">?</span>');
                     });
 
-                    // 'print' is a builtin in python3 but a keyworkd in python2.
+                    // `print` is a builtin in python3 but a keyworkd in python2.
                     // Let's also make this change here
                     $('span.bu').each(function() {
                         if ($(this).text() == 'print') {
@@ -170,20 +173,23 @@ gulp.task('sass', function() {
         outputStyle: 'compressed',
     };
     
-    return gulp.src('styles/sass/*.scss')
+    return gulp
+        .src('styles/sass/*.scss')
         .pipe(sass(options).on('error', sass.logError))
         .pipe(gulp.dest('out/css'));
 });
 
 gulp.task('minify-css', function() {
-    return gulp.src(['out/css/*.css', '!out/css/main.min.css'])
+    return gulp
+        .src(['out/css/*.css', '!out/css/main.min.css'])
         .pipe(cleanCSS())
         .pipe(rename('main.min.css'))
         .pipe(gulp.dest('out/css'))
 });
 
 gulp.task('clean-css', function() {
-    return gulp.src(['out/css/*.css', '!out/css/main.min.css'])
+    return gulp
+        .src(['out/css/*.css', '!out/css/main.min.css'])
         .pipe(clean());
 });
 
