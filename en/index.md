@@ -1,6 +1,6 @@
 % Data processing for metabolic pathways using files, web services and databases
 % João D. Ferreira; Francisco M. Couto
-% Faculdade de Ciências da Universidade de Lisboa<br>Version of 2016
+% Faculdade de Ciências da Universidade de Lisboa<br>Version of 2017
 
 <div id="license">
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
