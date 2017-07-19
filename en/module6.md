@@ -1,4 +1,4 @@
-# Module 3 -- UniProt as a web service {#module3}
+# Module 6 -- Web services {#module6}
 
 ## Objectives:
 - Recognize the importance of external sources of data
