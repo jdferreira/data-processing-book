@@ -33,10 +33,10 @@
 7. Click on `Execute SQL` and write:
 
 ```sql
-CREATE TABLE my_pathways (
-            id TEXT,
-            name TEXT
-        )
+	CREATE TABLE my_pathways (
+		id TEXT,
+		name TEXT
+	)
 ```
 
 and then click on Execute SQL (play icon).
