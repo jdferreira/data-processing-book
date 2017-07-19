@@ -119,7 +119,7 @@ Again, run the code, observe the output, and open the `selected1.csv` in Excel o
 
 Again, run the code, observe the output, and open the `selected2.csv` in Excel or in a text editor.
 
-7. Replace the previous code so it selects pathways containing at most 10 enzymes.
+7. Replace the previous code so it selects pathways containing more than 500 enzymes.
 Tip: use the built-in function `len`. The documentation for this function can be found in <https://docs.python.org/2/library/functions.html#len>
 
 
