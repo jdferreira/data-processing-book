@@ -18,111 +18,143 @@
 1. Go to <http://www.uniprot.org/uniprot/P18440.fasta> and study the FASTA format.
 Change the identifier in the link from `P18440` to another one and study its content and how it is different from the previous one.
 
-2. In a Python file named `module3.py`, create a function called `get_sequence` that takes as input the ID of a protein and returns its aminoacid sequence.
-This function:
+2. Open your Personal Area on your computer and create a folder named module6.
+Save the file `selected2.csv` given as input in the previous folder.
+Open the application `IDLE (Python 3...)`.
 
-	a. opens the URL mentioned above,
-	
-	b. reads the content on that URL,
-	
-	c. extracts the aminoacid sequence, and
-	
-	d. joins all the lines so that only a single string is returned
+3. Create a Python script that prints the sequence of a given protein.
+The script will open the URL mentioned above, read the content on that URL, and extracts the aminoacid sequence, and joins all the lines so that only a single string is returned.
+Click on `File`, then on `New File`, and write
+
 	```python
-	import urllib # This module contains functions to read URLs
+	import urllib.request # This module contains functions to read URLs
 
-	def get_sequence(identifier):
 	# Establish the URL to open
-	url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
-	
+	url = 'http://www.uniprot.org/uniprot/' + 'P18440' + '.fasta'
+
 	# Open the URL
-	f = urllib.urlopen(url)
-	
+	response = urllib.request.urlopen(url)
+
 	# Read all the lines into a list
-	lines = f.readlines()
-	
+	data = str(response.read())
+	lines = str.split(data,'\\n')
+
 	# Ignore the first line, which contains metadata
 	del lines[0]
-	
+
 	# Join all the remaining lines into a single string
 	sequence = str.join("", lines)
-	
+
 	# Remove the line ends (the "enter" used to start the next line)
-	# This line end is represented as `\n`
 	sequence = str.replace(sequence, '\n', '')
-	
-	# Return the sequence
-	return ???
+	# Remove the ' character ath the end of the string
+	sequence = sequence.strip("'")
+
+	# Prints the sequence
+	print(sequence)
 	```
 
-3. Let's try our function on a couple of proteins.
-To do that, add the following lines to the Python file (replace the `???` instances with any protein IDs you want):
-```python
-	sequence1 = get_sequence('P12345')
-	sequence2 = get_sequence('???')
-	sequence3 = get_sequence('???')
+Save the file as `module5.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
 	
-	print "SEQUENCE 1:\n" + sequence1 + "\n"
-	print "SEQUENCE 2:\n" + sequence2 + "\n"
-	print "SEQUENCE 3:\n" + sequence3 + "\n"
-```
+4. Modify the previous code so it prints the sequences of other enzymes. 
+	
+5. Modify the previous code to read the enzymes in the `selected2.csv` file and perform a lookup of their aminoacid sequences: 
 
-4. Now we are going to read the enzymes in the `selected2.csv` file and perform a lookup of their aminoacid sequences.
-	
-	a. Remove or comment the code from step 3.
-	
-	b. Replace it with this:
 	```python
-		import csv
+	import urllib.request
+	import csv
+	 
+	file_to_read = open('selected2.csv')
+	paths = csv.reader(file_to_read, delimiter='???')
 		
-		# Open the output file from the previous module
-		f = open('selected2.csv')
-		paths = csv.reader(f, delimiter=???)
-		
-		# Start with an empty list of enzymes
-		enzymes = []
-		
-		# Then:
-		# - read the information of each pathway,
-		# - extract the list of enzymes of each pathway, and
-		# - append each enzyme to the list of enzymes
-		for path in paths:
-			enzymes_field = path[???] # The field of the enzymes
+	for path in paths: # For each pathway ...
+		enzymes = path[???] # Select the column for the list of enzymes
 			
-			# Split the enzymes into a list, as in module 2
-			enzymes_in_this_path = str.split(enzymes_field, ???)
-			
-			# Append each one into the master enzyme list
-			for e in enzymes_in_this_path:
-				enzymes.append(e)
+		# Break that information into a list
+		enzyme_list = str.split(enzymes, '???')
+
+		for enzyme_id in enzyme_list:
 		
-		f.close()
+			# Establish the URL to open
+			url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
+
+			# Open the URL
+			response = urllib.request.urlopen(url)
+
+			# Read all the lines into a list
+			data = str(response.read())
+			lines = str.split(data,'\\n')
+
+			# Ignore the first line, which contains metadata
+			del lines[0]
+
+			# Join all the remaining lines into a single string
+			sequence = str.join("", lines)
+
+			# Remove the line ends (the "enter" used to start the next line)
+			sequence = str.replace(sequence, '\n', '')
+			# Remove the ' character ath the end of the string
+			sequence = sequence.strip("'")
+
+			# Prints the sequence
+			print("Sequence of pathway " + enzyme_id + ":\n" + sequence)
 	```
 
-5. Now that we have a list of enzymes, we can use it and the function we created in the beginning to get the aminoacid sequence of each enzyme.
-We will save this information into a new file.
-Continue adding code to your `module3.py` file:
-```python
-	f = open('sequences.csv', 'wb')
-	w = csv.writer(f, delimiter=???)
+Again, run the code, observe the output.
+
+**Note**: Replace all the green question mark place-holders (`???`) with appropriate Python code.
+
+6. Modify the previous code to write the output  to a file named `sequences.csv`:
+
+	```python
+	import urllib.request
+	import csv
+	 
+	file_to_read = open('selected2.csv')
+	paths = csv.reader(file_to_read, delimiter='???')
 	
-	for e in enzymes:
-		seq = get_sequence(e)
-		w.writerow([e, seq])
+	file_to_write = open('sequences.csv', 'w', newline='')
+	w = csv.writer(file_to_write, delimiter=',')
+		
+	for path in paths: # For each pathway ...
+		enzymes = path[???] # Select the column for the list of enzymes
+			
+		# Break that information into a list
+		enzyme_list = str.split(enzymes, '???')
+
+		for enzyme_id in enzyme_list:
+		
+			# Establish the URL to open
+			url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
+
+			# Open the URL
+			response = urllib.request.urlopen(url)
+
+			# Read all the lines into a list
+			data = str(response.read())
+			lines = str.split(data,'\\n')
+
+			# Ignore the first line, which contains metadata
+			del lines[0]
+
+			# Join all the remaining lines into a single string
+			sequence = str.join("", lines)
+
+			# Remove the line ends (the "enter" used to start the next line)
+			sequence = str.replace(sequence, '\n', '')
+			# Remove the ' character ath the end of the string
+			sequence = sequence.strip("'")
+
+			# Prints the sequence
+			print("Sequence of pathway " + enzyme_id + ":\n" + sequence)
+			
+			# Writes the sequence to the file
+			w.writerow([enzyme_id, sequence])
 	
-	f.close()
-```
+	file_to_read.close()
+	file_to_write.close()
+	```
 
-6. Run the code and take notice of the file that was created (`sequences.csv`).
-Does it correspond to what you were expecting to see?
+Again, run the code, observe the output, and open the `sequences.csv` in Excel or in a text editor.
+Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why?	
 
-7. Make sure you keep a copy of the `sequences.csv` file to yourself, so that you can use it in the next modules.
-For example, send it to you by email or upload it to Dropbox.
-
-
-## After the class:
-
-1. Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why?
-
-2. Change your code in order to find the sequence of all the enzymes in the metabolic pathways, and not only the enzymes in the pathways selected in the previous module.
-Save the sequences into a file named `all_sequences.csv`.

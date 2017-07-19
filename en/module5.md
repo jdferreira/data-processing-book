@@ -55,7 +55,7 @@ Save the file as `module5.py` in the previous folder, and click on `Run` and the
 **Note**: Replace all the green question mark place-holders (`???`) with appropriate Python code.
 	
 
-5. Replace the previous code so the output is saved to a CSV file named `selected1.csv`.
+5. Modify the previous code so the output is saved to a CSV file named `selected1.csv`.
 	
 	```python
 	import csv
@@ -85,7 +85,7 @@ Save the file as `module5.py` in the previous folder, and click on `Run` and the
 
 Again, run the code, observe the output, and open the `selected1.csv` in Excel or in a text editor.
 
-6. Replace the previous code so it selects the pathways where the enzyme P18440 participates and saves to a CSV file named `selected2.csv`.
+6. Modify the previous code so it selects the pathways where the enzyme P18440 participates and saves to a CSV file named `selected2.csv`:
 	
 	```python
 	import csv
@@ -122,7 +122,7 @@ Again, run the code, observe the output, and open the `selected1.csv` in Excel o
 
 Again, run the code, observe the output, and open the `selected2.csv` in Excel or in a text editor.
 
-7. Replace the previous code so it selects pathways containing more than 500 enzymes.
+7. Modify the previous code so it selects pathways containing more than 500 enzymes.
 Tip: use the built-in function `len`. The documentation for this function can be found in <https://docs.python.org/2/library/functions.html#len>
 
 
