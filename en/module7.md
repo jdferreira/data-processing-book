@@ -15,7 +15,7 @@
 
 ## Steps:
 
-1. Open your Personal Area on your computer and create a folder named module6.
+1. Open your Personal Area on your computer and create a folder named module7.
 Save the file `selected2.csv` given as input in the previous folder.
 Open the application `IDLE (Python 3...)`.
 

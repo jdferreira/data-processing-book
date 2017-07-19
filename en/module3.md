@@ -32,7 +32,7 @@
 
 7. Click on `Execute SQL` and write:
 
-```
+```sql
 CREATE TABLE my_pathways (
             id TEXT,
             name TEXT
