@@ -64,14 +64,15 @@ Save the file as `module5.py` in the previous folder, and click on `Run` and the
 	
 	# Open the file to save the selection
 	# The 'w' instructs Python that we want to write on this file
-	file_to_write = open('selected1.csv', 'w')
+	# The newline='' avoids blank lines between each row
+	file_to_write = open('selected1.csv', 'w', newline='')
 	w = csv.writer(file_to_write, delimiter='???')
 		
 	for path in paths: # For each pathway ...
 		path_id = path[???]  
 		
 		if path_id == '???':
-		   print("the pathway " + path_name + " was written to the file")      
+		   print("the pathway " + path_id + " was written to the file")      
 		   w.writerow(path)      # write the pathway to the file
 	 
 	# Close the files
@@ -93,20 +94,22 @@ Again, run the code, observe the output, and open the `selected1.csv` in Excel o
 	
 	# Open the file to save the selection
 	# The 'w' instructs Python that we want to write on this file
-	file_to_write = open('selected2.csv', 'w')
+	# The newline='' avoids blank lines between each row
+	file_to_write = open('selected2.csv', 'w', newline='')
 	w = csv.writer(file_to_write, delimiter='???')
 		
 	for path in paths: # For each pathway ...
+		path_id = path[0]
 		enzymes = path[???] # Select the column for the list of enzymes
 			
 		# Break that information into a list
-		enzyme_list = str.split(field, '???')
+		enzyme_list = str.split(enzymes, '???')
 		
 		# `enzyme_list` is now a list of strings, such as follows:
 		# ['H9EC08', 'P03905', 'G9LG04', 'P03901']
 		
 		if '???' in enzyme_list: # Check if our selected enzyme is in that list
-		   print("the pathway " + path_name + " was written to the file")      
+		   print("the pathway " + path_id + " was written to the file")      
 		   w.writerow(path)      # write the pathway to the file
 	 
 	# Close the files
