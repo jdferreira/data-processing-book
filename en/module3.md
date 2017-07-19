@@ -20,7 +20,7 @@
 2. Save the file `metabolic_pathways.csv` given as input in the previous folder.
 
 3. Open the application [DB Browser for SQLite](http://sqlitebrowser.org/).
-NOTE: There is a portable version available for download that can be used without installation.
+**Note**: There is a portable version available for download that can be used without installation.
 
 4. Create a new database named `database_metabolic_pathways.db` and save it in the previous folder. Click Cancel when asked for `Edit table definition`.
 

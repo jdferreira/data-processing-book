@@ -23,7 +23,7 @@
 - Click the Start button, and then click Control Panel.
 - Open the dialog box for changing Regional and Language settings.
 - Type , (comma) in the List separator box.
-NOTE: you have to do this step every time you use a different computer.
+**Note**: you have to do this step every time you use a different computer.
 
 4. Open the previous file in Excel, and save it as CSV:
 - Go to File > Save As
