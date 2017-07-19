@@ -19,7 +19,7 @@ This work is licensed under a<br>
 - [Module 4 -- Read and print data](#module4)
 - [Module 5 -- Filter data](#module5)
 - [Module 6 -- Web services](#module6)
-- [Module 7 -- Merging data(#module7)
+- [Module 7 -- Merging data](#module7)
 - [Module 8 -- Regular expressions](#module8)
 - [Module 9 -- Create a database](#module9)
 - [Module 10 -- Query a database](#module10)
