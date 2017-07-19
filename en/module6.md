@@ -104,7 +104,7 @@ Again, run the code, observe the output.
 
 **Note**: Replace all the green question mark place-holders (`???`) with appropriate Python code.
 
-6. Modify the previous code to write the output  to a file named `sequences.csv`:
+6. Modify the previous code to write the output to a file named `sequences.csv`:
 
 	```python
 	import urllib.request
@@ -158,3 +158,64 @@ Again, run the code, observe the output.
 Again, run the code, observe the output, and open the `sequences.csv` in Excel or in a text editor.
 Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why?	
 
+7. Modify the previous code to not save enzymes which sequence was already saved:
+
+	```python
+	import urllib.request
+	import csv
+	 
+	file_to_read = open('selected2.csv')
+	paths = csv.reader(file_to_read, delimiter='???')
+	
+	file_to_write = open('sequences.csv', 'w', newline='')
+	w = csv.writer(file_to_write, delimiter=',')
+
+	# List of enzymes which sequence was alread saved
+	enzymes_saved = []
+	
+	for path in paths: # For each pathway ...
+		enzymes = path[???] # Select the column for the list of enzymes
+			
+		# Break that information into a list
+		enzyme_list = str.split(enzymes, '???')
+
+		for enzyme_id in enzyme_list:
+		
+			# Check if the sequence of this enzyme was not already saved
+			if enzyme_id not in enzymes_saved:
+  
+				# Establish the URL to open
+				url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
+
+				# Open the URL
+				response = urllib.request.urlopen(url)
+
+				# Read all the lines into a list
+				data = str(response.read())
+				lines = str.split(data,'\\n')
+
+				# Ignore the first line, which contains metadata
+				del lines[0]
+
+				# Join all the remaining lines into a single string
+				sequence = str.join("", lines)
+
+				# Remove the line ends (the "enter" used to start the next line)
+				sequence = str.replace(sequence, '\n', '')
+				# Remove the ' character ath the end of the string
+				sequence = sequence.strip("'")
+
+				# Prints the sequence
+				print("Sequence of pathway " + enzyme_id + ":\n" + sequence)
+				
+				# Writes the sequence to the file
+				w.writerow([enzyme_id, sequence])
+				
+				# Add the enzyme to the list of saved enzymes
+				enzymes_saved.append(???)
+	
+	file_to_read.close()
+	file_to_write.close()
+	```
+
+Again, run the code, observe the output, and open the `sequences.csv` in Excel or in a text editor.
