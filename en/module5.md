@@ -11,10 +11,13 @@
 
 ## Output:
 - File: `selected1.csv`
-	* containing the data of the pathway `hsa04210`.
+	* containing the data of the pathway `hsa03030`.
 - File: `selected2.csv`
-	* containing the data of the pathway `hsa00730` and `hsa04122`.
+	* containing the data of the pathways where the enzyme P18440 participates.
+- File: `selected3.csv`
+	* containing the data of the pathways with more than 500 enzymes.
 
+	
 ## Steps:
 
 1. Open your Personal Area on your computer and create a folder named module5.
