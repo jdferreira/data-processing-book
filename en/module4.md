@@ -18,7 +18,7 @@
     Pentose and glucuronate interconversions
     ...
 ```
-	
+    
 ## Steps:
 
 1. Open your Personal Area on your computer and create a folder named module4.
@@ -30,42 +30,42 @@
 
 4. Click on `File`, then on `New File`, and write
 
-```python
+    ```python
     print('Hello World!')
-```
+    ```
 
 5. Save the file as `module4.py` in the previous folder.
 
 6. Click on `Run` and then `Run Module` and observe the output produced by Python and ensure that the screen shows the following:
 
-```text
+    ```text
     Hello World!
-```
+    ```
 
 7. Create a Python script to read the CSV file and print the name of each pathway. 
 Replace the previous command: 
 
-```python
+    ```python
     print('Hello World!')
-```
+    ```
 
 by the following code:    
 
-```python
+    ```python
     import csv
      
     f = open('metabolic_pathways.csv') # Open the file
   
     paths = csv.reader(f, delimiter='???') # Create a CSV reader object
-	
-	next(paths) # ignore the first row, which contains the headers of the columns called "metadata" 
+    
+    next(paths) # ignore the first row, which contains the headers of the columns called "metadata" 
         
     for path in paths: # For each pathway ...
         print(path[???])      # ... print its name
         
     # Close the file
     f.close()
-```
+    ```
     
 **Note**: Replace all the green question mark place-holders (`???`) with appropriate Python code.
 

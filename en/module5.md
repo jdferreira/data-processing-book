@@ -27,7 +27,7 @@
 4. Create a Python script that prints the name of the pathway with the identifier `hsa03030`:
 Click on `File`, then on `New File`, and write
 
-```python
+    ```python
     import csv
      
     f = open('metabolic_pathways.csv') # Open the file
@@ -45,7 +45,7 @@ Click on `File`, then on `New File`, and write
         
     # Close the file
     f.close()
-```
+    ```
 
 Save the file as `module5.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
     
@@ -54,7 +54,7 @@ Save the file as `module5.py` in the previous folder, and click on `Run` and the
 
 5. Replace the previous code so the output is saved to a CSV file named `selected1.csv`.
     
-```python
+    ```python
     import csv
      
     # Open the original file to read all pathways
@@ -77,13 +77,13 @@ Save the file as `module5.py` in the previous folder, and click on `Run` and the
     # Close the files
     file_to_read.close()
     file_to_write.close()
-```
+    ```
 
 Again, run the code, observe the output, and open the `selected1.csv` in Excel or in a text editor.
 
 6. Replace the previous code so it selects the pathways where the enzyme P18440 participates and saves to a CSV file named `selected2.csv`.
     
-```python
+    ```python
     import csv
      
     # Open the original file to read all pathways
@@ -112,7 +112,7 @@ Again, run the code, observe the output, and open the `selected1.csv` in Excel o
     # Close the files
     file_to_read.close()
     file_to_write.close()
-```
+    ```
 
 Again, run the code, observe the output, and open the `selected2.csv` in Excel or in a text editor.
 
