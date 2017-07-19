@@ -27,25 +27,25 @@
 4. Create a Python script that prints the name of the pathway with the identifier `hsa03030`:
 Click on `File`, then on `New File`, and write
 
-    ```python
-    import csv
-     
-    f = open('metabolic_pathways.csv') # Open the file
-  
-    paths = csv.reader(f, delimiter='???') # Create a CSV reader object
-	
-	next(paths) # ignore the first row, which contains the headers of the columns called "metadata" 
-        
-    for path in paths: # For each pathway ...
-	    path_id = path[???]  # Select the column for the ID
-		path_name = path[???]  # Select the column for the name
-	    
-		if path_id == '???':
-           print(path_name)      # ... print its name
-        
-    # Close the file
-    f.close()
-    ```
+```python
+import csv
+ 
+f = open('metabolic_pathways.csv') # Open the file
+
+paths = csv.reader(f, delimiter='???') # Create a CSV reader object
+
+next(paths) # ignore the first row, which contains the headers of the columns called "metadata" 
+    
+for path in paths: # For each pathway ...
+    path_id = path[???]  # Select the column for the ID
+    path_name = path[???]  # Select the column for the name
+    
+    if path_id == '???':
+       print(path_name)      # ... print its name
+    
+# Close the file
+f.close()
+```
 
 Save the file as `module5.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
 	
