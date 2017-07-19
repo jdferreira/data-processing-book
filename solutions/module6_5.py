@@ -35,3 +35,5 @@ for path in paths: # For each pathway ...
 
         # Prints the sequence
         print("Sequence of pathway " + enzyme_id + ":\n" + sequence)
+
+file_to_read.close()

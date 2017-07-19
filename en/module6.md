@@ -98,6 +98,8 @@ Save the file as `module5.py` in the previous folder, and click on `Run` and the
 
 			# Prints the sequence
 			print("Sequence of pathway " + enzyme_id + ":\n" + sequence)
+	
+	file_to_read.close()
 	```
 
 Again, run the code, observe the output.
