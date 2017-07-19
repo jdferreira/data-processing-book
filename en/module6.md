@@ -114,7 +114,7 @@ Again, run the code, observe the output.
 	paths = csv.reader(file_to_read, delimiter='???')
 	
 	file_to_write = open('sequences.csv', 'w', newline='')
-	w = csv.writer(file_to_write, delimiter=',')
+	w = csv.writer(file_to_write, delimiter='???')
 		
 	for path in paths: # For each pathway ...
 		enzymes = path[???] # Select the column for the list of enzymes
@@ -149,7 +149,7 @@ Again, run the code, observe the output.
 			print("Sequence of pathway " + enzyme_id + ":\n" + sequence)
 			
 			# Writes the sequence to the file
-			w.writerow([enzyme_id, sequence])
+			w.writerow([enzyme_id, ???])
 	
 	file_to_read.close()
 	file_to_write.close()
@@ -168,7 +168,7 @@ Observe in `sequences.csv` that some enzymes appear more than once, and try to e
 	paths = csv.reader(file_to_read, delimiter='???')
 	
 	file_to_write = open('sequences.csv', 'w', newline='')
-	w = csv.writer(file_to_write, delimiter=',')
+	w = csv.writer(file_to_write, delimiter='???')
 
 	# List of enzymes which sequence was alread saved
 	enzymes_saved = []
