@@ -14,11 +14,6 @@
 
 ## Steps:
 
-1. In this module, we will search, using regular expressions, the enzymes whose aminoacid sequence matches a certain pattern.
-    
-    a. You can consult a [reference of regular expressions](https://pythonforbiologists.com/regular-expressions/).
-    
-
 1. Open your Personal Area on your computer and create a folder named module6.
 Save the file `selected2.csv` given as input in the previous folder.
 Open the application `IDLE (Python 3...)`.
@@ -48,7 +43,7 @@ Open the application `IDLE (Python 3...)`.
 
 Save the file as `module8.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
 
-3. Add the following code after the previous script to search for all enzymes whose sequence contains three consecutive alanines `AAAAA`:
+3. Add the following code after the previous script to search, using regular expressions, the enzymes whose aminoacid sequence matches a certain pattern. Start by searching for all enzymes whose sequence contains three consecutive alanines `AAA`:
 ```python
 	(code from step 2)
 	
@@ -66,10 +61,10 @@ Save the file as `module8.py` in the previous folder, and click on `Run` and the
 		if re.search(reg_expr, ???):
 			print ('The enzyme ' + enzyme_id + ' matches the expression ' + reg_expr)
 ```
-
+    
 Again, run the code, observe the output that should present 22 matches.
 
-4. Change the regular expression in the Python script in order to find other matches:
+4. Refresh your memory on the usage of [regular expressions](https://pythonforbiologists.com/regular-expressions/) to change the regular expression in the previous Python script in order to find following matches:
     
     a. The 13 sequences where the first two aminoacids are a alanines or a methionine.
     
