@@ -1,4 +1,4 @@
-% Data processing for metabolic pathways using files, web services and databases
+% Biological Data Processing with Python and SQL
 % João D. Ferreira; Francisco M. Couto
 % Faculdade de Ciências da Universidade de Lisboa<br>Version of 2017
 
