@@ -79,22 +79,15 @@ and check the results on the database `pathways.db`.
 	f = open('sequences.csv')
 	enzymes = csv.reader(f, delimiter='???')
 
-	enzymes_inserted = [] # Keep a list of the enzymes already inserted
-
 	for enzyme in enzymes:
 		enzyme_id = enzyme[???]
 		enzyme_sequence = enzyme[???]
 		
-		# Check to see if the enzyme has been added before
-		if enzyme_id not in enzymes_inserted:
-			connection.execute('''
+		connection.execute('''
 				INSERT INTO enzyme (id, sequence)
 				VALUES (?, ?)
 			''', (enzyme_id, enzyme_sequence))
 			
-			# Add this enzyme to the list of enzymes already inserted
-			enzymes_inserted.append(enzyme_id)
-
 	# Close the file
 	f.close()
 
