@@ -15,24 +15,26 @@
 
 ## Steps:
 
-1. Open your Personal Area on your computer and create a folder named module2.
+1. Open your Personal Area on your computer and create a folder named `module2`.
 
 2. Save the file `metabolic_pathways.xls` given as input in the previous folder.
 
-3. Change the delimiter that is used in your computer to comma and not semicolon (defined by default for Portugal).
-- Click the Start button, and then click Control Panel.
-- Open the dialog box for changing Regional and Language settings.
-- Type , (comma) in the List separator box.
-**Note**: you have to do this step every time you use a different computer.
+3. Change the delimiter that is used in your computer to comma and not semicolon (defined by default for Portugal). (**Note**: you have to do this step every time you use a different computer.)
+
+    - Click the Start button, and then click Control Panel.
+    - Open the dialog box for changing Regional and Language settings.
+    - Type `,` (comma) in the List separator box.
 
 4. Open the previous file in Excel, and save it as CSV:
-- Go to File > Save As
-- The Save As dialog box appears
-- In the Save as type box, choose CSV (Comma delimited). 
 
-5. Open the CSV file in a text editor (Notepad) and find how many commas has each line?
+    - Go to `File` > `Save As`
+    - The `Save As` dialog box appears
+    - In the `Save as type` box, choose `CSV (Comma delimited)`.
 
-6. Verify that some fields in the CSV file are delimited by quotes <nobr>(`"`)</nobr> and other are not. Explain why.
+5. Open the CSV file in a text editor (Notepad) and find how many commas has each line.
+
+6. Verify that some fields in the CSV file are delimited by quotes <span class="nobr">(`"`)</span> and other are not.
+Explain why.
 
 7. Open the CSV file in Excel.
 
