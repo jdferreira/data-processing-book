@@ -1,0 +1,2 @@
+ALTER TABLE enzyme ADD COLUMN name VARCHAR(255);
+ALTER TABLE path_enzyme ADD COLUMN position INTEGER;

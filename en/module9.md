@@ -1,8 +1,9 @@
 # Module 6 -- Create a database {#module6}
 
 ## Objectives:
-- Design a simple database schema to store information on the pathways
-- Use foreign keys
+- Design a simple database schema to store information of the pathways
+- Use SQL statements to define and change the database structure or schema
+- Use SQL statements to insert, update and delete data
 
 ## Input:
 - None
@@ -43,19 +44,18 @@ Click Cancel when asked for `Edit table definition`.
 	CREATE TABLE path_enzyme (
 		path_id VARCHAR(255),
 		enzyme_id VARCHAR(255),
-		PRIMARY KEY (path_id, enzyme_id),
-		FOREIGN KEY (path_id) REFERENCES ??? (id),
-		FOREIGN KEY (enzyme_id) REFERENCES ??? (id)
+		PRIMARY KEY (path_id, ???)
 	);
 ```
 and then click on Execute SQL (play icon).
+Explain why the primary key of the table `path_enzyme` has two atributes.
 
 **Note**: Replace all the green question mark place-holders (`???`) with appropriate SQL code.
 
-3. Now, insert some data in these three tables.
+4. Insert some data in these three tables.
 We will only insert two pathways and three enzymes of the pathway based on the contents of the files 
 `sequences.csv` and `selected2.csv` created in the previous modules.
-Click on `Execute SQL` and write:
+Click on `Execute SQL` and run the following SQL commands:
 ```sql
 	-- Delete any rows in case they already exist
     DELETE FROM path;
@@ -63,51 +63,55 @@ Click on `Execute SQL` and write:
     DELETE FROM path_enzyme;
 
 	-- Insert the pathways
-	INSERT INTO path (id, name, class) VALUES ('hsa00232', 'Caffeine metabolism', 'Metabolism; Biosynthesis of other secondary metabolites');
-	INSERT INTO path (id, name, class) VALUES ('hsa00983', 'Drug metabolism - other enzymes', 'Metabolism; Xenobiotics biodegradation and metabolism');
+	INSERT INTO path (id, name, ???) VALUES ('hsa00232', 'Caffeine metabolism', 'Metabolism; Biosynthesis of other secondary metabolites');
+	INSERT INTO path (id, name, ???) VALUES ('hsa00983', 'Drug metabolism - other enzymes', 'Metabolism; Xenobiotics biodegradation and metabolism');
 
 	
 	-- Insert the enzymes
-	INSERT INTO enzyme (id, sequence) VALUES ('P05177','MALSQSVPFSATELLLASAIFCLVFWVLKGLRPRVPKGLKSPPEPWGWPLLGHVLTLGKNPHLALSRMSQRYGDVLQIRIGSTPVLVLSRLDTIRQALVRQGDDFKGRPDLYTSTLITDGQSLTFSTDSGPVWAARRRLAQNALNTFSIASDPASSSSCYLEEHVSKEAKALISRLQELMAGPGHFDPYNQVVVSVANVIGAMCF');
-	INSERT INTO enzyme (id, sequence) VALUES ('P18440','MDIEAYLERIGYKKSRNKLDLETLTDILQHQIRAVPFENLNIHCGDAMDLGLEAIFDQVVRRNRGGWCLQVNHLLYWALTTIGFETTMLGGYVYSTPAKKYSTGMIHLLLQVTIDGRNYIVDAGFGRSYQMWQPLELISGKDQPQVPCVFRLTEENGFWYLDQIRREQYIPNEEFLHSDLLEDSKYRKIYSFTLKPRTIEDFESMNT');
-	INSERT INTO enzyme (id, sequence) VALUES ('P00492','MATRSPGVVISDDEPGYDLDLFCIPNHYAEDLERVFIPHGLIMDRTERLARDVMKEMGGHHIVALCVLKGGYKFFADLLDYIKALNRNSDRSIPMTVDFIRLKSYCNDQSTGDIKVIGGDDLSTLTGKNVLIVEDIIDTGKTMQTLLSLVRQYNPKMVKVASLLVKRTPRSVGYKPDFVGFEIPDKFVVGYALDYNEYFRDLNHVC');
+	INSERT INTO enzyme (id, ???) VALUES ('P05177','MALSQSVPFSATELLLASAIFCLVFWVLKGLRPRVPKGLKSPPEPWGWPLLGHVLTLGKNPHLALSRMSQRYGDVLQIRIGSTPVLVLSRLDTIRQALVRQGDDFKGRPDLYTSTLITDGQSLTFSTDSGPVWAARRRLAQNALNTFSIASDPASSSSCYLEEHVSKEAKALISRLQELMAGPGHFDPYNQVVVSVANVIGAMCF');
+	INSERT INTO enzyme (id, ???) VALUES ('P18440','MDIEAYLERIGYKKSRNKLDLETLTDILQHQIRAVPFENLNIHCGDAMDLGLEAIFDQVVRRNRGGWCLQVNHLLYWALTTIGFETTMLGGYVYSTPAKKYSTGMIHLLLQVTIDGRNYIVDAGFGRSYQMWQPLELISGKDQPQVPCVFRLTEENGFWYLDQIRREQYIPNEEFLHSDLLEDSKYRKIYSFTLKPRTIEDFESMNT');
+	INSERT INTO enzyme (id, ???) VALUES ('P00492','MATRSPGVVISDDEPGYDLDLFCIPNHYAEDLERVFIPHGLIMDRTERLARDVMKEMGGHHIVALCVLKGGYKFFADLLDYIKALNRNSDRSIPMTVDFIRLKSYCNDQSTGDIKVIGGDDLSTLTGKNVLIVEDIIDTGKTMQTLLSLVRQYNPKMVKVASLLVKRTPRSVGYKPDFVGFEIPDKFVVGYALDYNEYFRDLNHVC');
 
 	-- Associate the enzymes with the pathways
-	INSERT INTO path_enzyme (path_id, enzyme_id) VALUES ('hsa00232','P05177');
-	INSERT INTO path_enzyme (path_id, enzyme_id) VALUES ('hsa00232','P18440');
-	INSERT INTO path_enzyme (path_id, enzyme_id) VALUES ('hsa00983','P00492');
-	INSERT INTO path_enzyme (path_id, enzyme_id) VALUES ('hsa00983','P18440');
+	INSERT INTO path_enzyme (path_id, ???) VALUES ('hsa00232','P05177');
+	INSERT INTO path_enzyme (path_id, ???) VALUES ('hsa00232','P18440');
+	INSERT INTO path_enzyme (path_id, ???) VALUES ('hsa00983','P00492');
+	INSERT INTO path_enzyme (path_id, ???) VALUES ('hsa00983','P18440');
 ```
 and then click on Execute SQL (play icon).	
-Click on write changes...
+Click on Write Changes to save the modifications to the database.
 	
+5. Try to associate a second sequence to enzyme `P18440` by running the SQL statement:
+```sql
+INSERT INTO enzyme (id, ???) VALUES ('P18440', 'AAAAAAA');
+```
+Why the SQL statement failed?
 
-4. Finally, let's just make sure that the tables contain some data.
-To do that, you can use [DB Browser for SQLite](http://sqlitebrowser.org/), which has a [portable version](https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.9.1/SQLiteDatabaseBrowserPortable_3.9.1_English.paf.exe) that can be used without installation.
-o check with Python, we can select, for example, the sequences of each pathway.
-```python
-	rows = connection.execute('SELECT id, sequence FROM enzyme')
-	for row in rows:
-		enzyme_id = row[0]
-		enzyme_sequence = row[1]
-		
-		print enzyme_id + ' starts with ' + enzyme_sequence[:5]
+6. DELETE the sequence of enzyme `P18440` by running the SQL statement:
+```sql
+DELETE FROM enzyme WHERE ??? = 'P18440';
 ```
 
-5. Ensure that the output on the screen is:
-```text
-	Q53FP3 starts with MLLRA
-	Q9Y697 starts with MLLRA
+7. Insert the original sequence of enzyme `P18440` by running the SQL statement in step 4:
+
+8. Modify the database schema so that the database can store the name of the enzymes and also their position within the pathway (a whole number):
+```sql
+ALTER TABLE enzyme ADD COLUMN name VARCHAR(255);
+ALTER TABLE path_enzyme ADD COLUMN position INTEGER;
 ```
 
-6. Make sure you keep a copy of the `pathways.db` file to yourself, so that you can use it in the next module.
-For example, send it to you by email or upload it to Dropbox.
+9. Update the values of the new columns created in the previous step:
+```sql
+UPDATE enzyme SET name = 'Cytochrome P450 1A2' WHERE ??? = 'P05177';
+UPDATE enzyme SET name = 'Arylamine N-acetyltransferase 1' WHERE ??? = 'P18440';
+UPDATE enzyme SET name = 'Hypoxanthine-guanine phosphoribosyltransferase' WHERE ??? = 'P00492';
 
-## After the class:
+UPDATE path_enzyme SET position = 1 WHERE enzyme_id = 'P05177' and ??? = 'hsa00232';
+UPDATE path_enzyme SET position = 2 WHERE enzyme_id = 'P18440' and ??? = 'hsa00232';
+UPDATE path_enzyme SET position = 1 WHERE enzyme_id = 'P18440' and ??? = 'hsa00983';
+UPDATE path_enzyme SET position = 2 WHERE enzyme_id = 'P00492' and ??? = 'hsa00983';
+```
+Click on Browse Data to check the changes.
+Click on `Write Changes` to save the database.
 
-1. Explain why the primary key of the table `path_enzyme` has two atributes.
-
-2. Modify the database schema so that the database can store the name of the enzymes and also their position within the pathway (a whole number).
-
-3. Change the code of step 4 so that you can also verify the contents of the  tables `paths` and `path_enzyme`.
 

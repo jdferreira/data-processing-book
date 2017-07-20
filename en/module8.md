@@ -43,6 +43,8 @@ Open the application `IDLE (Python 3...)`.
 
 Save the file as `module8.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
 
+**Note**: Replace all the green question mark place-holders (`???`) with appropriate Python code.
+
 3. Add the following code after the previous script to search, using regular expressions, the enzymes whose aminoacid sequence matches a certain pattern. Start by searching for all enzymes whose sequence contains three consecutive alanines `AAA`:
 ```python
 	(code from step 2)

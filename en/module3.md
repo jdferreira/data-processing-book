@@ -42,10 +42,9 @@
 and then click on Execute SQL (play icon).
 
 8. Click on `Browse Data`, select the table `metabolic_pathways` and find the id and name of your favorite pathway. 
-Next, select the table `my_pathways` and click on `New Record` and replace the NULL by the id and name of your favorite pathway.
+Next, select the table `my_pathways` and click on `New Record` and replace the NULL by the id and name of your favorite pathway. 
+Click on `Write Changes` to save the database.
 
-9. Click on `Write Changes`
+9. Click on `File`, then on `Export`, and finally on `Database to SQL file...`, click ok and name save as `database_metabolic_pathways.db.sql` in the previous folder. 
 
-10. Click on `File`, then on `Export`, and finally on `Database to SQL file...`, click ok and name save as `database_metabolic_pathways.db.sql` in the previous folder. 
-
-11. Open the file `database_metabolic_pathways.db.sql` in a text editor (Notepad) and check how each pathway is now being stored.
+10. Open the file `database_metabolic_pathways.db.sql` in a text editor (Notepad) and check how each pathway is now being stored.
