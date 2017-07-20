@@ -28,7 +28,7 @@
 2. Save the file `metabolic_pathways.csv` given as input in the previous folder.
 
 3. Open the application `IDLE (Python 3...)`.
-**Note**: do not open version 2 of Python 
+**Note**: do not open version 2 of Python
 
 4. Click on `File`, then on `New File`, and write
     ```python
@@ -43,19 +43,22 @@
     ```
 
 7. Create a Python script to read the CSV file and print the name of each pathway.
-Replace the previous command: 
+Replace the previous command:
     ```python
     print('Hello World!')
     ```
-with the following code:    
+with the following code:
     ```python
     import csv
-     
+    
     f = open('metabolic_pathways.csv') # Open the file
     
     paths = csv.reader(f, delimiter='???') # Create a CSV reader object
     
-    next(paths) # ignore the first row, which contains the headers of the columns called "metadata" 
+    # We need to ignore the first row, which contains the headers of the
+    # columns, called the "metadata". We do it by calling the `next`
+    # function, which advances to the next line of the file
+    next(paths)
         
     for path in paths:    # For each pathway ...
         print(path[???])  # ... print its name
@@ -63,7 +66,7 @@ with the following code:
     # Close the file
     f.close()
     ```
-**Note**: Replace all the green question mark place-holders (`???`) with appropriate Python code.
+**Note**: Replace all the green question mark place-holders <span class="nobr">(`???`)</span> with appropriate Python code.
 
 8. Click on `Run` and then `Run Module` and observe the output.
 Does it correspond to what you were expecting to see?

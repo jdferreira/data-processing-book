@@ -19,17 +19,22 @@
 
 2. Save the file `metabolic_pathways.xls` given as input in the previous folder.
 
-3. Change the delimiter that is used in your computer to comma and not semicolon (defined by default for Portugal). (**Note**: you have to do this step every time you use a different computer.)
+3. Change the delimiter that is used in your computer to comma and not semicolon (defined by default for Portugal).
+**Note**: you have to do this step every time you use a different computer.
 
-    - Click the Start button, and then click Control Panel.
-    - Open the dialog box for changing Regional and Language settings.
-    - Type `,` (comma) in the List separator box.
+    a. Click the Start button, and then click Control Panel.
+    
+    b. Open the dialog box for changing Regional and Language settings.
+    
+    c. Type `,` (comma) in the List separator box.
 
 4. Open the previous file in Excel, and save it as CSV:
 
-    - Go to `File` > `Save As`
-    - The `Save As` dialog box appears
-    - In the `Save as type` box, choose `CSV (Comma delimited)`.
+    a. Go to `File` > `Save As`
+    
+    b. The `Save As` dialog box appears
+    
+    c. In the `Save as type` box, choose `CSV (Comma delimited)`.
 
 5. Open the CSV file in a text editor (Notepad) and find how many commas has each line.
 

@@ -29,7 +29,7 @@ Open the application `IDLE (Python 3...)`.
     file_paths = open('selected2.csv')
     paths = csv.reader(file_paths, delimiter='???')
     
-    # Dictionary that associates each pathway with its list of enzymes 
+    # Dictionary that associates each pathway with its list of enzymes
     path_enzyme = {}
     
     for path in paths: # For each pathway ...
@@ -39,7 +39,7 @@ Open the application `IDLE (Python 3...)`.
         # Break that information into a list
         enzyme_list = str.split(enzymes, '???')
         
-        # associate the path with its enzymes
+        # Associate the path with its enzymes
         path_enzyme[path_id] = enzyme_list
     
     # Print debugging information
@@ -55,7 +55,7 @@ Open the application `IDLE (Python 3...)`.
         enzyme_id = enzyme[???] # Select the column for the enzyme identifier
         sequence = enzyme[???] # Select the column for the sequence
         
-        # associate the enzyme with its sequence       
+        # Associate the enzyme with its sequence
         enzyme_sequence[enzyme_id] = sequence
     
     # Print debugging information
@@ -65,7 +65,7 @@ Open the application `IDLE (Python 3...)`.
     file_sequences.close()
     ```
 Save the file as `module7.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
-**Note**: Replace all the green question mark place-holders (`???`) with appropriate Python code.
+**Note**: Replace all the green question mark place-holders <span class="nobr">(`???`)</span> with appropriate Python code.
     
 3. Add the following code after the previous script to associate each pathway to the sequences of its enzymes.
     ```python
@@ -75,7 +75,7 @@ Save the file as `module7.py` in the previous folder, and click on `Run` and the
     for path_id, enzyme_list in path_enzyme.items():
         print('Processing path: ' + path_id)
         
-        # for each enzyme of that pathway 
+        # For each enzyme of that pathway
         for enzyme_id in enzyme_list:
             # Some more debugging information
             print('Processing enzyme: ' + enzyme_id)
@@ -85,7 +85,7 @@ Save the file as `module7.py` in the previous folder, and click on `Run` and the
             
             # Print the sequence associated to the path being processed
             print(path_id + ', ' + sequence)
-   ```
+    ```
 Again, run the code and observe the output.
 
 4. Modify the previous code to save the output in a CSV file named `paths_enzymes.csv`:
@@ -100,7 +100,7 @@ Again, run the code and observe the output.
         # Print debugging information
         print('Processing path: ' + path_id)
         
-        # for each enzyme of that pathway 
+        # For each enzyme of that pathway
         for enzyme_id in enzyme_list:
             # Print debugging information
             print('Processing enzyme: ' + enzyme_id)

@@ -30,6 +30,6 @@ The enzymes are referred by their UniProt code.
 7. Find the identifier of the pathway with the name "Insulin secretion".
 
 8. Find the name of the pathways that belong to the class "Metabolism; Energy metabolism".
- 
+
 9. Find the name of the pathways in which the enzyme "Arylamine N-acetyltransferase 1" with identifier [P18440](http://www.uniprot.org/uniprot/P18440) participates.
 

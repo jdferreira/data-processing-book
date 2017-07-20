@@ -50,7 +50,7 @@ Click Cancel when asked for `Edit table definition`.
     ```
 Then click on `Execute SQL` (the play icon).
 Explain why the primary key of the table `path_enzyme` has two atributes.
-**Note**: Replace all the green question mark place-holders (`???`) with appropriate SQL code.
+**Note**: Replace all the green question mark place-holders <span class="nobr">(`???`)</span> with appropriate SQL code.
 
 4. Insert some data in these three tables.
 We will only insert two pathways and three enzymes of the pathway based on the contents of the files `sequences.csv` and `selected2.csv` created in the previous modules.
@@ -76,10 +76,10 @@ Click on `Execute SQL` and run the following SQL commands:
     INSERT INTO path_enzyme (path_id, ???) VALUES ('hsa00983','P00492');
     INSERT INTO path_enzyme (path_id, ???) VALUES ('hsa00983','P18440');
     ```
-Then click on `Execute SQL` (play icon).	
+Then click on `Execute SQL` (play icon).
 Click on `Write Changes` to save the modifications to the database.
-**Note**: Save your SQL statements in a file for future study. 
-	
+**Note**: Save your SQL statements in a file for future study.
+
 5. Try to associate a second sequence to enzyme `P18440` by running the SQL statement:
     ```sql
     INSERT INTO enzyme (id, ???) VALUES ('P18440', 'AAAAAAA');

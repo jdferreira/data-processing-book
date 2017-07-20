@@ -57,7 +57,7 @@ Save the file as `module6.py` in the previous folder, and click on `Run` and the
     
 4. Modify the previous code so it prints the sequences of other enzymes.
     
-5. Modify the previous code to read the enzymes in the `selected2.csv` file and perform a lookup of their aminoacid sequences: 
+5. Modify the previous code to read the enzymes in the `selected2.csv` file and perform a lookup of their aminoacid sequences:
     ```python
     import urllib.request
     import csv
@@ -98,7 +98,7 @@ Save the file as `module6.py` in the previous folder, and click on `Run` and the
     file_to_read.close()
     ```
 Again, run the code, observe the output.
-**Note**: Replace all the green question mark place-holders (`???`) with appropriate Python code.
+**Note**: Replace all the green question mark place-holders <span class="nobr">(`???`)</span> with appropriate Python code.
 
 6. Modify the previous code to write the output to a file named `sequences.csv`:
     ```python
@@ -174,7 +174,7 @@ Observe in `sequences.csv` that some enzymes appear more than once, and try to e
         
             # Check if the sequence of this enzyme was not already saved
             if enzyme_id not in enzymes_saved:
-  
+                
                 # Establish the URL to open
                 url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
 

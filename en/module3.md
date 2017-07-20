@@ -43,9 +43,9 @@ and then click on Execute SQL (play icon).
 
 8. Insert one metabolic pathway in the table:
 
-    - Click on `Browse Data`, select the table `metabolic_pathways` and find the identifier (the id) and name of your favorite pathway.
-    - Next, select the table `my_pathways` and click on `New Record` and replace `NULL` by the id and name of your favorite pathway.
-    - Click on `Write Changes` to save the database.
+    a. Click on `Browse Data`, select the table `metabolic_pathways` and find the identifier (the id) and name of your favorite pathway.
+    b. Next, select the table `my_pathways` and click on `New Record` and replace `NULL` by the id and name of your favorite pathway.
+    c. Click on `Write Changes` to save the database.
 
 9. Click on `File`, then on `Export`, and finally on `Database to SQL file...`.
 Click `OK` and save as `database_metabolic_pathways.db.sql` in the previous folder.

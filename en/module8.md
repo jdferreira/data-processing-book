@@ -17,7 +17,7 @@
 
 ## Steps:
 
-1. Open your Personal Area on your computer and create a folder named module8.
+1. Open your Personal Area on your computer and create a folder named `module8`.
 Save the file `selected2.csv` given as input in the previous folder.
 Open the application `IDLE (Python 3...)`.
 
@@ -35,7 +35,7 @@ Open the application `IDLE (Python 3...)`.
         enzyme_id = enzyme[???] # Select the column for the enzyme identifier
         sequence = enzyme[???] # Select the column for the sequence
         
-        # associate the enzyme with its sequence
+        # Associate the enzyme with its sequence
         enzyme_sequence[enzyme_id] = sequence
     
     # Print debugging information
@@ -44,7 +44,7 @@ Open the application `IDLE (Python 3...)`.
     file_sequences.close()
     ```
 Save the file as `module8.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
-**Note**: Replace all the green question mark place-holders (`???`) with appropriate Python code.
+**Note**: Replace all the green question mark place-holders <span class="nobr">(`???`)</span> with appropriate Python code.
 
 3. Add the following code after the previous script to search, using regular expressions, the enzymes whose aminoacid sequence matches a certain pattern.
 Start by searching for all enzymes whose sequence contains three consecutive alanines `AAA`:
