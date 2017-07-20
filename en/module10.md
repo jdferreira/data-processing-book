@@ -27,7 +27,7 @@ and then click on Execute SQL (play icon).
 
 **Note**: Replace all the green question mark place-holders (`???`) with appropriate SQL code.
 
-4. Write a SQL query that associates the enzyme sequences with the pathway names:
+4. Write a SQL query that associates the enzyme sequences with the name of each pathway:
 ```sql
     SELECT path.???, enzyme.???
     FROM path, enzyme, path_enzyme

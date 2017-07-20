@@ -80,6 +80,8 @@ Click on `Execute SQL` and run the following SQL commands:
 ```
 and then click on Execute SQL (play icon).	
 Click on Write Changes to save the modifications to the database.
+
+**Note**: Save your SQL statements in a file for future study. 
 	
 5. Try to associate a second sequence to enzyme `P18440` by running the SQL statement:
 ```sql
