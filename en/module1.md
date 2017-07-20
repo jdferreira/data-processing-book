@@ -12,14 +12,16 @@
 
 1. Analyze the following figure that represents the [metabolic pathway of glycolysis](https://en.wikipedia.org/wiki/Glycolysis) that decomposes glucose in smaller chemical compounds.
 
-![The metabolic pathway of glycolysis](images/Glycolysis_metabolic_pathway_3_annotated.png "An example of a metabolic pathway")
+    ![The metabolic pathway of glycolysis](images/Glycolysis_metabolic_pathway_3_annotated.png "An example of a metabolic pathway")
 
-2. Open your Personal Area on your computer and create a folder named module1.
+2. Open your Personal Area on your computer and create a folder named `module1`.
 
 3. Save the file `metabolic_pathways.xls` given as input in the previous folder.
 
-4. Open the previous file in Excel. The data it contains comes from an online database called [Kyoto Encyclopedia of Genes and Genome](http://www.genome.jp/kegg/kegg2.html).
-The enzymes are referred by their UniProt code. [UniProt](http://www.uniprot.org/) is a database of proteins that contain, among a vast amount of information, the aminoacid sequences of the proteins.
+4. Open the previous file in Excel.
+The data it contains comes from an online database called [Kyoto Encyclopedia of Genes and Genome](http://www.genome.jp/kegg/kegg2.html).
+The enzymes are referred by their UniProt code.
+[UniProt](http://www.uniprot.org/) is a database of proteins that contain, among a vast amount of information, the aminoacid sequences of the proteins.
 
 5. Find how many metabolic pathways it contains.
 
