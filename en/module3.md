@@ -2,7 +2,7 @@
 
 ## Objectives:
 
--  Store data in a SQLite database.
+-  Store data in an SQLite database.
 
 ## Input:
 
