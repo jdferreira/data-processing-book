@@ -1,0 +1,1 @@
+DELETE FROM enzyme WHERE  id = 'P18440';

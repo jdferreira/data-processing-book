@@ -1,102 +1,130 @@
-# Module 5 -- Information selection with regular expressions {#module5}
+# Module 5 -- Filter data {#module5}
 
 ## Objectives:
-- Develop regular expressions that represent several selection criteria
-- Use the `re` Python module to create the regular expressions
-- Search for aminoacid motives in the enzyme sequences
+
+- Transform a selection criterion into actual Python code
+- Implement the selection process in Python
+- Save the selected information on a new file
 
 ## Input:
-- File: [sequences.csv](files/sequences.csv)
-    - created in module 3
+
+- File: [metabolic_pathways.csv](files/metabolic_pathways.csv)
+    - created in module 2
 
 ## Output:
-- File: `relevant_sequences_1.csv`
-- File: `relevant_sequences_2.csv`
-- File: `relevant_sequences_3.csv`
 
+- File: `selected1.csv`
+    * containing the data of the pathway `hsa03030`.
+- File: `selected2.csv`
+    * containing the data of the pathways where the enzyme P18440 participates.
+- File: `selected3.csv`
+    * containing the data of the pathways with more than 500 enzymes.
+    
 ## Steps:
 
-1. In this module, we will search, using regular expressions, the enzymes whose aminoacid sequence matches a certain pattern.
-    
-    a. You can consult a [reference cheat sheet of regular expressions](http://www.cheat-sheets.org/saved-copy/regular_expressions_cheat_sheet.png).
-    
-    b. You can also find the correspondence between each aminoacid and their 1-letter code in this [chart](http://bio100.class.uic.edu/lectures/aminoacids01.jpg).
-    
-    c. Familiarize yourself these two charts.
+1. Open your Personal Area on your computer and create a folder named `module5`.
 
-2. We start by reading the file `sequences.csv` and creating a dictionary that associates the enzymes with their aminoacid sequence, just as we did in the previous module.
-Start the `module5.py` script:
-```python
+2. Save the file `metabolic_pathways.csv` given as input in the previous folder.
+
+3. Open the application `IDLE (Python 3...)`.
+**Note**: do not open version 2 of Python
+
+4. Create a Python script that prints the name of the pathway with the identifier `hsa03030`.
+First, click on `File`, then on `New File`, and write
+    ```python
     import csv
     
-    # Read the CSV file
-    f = open('sequences.csv')
-    enzymes = csv.reader(f, delimiter=???)
+    f = open('metabolic_pathways.csv') # Open the file
     
-    # Create an empty dictionary that we will populate as we read the CSV
-    # file
-    dict_sequences = {}
+    paths = csv.reader(f, delimiter='???') # Create a CSV reader object
     
-    # For each of the enzymes in the file, associate the enzyme with its
-    # sequence
-    for enzyme in enzymes:
-        enzyme_id = enzyme[???] # The ID of this enzyme
-        seq = enzyme[???]       # The aminoacid sequence of this enzyme
-        dict_sequences[enzyme_id] = seq
+    # We must ignore the first row, which contains the headers of the
+    # columns, called the "metadata" of our data. We do it by calling
+    # the `next` function which advances to the next line of the file
+    next(paths)
     
-    f.close()
-```
-
-3. Now that we have the dictionary, let's search for all enzymes whose aminoacid sequence contains three consecutive alanines:
-```python
-    # We import the `re` module to handle regular expressions
-    import re
-    
-    # Define here your regular expression
-    reg_expr = r'???'
-    
-    # For each enzyme, retrieve their sequence and determine whether
-    # the sequence matches three consecutive alanines
-    for enzyme in dict_sequences:
-        # Retrieve the aminoacid sequence
-        seq = ???
+    for path in paths: # For each pathway ...
+        path_id = path[???] # Select the column for the ID
+        path_name = path[???] # Select the column for the name
         
-        # Determine whether the sequence matches the pattern
-        if re.search(reg_expr, seq):
-            print 'The enzyme ' + ??? + ' matches the expression ' + reg_expr
-```
+        if path_id == '???':
+            print(path_name) # ... print its name
+        
+    # Close the file
+    f.close()
+    ```
+Save the file as `module5.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
+**Note**: Replace all the green question mark place-holders <span class="nobr">(`???`)</span> with appropriate Python code.
 
-4. Change the code above to save the enzyme identifiers and sequences to a file named `relevant_sequences_1.csv` instead of printing them to the screen.
-Refer to module 3, step 5 to refresh your memory on how to write a CSV file.
-
-5. Change the regular expression in the Python script in order to find other sequences.
-For each of these patterns, save a new file named `relevant_sequences_2.csv` and `relevant_sequences_3.csv` respectively.
+5. Modify the previous code so the output is saved to a CSV file named `selected1.csv`.
+    ```python
+    import csv
+     
+    # Open the original file to read all pathways
+    file_to_read = open('metabolic_pathways.csv')
+    paths = csv.reader(file_to_read, delimiter='???')
+    next(paths)
     
-    a. Sequences where the first 5 aminoacids are non-polar.
+    # Open the file to save the selection
+    # The 'w' instructs Python that we want to write on this file
+    # The newline='' avoids blank lines between each row
+    file_to_write = open('selected1.csv', 'w', newline='')
+    w = csv.writer(file_to_write, delimiter='???')
+        
+    for path in paths: # For each pathway ...
+        path_id = path[???]
+        
+        if path_id == '???':
+            print('The pathway ' + path_id + ' was written to the file')
+            w.writerow(path) # write the pathway to the file
     
-    b. Sequences that contain a methionine, followed by any aminoacid, followed by either a serine or a proline.
+    # Close the files
+    file_to_read.close()
+    file_to_write.close()
+    ```
+Again, run the code, observe the output, and open the `selected1.csv` in Excel or in a text editor.
 
-6. Run the code and take notice of the files that were created.
-Do they correspond to what you were expecting to see?
+6. Modify the previous code so it selects the pathways where the enzyme P18440 participates and saves to a CSV file named `selected2.csv`:
+    ```python
+    import csv
+    
+    # Open the original file to read all pathways
+    file_to_read = open('metabolic_pathways.csv')
+    paths = csv.reader(file_to_read, delimiter=???)
+    next(paths)
+    
+    # Open the file to save the selection
+    # The 'w' instructs Python that we want to write on this file
+    # The newline='' avoids blank lines between each row
+    file_to_write = open('selected2.csv', 'w', newline='') # <-- Change here!!
+    w = csv.writer(file_to_write, delimiter='???')
+        
+    for path in paths: # For each pathway ...
+        path_id = path[0]
+        enzymes = path[???] # Select the column for the list of enzymes
+            
+        # Break that information into a list
+        enzyme_list = str.split(enzymes, '???')
+        
+        # `enzyme_list` is now a list of strings, such as follows:
+        # ['H9EC08', 'P03905', 'G9LG04', 'P03901']
+        
+        if '???' in enzyme_list: # Check if our selected enzyme is in that list
+            print('The pathway ' + path_id + ' was written to the file')
+            w.writerow(path) # write the pathway to the file
+    
+    # Close the files
+    file_to_read.close()
+    file_to_write.close()
+    ```
+Again, run the code, observe the output, and open the `selected2.csv` in Excel or in a text editor.
 
-7. Make sure you keep a copy of the `relevant_sequences_1.csv`, `relevant_sequences_2.csv` and `relevant_sequences_3.csv` files to yourself, so that you can use them in the next modules.
-For example, send it to you by email or upload it to Dropbox.
+7. Modify the previous code so it selects pathways containing more than 500 enzymes.
+**Tip**: use the built-in function `len`.
+The documentation for this function can be found in <https://docs.python.org/2/library/functions.html#len>
 
 
-## After the class:
-1. Write an alternative regular expression to the one of step 3 having the same meaning but using different regular expression elements.
 
-2. Imagine you want to apply the first regular expression used in this module (three consecutive alanines) to the file `relevant_sequences_2.csv` instead of `sequences.csv`.
-Change the Python script to accommodate this change.
-Verify whether the result is equal to what you got in `relevant_sequences_1.csv`.
 
-**Note**: To the students that want to explore regular expressions in more detail, we propose the following exercise:<br>
-What regular expression describes a molecular group that connects to GTP?
-This is a complex pattern that is composed of three subsequences (note that there is no aminoacid with the letter `X`; this letter is used to describe that any aminoacid can occur in that position):
 
-- the first is `GXXXXGK`,
-- the second is `DXXG`, and
-- the third is `NKXD` or `NKXW`.
 
-The first and second group are separated by either 40 to 80 aminoacids or 130 to 170 aminoacids; the second and third groups are separated by 40 to 80 aminoacids.
-<small>[Source: Dever TE, Glynias MJ, Merrick WC (1987). PNAS 84(7), 1814-1818.]</small>

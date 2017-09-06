@@ -1,128 +1,57 @@
-# Module 3 -- UniProt as a web service {#module3}
+# Module 3 -- Relational databases {#module3}
 
 ## Objectives:
-- Recognize the importance of external sources of data
-- Use a web service through Python code
-- Process information coming from a web service
+
+-  Store data in an SQLite database.
 
 ## Input:
-- File: [selected2.csv](files/selected2.csv)
-    - created in the previous module
+
+- File: [metabolic_pathways.csv](files/metabolic_pathways.csv)
+    - created in the module 2
 
 ## Output:
-- File: `sequences.csv`
-    - containing the aminoacid sequences for each enzyme
+- File: `database_metabolic_pathways.db`
+- File: `database_metabolic_pathways.db.sql`
 
 ## Steps:
 
-1. Go to <http://www.uniprot.org/uniprot/P12345.fasta> and study the FASTA format.
-Change the identifier in the link from `P12345` to another one and study its content and how it is different from the previous one.
+1. Open your Personal Area on your computer and create a folder named `module3`.
 
-2. In a Python file named `module3.py`, create a function called `get_sequence` that takes as input the ID of a protein and returns its aminoacid sequence.
-This function:
+2. Save the file `metabolic_pathways.csv` given as input in the previous folder.
 
-    a. opens the URL mentioned above,
-    
-    b. reads the content on that URL,
-    
-    c. extracts the aminoacid sequence, and
-    
-    d. joins all the lines so that only a single string is returned
-    ```python
-        import urllib # This module contains functions to read URLs
+3. Open the application [DB Browser for SQLite](http://sqlitebrowser.org/).
+**Note**: There is a portable version available for download that can be used without installation.
 
-        def get_sequence(identifier):
-            # Establish the URL to open
-            url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
-            
-            # Open the URL
-            f = urllib.urlopen(url)
-            
-            # Read all the lines into a list
-            lines = f.readlines()
-            
-            # Ignore the first line, which contains metadata
-            del lines[0]
-            
-            # Join all the remaining lines into a single string
-            sequence = str.join("", lines)
-            
-            # Remove the line ends (the "enter" used to start the next line)
-            # This line end is represented as `\n`
-            sequence = str.replace(sequence, '\n', '')
-            
-            # Return the sequence
-            return ???
+4. Create a new database named `database_metabolic_pathways.db` and save it in the previous folder.
+Click Cancel when asked for `Edit table definition`.
+
+5. Click on `File`, then on `Import`, and finally on `Table from CSV file...`.
+Select the `metabolic_pathways.csv` and click Open.
+Make sure that the checkbox "Column names in first line" is selected and that the "Field separator" and "Quote separator" characters are correct (a comma `,` and a double quote `"` respectively). See the picture below if necessary.
+
+    ![Table metabolic_pathways](images/table_metabolic_pathways.png "Table metabolic_pathways")
+
+6. Click OK twice to import the table.
+
+7. Click on `Browse Data` and check how many rows the table `metabolic_pathways`.
+
+8. Click on `Execute SQL` and write:
+    ```sql
+    CREATE TABLE my_pathways (
+        id TEXT,
+        name TEXT
+    )
     ```
+and then click on Execute SQL (play icon).
 
-3. Let's try our function on a couple of proteins.
-To do that, add the following lines to the Python file (replace the `???` instances with any protein IDs you want):
-```python
-    sequence1 = get_sequence('P12345')
-    sequence2 = get_sequence('???')
-    sequence3 = get_sequence('???')
-    
-    print "SEQUENCE 1:\n" + sequence1 + "\n"
-    print "SEQUENCE 2:\n" + sequence2 + "\n"
-    print "SEQUENCE 3:\n" + sequence3 + "\n"
-```
+9. Insert one metabolic pathway in the table:
 
-4. Now we are going to read the enzymes in the `selected2.csv` file and perform a lookup of their aminoacid sequences.
-    
-    a. Remove or comment the code from step 3.
-    
-    b. Replace it with this:
-    ```python
-        import csv
-        
-        # Open the output file from the previous module
-        f = open('selected2.csv')
-        paths = csv.reader(f, delimiter=???)
-        
-        # Start with an empty list of enzymes
-        enzymes = []
-        
-        # Then:
-        # - read the information of each pathway,
-        # - extract the list of enzymes of each pathway, and
-        # - append each enzyme to the list of enzymes
-        for path in paths:
-            enzymes_field = path[???] # The field of the enzymes
-            
-            # Split the enzymes into a list, as in module 2
-            enzymes_in_this_path = str.split(enzymes_field, ???)
-            
-            # Append each one into the master enzyme list
-            for e in enzymes_in_this_path:
-                enzymes.append(e)
-        
-        f.close()
-    ```
+    a. Click on `Browse Data`, select the table `metabolic_pathways` and find the identifier (the id) and name of your favorite pathway.
+    b. Next, select the table `my_pathways` and click on `New Record` and replace `NULL` by the id and name of your favorite pathway.
+    c. Click on `Write Changes` to save the database.
 
-5. Now that we have a list of enzymes, we can use it and the function we created in the beginning to get the aminoacid sequence of each enzyme.
-We will save this information into a new file.
-Continue adding code to your `module3.py` file:
-```python
-    f = open('sequences.csv', 'wb')
-    w = csv.writer(f, delimiter=???)
-    
-    for e in enzymes:
-        seq = get_sequence(e)
-        w.writerow([e, seq])
-    
-    f.close()
-```
+10. Click on `File`, then on `Export`, and finally on `Database to SQL file...`.
+Make sure that you select all the tables in your database (click the `Select All` button) and click `OK`.
+Save the file as `database_metabolic_pathways.db.sql` in the previous folder.
 
-6. Run the code and take notice of the file that was created (`sequences.csv`).
-Does it correspond to what you were expecting to see?
-
-7. Make sure you keep a copy of the `sequences.csv` file to yourself, so that you can use it in the next modules.
-For example, send it to you by email or upload it to Dropbox.
-
-
-## After the class:
-
-1. Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why?
-
-2. Change your code in order to find the sequence of all the enzymes in the metabolic pathways, and not only the enzymes in the pathways selected in the previous module.
-Save the sequences into a file named `all_sequences.csv`.
+11. Open the file `database_metabolic_pathways.db.sql` in a text editor (Notepad) and check how each pathway is now being stored.

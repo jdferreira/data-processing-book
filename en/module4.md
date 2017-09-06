@@ -1,111 +1,80 @@
-# Module 4 -- Crossing data from several sources {#module4}
+# Module 4 -- Read and print data {#module4}
 
 ## Objectives:
-- Use dictionaries to associate information
-- Cross data from different data sources
+
+- Read CSV files and print data with Python
+- Understand the meaning of metadata
 
 ## Input:
-- File: [selected2.csv](files/selected2.csv)
+
+- File: [metabolic_pathways.csv](files/metabolic_pathways.csv)
     - created in module 2
-- File: [sequences.csv](files/sequences.csv)
-    - created in module 3
 
-## Output:
-- File: `paths_enzymes.csv`
+### Output:
 
+- Console:
+    ```text
+    Glycolysis / Gluconeogenesis
+    Citrate cycle (TCA cycle)
+    Pentose phosphate pathway
+    Pentose and glucuronate interconversions
+    ...
+    ```
+    
 ## Steps:
 
-1. Start by creating an empty `module4.py` file.
+1. Open your Personal Area on your computer and create a folder named `module4`.
 
-2. We will first read the file `sequences.csv` so that we can build a dictionary where each enzyme is associated with its own aminoacid sequence.
-As such, add this to your `module4.py`, filling in the question marks:
-```python
+2. Save the file `metabolic_pathways.csv` given as input in the previous folder.
+
+3. Open the application `IDLE (Python 3...)`.
+**Note**: do not open version 2 of Python
+
+4. Click on `File`, then on `New File`, and write
+    ```python
+    print('Hello World!')
+    ```
+
+5. Save the file as `module4.py` in the previous folder.
+
+6. Click on `Run` and then `Run Module` and observe the output produced by Python and ensure that the screen shows the following:
+    ```text
+    Hello World!
+    ```
+
+7. Create a Python script to read the CSV file and print the name of each pathway.
+Replace the previous command:
+    ```python
+    print('Hello World!')
+    ```
+with the following code:
+    ```python
     import csv
     
-    # Read the CSV file
-    f = open('sequences.csv')
-    enzymes = csv.reader(f, delimiter=???)
+    f = open('metabolic_pathways.csv') # Open the file
     
-    # Create an empty dictionary that we will populate as we read the CSV
-    # file
-    dict_sequences = {}
+    paths = csv.reader(f, delimiter='???') # Create a CSV reader object
     
-    # For each of the enzymes in the file, associate the enzyme with its
-    # sequence
-    for enzyme in enzymes:
-        enzyme_id = enzyme[???] # The ID of this enzyme
-        seq = enzyme[???]       # The aminoacid sequence of this enzyme
-        dict_sequences[enzyme_id] = seq
-    
+    # We must ignore the first row, which contains the headers of the
+    # columns, called the "metadata" of our data. We do it by calling
+    # the `next` function which advances to the next line of the file
+    next(paths)
+        
+    for path in paths:    # For each pathway ...
+        print(path[???])  # ... print its name
+        
+    # Close the file
     f.close()
-```
+    ```
+**Note**: Replace all the green question mark place-holders <span class="nobr">(`???`)</span> with appropriate Python code.
 
-3. Then we will read the file `selected2.csv` and associate each pathway with the list of enzymes that are part of it.
-We will also use a dictionary for this task:
-```python
-    # Read the CSV file
-    f = open('selected2.csv')
-    paths = csv.reader(f, delimiter=???)
-    
-    # Create an empty dictionary that we will populate as we read the CSV
-    # file
-    dict_paths = {}
-    
-    # For each pathway in that file:
-    # - extract the list of enzymes in the pathway
-    # - associate the pathway with this list of enzymes
-    for path in paths:
-        path_id = path[???] # The ID of the pathways
-        enzymes = path[???] # The field of the enzymes
-        
-        # Break that information into a list
-        enzyme_list = str.split(enzymes, ???)
-        
-        # Associate the pathway ID with the corresponding list of enzymes
-        dict_paths[???] = ???
-    
-    f.close()
-```
-
-4. Now that we have the two dictionaries, we can go through each pathway and through each enzyme in it and create a CSV file that crosses the information, associating each pathway to the aminoacid sequences of its enzymes.
-To do so, add this final piece of code to your script:
-```python
-    # Open a file to save the output
-    f = open('paths_enzymes.csv', 'wb')
-    w = csv.writer(f, delimiter=???)
-    
-    # For each pathway and each enzyme that it contains
-    for path_id in dict_paths :
-        # Let's print some debugging information
-        print 'Processing pathway with ID ' + path_id
-        
-        # Retrieve the list of enzymes associated with this pathway
-        enzyme_list = dict_paths[???]
-        
-        # Now that we have the list of enzymes, associate the pathway with each
-        # aminoacid sequence
-        for enzyme_id in enzyme_list:
-            # Some more debugging information
-            print '  enzyme = ' + enzyme_id
-            
-            # Retrieve the sequence associated with this enzyme
-            seq = dict_sequences[???]
-            
-            # Write this row to the CSV file
-            w.writerow([path_id, seq])
-    
-    f.close()
-```
-
-5. Run the code and take notice of the file that was created (`paths_enzymes.csv`).
+8. Click on `Run` and then `Run Module` and observe the output.
 Does it correspond to what you were expecting to see?
 
-6. Make sure you keep a copy of the `paths_enzymes.csv` file to yourself, so that you can use it in the next modules.
-For example, send it to you by email or upload it to Dropbox.
+9. Change the previous Python code to print the class of each pathway instead of its name.
 
+**Note**: to read and write CSV files in Python, we use the `csv` module.
+This module allows us to specify the format of the file to read/write, _e.g._ which character to use to separate the fields and to delimit the fields.
+You should familiarize yourself with this module by reading its documentation at <https://docs.python.org/2/library/csv.html>.
 
-
-## After the class:
-1. Change the selection criterion used to create the file `selected2.csv` (for example selecting only the pathways with at most 10 enzymes, as proposed in the quiz of module 2).
-Then change the code of today's module to accommodate this change.
 

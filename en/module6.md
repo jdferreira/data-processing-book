@@ -1,126 +1,203 @@
-# Module 6 -- Create an SQL database {#module6}
+# Module 6 -- Web services {#module6}
 
 ## Objectives:
-- Design a simple database schema to store information on the pathways
-- Use foreign keys
+
+- Recognize the importance of external sources of data
+- Use a web service through Python code
+- Process information coming from a web service
 
 ## Input:
-- None
+
+- File: [selected2.csv](files/selected2.csv)
+    - created in module 5
 
 ## Output:
-- Database file: `pathways.db`
+
+- File: `sequences.csv`
+    - containing the aminoacid sequences for each enzyme
 
 ## Steps:
 
-1. We will start by creating an empty database in the file `pathways.db` which will contain three tables.
-First create a new Python script `module6.py` with the following code:
-```python
-    # `sqlite3` is a package that can be used to create a file containing
-    # a relational database. We use this package to create the database,
-    # insert data in it and query the data.
-    
-    import sqlite3
-    
-    # To access a database, we need to connect to it. If the file does not
-    # exist, one will be created
-    connection = sqlite3.connect('pathways.db')
-```
+1. Go to <http://www.uniprot.org/uniprot/P18440.fasta> and study the FASTA format.
+Change the identifier in the link from `P18440` to another one and study its content and how it is different from the previous one.
 
-2. Now that we have an empty database, let's add the tables that we need to store the metabolic pathway data.
-```python
-    # Erase the tables in case they already exist in the database
-    connection.execute('DROP TABLE IF EXISTS path')
-    connection.execute('DROP TABLE IF EXISTS enzyme')
-    connection.execute('DROP TABLE IF EXISTS path_enzyme')
-    
-    # This table will contain data about the pathways
-    connection.execute('''
-        CREATE TABLE path (
-            id VARCHAR(255) PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            class VARCHAR(255) NOT NULL
-        )
-    ''')
-    
-    # This table will contain data about the enzymes
-    connection.execute('''
-        CREATE TABLE enzyme (
-            id VARCHAR(255) PRIMARY KEY,
-            sequence TEXT NOT NULL
-        )
-    ''')
-    
-    # This table will associate each pathway with its enzymes
-    connection.execute('''
-        CREATE TABLE path_enzyme (
-            path_id VARCHAR(255),
-            enzyme_id VARCHAR(255),
-            PRIMARY KEY (path_id, enzyme_id),
-            FOREIGN KEY (path_id) REFERENCES path (id),
-            FOREIGN KEY (enzyme_id) REFERENCES enzyme (id)
-        )
-    ''')
-```
+2. Open your Personal Area on your computer and create a folder named `module6`.
+Save the file `selected2.csv` given as input in the previous folder.
+Open the application `IDLE (Python 3...)`.
 
-3. Now, we insert some data in these three tables.
-We will only insert one pathway and two enzymes of that pathway.
-If you need, consult the files from the previous modules to find the name, enzymes and sequences of the pathway `hsa00730`.
-```python
-    connection.execute('''
-        INSERT INTO path (id, name, class)
-        VALUES ('hsa00730', '???', '???')
-    ''')
-    
-    connection.execute('''
-        INSERT INTO enzyme (id, sequence)
-        VALUES ('Q53FP3','???')
-    ''')
-    
-    connection.execute('''
-        INSERT INTO enzyme (id, sequence)
-        VALUES ('???','???')
-    ''')
-    
-    connection.execute('''
-        INSERT INTO path_enzyme (path_id, enzyme_id)
-        VALUES ('hsa00730','???')
-    ''')
-    
-    connection.execute('''
-        INSERT INTO path_enzyme (path_id, enzyme_id)
-        VALUES ('???','???')
-    ''')
-    
-    # Ensure that the data is saved
-    connection.commit()
-```
+3. Create a Python script that prints the sequence of a given protein.
+The script will open the URL mentioned above, read the content on that URL, extract the aminoacid sequence, and join all the lines so that only a single string is returned.
+Click on `File`, then on `New File`, and write
+    ```python
+    import urllib.request # This module contains functions to read URLs
 
-4. Finally, let's just make sure that the tables contain some data.
-To do that, you can use [DB Browser for SQLite](http://sqlitebrowser.org/), which has a [portable version](https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.9.1/SQLiteDatabaseBrowserPortable_3.9.1_English.paf.exe) that can be used without installation.
-o check with Python, we can select, for example, the sequences of each pathway.
-```python
-    rows = connection.execute('SELECT id, sequence FROM enzyme')
-    for row in rows:
-        enzyme_id = row[0]
-        enzyme_sequence = row[1]
+    # Establish the URL to open
+    url = 'http://www.uniprot.org/uniprot/' + 'P18440' + '.fasta'
+
+    # Open the URL
+    response = urllib.request.urlopen(url)
+
+    # Read all the lines into a list
+    data = response.read().decode('ascii')
+    lines = str.split(data, '\n')
+
+    # Ignore the first line, which contains metadata
+    del lines[0]
+
+    # Join all the remaining lines into a single string
+    sequence = str.join('', lines)
+
+    # Remove the line ends (the "enter" used to start the next line)
+    sequence = str.replace(sequence, '\n', '')
+    
+    # Prints the sequence
+    print(sequence)
+    ```
+Save the file as `module6.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
+    
+4. Modify the previous code so it prints the sequences of other enzymes.
+    
+5. Modify the previous code to read the enzymes in the `selected2.csv` file and perform a lookup of their aminoacid sequences:
+    ```python
+    import urllib.request
+    import csv
+    
+    file_to_read = open('selected2.csv')
+    paths = csv.reader(file_to_read, delimiter='???')
         
-        print enzyme_id + ' starts with ' + enzyme_sequence[:5]
-```
+    for path in paths: # For each pathway ...
+        enzymes = path[???] # Select the column for the list of enzymes
+            
+        # Break that information into a list
+        enzyme_list = str.split(enzymes, '???')
 
-5. Ensure that the output on the screen is:
-```text
-    Q53FP3 starts with MLLRA
-    Q9Y697 starts with MLLRA
-```
+        for enzyme_id in enzyme_list:
+        
+            # Establish the URL to open
+            url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
 
-6. Make sure you keep a copy of the `pathways.db` file to yourself, so that you can use it in the next module.
-For example, send it to you by email or upload it to Dropbox.
+            # Open the URL
+            response = urllib.request.urlopen(url)
 
-## After the class:
+            # Read all the lines into a list
+            data = response.read().decode('ascii')
+            lines = str.split(data, '\n')
 
-1. Explain why the primary key of the table `path_enzyme` has two atributes.
+            # Ignore the first line, which contains metadata
+            del lines[0]
 
-2. Modify the database schema so that the database can store the name of the enzymes and also their position within the pathway (a whole number).
+            # Join all the remaining lines into a single string
+            sequence = str.join('', lines)
 
-3. Change the code of step 4 so that you can also verify the contents of the  tables `paths` and `path_enzyme`.
+            # Remove the line ends (the "enter" used to start the next line)
+            sequence = str.replace(sequence, '\n', '')
 
+            # Prints the sequence
+            print('Sequence of pathway ' + enzyme_id + ':\n' + sequence)
+    
+    file_to_read.close()
+    ```
+Again, run the code, observe the output.
+**Note**: Replace all the green question mark place-holders <span class="nobr">(`???`)</span> with appropriate Python code.
+
+6. Modify the previous code to write the output to a file named `sequences.csv`:
+    ```python
+    import urllib.request
+    import csv
+    
+    file_to_read = open('selected2.csv')
+    paths = csv.reader(file_to_read, delimiter='???')
+    
+    file_to_write = open('sequences.csv', 'w', newline='')
+    w = csv.writer(file_to_write, delimiter='???')
+        
+    for path in paths: # For each pathway ...
+        enzymes = path[???] # Select the column for the list of enzymes
+            
+        # Break that information into a list
+        enzyme_list = str.split(enzymes, '???')
+
+        for enzyme_id in enzyme_list:
+        
+            # Establish the URL to open
+            url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
+
+            # Open the URL
+            response = urllib.request.urlopen(url)
+
+            # Read all the lines into a list
+            data = response.read().decode('ascii')
+            lines = str.split(data, '\n')
+
+            # Ignore the first line, which contains metadata
+            del lines[0]
+
+            # Join all the remaining lines into a single string
+            sequence = str.join('', lines)
+
+            # Remove the line ends (the "enter" used to start the next line)
+            sequence = str.replace(sequence, '\n', '')
+
+            # Writes the sequence to the file
+            w.writerow([enzyme_id, ???])
+    
+    file_to_read.close()
+    file_to_write.close()
+    ```
+Again, run the code, observe the output, and open the `sequences.csv` in Excel or in a text editor.
+Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why.
+
+7. Modify the previous code so that repeated enzymes are only processed once, thus minimizing the calls to the external web service:
+    ```python
+    import urllib.request
+    import csv
+    
+    file_to_read = open('selected2.csv')
+    paths = csv.reader(file_to_read, delimiter='???')
+    
+    file_to_write = open('sequences.csv', 'w', newline='')
+    w = csv.writer(file_to_write, delimiter='???')
+
+    # List of enzymes which sequence was alread saved
+    enzymes_saved = []
+    
+    for path in paths: # For each pathway ...
+        enzymes = path[???] # Select the column for the list of enzymes
+            
+        # Break that information into a list
+        enzyme_list = str.split(enzymes, '???')
+
+        for enzyme_id in enzyme_list:
+        
+            # Check to see if this enzyme was not already processed.
+            if enzyme_id not in enzymes_saved:
+                
+                # Establish the URL to open
+                url = 'http://www.uniprot.org/uniprot/' + ??? + '.fasta'
+
+                # Open the URL
+                response = urllib.request.urlopen(url)
+
+                # Read all the lines into a list
+                data = response.read().decode('ascii')
+                lines = str.split(data, '\n')
+
+                # Ignore the first line, which contains metadata
+                del lines[0]
+
+                # Join all the remaining lines into a single string
+                sequence = str.join('', lines)
+
+                # Remove the line ends (the "enter" used to start the next line)
+                sequence = str.replace(sequence, '\n', '')
+
+                # Writes the sequence to the file
+                w.writerow([enzyme_id, sequence])
+                
+                # Add the enzyme to the list of saved enzymes
+                enzymes_saved.append(???)
+    
+    file_to_read.close()
+    file_to_write.close()
+    ```
+Again, run the code, observe the output, and open the `sequences.csv` in Excel or in a text editor.

@@ -1,197 +1,113 @@
-# Module 7 -- Inserting data from CSV {#module7}
+# Module 7 -- Merging data {#module7}
 
 ## Objectives:
-- Copy data from CSV into the database
-- Query the database with complex selection criteria
+
+- Use dictionaries to associate information
+- Merge data from different data sources
 
 ## Input:
-- File: [metabolic_pathways.csv](files/metabolic_pathways.csv)
-    - created in module 1
-- File: [all_sequences.csv](files/all_sequences.csv)
-    - similar to `sequences.csv` from module 3 but will the sequence of all the enzymes.
-    See question 2 in the **After the class** section of that module.
-- File: [pathways.db](files/pathways.db)
+
+- File: [selected2.csv](files/selected2.csv)
+    - created in module 5
+- File: [sequences.csv](files/sequences.csv)
     - created in module 6
 
 ## Output:
-- File: `results_1.csv`
-- File: `results_2.csv`
-- File: `results_3.csv`
-- File: `results_4.csv`
+
+- File: `paths_enzymes.csv`
 
 ## Steps:
 
-1. Create a new Python script `module7.py` that opens the database `pathways.db` created in the previous module with Python and removes the entries in the tables.
-```python
-    import sqlite3
-    
-    connection = sqlite3.connect('pathways.db')
-    
-    # Erase all data from the three tables
-    connection.execute('DELETE FROM path_enzyme')
-    connection.execute('DELETE FROM path')
-    connection.execute('DELETE FROM enzyme')
-    
-    # Save the deletions
-    connection.commit()
-```
+1. Open your Personal Area on your computer and create a folder named `module7`.
+Save the files `selected2.csv` and `sequences.csv` given as input in the previous folder.
+Open the application `IDLE (Python 3...)`.
 
-2. Add the following code to the script, which will read the data from each pathway and add them to the database.
-```python
+2. Create a Python script that creates two dictionaries, one that associates each pathway with its list of enzymes based on the contents of the file `selected2.csv`, and the other that associates each enzyme with its sequence based on the contents of the file `sequences.csv`:
+    ```python
     import csv
     
-    # Read the pathways from the file from module 3
-    f = open('metabolic_pathways.csv')
-    paths = csv.reader(f, delimiter=???)
+    file_paths = open('selected2.csv')
+    paths = csv.reader(file_paths, delimiter='???')
     
-    # For each pathway, insert its information into the database
-    for path in paths:
-        # Extract the pathway information from the `path` variable
-        path_id = path[0]
-        path_name = ???
-        path_class = ???
+    # Dictionary that associates each pathway with its list of enzymes
+    path_enzyme = {}
+    
+    for path in paths: # For each pathway ...
+        path_id = path[???] # Select the column for the path identifier
+        enzymes = path[???] # Select the column for the list of enzymes
         
-        # Insert into the database
-        # Notice that we create a generic SQL command using the `?` notation
-        # and give the parameters of the command as a tuple
-        connection.execute('''
-            INSERT INTO path (id, name, class)
-            VALUES (?, ?, ?)
-        ''', (path_id, path_name, path_class))
-    
-    # Close the file
-    f.close()
-    
-    # Save the changes
-    connection.commit()
-```
-
-3. We will do the same thing for the enzymes:
-```python
-    # Now do the same for the enzymes
-    f = open('all_sequences.csv')
-    enzymes = csv.reader(f, delimiter=???)
-    
-    enzymes_inserted = [] # Keep a list of the enzymes already inserted
-    
-    for enzyme in enzymes:
-        enzyme_id = ???
-        enzyme_sequence = ???
+        # Break that information into a list
+        enzyme_list = str.split(enzymes, '???')
         
-        # Check to see if the enzyme has been added before
-        if enzyme_id not in enzymes_inserted:
-            connection.execute('''
-                INSERT INTO enzyme (id, sequence)
-                VALUES (?, ?)
-            ''', (enzyme_id, enzyme_sequence))
-            
-            # Add this enzyme to the list of enzymes already inserted
-            enzymes_inserted.append(enzyme_id)
+        # Associate the path with its enzymes
+        path_enzyme[path_id] = enzyme_list
     
-    # Close the file
-    f.close()
+    # Print debugging information
+    print('Enzymes of pathway hsa00232: ' + str(path_enzyme['hsa00232']))
     
-    # Save the changes
-    connection.commit()
-```
-
-4. And now it is time to insert into the database the information that will allow us to relate pathways with enzymes:
-```python
-    # Which file do we need to read in order to relate pathways with enzymes?
-    f = open(???)
+    file_sequences = open('sequences.csv')
+    enzymes = csv.reader(file_sequences, delimiter='???')
     
-    paths =  csv.reader(f, delimiter=???)
+    # Dictionary that associates each enzyme with its sequence
+    enzyme_sequence = {}
     
-    for path in paths:
-        path_id = path[0]
-        enzyme_list = path[3].split('|')
+    for enzyme in enzymes: # For each pathway ...
+        enzyme_id = enzyme[???] # Select the column for the enzyme identifier
+        sequence = enzyme[???] # Select the column for the sequence
         
-        # For each enzyme, we need to add one line to the `path_enzyme` table
+        # Associate the enzyme with its sequence
+        enzyme_sequence[enzyme_id] = sequence
+    
+    # Print debugging information
+    print('Sequence of enzyme P18440: ' + enzyme_sequence['P18440'])
+    
+    file_paths.close()
+    file_sequences.close()
+    ```
+Save the file as `module7.py` in the previous folder, and click on `Run` and then `Run Module` and observe the output.
+**Note**: Replace all the green question mark place-holders <span class="nobr">(`???`)</span> with appropriate Python code.
+    
+3. Add the following code after the previous script to associate each pathway to the sequences of its enzymes.
+    ```python
+    # (code from step 2)
+    
+    # For each pathway
+    for path_id, enzyme_list in path_enzyme.items():
+        print('Processing path: ' + path_id)
+        
+        # For each enzyme of that pathway
         for enzyme_id in enzyme_list:
-            connection.execute('''
-                INSERT INTO path_enzyme (path_id, enzyme_id)
-                VALUES (?, ?)
-            ''', (path_id, enzyme_id))
-    
-    f.close()
-    connection.commit()
-```
+            # Some more debugging information
+            print('Processing enzyme: ' + enzyme_id)
+            
+            # Retrieve the sequence associated with this enzyme
+            sequence = enzyme_sequence[???]
+            
+            # Print the sequence associated to the path being processed
+            print(path_id + ', ' + sequence)
+    ```
+Again, run the code and observe the output.
 
-5. Let's use an SQL query to print the id and name of the pathways:
-```python
-    rows = connection.execute('SELECT ??? FROM ???')
+4. Modify the previous code to save the output in a CSV file named `paths_enzymes.csv`:
+    ```python
+    # (code from step 2)
     
-    # For each selected pathway, print the id and the name of the pathway
-    for row in rows:
-        path_id = row[???]
-        path_name = row[???]
+    file_to_write = open('paths_enzymes.csv', 'w', newline='')
+    w = csv.writer(file_to_write, delimiter='???')
+    
+    # For each pathway
+    for path_id, enzyme_list in path_enzyme.items():
         
-        print 'Path ' + path_id + ' is named "' + path_name + '"'
-```
-
-6. Check that the output is
-```text
-    Path hsa00010 is named "Glycolysis / Gluconeogenesis"
-    Path hsa00020 is named "Citrate cycle (TCA cycle)"
-    Path hsa00030 is named "Pentose phosphate pathway"
-    Path hsa00040 is named "Pentose and glucuronate interconversions"
-    Path hsa00051 is named "Fructose and mannose metabolism"
-    ...
-```
-
-7. The code above prints the results to the screen.
-Now we want to save them into the CSV file `results_1.csv`.
-Replace the code from step 5 with this:
-```python
-    # Let's open file `results_1.csv` in write mode
-    f = open(???, ???)
-    w = csv.writer(f, delimiter=???)
+        # For each enzyme of that pathway
+        for enzyme_id in enzyme_list:
+            
+            # Retrieve the sequence associated with this enzyme
+            sequence = enzyme_sequence[???]
+            
+            # Write this row to the CSV file
+            w.writerow([path_id, sequence])
     
-    rows = connection.execute('SELECT ??? FROM ???')
-    
-    # For each selected pathway, save it to the file
-    for row in rows:
-        w.writerow(row)
-    
-    f.close()
-```
+    file_to_write.close()
+    ```
+Again, run the code, observe the output, and open the `paths_enzymes.csv` in Excel or in a text editor.
 
-8. Let's now select all the enzymes whose id starts with Q and save them to the file `results_2.csv`.
-The code recipe is the same, changing only the file name and the query.
-You can use the following query, changing where necessary:
-```sql
-    SELECT ??? FROM enzyme WHERE ??? LIKE "Q%"
-```
-
-9. Now we will cross the data in the tables.
-Duplicate and adapt the same code from the previous step, using the following command SQL to select the enzyme sequences of each pathway, and save the results to `results_3.csv`:
-```sql
-    SELECT path.name, enzyme.???
-    FROM path, enzyme, path_enzyme
-    WHERE path.id = path_enzyme.path_id
-      AND enzyme.id = path_enzyme.enzyme_id
-```
-
-10. SQL allows the use of complex queries.
-Use this query to save the id and name of the pathways associated with at least 300 enzymes.
-Save this to `results_4.csv`.
-```sql
-    SELECT path.id, path.name
-    FROM path, path_enzyme
-    WHERE path.id = path_enzyme.path_id
-    GROUP BY path_id HAVING COUNT(*) >= 300
-```
-
-## After the class:
-
-1. Determine the reason for using the list `enzymes_inserted` in step 3.<br>
-**Hint**: try to remove the list from the script and observe that the code fails with a `constraint failed` exception.
-
-2. Many of the steps in this module suffer from code repetition.
-    
-    a. Create a function `run_sql` that accepts two arguments: an SQL command and a file name.
-    
-    b. Implement this function so that it runs the SQL command and saves the results in a CSV file.
-    
-    c. Change today's code so that it uses the function, instead of repeating code<br>
-    **Hint**: The steps 6 to 9 will each simply call the function once.

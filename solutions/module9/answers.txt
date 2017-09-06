@@ -1,0 +1,10 @@
+== 5 ==
+Because we already had row in the table `enzyme` with the identifier `P18440`. The primary key ensures that the rows contain only unique identifiers.
+
+== 9 ==
+Because we are crossing the 3 tables path, enzyme and path_enzyme, which have a total of 2, 3 and 4 rows respectively. Thus we get one new row for each possible combination of the original rows in the three tables, or, in other words, we get 2*3*4=24 rows.
+
+== 10 ==
+The query selects all combinations of pathways and enzymes that are valid (in the sense that it only selects rows containing a pathway and an enzyme if the enzyme participates in the pathway), and filters these result with an additional criterion, namely having the enzyme sequence match the regular expression `%EA`.
+
+If this was the whole story, it would select pathway hsa00232 twice (because both `P05177` and `P18440` match the regular expression) and the pathway hsa00983 once (because only one of its enzymes -- P18440 -- matches the regular expression). However, we are grouping this result by pathway identifier, and then further inlcuding the criterion that each selected group must have a size of 2 or more (as declared with the `HAVING COUNT(enzyme_id) >= 2` clause). Only the hsa00983 pathway satisfies the whole selection conditions, and it is, therefore, the only result of the query.

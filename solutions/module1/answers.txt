@@ -1,0 +1,18 @@
+== 5 ==
+297
+
+== 6 ==
+DNA replication
+
+== 7 ==
+hsa04911
+
+== 8 ==
+hsa00190: Oxidative phosphorylation
+hsa00910: Nitrogen metabolism
+hsa00920: Sulfur metabolism
+
+== 9 ==
+hsa00232: Caffeine metabolism
+hsa00983: Drug metabolism - other enzymes
+hsa05204: Chemical carcinogenesis
