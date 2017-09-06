@@ -38,9 +38,9 @@ First, click on `File`, then on `New File`, and write
     
     paths = csv.reader(f, delimiter='???') # Create a CSV reader object
     
-    # We need to ignore the first row, which contains the headers of the
-    # columns, called the "metadata". We do it by calling the `next`
-    # function, which advances to the next line of the file
+    # We must ignore the first row, which contains the headers of the
+    # columns, called the "metadata" of our data. We do it by calling
+    # the `next` function which advances to the next line of the file
     next(paths)
     
     for path in paths: # For each pathway ...
@@ -75,7 +75,7 @@ Save the file as `module5.py` in the previous folder, and click on `Run` and the
         path_id = path[???]
         
         if path_id == '???':
-            print("the pathway " + path_id + " was written to the file")
+            print('The pathway ' + path_id + ' was written to the file')
             w.writerow(path) # write the pathway to the file
     
     # Close the files
@@ -96,7 +96,7 @@ Again, run the code, observe the output, and open the `selected1.csv` in Excel o
     # Open the file to save the selection
     # The 'w' instructs Python that we want to write on this file
     # The newline='' avoids blank lines between each row
-    file_to_write = open('selected2.csv', 'w', newline='')
+    file_to_write = open('selected2.csv', 'w', newline='') # <-- Change here!!
     w = csv.writer(file_to_write, delimiter='???')
         
     for path in paths: # For each pathway ...
@@ -110,7 +110,7 @@ Again, run the code, observe the output, and open the `selected1.csv` in Excel o
         # ['H9EC08', 'P03905', 'G9LG04', 'P03901']
         
         if '???' in enzyme_list: # Check if our selected enzyme is in that list
-            print("the pathway " + path_id + " was written to the file")
+            print('The pathway ' + path_id + ' was written to the file')
             w.writerow(path) # write the pathway to the file
     
     # Close the files
