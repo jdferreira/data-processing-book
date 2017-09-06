@@ -9,8 +9,8 @@
 
 - File: [metabolic_pathways.csv](files/metabolic_pathways.csv)
     - created in module 2
-- File: [sequences.csv](files/sequences.csv)
-    - created in module 6
+- File: [all_sequences.csv](files/all_sequences.csv)
+    - contains the sequences of all enzymes in all the pathways, following the same format of the file `sequences.csv` from module 6.
 - File: [pathways.db](files/pathways.db)
     - created in module 9
 
@@ -81,7 +81,7 @@ Notice that there are some question marks without the green background: do not c
     # (code from step 3)
     
     # Now do the same for the enzymes
-    f = open('sequences.csv')
+    f = open('all_sequences.csv')
     enzymes = csv.reader(f, delimiter='???')
     
     for enzyme in enzymes:
