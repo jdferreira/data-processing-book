@@ -2,7 +2,7 @@
 
 ## Objectives:
 
-- Develop regular expressions that represent several selection criteria
+- Develop regular expressions to represent selection criteria
 - Use the `re` Python module to create the regular expressions
 - Search for aminoacid motives in the enzyme sequences
 
@@ -39,7 +39,7 @@ Open the application `IDLE (Python 3...)`.
         enzyme_sequence[enzyme_id] = sequence
     
     # Print debugging information
-    print('Sequence of enzyme P18440 :' + enzyme_sequence['P18440'])
+    print('Sequence of enzyme P18440: ' + enzyme_sequence['P18440'])
     
     file_sequences.close()
     ```
@@ -62,16 +62,16 @@ Start by searching for all enzymes whose sequence contains three consecutive ala
     for enzyme_id, sequence in enzyme_sequence.items():
         # Determine whether the sequence matches the pattern
         if re.search(reg_expr, ???):
-            print ('The enzyme ' + enzyme_id + ' matches the expression ' + reg_expr)
+            print('The enzyme ' + enzyme_id + ' matches the expression ' + reg_expr)
     ```
 Again, run the code, observe the output that should present 22 matches.
 
 4. Refresh your memory on the usage of [regular expressions](https://pythonforbiologists.com/regular-expressions/) to change the regular expression in the previous Python script in order to find following matches:
 
-    a. The 13 sequences where the first two aminoacids are a alanines or a methionine.
+    a. The 13 sequences where the first three aminoacids are alanines or methionines.
     
-    b. The 7 sequences that contain a methionine, followed by any aminoacid, followed by either a serine or a proline.
+    b. The 7 sequences that contain two consecutive methionines, followed by any aminoacid, followed by either a serine or a proline.
 
-5. Change the code above to save the enzyme identifiers and sequences to a file named `relevant_sequences.csv` instead of printing them to the screen.
+5. Change the code to save the enzyme identifiers and sequences selected in step 4b to a file named `relevant_sequences.csv` instead of printing them to the screen.
 Refer to module 7, step 4 to refresh your memory on how to write a CSV file.
 
