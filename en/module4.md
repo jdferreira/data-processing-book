@@ -55,9 +55,9 @@ with the following code:
     
     paths = csv.reader(f, delimiter='???') # Create a CSV reader object
     
-    # We need to ignore the first row, which contains the headers of the
-    # columns, called the "metadata". We do it by calling the `next`
-    # function, which advances to the next line of the file
+    # We must ignore the first row, which contains the headers of the
+    # columns, called the "metadata" of our data. We do it by calling
+    # the `next` function which advances to the next line of the file
     next(paths)
         
     for path in paths:    # For each pathway ...
@@ -73,7 +73,7 @@ Does it correspond to what you were expecting to see?
 
 9. Change the previous Python code to print the class of each pathway instead of its name.
 
-**Note**: to read and write CSV files in Python, we have been using the `csv` module.
+**Note**: to read and write CSV files in Python, we use the `csv` module.
 This module allows us to specify the format of the file to read/write, _e.g._ which character to use to separate the fields and to delimit the fields.
 You should familiarize yourself with this module by reading its documentation at <https://docs.python.org/2/library/csv.html>.
 
