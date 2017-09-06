@@ -177,7 +177,7 @@ gulp.task('sass', () => {
         .pipe(gulp.dest('out/css'));
 });
 
-gulp.task('minify-css', () => {
+gulp.task('minify-css', ['sass'], () => {
     return gulp
         .src(['out/css/*.css', '!out/css/main.min.css'])
         .pipe(cleanCSS())
@@ -185,16 +185,8 @@ gulp.task('minify-css', () => {
         .pipe(gulp.dest('out/css'))
 });
 
-gulp.task('clean-css', () => {
+gulp.task('clean-css', ['sass'], () => {
     return gulp
         .src(['out/css/*.css', '!out/css/main.min.css'])
         .pipe(clean());
-});
-
-gulp.task('watch', () => {
-    gulp.watch('styles/sass/*.scss', () => {
-        gulpSequence('sass', 'minify-css', 'clean-css')();
-    });
-    gulp.watch('en/*.md', ['build-en']);
-    gulp.watch('pt/*.md', ['build-pt']);
 });
