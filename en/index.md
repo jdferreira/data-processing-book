@@ -40,11 +40,10 @@ Processing our data with Python and SQLite instead of just using Excel offers se
 - Programming languages can handle complex data types and large datasets, while Excel is mostly oriented towards numeric computations.
 
 No deep knowledge of programming will be required for the class exercises, as we will provide most of the code.
-In fact, the students will not directly learn the details of Python and SQL as programming languages, 
-but will instead be given "recipes" that contain most of the necessary logic, with small snippets of missing code that the students need to fill.
+In fact, the students will not directly learn the details of Python and SQL as programming languages, but will instead be given "recipes" that contain most of the necessary logic, with small snippets of missing code that the students need to fill.
 However, we expect that the students familiarize themselves with Python and SQL syntax by following some online courses.
 For example, [Codecademy](https://www.codecademy.com/) contains multiple modules that will help the students in this task:
 
-- [Python](https://www.codecademy.com/learn/python)
+- [Python](https://www.codecademy.com/learn/learn-python)
 - [SQL](https://www.codecademy.com/learn/learn-sql)
 
