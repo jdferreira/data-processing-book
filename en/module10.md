@@ -78,6 +78,8 @@ Notice that there are some question marks without the green background: do not c
 
 4. Add the following code to the previous script, which will read the data from each enzyme and add them to the database:
     ```python
+    # (code from step 3)
+    
     # Now do the same for the enzymes
     f = open('sequences.csv')
     enzymes = csv.reader(f, delimiter='???')
@@ -101,6 +103,8 @@ Again, run the code, and check the database.
 
 5. Add the following code to the previous script, which will insert into the database the information that will allow us to associate pathways with enzymes:
     ```python
+    # (code from step 4)
+    
     # Which file do we need to read in order to relate pathways with enzymes?
     f = open('???')
     paths =  csv.reader(f, delimiter='???')
@@ -122,7 +126,7 @@ Again, run the code, and check the database.
     ```
 Run this code and check the database once more.
 
-6. Create a **new Python script** that opens the database `pathways.db` and executes the SQL last query of the previous module: namely, it selects the id and name of the pathways associated with at least 2 enzymes whose sequence contains a glutamic acid `E` followed by an alanine `A`.
+6. Create a **new Python script** that opens the database `pathways.db` and executes the last SQL query of the previous module: namely, it selects the id and name of the pathways associated with at least 2 enzymes whose sequence contains a glutamic acid `E` followed by an alanine `A`.
     ```python
     import sqlite3
 

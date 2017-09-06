@@ -21,9 +21,8 @@ This work is licensed under a<br>
 - [Module 6 -- Web services](#module6)
 - [Module 7 -- Merging data](#module7)
 - [Module 8 -- Regular expressions](#module8)
-- [Module 9 -- Create a database](#module9)
-- [Module 10 -- Query a database](#module10)
-- [Module 11 -- Access a database](#module11)
+- [Module 9 -- Create and query a database](#module9)
+- [Module 10 -- Access a database](#module10)
 
 
 # Introduction

@@ -121,7 +121,7 @@ Let's correct it
     
     c. Click on `Browse Data` to check the changes.
 
-7. Write a SQL query that selects the name of the enzymes whose id starts with `P0`.
+7. Write an SQL query that selects the name of the enzymes whose id starts with `P0`.
 Click on `Execute SQL` and write:
     ```sql
     SELECT ??? FROM enzyme WHERE ??? LIKE "P0%";
@@ -145,7 +145,7 @@ Observe the output that should be composed of 4 rows.
     ```
 Why does the output have now 24 rows?
 
-10. Write a SQL query that selects the id and name of the pathways associated with at least 2 enzymes whose sequence contains a glutamic acid `E` followed by a alanine `A`:
+10. Write an SQL query that selects the id and name of the pathways associated with at least 2 enzymes whose sequence contains a glutamic acid `E` followed by an alanine `A`:
     ```sql
     SELECT path.id, path.name
     FROM path, enzyme, path_enzyme
