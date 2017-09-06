@@ -36,7 +36,7 @@
     
     c. In the `Save as type` box, choose `CSV (Comma delimited)`.
 
-5. Open the CSV file in a text editor (Notepad) and find how many commas has each line.
+5. Open the CSV file in a text editor (Notepad) and find how many commas each line has.
 
 6. Verify that some fields in the CSV file are delimited by quotes <span class="nobr">(`"`)</span> and other are not.
 Explain why.
@@ -44,7 +44,7 @@ Explain why.
 7. Open the CSV file in Excel.
 
 8. Make sure you keep a copy of the files, so you can use them afterwards.
-For example, send it to you by email or upload it to Dropbox.
+For example, send them to you by email or upload them to Dropbox.
 
 
 

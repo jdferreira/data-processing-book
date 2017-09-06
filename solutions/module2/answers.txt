@@ -1,0 +1,7 @@
+== 5 ==
+3
+
+== 6 ==
+Because some data in the file contains commas; and the CSV file format
+needs to know whether a comma separates two fields or rather is part of
+the data in one of the fields.
