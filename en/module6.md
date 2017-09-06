@@ -93,7 +93,7 @@ Save the file as `module6.py` in the previous folder, and click on `Run` and the
             sequence = str.replace(sequence, '\n', '')
 
             # Prints the sequence
-            print("Sequence of pathway " + enzyme_id + ":\n" + sequence)
+            print('Sequence of pathway ' + enzyme_id + ':\n' + sequence)
     
     file_to_read.close()
     ```
@@ -138,9 +138,6 @@ Again, run the code, observe the output.
             # Remove the line ends (the "enter" used to start the next line)
             sequence = str.replace(sequence, '\n', '')
 
-            # Prints the sequence
-            print("Sequence of pathway " + enzyme_id + ":\n" + sequence)
-            
             # Writes the sequence to the file
             w.writerow([enzyme_id, ???])
     
@@ -150,7 +147,7 @@ Again, run the code, observe the output.
 Again, run the code, observe the output, and open the `sequences.csv` in Excel or in a text editor.
 Observe in `sequences.csv` that some enzymes appear more than once, and try to explain why.
 
-7. Modify the previous code to not save enzymes which sequence was already saved:
+7. Modify the previous code so that repeated enzymes are only processed once, thus minimizing the calls to the external web service:
     ```python
     import urllib.request
     import csv
@@ -172,7 +169,7 @@ Observe in `sequences.csv` that some enzymes appear more than once, and try to e
 
         for enzyme_id in enzyme_list:
         
-            # Check if the sequence of this enzyme was not already saved
+            # Check to see if this enzyme was not already processed.
             if enzyme_id not in enzymes_saved:
                 
                 # Establish the URL to open
@@ -194,9 +191,6 @@ Observe in `sequences.csv` that some enzymes appear more than once, and try to e
                 # Remove the line ends (the "enter" used to start the next line)
                 sequence = str.replace(sequence, '\n', '')
 
-                # Prints the sequence
-                print("Sequence of pathway " + enzyme_id + ":\n" + sequence)
-                
                 # Writes the sequence to the file
                 w.writerow([enzyme_id, sequence])
                 
