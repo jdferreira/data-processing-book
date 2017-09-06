@@ -61,6 +61,7 @@ a::selection {
 }
 
 p {
+    text-align: justify;
     margin: 1em 0;
 }
 
@@ -632,3 +633,6 @@ li li div.sourceCode {
     margin-left: -2em;
 }
 
+.nobr {
+    white-space: nowrap;
+}
