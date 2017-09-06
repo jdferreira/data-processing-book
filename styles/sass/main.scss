@@ -493,7 +493,7 @@ code > span.ch {
 }
 
 /* String */
-code > span.st {
+code > span.st, code > span.sc {
     color: #4e9a06;
 }
 
@@ -533,11 +533,6 @@ code > span.wa {
 
 /* Constant */
 code > span.cn {
-    color: #000000;
-}
-
-/* SpecialChar */
-code > span.sc {
     color: #000000;
 }
 
