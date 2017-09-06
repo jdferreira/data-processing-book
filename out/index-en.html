@@ -806,9 +806,9 @@ reg_expr <span class="op">=</span> <span class="vs">r'AAA'</span>
 <ul>
 <li>created in module 2</li>
 </ul></li>
-<li>File: <a href="files/sequences.csv">sequences.csv</a>
+<li>File: <a href="files/all_sequences.csv">all_sequences.csv</a>
 <ul>
-<li>created in module 6</li>
+<li>contains the sequences of all enzymes in all the pathways, following the same format of the file <code>sequences.csv</code> from module 6.</li>
 </ul></li>
 <li>File: <a href="files/pathways.db">pathways.db</a>
 <ul>
@@ -870,7 +870,7 @@ connection.commit()</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># (code from step 3)</span>
 
 <span class="co"># Now do the same for the enzymes</span>
-f <span class="op">=</span> <span class="bu">open</span>(<span class="st">'sequences.csv'</span>)
+f <span class="op">=</span> <span class="bu">open</span>(<span class="st">'all_sequences.csv'</span>)
 enzymes <span class="op">=</span> csv.reader(f, delimiter<span class="op">=</span><span class="st">'<span class="blank">?</span>'</span>)
 
 <span class="cf">for</span> enzyme <span class="op">in</span> enzymes:
