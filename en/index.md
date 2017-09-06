@@ -32,7 +32,7 @@ The main topic surrounding these exercises will be metabolic pathway data proces
 Despite working with metabolic pathways during the classes, the data processing methods that the students will learn in this class can be applied to many other types of data.
 
 Despite the data being provided to the students as an Excel file, the data processing operations will mostly be executed with a programming language and a relational database.
-In this class, we will use [Python](http://www.python.org) and [SQLite](https://www.sqlite.org/).
+In this class, we will use [Python](https://www.python.org/) and [SQLite](https://www.sqlite.org/).
 Processing our data with Python and SQLite instead of just using Excel offers several benefits:
 
 - We can define a set of operations to be executed automatically, which in Excel would take a large amount of time, since it is mostly driven by user interaction rather than direct commands;
